@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- =================================================================== 
+		======= USER ACCOUNTS ========= =================================================================== -->
+
+	<bean id="userAccountAdmin1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountAdmin2" class="security.UserAccount">
+		<property name="username" value="admin2" />
+		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountRooky1" class="security.UserAccount">
+		<property name="username" value="rooky1" />
+		<property name="password" value="c85f0d94b02a168f4e0220313eb4a377" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ROOKY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountRooky2" class="security.UserAccount">
+		<property name="username" value="rooky2" />
+		<property name="password" value="2f18c47cd08057de692c777340a1cfca" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ROOKY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountCompany1" class="security.UserAccount">
+		<property name="username" value="company1" />
+		<property name="password" value="df655f976f7c9d3263815bd981225cd9" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="COMPANY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountCompany2" class="security.UserAccount">
+		<property name="username" value="company2" />
+		<property name="password" value="d196a28097115067fefd73d25b0c0be8" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="COMPANY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountProvider1" class="security.UserAccount">
+		<property name="username" value="provider1" />
+		<property name="password" value="cdb82d56473901641525fbbd1d5dab56" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PROVIDER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountProvider2" class="security.UserAccount">
+		<property name="username" value="provider2" />
+		<property name="password" value="ebfc815ee2cc6a16225105bb7b3e1e53" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PROVIDER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountAuditor1" class="security.UserAccount">
+		<property name="username" value="auditor1" />
+		<property name="password" value="175d2e7a63f386554a4dd66e865c3e14" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountAuditor2" class="security.UserAccount">
+		<property name="username" value="auditor2" />
+		<property name="password" value="04dd94ba3212ac52ad3a1f4cbfb52d4f" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUDITOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+		
+
+	
+
+	<!-- ========================= SYSTEM =========================== -->
+	<bean id="userAccountSystem" class="security.UserAccount">
+		<property name="username" value="system" />
+		<property name="password" value="54b53072540eeeb8f8e9343e71f28176" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="system" class="domain.Administrator">
+		<property name="name" value="Educafy" />
+		<property name="surname">
+			<list>
+				<value>System</value>
+			</list>
+		</property>
+		<property name="photo" value="" />
+		<property name="email" value="correo@gmail.com" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="userAccount" ref="userAccountSystem" />
+	</bean>
+	<!-- ========================= ======== =========================== -->
+
+	<bean id="outBoxSystem" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxSystem" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxSystem" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="notificationBoxSystem" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxSystem" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxProvider1" class="domain.Folder">
+        <property name="name" value="Out box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider1" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxProvider1" class="domain.Folder">
+        <property name="name" value="In box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider1" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxProvider1" class="domain.Folder">
+        <property name="name" value="Trash box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider1" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="notificationBoxProvider1" class="domain.Folder">
+        <property name="name" value="Notification box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider1" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxProvider1" class="domain.Folder">
+        <property name="name" value="Spam box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider1" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+    
+    <!-- ========================================= -->
+
+    <bean id="outBoxProvider2" class="domain.Folder">
+        <property name="name" value="Out box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider2" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inBoxProvider2" class="domain.Folder">
+        <property name="name" value="In box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider2" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trashBoxProvider2" class="domain.Folder">
+        <property name="name" value="Trash box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider2" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="notificationBoxProvider2" class="domain.Folder">
+        <property name="name" value="Notification box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider2" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="spamBoxProvider2" class="domain.Folder">
+        <property name="name" value="Spam box" />
+        <property name="isSystemFolder" value="true" />
+        <property name="actor" ref="provider2" />
+        <property name="messages">
+            <list>
+                <!-- <ref bean="message1"/> -->
+            </list>
+        </property>
+    </bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxRooky1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxRooky1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxRooky1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxRooky1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxRooky1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxRooky2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxRooky2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxRooky2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxRooky2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxRooky2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="rooky2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxCompany1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxCompany1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxCompany1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxCompany1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxCompany1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxCompany2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxCompany2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxCompany2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxCompany2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxCompany2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="company2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+		
+		
+	
+	<!-- ========================================= -->
+
+	<bean id="outBoxAuditor1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxAuditor1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAuditor1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxAuditor1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAuditor1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ========================================= -->
+
+	<bean id="outBoxAuditor2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxAuditor2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAuditor2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxAuditor2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAuditor2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="auditor2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+	
+
+	<!-- =================================================================== 
+		======= ADMINISTRATOR ========= =================================================================== -->
+
+	<bean id="administrator1" class="domain.Administrator">
+		<!-- Actor -->
+		<property name="name" value="Admin1" />
+		<property name="surname">
+			<list>
+				<value>Admin</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="conwdasto@jmsx.es" />
+		<property name="phone" value="+34647607406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="userAccount" ref="userAccountAdmin1" />
+	</bean>
+
+	<bean id="administrator2" class="domain.Administrator">
+		<!-- Actor -->
+		<property name="name" value="Admin2" />
+		<property name="surname">
+			<list>
+				<value>Gonzalez</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="lusi@gamil.es" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard3" />
+		<property name="userAccount" ref="userAccountAdmin2" />
+	</bean>
+
+
+	<!-- =================================================================== 
+		======= ROOKY ========= =================================================================== -->
+
+	<bean id="rooky1" class="domain.Rooky">
+		<!-- Actor -->
+		<property name="name" value="Rooky1" />
+		<property name="surname">
+			<list>
+				<value>Garcia</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="garcia@gmail.es" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard4" />
+		<property name="userAccount" ref="userAccountRooky1" />
+		<property name="finder" ref="finder1" />
+
+	</bean>
+
+	<bean id="rooky2" class="domain.Rooky">
+		<!-- Actor -->
+		<property name="name" value="Rooky2" />
+		<property name="surname">
+			<list>
+				<value>Lanzas</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="lanzas@gmail.es" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard5" />
+		<property name="userAccount" ref="userAccountRooky2" />
+		<property name="finder" ref="finder2" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= COMPANY ========= =================================================================== -->
+
+	<bean id="company1" class="domain.Company">
+		<!-- Actor -->
+		<property name="name" value="Company1" />
+		<property name="surname">
+			<list>
+				<value>Company's</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="company1@gmail.es" />
+		<property name="phone" value="+34647307480" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard6" />
+		<property name="userAccount" ref="userAccountCompany1" />
+		<property name="commercialName" value="commercialName1" />
+	</bean>
+
+	<bean id="company2" class="domain.Company">
+		<!-- Actor -->
+		<property name="name" value="Company2" />
+		<property name="surname">
+			<list>
+				<value>Company's</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="company2@gmail.es" />
+		<property name="phone" value="+34647307484" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard7" />
+		<property name="userAccount" ref="userAccountCompany2" />
+		<property name="commercialName" value="commercialName2" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= Auditor ========= =================================================================== -->
+	
+	
+	<bean id="auditor1" class="domain.Auditor">
+		<!-- Actor -->
+		<property name="name" value="Auditor1" />
+		<property name="surname">
+			<list>
+				<value>Auditor 1</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="conwdasto@jmsx.es" />
+		<property name="phone" value="+34647607406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard12" />
+		<property name="userAccount" ref="userAccountAuditor1" />
+	</bean>
+
+	<bean id="auditor2" class="domain.Auditor">
+		<!-- Actor -->
+		<property name="name" value="Auditor 2" />
+		<property name="surname">
+			<list>
+				<value>Auditor 2</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="lusi@gamil.es" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard13" />
+		<property name="userAccount" ref="userAccountAuditor2" />
+	</bean>
+	
+
+
+	<!-- =================================================================== 
+		======= CreditCard ========= =================================================================== -->
+
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Customer 1" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4716477920082572" />
+		<property name="expirationMonth" value="06" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="163" />
+	</bean>
+
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Customer 2" />
+		<property name="make" value="MASTER" />
+		<property name="number" value="5498128346540526" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="728" />
+	</bean>
+
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="Sponsor 1" />
+		<property name="make" value="AMEX" />
+		<property name="number" value="375278545368168" />
+		<property name="expirationMonth" value="06" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="533" />
+	</bean>
+
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="Sponsor 2" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4532787155338743" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="266" />
+	</bean>
+
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="Sponsor 3" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4716699361876929" />
+		<property name="expirationMonth" value="02" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="885" />
+	</bean>
+
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="Company 1" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4231348143458624" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="22" />
+		<property name="cvv" value="837" />
+	</bean>
+
+	<bean id="creditCard7" class="domain.CreditCard">
+		<property name="holderName" value="Company 2" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4294148159742547" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="988" />
+	</bean>
+
+	<!-- Credit cards asignadas a Providers 1 y 2 -->
+	<bean id="creditCard8" class="domain.CreditCard">
+		<property name="holderName" value="Provider 1" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5547165664775350" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="475" />
+	</bean>
+
+	<bean id="creditCard9" class="domain.CreditCard">
+		<property name="holderName" value="Provider 1" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4410435734979051" />
+		<property name="expirationMonth" value="03" />
+		<property name="expirationYear" value="27" />
+		<property name="cvv" value="941" />
+	</bean>
+	
+	<!-- Credit cards asignadas a Sponsorship 1 y 2 -->
+	<bean id="creditCard10" class="domain.CreditCard">
+		<property name="holderName" value="Sponsorship 1" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5316710759043864" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="26" />
+		<property name="cvv" value="408" />
+	</bean>
+
+	<bean id="creditCard11" class="domain.CreditCard">
+		<property name="holderName" value="Sponsorship 2" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5384948404521051" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="906" />
+	</bean>
+	
+		<!-- Credit cards asignadas a Auditor 1 y 2 -->
+	<bean id="creditCard12" class="domain.CreditCard">
+		<property name="holderName" value="Auditor 1" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5316710759043864" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="26" />
+		<property name="cvv" value="408" />
+	</bean>
+
+	<bean id="creditCard13" class="domain.CreditCard">
+		<property name="holderName" value="Auditor 2" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5384948404521051" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="906" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= Configuration Parameters ========= =================================================================== -->
+
+	<bean id="configurationParameters" class="domain.ConfigurationParameters">
+		<property name="sysName" value="Acme Rookies" />
+		<property name="banner" value="https://i.ibb.co/HpCD1x8/logo1.png" />
+		<property name="welcomeMessageEn"
+			value="Welcome to Acme Rookies! We're IT Rookies' favourite job marketplace!" />
+		<property name="welcomeMessageEsp"
+			value="¡Bienvenidos a Acme Rookies! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
+		<property name="countryPhoneCode" value="+34" />
+		<property name="spamWords">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>one million</value>
+				<value>you've been selected</value>
+				<value>nigeria</value>
+				<value>sexo</value>
+				<value>un millón</value>
+				<value>ha sido seleccionado</value>
+			</list>
+		</property>
+		<property name="positiveWords">
+			<list>
+				<value>good</value>
+				<value>factastic</value>
+				<value>excellent</value>
+				<value>great</value>
+				<value>amazing</value>
+				<value>terrific</value>
+				<value>beautiful</value>
+				<value>bueno</value>
+				<value>buena</value>
+				<value>fantástico</value>
+				<value>fantástica</value>
+				<value>excelente</value>
+				<value>genial</value>
+				<value>terrorífico</value>
+				<value>bonito</value>
+				<value>bonita</value>
+			</list>
+		</property>
+		<property name="negativeWords">
+			<list>
+				<value>not</value>
+				<value>bad</value>
+				<value>horrible</value>
+				<value>average</value>
+				<value>disaster</value>
+				<value>malo</value>
+				<value>media</value>
+				<value>desastre</value>
+			</list>
+		</property>
+		<property name="maxFinderResults" value="10" />
+		<property name="finderTime" value="1" />
+		<property name="rebranding" value="false" />
+		<property name="vat" value="0.21" />
+		<property name="flatFare" value="10.0" />
+		<property name="creditCardMake">
+			<list>
+				<value>VISA</value>
+				<value>MCARD</value>
+				<value>AMEX</value>
+				<value>DINNERS</value>
+				<value>FLY</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
+
