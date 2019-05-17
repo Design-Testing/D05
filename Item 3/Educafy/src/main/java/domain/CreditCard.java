@@ -4,7 +4,9 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -13,9 +15,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 
-@Embeddable
+@Entity
 @Access(AccessType.PROPERTY)
-public class CreditCard {
+public class CreditCard extends DomainEntity {
 
 	private String	holderName;
 	private String	make;
@@ -23,6 +25,7 @@ public class CreditCard {
 	private Integer	expirationMonth;
 	private Integer	expirationYear;
 	private String	cvv;
+	private Actor	actor;
 
 
 	@NotBlank
@@ -85,4 +88,13 @@ public class CreditCard {
 		this.cvv = cvv;
 	}
 
+	@Valid
+	@ManyToOne(optional = false)
+	public Actor getActor() {
+		return this.actor;
+	}
+
+	public void setActor(final Actor actor) {
+		this.actor = actor;
+	}
 }
