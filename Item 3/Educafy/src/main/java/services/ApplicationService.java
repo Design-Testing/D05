@@ -20,7 +20,7 @@ import security.Authority;
 import domain.Actor;
 import domain.Application;
 import domain.Company;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.Position;
 import domain.Problem;
 import domain.Rooky;
@@ -157,7 +157,7 @@ public class ApplicationService {
 		Assert.isTrue(this.actorService.checkAuthority(this.actorService.findByPrincipal(), Authority.ROOKY));
 		final Application application = this.create(positionId);
 		Assert.notNull(application);
-		final Curricula curricula = this.curriculaService.findOne(curriculaId);
+		final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 		application.setCurricula(curricula);
 		final Application retreived = this.applicationRepository.save(application);
 		return retreived;

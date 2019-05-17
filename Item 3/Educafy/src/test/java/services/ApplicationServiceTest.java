@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Application;
-import domain.Curricula;
+import domain.Curriculum;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -67,7 +67,7 @@ public class ApplicationServiceTest extends AbstractTest {
 			this.authenticate(rooky);
 
 			final Integer positionId = this.getEntityId(position);
-			final Curricula curricula = this.curriculaService.findOne(this.getEntityId("curricula1"));
+			final Curriculum curricula = this.curriculaService.findOne(this.getEntityId("curricula1"));
 			final Application saved = this.applicationService.apply(positionId, curricula.getId());
 
 			Assert.isTrue(saved.getId() != 0);

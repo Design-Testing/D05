@@ -22,7 +22,7 @@ import services.PositionService;
 import services.RookyService;
 import controllers.AbstractController;
 import domain.Application;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.Position;
 import domain.Rooky;
 import forms.ApplicationForm;
@@ -54,7 +54,7 @@ public class ApplicationRookyController extends AbstractController {
 
 		try {
 
-			final Collection<Curricula> curriculas = this.curriculaService.findCurriculaByRooky(rooky.getId());
+			final Collection<Curriculum> curriculas = this.curriculaService.findCurriculaByRooky(rooky.getId());
 
 			result = new ModelAndView("position/apply");
 			result.addObject("curriculas", curriculas);
@@ -76,8 +76,8 @@ public class ApplicationRookyController extends AbstractController {
 		final Position position = this.positionService.findOne(positionId);
 
 		try {
-			final Curricula curricula = this.curriculaService.findOne(curriculaId);
-			final Curricula copy = this.curriculaService.makeCopyAndSave(curricula);
+			final Curriculum curricula = this.curriculaService.findOne(curriculaId);
+			final Curriculum copy = this.curriculaService.makeCopyAndSave(curricula);
 
 			final Application application = this.applicationService.apply(positionId, copy.getId());
 			result = this.listPending();

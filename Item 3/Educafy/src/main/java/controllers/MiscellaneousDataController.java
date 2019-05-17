@@ -20,7 +20,7 @@ import services.CurriculaService;
 import services.MiscellaneousDataService;
 import services.RookyService;
 import domain.Company;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.MiscellaneousData;
 import domain.Rooky;
 
@@ -88,7 +88,7 @@ public class MiscellaneousDataController {
 			try {
 				this.miscellaneousDataService.save(miscellaneousData, curriculaId);
 
-				final Curricula curricula = this.curriculaService.findOne(curriculaId);
+				final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 				result = new ModelAndView("curricula/display");
 				result.addObject("curricula", curricula);
 				result.addObject("curriculaId", curricula.getId());
@@ -116,7 +116,7 @@ public class MiscellaneousDataController {
 			res.addObject("curriculaId", this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousData.getId()).getId());
 			res.addObject("buttons", false);
 
-			final Curricula curricula = this.curriculaService.findOne(this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousData.getId()).getId());
+			final Curriculum curricula = this.curriculaService.findOne(this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousData.getId()).getId());
 
 			final UserAccount logged = LoginService.getPrincipal();
 
@@ -146,7 +146,7 @@ public class MiscellaneousDataController {
 	public ModelAndView delete(@RequestParam final int miscellaneousDataId) {
 		ModelAndView result;
 		final MiscellaneousData miscellaneousData = this.miscellaneousDataService.findOne(miscellaneousDataId);
-		final Curricula curricula = this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousDataId);
+		final Curriculum curricula = this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousDataId);
 		this.miscellaneousDataService.delete(miscellaneousData);
 
 		result = new ModelAndView("curricula/display");

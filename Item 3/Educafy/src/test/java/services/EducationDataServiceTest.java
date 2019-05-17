@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.EducationData;
 import domain.PersonalData;
 import domain.Rooky;
@@ -80,7 +80,7 @@ public class EducationDataServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(user);
-			Curricula curricula = this.curriculaService.create();
+			Curriculum curricula = this.curriculaService.create();
 			PersonalData pd = curricula.getPersonalRecord();
 			pd = this.personalDataService.save(pd);
 			curricula.setPersonalRecord(pd);
@@ -146,8 +146,8 @@ public class EducationDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(user);
 			final Rooky principal = this.hackerService.findByPrincipal();
-			final Collection<Curricula> curriculas = this.curriculaService.findCurriculaByRooky(principal.getId());
-			final Curricula curricula = curriculas.iterator().next();
+			final Collection<Curriculum> curriculas = this.curriculaService.findCurriculaByRooky(principal.getId());
+			final Curriculum curricula = curriculas.iterator().next();
 			final EducationData lR = curricula.getEducations().iterator().next();
 			lR.setInstitution(institution);
 			lR.setDegree(degree);

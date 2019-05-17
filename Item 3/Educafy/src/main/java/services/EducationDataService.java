@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.EducationDataRepository;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.EducationData;
 import domain.Rooky;
 
@@ -64,7 +64,7 @@ public class EducationDataService {
 
 		Assert.notNull(res);
 
-		final Curricula curricula = this.curriculaService.findOne(curriculaId);
+		final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 		if (educationData.getId() == 0) {
 			final Collection<EducationData> misc = curricula.getEducations();
 			misc.add(educationData);
@@ -82,7 +82,7 @@ public class EducationDataService {
 		Assert.isTrue(mR.getId() != 0);
 		final EducationData res = this.findOne(mR.getId());
 
-		final Curricula curricula = this.curriculaService.findCurriculaByEducationData(res.getId());
+		final Curriculum curricula = this.curriculaService.findCurriculaByEducationData(res.getId());
 
 		final Collection<EducationData> educationDatas = curricula.getEducations();
 
@@ -97,7 +97,7 @@ public class EducationDataService {
 
 	}
 
-	final EducationData makeCopyAndSave(final EducationData ed, final Curricula curricula) {
+	final EducationData makeCopyAndSave(final EducationData ed, final Curriculum curricula) {
 		EducationData result = this.create();
 		result.setDegree(ed.getDegree());
 		result.setEndDate(ed.getEndDate());

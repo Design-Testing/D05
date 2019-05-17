@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MiscellaneousDataRepository;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.MiscellaneousData;
 import domain.Rooky;
 
@@ -63,7 +63,7 @@ public class MiscellaneousDataService {
 
 		Assert.notNull(res);
 
-		final Curricula curricula = this.curriculaService.findOne(curriculaId);
+		final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 		if (miscellaneousData.getId() == 0) {
 			final Collection<MiscellaneousData> misc = curricula.getMiscellaneous();
 			misc.add(miscellaneousData);
@@ -81,7 +81,7 @@ public class MiscellaneousDataService {
 		Assert.isTrue(mR.getId() != 0);
 		final MiscellaneousData res = this.findOne(mR.getId());
 
-		final Curricula curricula = this.curriculaService.findCurriculaByMiscellaneousData(res.getId());
+		final Curriculum curricula = this.curriculaService.findCurriculaByMiscellaneousData(res.getId());
 
 		final Collection<MiscellaneousData> miscellaneousDatas = curricula.getMiscellaneous();
 
@@ -96,7 +96,7 @@ public class MiscellaneousDataService {
 
 	}
 
-	public MiscellaneousData makeCopyAndSave(final MiscellaneousData md, final Curricula curricula) {
+	public MiscellaneousData makeCopyAndSave(final MiscellaneousData md, final Curriculum curricula) {
 		MiscellaneousData result = this.create();
 		result.setFreeText(md.getFreeText());
 		final Collection<String> attachements = new ArrayList<String>();

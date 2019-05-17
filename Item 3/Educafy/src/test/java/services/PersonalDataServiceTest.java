@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.PersonalData;
 import domain.Rooky;
 
@@ -126,7 +126,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 			this.authenticate(user);
 			final Rooky owner = this.hackerService.findOne(this.getEntityId(userProp));
 			final PersonalData iR;
-			final Curricula curricula = this.curriculaService.findCurriculaByRooky(owner.getId()).iterator().next();
+			final Curriculum curricula = this.curriculaService.findCurriculaByRooky(owner.getId()).iterator().next();
 			iR = curricula.getPersonalRecord();
 			iR.setFullName(fullName);
 			iR.setStatement(statement);

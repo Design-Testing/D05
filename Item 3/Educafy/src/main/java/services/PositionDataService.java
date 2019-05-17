@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PositionDataRepository;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.PositionData;
 import domain.Rooky;
 
@@ -64,7 +64,7 @@ public class PositionDataService {
 
 		Assert.notNull(res);
 
-		final Curricula curricula = this.curriculaService.findOne(curriculaId);
+		final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 		if (positionData.getId() == 0) {
 			final Collection<PositionData> misc = curricula.getPositions();
 			misc.add(positionData);
@@ -82,7 +82,7 @@ public class PositionDataService {
 		Assert.isTrue(mR.getId() != 0);
 		final PositionData res = this.findOne(mR.getId());
 
-		final Curricula curricula = this.curriculaService.findCurriculaByPositionData(res.getId());
+		final Curriculum curricula = this.curriculaService.findCurriculaByPositionData(res.getId());
 
 		final Collection<PositionData> positionDatas = curricula.getPositions();
 		Assert.isTrue(this.hackerService.hasPositionData(me.getId(), res.getId()), "This personal data is not of your property");
@@ -96,7 +96,7 @@ public class PositionDataService {
 
 	}
 
-	final PositionData makeCopyAndSave(final PositionData p, final Curricula curricula) {
+	final PositionData makeCopyAndSave(final PositionData p, final Curriculum curricula) {
 		PositionData result = this.create();
 		result.setDescription(p.getDescription());
 		result.setEndDate(p.getEndDate());

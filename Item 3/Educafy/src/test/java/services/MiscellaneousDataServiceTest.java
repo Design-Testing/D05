@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.MiscellaneousData;
 import domain.PersonalData;
 import domain.Rooky;
@@ -75,7 +75,7 @@ public class MiscellaneousDataServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(user);
-			Curricula curricula = this.curriculaService.create();
+			Curriculum curricula = this.curriculaService.create();
 			final PersonalData pd = curricula.getPersonalRecord();
 			this.personalDataService.save(pd);
 			curricula.setPersonalRecord(pd);
@@ -127,8 +127,8 @@ public class MiscellaneousDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(user);
 			final Rooky principal = this.hackerService.findByPrincipal();
-			final Collection<Curricula> curriculas = this.curriculaService.findCurriculaByRooky(principal.getId());
-			final Curricula curricula = curriculas.iterator().next();
+			final Collection<Curriculum> curriculas = this.curriculaService.findCurriculaByRooky(principal.getId());
+			final Curriculum curricula = curriculas.iterator().next();
 			final MiscellaneousData lR = curricula.getMiscellaneous().iterator().next();
 			lR.setFreeText(freeText);
 			if (attachments != null)

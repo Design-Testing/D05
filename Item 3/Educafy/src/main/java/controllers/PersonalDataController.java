@@ -21,7 +21,7 @@ import services.CurriculaService;
 import services.PersonalDataService;
 import services.RookyService;
 import domain.Company;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.PersonalData;
 import domain.Rooky;
 
@@ -82,7 +82,7 @@ public class PersonalDataController extends AbstractController {
 			try {
 				this.personalDataService.save(personalData);
 
-				final Curricula curricula = this.curriculaService.findCurriculaByPersonalData(personalData.getId());
+				final Curriculum curricula = this.curriculaService.findCurriculaByPersonalData(personalData.getId());
 
 				result = new ModelAndView("curricula/display");
 				result.addObject("curricula", curricula);
@@ -102,7 +102,7 @@ public class PersonalDataController extends AbstractController {
 		ModelAndView res;
 
 		final PersonalData personalData = this.personalDataService.findOne(personalDataId);
-		final Curricula curricula = this.curriculaService.findCurriculaByPersonalData(personalDataId);
+		final Curriculum curricula = this.curriculaService.findCurriculaByPersonalData(personalDataId);
 
 		if (personalData != null) {
 

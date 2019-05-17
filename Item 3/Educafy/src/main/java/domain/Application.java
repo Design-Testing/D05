@@ -30,7 +30,7 @@ public class Application extends DomainEntity {
 	private Position	position;
 	private Rooky		rooky;
 	private Problem		problem;
-	private Curricula	curricula;
+	private Curriculum	curricula;
 
 
 	@Pattern(regexp = "^(ACCEPTED|SUBMITTED|PENDING|REJECTED)$")
@@ -115,11 +115,11 @@ public class Application extends DomainEntity {
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Curricula getCurricula() {
+	public Curriculum getCurricula() {
 		return this.curricula;
 	}
 
-	public void setCurricula(final Curricula curricula) {
+	public void setCurricula(final Curriculum curricula) {
 		this.curricula = curricula;
 	}
 
