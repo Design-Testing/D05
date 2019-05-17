@@ -21,7 +21,6 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountRepository;
 import domain.Administrator;
-import domain.CreditCard;
 import forms.ActorForm;
 
 @Service
@@ -128,14 +127,6 @@ public class AdministratorService {
 
 	public Administrator reconstruct(final ActorForm actorForm, final BindingResult binding) {
 		Administrator admin;
-		final CreditCard c = new CreditCard();
-		c.setHolderName(actorForm.getHolderName());
-		final String cardNumber = actorForm.getNumber().replace(" ", "");
-		c.setNumber(cardNumber);
-		c.setMake(actorForm.getMake());
-		c.setExpirationMonth(actorForm.getExpirationMonth());
-		c.setExpirationYear(actorForm.getExpirationYear());
-		c.setCvv(actorForm.getCvv());
 
 		if (actorForm.getId() == 0) {
 			admin = this.create();
@@ -172,7 +163,6 @@ public class AdministratorService {
 			account.setPassword(actorForm.getUserAccountpassword());
 			admin.setUserAccount(account);
 		}
-		admin.setCreditCard(c);
 
 		this.validator.validate(admin, binding);
 

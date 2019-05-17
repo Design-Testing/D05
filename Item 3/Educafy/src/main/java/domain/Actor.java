@@ -35,7 +35,6 @@ public class Actor extends DomainEntity {
 	private String				phone;
 	private String				address;
 	private Double				vat;
-	private CreditCard			creditCard;
 	private Boolean				spammer;
 
 	//Relational attributes
@@ -125,15 +124,6 @@ public class Actor extends DomainEntity {
 
 	public void setSpammer(final Boolean spammer) {
 		this.spammer = spammer;
-	}
-
-	@Valid
-	public CreditCard getCreditCard() {
-		return this.creditCard;
-	}
-
-	public void setCreditCard(final CreditCard creditCard) {
-		this.creditCard = creditCard;
 	}
 
 	@NotNull
