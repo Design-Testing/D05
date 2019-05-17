@@ -1127,5 +1127,64 @@
 		</property>
 	</bean>
 
+<!-- =================================================================== 
+		======= Reservation ========= 
+		=================================================================== -->
+
+	<bean id="reservation1" class="domain.Reservation">
+		<property name="status" value="PENDING"/>
+		<property name="moment" value="2019-09-10 20:30"/>
+		<property name="explanation" value="Explanation of Reservation 1"/>
+		<property name="cost" value="20.5"/>
+		<property name="hourWeek" value="5"/>
+		<property name="student" ref="student1"/>
+		<property name="lesson" ref="lesson1"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="exam" ref="exam1"/>
+	</bean>
+	
+	<bean id="reservation2" class="domain.Reservation">
+		<property name="status" value="PENDING"/>
+		<property name="moment" value="2019-09-11 20:30"/>
+		<property name="explanation" value="Explanation of Reservation 2"/>
+		<property name="cost" value="15.5"/>
+		<property name="hourWeek" value="3"/>
+		<property name="student" ref="student2"/>
+		<property name="lesson" ref="lesson2"/>
+		<property name="creditCard" ref="creditCard2"/>
+		<property name="exam" ref="exam2"/>
+	</bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </beans>
 
