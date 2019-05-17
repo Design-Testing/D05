@@ -11,9 +11,9 @@ import org.springframework.util.Assert;
 
 import repositories.CurriculaRepository;
 import domain.Curriculum;
-import domain.EducationData;
-import domain.MiscellaneousData;
-import domain.PersonalData;
+import domain.EducationRecord;
+import domain.MiscellaneousRecord;
+import domain.PersonalRecord;
 import domain.PositionData;
 import domain.Rooky;
 
@@ -44,7 +44,7 @@ public class CurriculaService {
 		final Curriculum curricula = new Curriculum();
 		final Rooky hacker = this.hackerService.findByPrincipal();
 
-		final PersonalData personalData = this.personalDataService.create();
+		final PersonalRecord personalData = this.personalDataService.create();
 
 		personalData.setFullName(hacker.getName());
 		personalData.setStatement("Statement " + hacker.getName());
@@ -55,10 +55,10 @@ public class CurriculaService {
 		final Collection<PositionData> positionData = new ArrayList<PositionData>();
 		curricula.setPositions(positionData);
 
-		final Collection<MiscellaneousData> miscellaneousData = new ArrayList<MiscellaneousData>();
+		final Collection<MiscellaneousRecord> miscellaneousData = new ArrayList<MiscellaneousRecord>();
 		curricula.setMiscellaneous(miscellaneousData);
 
-		final Collection<EducationData> educationData = new ArrayList<EducationData>();
+		final Collection<EducationRecord> educationData = new ArrayList<EducationRecord>();
 		curricula.setEducations(educationData);
 
 		return curricula;
@@ -68,7 +68,7 @@ public class CurriculaService {
 	public Curriculum createForNewRooky() {
 		final Curriculum curricula = new Curriculum();
 
-		final PersonalData personalData = this.personalDataService.create();
+		final PersonalRecord personalData = this.personalDataService.create();
 
 		personalData.setFullName("full name");
 		personalData.setStatement("statement");
@@ -78,10 +78,10 @@ public class CurriculaService {
 		final Collection<PositionData> positionData = new ArrayList<PositionData>();
 		curricula.setPositions(positionData);
 
-		final Collection<MiscellaneousData> miscellaneousData = new ArrayList<MiscellaneousData>();
+		final Collection<MiscellaneousRecord> miscellaneousData = new ArrayList<MiscellaneousRecord>();
 		curricula.setMiscellaneous(miscellaneousData);
 
-		final Collection<EducationData> educationData = new ArrayList<EducationData>();
+		final Collection<EducationRecord> educationData = new ArrayList<EducationRecord>();
 		curricula.setEducations(educationData);
 
 		return curricula;
@@ -167,21 +167,21 @@ public class CurriculaService {
 		Curriculum result = this.create();
 		result.setRooky(curricula.getRooky());
 
-		final PersonalData pd = this.personalDataService.makeCopyAndSave(curricula.getPersonalRecord());
+		final PersonalRecord pd = this.personalDataService.makeCopyAndSave(curricula.getPersonalRecord());
 		result.setPersonalRecord(pd);
-		final Collection<EducationData> eds = new ArrayList<EducationData>();
+		final Collection<EducationRecord> eds = new ArrayList<EducationRecord>();
 		result.setEducations(eds);
-		final Collection<MiscellaneousData> mds = new ArrayList<MiscellaneousData>();
+		final Collection<MiscellaneousRecord> mds = new ArrayList<MiscellaneousRecord>();
 		result.setMiscellaneous(mds);
 		final Collection<PositionData> pds = new ArrayList<PositionData>();
 		result.setPositions(pds);
 		result = this.save(result);
 
-		for (final EducationData ed : curricula.getEducations())
+		for (final EducationRecord ed : curricula.getEducations())
 			eds.add(this.educationDataService.makeCopyAndSave(ed, result));
 		result.setEducations(eds);
 
-		for (final MiscellaneousData md : curricula.getMiscellaneous())
+		for (final MiscellaneousRecord md : curricula.getMiscellaneous())
 			mds.add(this.miscellaneousDataService.makeCopyAndSave(md, result));
 		result.setMiscellaneous(mds);
 

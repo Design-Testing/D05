@@ -35,21 +35,21 @@ public class Curriculum extends DomainEntity {
 
 	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<EducationData> getEducationRecords() {
+	public Collection<EducationRecord> getEducationRecords() {
 		return this.educationRecords;
 	}
 
-	public void setEducationRecords(final Collection<EducationData> educationRecords) {
+	public void setEducationRecords(final Collection<EducationRecord> educationRecords) {
 		this.educationRecords = educationRecords;
 	}
 
 	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<MiscellaneousData> getMiscellaneousRecords() {
+	public Collection<MiscellaneousRecord> getMiscellaneousRecords() {
 		return this.miscellaneousRecords;
 	}
 
-	public void setMiscellaneousRecords(final Collection<MiscellaneousData> miscellaneousRecords) {
+	public void setMiscellaneousRecords(final Collection<MiscellaneousRecord> miscellaneousRecords) {
 		this.miscellaneousRecords = miscellaneousRecords;
 	}
 

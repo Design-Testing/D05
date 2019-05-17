@@ -14,8 +14,8 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Curriculum;
-import domain.MiscellaneousData;
-import domain.PersonalData;
+import domain.MiscellaneousRecord;
+import domain.PersonalRecord;
 import domain.Rooky;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -76,16 +76,16 @@ public class MiscellaneousDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(user);
 			Curriculum curricula = this.curriculaService.create();
-			final PersonalData pd = curricula.getPersonalRecord();
+			final PersonalRecord pd = curricula.getPersonalRecord();
 			this.personalDataService.save(pd);
 			curricula.setPersonalRecord(pd);
 			curricula = this.curriculaService.save(curricula);
 
-			final MiscellaneousData lRec = this.miscellaneousDataService.create();
+			final MiscellaneousRecord lRec = this.miscellaneousDataService.create();
 			lRec.setFreeText(freeText);
 			if (attachments != null)
 				lRec.setAttachments(attachments);
-			final MiscellaneousData lRecSaved = this.miscellaneousDataService.save(lRec, curricula.getId());
+			final MiscellaneousRecord lRecSaved = this.miscellaneousDataService.save(lRec, curricula.getId());
 			Assert.isTrue(lRecSaved.getId() != 0);
 			this.miscellaneousDataService.flush();
 			this.unauthenticate();
@@ -129,7 +129,7 @@ public class MiscellaneousDataServiceTest extends AbstractTest {
 			final Rooky principal = this.hackerService.findByPrincipal();
 			final Collection<Curriculum> curriculas = this.curriculaService.findCurriculaByRooky(principal.getId());
 			final Curriculum curricula = curriculas.iterator().next();
-			final MiscellaneousData lR = curricula.getMiscellaneous().iterator().next();
+			final MiscellaneousRecord lR = curricula.getMiscellaneous().iterator().next();
 			lR.setFreeText(freeText);
 			if (attachments != null)
 				lR.setAttachments(attachments);
@@ -172,7 +172,7 @@ public class MiscellaneousDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(actor);
 			final Rooky hacker = this.hackerService.findByPrincipal();
-			final MiscellaneousData lRec = this.curriculaService.findCurriculaByRooky(hacker.getId()).iterator().next().getMiscellaneous().iterator().next();
+			final MiscellaneousRecord lRec = this.curriculaService.findCurriculaByRooky(hacker.getId()).iterator().next().getMiscellaneous().iterator().next();
 			this.miscellaneousDataService.delete(lRec);
 			this.miscellaneousDataService.flush();
 			this.unauthenticate();

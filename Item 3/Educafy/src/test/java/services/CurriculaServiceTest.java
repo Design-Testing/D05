@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Curriculum;
-import domain.PersonalData;
+import domain.PersonalRecord;
 import domain.Rooky;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -78,7 +78,7 @@ public class CurriculaServiceTest extends AbstractTest {
 				this.curriculaService.delete(curricula);
 			} else {
 				final Curriculum curricula = this.curriculaService.create();
-				PersonalData pd = curricula.getPersonalRecord();
+				PersonalRecord pd = curricula.getPersonalRecord();
 				pd = this.personalDataService.save(pd);
 				curricula.setPersonalRecord(pd);
 				final Curriculum saved = this.curriculaService.save(curricula);

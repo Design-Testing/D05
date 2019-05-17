@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.MiscellaneousDataRepository;
 import domain.Curriculum;
-import domain.MiscellaneousData;
+import domain.MiscellaneousRecord;
 import domain.Rooky;
 
 @Service
@@ -30,28 +30,28 @@ public class MiscellaneousDataService {
 
 	//Metodos CRUD
 
-	public MiscellaneousData create() {
-		final MiscellaneousData mRecord = new MiscellaneousData();
+	public MiscellaneousRecord create() {
+		final MiscellaneousRecord mRecord = new MiscellaneousRecord();
 		mRecord.setFreeText("");
 		final Collection<String> attachments = new ArrayList<String>();
 		mRecord.setAttachments(attachments);
 		return mRecord;
 	}
 
-	public Collection<MiscellaneousData> findAll() {
-		final Collection<MiscellaneousData> res = this.miscellaneousDataRepository.findAll();
+	public Collection<MiscellaneousRecord> findAll() {
+		final Collection<MiscellaneousRecord> res = this.miscellaneousDataRepository.findAll();
 		Assert.notNull(res);
 		return res;
 	}
 
-	public MiscellaneousData findOne(final int id) {
+	public MiscellaneousRecord findOne(final int id) {
 		Assert.isTrue(id != 0);
-		final MiscellaneousData res = this.miscellaneousDataRepository.findOne(id);
+		final MiscellaneousRecord res = this.miscellaneousDataRepository.findOne(id);
 		Assert.notNull(res);
 		return res;
 	}
 
-	public MiscellaneousData save(final MiscellaneousData miscellaneousData, final int curriculaId) {
+	public MiscellaneousRecord save(final MiscellaneousRecord miscellaneousData, final int curriculaId) {
 		final Rooky me = this.hackerService.findByPrincipal();
 		Assert.notNull(me, "You must be logged in the system");
 		Assert.notNull(miscellaneousData);
@@ -59,13 +59,13 @@ public class MiscellaneousDataService {
 		if (miscellaneousData.getId() != 0)
 			Assert.isTrue(this.hackerService.hasMiscellaneousData(me.getId(), miscellaneousData.getId()), "This personal data is not of your property");
 
-		final MiscellaneousData res = this.miscellaneousDataRepository.save(miscellaneousData);
+		final MiscellaneousRecord res = this.miscellaneousDataRepository.save(miscellaneousData);
 
 		Assert.notNull(res);
 
 		final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 		if (miscellaneousData.getId() == 0) {
-			final Collection<MiscellaneousData> misc = curricula.getMiscellaneous();
+			final Collection<MiscellaneousRecord> misc = curricula.getMiscellaneous();
 			misc.add(miscellaneousData);
 			curricula.setMiscellaneous(misc);
 			this.curriculaService.save(curricula);
@@ -73,17 +73,17 @@ public class MiscellaneousDataService {
 		return res;
 	}
 
-	public void delete(final MiscellaneousData mR) {
+	public void delete(final MiscellaneousRecord mR) {
 		final Rooky me = this.hackerService.findByPrincipal();
 		Assert.notNull(me, "You must be logged in the system");
 		Assert.isTrue(this.hackerService.findRookyByMiscellaneous(mR.getId()) == me, "No puede borrar un MiscellaneousData que no pertenezca a su historia.");
 		Assert.notNull(mR);
 		Assert.isTrue(mR.getId() != 0);
-		final MiscellaneousData res = this.findOne(mR.getId());
+		final MiscellaneousRecord res = this.findOne(mR.getId());
 
 		final Curriculum curricula = this.curriculaService.findCurriculaByMiscellaneousData(res.getId());
 
-		final Collection<MiscellaneousData> miscellaneousDatas = curricula.getMiscellaneous();
+		final Collection<MiscellaneousRecord> miscellaneousDatas = curricula.getMiscellaneous();
 
 		Assert.isTrue(this.hackerService.hasMiscellaneousData(me.getId(), res.getId()), "This personal data is not of your property");
 
@@ -96,8 +96,8 @@ public class MiscellaneousDataService {
 
 	}
 
-	public MiscellaneousData makeCopyAndSave(final MiscellaneousData md, final Curriculum curricula) {
-		MiscellaneousData result = this.create();
+	public MiscellaneousRecord makeCopyAndSave(final MiscellaneousRecord md, final Curriculum curricula) {
+		MiscellaneousRecord result = this.create();
 		result.setFreeText(md.getFreeText());
 		final Collection<String> attachements = new ArrayList<String>();
 		if (!md.getAttachments().isEmpty() && md.getAttachments() != null)

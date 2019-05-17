@@ -21,7 +21,7 @@ import services.EducationDataService;
 import services.RookyService;
 import domain.Company;
 import domain.Curricula;
-import domain.EducationData;
+import domain.EducationRecord;
 import domain.Rooky;
 
 @Controller
@@ -46,7 +46,7 @@ public class EducationDataController {
 
 		ModelAndView result;
 
-		final EducationData educationData = this.educationDataService.create();
+		final EducationRecord educationData = this.educationDataService.create();
 
 		result = new ModelAndView("educationData/edit");
 		result.addObject("educationData", educationData);
@@ -60,7 +60,7 @@ public class EducationDataController {
 	public ModelAndView edit(@RequestParam final int educationDataId, @RequestParam final int curriculaId) {
 		ModelAndView result;
 		try {
-			final EducationData educationData;
+			final EducationRecord educationData;
 			final Rooky rooky = this.rookyService.findByPrincipal();
 			educationData = this.educationDataService.findOne(educationDataId);
 
@@ -80,7 +80,7 @@ public class EducationDataController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@RequestParam final int curriculaId, @Valid final EducationData educationData, final BindingResult bindingResult) {
+	public ModelAndView save(@RequestParam final int curriculaId, @Valid final EducationRecord educationData, final BindingResult bindingResult) {
 		ModelAndView result;
 		if (bindingResult.hasErrors()) {
 			result = this.createEditModelAndView(educationData);
@@ -116,7 +116,7 @@ public class EducationDataController {
 
 		ModelAndView res;
 
-		final EducationData educationData = this.educationDataService.findOne(educationDataId);
+		final EducationRecord educationData = this.educationDataService.findOne(educationDataId);
 
 		if (educationData != null) {
 
@@ -154,7 +154,7 @@ public class EducationDataController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int educationDataId) {
 		ModelAndView result;
-		final EducationData educationData = this.educationDataService.findOne(educationDataId);
+		final EducationRecord educationData = this.educationDataService.findOne(educationDataId);
 		final Curricula curricula = this.curriculaService.findCurriculaByEducationData(educationDataId);
 		this.educationDataService.delete(educationData);
 
@@ -166,7 +166,7 @@ public class EducationDataController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final EducationData educationData) {
+	protected ModelAndView createEditModelAndView(final EducationRecord educationData) {
 		ModelAndView result;
 
 		result = this.createEditModelAndView(educationData, null);
@@ -175,7 +175,7 @@ public class EducationDataController {
 	}
 	// Edition ---------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final EducationData educationData, final String message) {
+	protected ModelAndView createEditModelAndView(final EducationRecord educationData, final String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("educationData/edit");

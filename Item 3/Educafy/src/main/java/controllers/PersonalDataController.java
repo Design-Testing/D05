@@ -22,7 +22,7 @@ import services.PersonalDataService;
 import services.RookyService;
 import domain.Company;
 import domain.Curriculum;
-import domain.PersonalData;
+import domain.PersonalRecord;
 import domain.Rooky;
 
 @Controller
@@ -59,7 +59,7 @@ public class PersonalDataController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int personalDataId) {
 		ModelAndView result;
 		try {
-			final PersonalData personalData;
+			final PersonalRecord personalData;
 			final Rooky rooky = this.rookyService.findByPrincipal();
 			personalData = this.personalDataService.findOne(personalDataId);
 			Assert.isTrue(this.rookyService.hasPersonalData(rooky.getId(), personalDataId), "This personal data is not of your property");
@@ -74,7 +74,7 @@ public class PersonalDataController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final PersonalData personalData, final BindingResult bindingResult) {
+	public ModelAndView save(@Valid final PersonalRecord personalData, final BindingResult bindingResult) {
 		ModelAndView result;
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(personalData);
@@ -101,7 +101,7 @@ public class PersonalDataController extends AbstractController {
 
 		ModelAndView res;
 
-		final PersonalData personalData = this.personalDataService.findOne(personalDataId);
+		final PersonalRecord personalData = this.personalDataService.findOne(personalDataId);
 		final Curriculum curricula = this.curriculaService.findCurriculaByPersonalData(personalDataId);
 
 		if (personalData != null) {
@@ -135,14 +135,14 @@ public class PersonalDataController extends AbstractController {
 
 	}
 
-	protected ModelAndView createEditModelAndView(final PersonalData personalData) {
+	protected ModelAndView createEditModelAndView(final PersonalRecord personalData) {
 		ModelAndView result;
 		result = this.createEditModelAndView(personalData, null);
 		return result;
 	}
 	// Edition ---------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final PersonalData personalData, final String message) {
+	protected ModelAndView createEditModelAndView(final PersonalRecord personalData, final String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("personalData/edit");

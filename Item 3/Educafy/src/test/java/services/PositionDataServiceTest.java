@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Curriculum;
-import domain.PersonalData;
+import domain.PersonalRecord;
 import domain.PositionData;
 import domain.Rooky;
 
@@ -80,7 +80,7 @@ public class PositionDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(user);
 			Curriculum curricula = this.curriculaService.create();
-			PersonalData pd = curricula.getPersonalRecord();
+			PersonalRecord pd = curricula.getPersonalRecord();
 			pd = this.personalDataService.save(pd);
 			curricula.setPersonalRecord(pd);
 			curricula = this.curriculaService.save(curricula);
