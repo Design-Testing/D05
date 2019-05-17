@@ -35,105 +35,78 @@
 		</property>
 	</bean>
 
-	<bean id="userAccountRooky1" class="security.UserAccount">
-		<property name="username" value="rooky1" />
-		<property name="password" value="c85f0d94b02a168f4e0220313eb4a377" />
+	<bean id="userAccountStudent1" class="security.UserAccount">
+		<property name="username" value="student1" />
+		<property name="password" value="5e5545d38a68148a2d5bd5ec9a89e327" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ROOKY" />
+					<property name="authority" value="STUDENT" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccountRooky2" class="security.UserAccount">
-		<property name="username" value="rooky2" />
-		<property name="password" value="2f18c47cd08057de692c777340a1cfca" />
+	<bean id="userAccountStudent2" class="security.UserAccount">
+		<property name="username" value="student2" />
+		<property name="password" value="213ee683360d88249109c2f92789dbc3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ROOKY" />
+					<property name="authority" value="STUDENT" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccountCompany1" class="security.UserAccount">
-		<property name="username" value="company1" />
-		<property name="password" value="df655f976f7c9d3263815bd981225cd9" />
+	<bean id="userAccountTeacher1" class="security.UserAccount">
+		<property name="username" value="teacher1" />
+		<property name="password" value="41c8949aa55b8cb5dbec662f34b62df3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="COMPANY" />
+					<property name="authority" value="TEACHER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccountCompany2" class="security.UserAccount">
-		<property name="username" value="company2" />
-		<property name="password" value="d196a28097115067fefd73d25b0c0be8" />
+	<bean id="userAccountTeacher2" class="security.UserAccount">
+		<property name="username" value="teacher2" />
+		<property name="password" value="ccffb0bb993eeb79059b31e1611ec353" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="COMPANY" />
+					<property name="authority" value="TEACHER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccountProvider1" class="security.UserAccount">
-		<property name="username" value="provider1" />
-		<property name="password" value="cdb82d56473901641525fbbd1d5dab56" />
+	<bean id="userAccountCertifier1" class="security.UserAccount">
+		<property name="username" value="certifier1" />
+		<property name="password" value="c7acc7970ffab6dcf9422fb98465399d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="PROVIDER" />
+					<property name="authority" value="CERTIFIER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccountProvider2" class="security.UserAccount">
-		<property name="username" value="provider2" />
-		<property name="password" value="ebfc815ee2cc6a16225105bb7b3e1e53" />
+	<bean id="userAccountCertifier2" class="security.UserAccount">
+		<property name="username" value="certifier2" />
+		<property name="password" value="99954134cc0cccdf1951c24cd5202d9d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="PROVIDER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="userAccountAuditor1" class="security.UserAccount">
-		<property name="username" value="auditor1" />
-		<property name="password" value="175d2e7a63f386554a4dd66e865c3e14" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="AUDITOR" />
+					<property name="authority" value="CERTIFIER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccountAuditor2" class="security.UserAccount">
-		<property name="username" value="auditor2" />
-		<property name="password" value="04dd94ba3212ac52ad3a1f4cbfb52d4f" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="AUDITOR" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-	
-		
-
-	
 
 	<!-- ========================= SYSTEM =========================== -->
 	<bean id="userAccountSystem" class="security.UserAccount">
