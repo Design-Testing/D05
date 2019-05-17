@@ -53,7 +53,7 @@ public class Curriculum extends DomainEntity {
 		this.miscellaneousRecords = miscellaneousRecords;
 	}
 
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	public Teacher getTeacher() {
 		return this.teacher;
 	}

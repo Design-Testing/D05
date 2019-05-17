@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
+import cz.jirutka.validator.collection.constraints.EachURL;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class MiscellaneousRecord extends DomainEntity {
@@ -33,6 +35,7 @@ public class MiscellaneousRecord extends DomainEntity {
 	}
 
 	@NotNull
+	@EachURL
 	@ElementCollection
 	public Collection<String> getAttachments() {
 		return this.attachments;
