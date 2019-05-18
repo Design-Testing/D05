@@ -1292,5 +1292,267 @@
 		<property name="creditCard" ref="creditCard2"/>
 		<property name="exam" ref="exam2"/>
 	</bean>
+	
+	<!-- =================================================================== 
+		======= Exam ========= 
+		=================================================================== -->
+		
+	<bean id="exam1" class="domain.Exam">
+		<property name="title" value="Title Exam 1"/>
+		<property name="score" value="10.0"/>
+		<property name="questions">
+		<list>
+		<bean ref="question1"/>
+		<bean ref="question2"/>
+		</list>
+		</property>
+	</bean>
+	
+	<bean id="exam2" class="domain.Exam">
+		<property name="title" value="Title Exam 2"/>
+		<property name="score" value="10.0"/>
+		<property name="questions">
+		<list>
+		<bean ref="question3"/>
+		<bean ref="question4"/>
+		</list>
+		</property>
+	</bean>
+	
+	<bean id="exam3" class="domain.Exam">
+		<property name="title" value="Title Exam 3"/>
+		<property name="score" value="10.0"/>
+		<property name="questions">
+		<list>
+		<bean ref="question5"/>
+		<bean ref="question6"/>
+		</list>
+		</property>
+	</bean>
+	
+	<bean id="exam4" class="domain.Exam">
+		<property name="title" value="Title Exam 4"/>
+		<property name="score" value="10.0"/>
+		<property name="questions">
+		<list>
+		<bean ref="question7"/>
+		<bean ref="question8"/>
+		</list>
+		</property>
+	</bean>
+	
+	<!-- =================================================================== 
+		======= Question ========= 
+		=================================================================== -->
+		
+	<bean id="question1" class="domain.Question">
+		<property name="question" value="Question 1"/>
+		<property name="answer" value="Answer 1"/>
+	</bean>
+	
+	<bean id="question2" class="domain.Question">
+		<property name="question" value="Question 2"/>
+		<property name="answer" value="Answer 2"/>
+	</bean>
+	
+	<bean id="question3" class="domain.Question">
+		<property name="question" value="Question 3"/>
+		<property name="answer" value="Answer 3"/>
+	</bean>
+	
+	<bean id="question4" class="domain.Question">
+		<property name="question" value="Question 4"/>
+		<property name="answer" value="Answer 4"/>
+	</bean>
+	
+	<bean id="question5" class="domain.Question">
+		<property name="question" value="Question 5"/>
+		<property name="answer" value="Answer 5"/>
+	</bean>
+	
+	<bean id="question6" class="domain.Question">
+		<property name="question" value="Question 6"/>
+		<property name="answer" value="Answer 6"/>
+	</bean>
+	
+	<bean id="question7" class="domain.Question">
+		<property name="question" value="Question 7"/>
+		<property name="answer" value="Answer 7"/>
+	</bean>
+	
+	<bean id="question8" class="domain.Question">
+		<property name="question" value="Question 8"/>
+		<property name="answer" value="Answer 8"/>
+	</bean>
+	
+	<!-- =================================================================== 
+		======= TimePeriod ========= 
+		=================================================================== -->
+		
+	<bean id="timePeriod1" class="domain.TimePeriod">
+		<property name="startHour" value="12"/>
+		<property name="endHour" value="13"/>
+		<property name="dayNumber" value="4"/>
+		<property name="" ref="reservation1"/>
+	</bean>
+	
+	<bean id="timePeriod2" class="domain.TimePeriod">
+		<property name="startHour" value="16"/>
+		<property name="endHour" value="18"/>
+		<property name="dayNumber" value="1"/>
+		<property name="" ref="reservation2"/>
+	</bean>
+	
+	<!-- =================================================================== 
+		======= Schedule ========= 
+		=================================================================== -->
+		
+	<bean id="schedule1" class="domain.Schedule">
+	    <property name="lunes">
+		    <array>  
+			    <item>1</item>  
+			    <item>2</item>  
+			    <item>3</item>  
+			    <item>4</item>  
+			    <item>5</item>
+			    <item>6</item> 
+			    <item>7</item> 
+			    <item>8</item> 
+			    <item>9</item> 
+			    <item>10</item> 
+			    <item>11</item> 
+			    <item>12</item> 
+			    <item>13</item> 
+			    <item>14</item> 
+			    <item>15</item> 
+			    <item>16</item> 
+			    <item>17</item> 
+			    <item>18</item> 
+			    <item>19</item> 
+			    <item>20</item>
+			    <item>21</item>
+			    <item>22</item>
+			    <item>23</item>
+			    <item>24</item>
+		     </array>
+	    </property>
+	    
+	    <property name="martes">
+		    <array>  
+			    <item>1</item>  
+			    <item>2</item>  
+			    <item>3</item>  
+			    <item>4</item>  
+			    <item>5</item>
+			    <item>6</item> 
+			    <item>7</item> 
+			    <item>8</item> 
+			    <item>9</item> 
+			    <item>10</item> 
+			    <item>11</item> 
+			    <item>12</item> 
+			    <item>13</item> 
+			    <item>14</item> 
+			    <item>15</item> 
+			    <item>16</item> 
+			    <item>17</item> 
+			    <item>18</item> 
+			    <item>19</item> 
+			    <item>20</item>
+			    <item>21</item>
+			    <item>22</item>
+			    <item>23</item>
+			    <item>24</item>
+		     </array>
+	    </property>
+	    
+	    <property name="miercoles">
+		    <array>  
+			    <item>1</item>  
+			    <item>2</item>  
+			    <item>3</item>  
+			    <item>4</item>  
+			    <item>5</item>
+			    <item>6</item> 
+			    <item>7</item> 
+			    <item>8</item> 
+			    <item>9</item> 
+			    <item>10</item> 
+			    <item>11</item> 
+			    <item>12</item> 
+			    <item>13</item> 
+			    <item>14</item> 
+			    <item>15</item> 
+			    <item>16</item> 
+			    <item>17</item> 
+			    <item>18</item> 
+			    <item>19</item> 
+			    <item>20</item>
+			    <item>21</item>
+			    <item>22</item>
+			    <item>23</item>
+			    <item>24</item>
+		     </array>
+	    </property>
+	    
+	    <property name="jueves">
+		    <array>  
+			    <item>1</item>  
+			    <item>2</item>  
+			    <item>3</item>  
+			    <item>4</item>  
+			    <item>5</item>
+			    <item>6</item> 
+			    <item>7</item> 
+			    <item>8</item> 
+			    <item>9</item> 
+			    <item>10</item> 
+			    <item>11</item> 
+			    <item>12</item> 
+			    <item>13</item> 
+			    <item>14</item> 
+			    <item>15</item> 
+			    <item>16</item> 
+			    <item>17</item> 
+			    <item>18</item> 
+			    <item>19</item> 
+			    <item>20</item>
+			    <item>21</item>
+			    <item>22</item>
+			    <item>23</item>
+			    <item>24</item>
+		     </array>
+	    </property>
+	    
+	    <property name="viernes">
+		    <array>  
+			    <item>1</item>  
+			    <item>2</item>  
+			    <item>3</item>  
+			    <item>4</item>  
+			    <item>5</item>
+			    <item>6</item> 
+			    <item>7</item> 
+			    <item>8</item> 
+			    <item>9</item> 
+			    <item>10</item> 
+			    <item>11</item> 
+			    <item>12</item> 
+			    <item>13</item> 
+			    <item>14</item> 
+			    <item>15</item> 
+			    <item>16</item> 
+			    <item>17</item> 
+			    <item>18</item> 
+			    <item>19</item> 
+			    <item>20</item>
+			    <item>21</item>
+			    <item>22</item>
+			    <item>23</item>
+			    <item>24</item>
+		     </array>
+	    </property>
+    
+    </bean>  
 
 </beans>
