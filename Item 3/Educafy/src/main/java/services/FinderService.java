@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 import repositories.FinderRepository;
 import domain.Finder;
 import domain.Position;
-import domain.Rooky;
+import domain.Student;
 
 @Service
 @Transactional
@@ -28,10 +28,10 @@ public class FinderService {
 	private ConfigurationParametersService	configParamService;
 
 	@Autowired
-	private RookyService					rookyService;
+	private StudentService					studentService;
 
 	@Autowired
-	private PositionService					positionService;
+	private LessonService					lessonService;
 
 
 	/**
@@ -85,8 +85,8 @@ public class FinderService {
 
 	// Antes de guardar tengo que pasar por este metodo para setearle las nuevas procesiones segun los nuevos parametros
 	public Finder find(final Finder finder) {
-		this.rookyService.findByPrincipal();
-		List<Position> result = new ArrayList<>(this.positionService.findPositions(finder.getKeyword(), finder.getMinSalary(), finder.getMaxSalary(), finder.getMinDeadline(), finder.getMaxDeadline()));
+		this.studentService.findByPrincipal();
+		List<Lesson> result = new ArrayList<>(this.lessonService.findLessons(finder.getKeyword(), finder.getMinSalary(), finder.getMaxSalary(), finder.getMinDeadline(), finder.getMaxDeadline()));
 		final int maxResults = this.configParamService.find().getMaxFinderResults();
 		if (result.size() > maxResults) {
 			Collections.shuffle(result);
@@ -97,21 +97,21 @@ public class FinderService {
 	}
 
 	public Finder save(final Finder finder) {
-		final Rooky rooky = this.rookyService.findByPrincipal();
+		final Student student = this.studentService.findByPrincipal();
 		Assert.notNull(finder);
 		Assert.isTrue(finder.getId() != 0);
-		Assert.isTrue(this.finderRepository.findRookyFinder(rooky.getId()).getId() == finder.getId(), "You're not owner of this finder, you cannot modify it");
+		Assert.isTrue(this.finderRepository.findStudentFinder(student.getId()).getId() == finder.getId(), "You're not owner of this finder, you cannot modify it");
 
 		finder.setCreationDate(new Date(System.currentTimeMillis()));
 		final Finder res = this.finderRepository.save(finder);
 		Assert.notNull(res);
 
-		rooky.setFinder(finder);
-		this.rookyService.save(rooky);
+		student.setFinder(finder);
+		this.studentService.save(student);
 		return res;
 	}
 
-	public Finder createForNewRooky() {
+	public Finder createForNewStudent() {
 		final Finder finder = new Finder();
 		finder.setKeyword("");
 		finder.setMinSalary(null);
@@ -127,17 +127,17 @@ public class FinderService {
 
 	public void delete(final Finder finder) {
 		Assert.notNull(finder);
-		final Rooky rooky = this.rookyService.findByPrincipal();
+		final Student student = this.studentService.findByPrincipal();
 		Assert.isTrue(finder.getId() != 0);
 		Assert.isTrue(this.finderRepository.exists(finder.getId()));
-		Assert.isTrue(this.finderRepository.findRookyFinder(rooky.getId()).getId() == finder.getId(), "You're not owner of this finder, you cannot delete it");
+		Assert.isTrue(this.finderRepository.findStudentFinder(student.getId()).getId() == finder.getId(), "You're not owner of this finder, you cannot delete it");
 		this.finderRepository.delete(finder);
 	}
 
-	public Finder findRookyFinder() {
-		final Rooky principal = this.rookyService.findByPrincipal();
+	public Finder findStudentFinder() {
+		final Student principal = this.studentService.findByPrincipal();
 
-		final Finder finder = this.finderRepository.findRookyFinder(principal.getId());
+		final Finder finder = this.finderRepository.findStudentFinder(principal.getId());
 		Assert.notNull(finder);
 
 		// final int finderTime = this.configParamService.find().getFinderTime();
@@ -152,8 +152,8 @@ public class FinderService {
 	}
 
 	public Finder clear(final Finder finder) {
-		final Rooky rooky = this.rookyService.findByPrincipal();
-		final Finder result = this.finderRepository.findRookyFinder(rooky.getId());
+		final Student student = this.studentService.findByPrincipal();
+		final Finder result = this.finderRepository.findStudentFinder(student.getId());
 		Assert.isTrue(result.equals(finder), "You're not owner of this finder");
 		Assert.notNull(result);
 		result.setKeyword("");
