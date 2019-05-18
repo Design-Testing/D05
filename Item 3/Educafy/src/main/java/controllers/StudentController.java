@@ -24,18 +24,17 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import security.UserAccount;
 import services.ConfigurationParametersService;
-import services.RookyService;
 import services.UserAccountService;
 import services.auxiliary.RegisterService;
-import domain.Rooky;
+import domain.Student;
 import forms.ActorForm;
 
 @Controller
-@RequestMapping("/rooky")
-public class RookyController extends AbstractController {
+@RequestMapping("/student")
+public class StudentController extends AbstractController {
 
 	@Autowired
-	private RookyService					rookyService;
+	private StudentService					studentService;
 
 	@Autowired
 	private RegisterService					registerService;
@@ -49,7 +48,7 @@ public class RookyController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public RookyController() {
+	public StudentController() {
 		super();
 	}
 
@@ -58,20 +57,20 @@ public class RookyController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result = new ModelAndView();
-		final ActorForm rooky = new ActorForm();
-		result = this.createEditModelAndView(rooky);
+		final ActorForm student = new ActorForm();
+		result = this.createEditModelAndView(student);
 		return result;
 	}
 
 	// DISPLAY TABLA -----------------------------------------------------------
 
 	@RequestMapping(value = "/displayTabla", method = RequestMethod.GET)
-	public ModelAndView displayTabla(@RequestParam final int rookyId) {
+	public ModelAndView displayTabla(@RequestParam final int studentId) {
 		final ModelAndView result;
-		final Rooky rooky = this.rookyService.findOne(rookyId);
-		if (rooky != null) {
-			result = new ModelAndView("rooky/display");
-			result.addObject("rooky", rooky);
+		final Student student = this.studentService.findOne(studentId);
+		if (student != null) {
+			result = new ModelAndView("student/display");
+			result.addObject("student", student);
 			result.addObject("displayButtons", true);
 		} else
 			result = new ModelAndView("redirect:misc/403");
@@ -85,10 +84,10 @@ public class RookyController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		final ModelAndView result;
-		final Rooky rooky = this.rookyService.findByPrincipal();
-		if (rooky != null) {
-			result = new ModelAndView("rooky/display");
-			result.addObject("rooky", rooky);
+		final Student student = this.studentService.findByPrincipal();
+		if (student != null) {
+			result = new ModelAndView("student/display");
+			result.addObject("student", student);
 			result.addObject("displayButtons", true);
 		} else
 			result = new ModelAndView("redirect:misc/403");
@@ -102,9 +101,9 @@ public class RookyController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-		result = new ModelAndView("rooky/edit");
-		final Rooky rooky = this.rookyService.findByPrincipal();
-		final ActorForm actor = this.registerService.inyect(rooky);
+		result = new ModelAndView("student/edit");
+		final Student student = this.studentService.findByPrincipal();
+		final ActorForm actor = this.registerService.inyect(student);
 		actor.setTermsAndCondicions(true);
 		result.addObject("actorForm", actor);
 		result.addObject("cardmakes", this.configurationParametersService.find().getCreditCardMake());
@@ -117,8 +116,8 @@ public class RookyController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final ActorForm actorForm, final BindingResult binding) {
 		ModelAndView result;
-		result = new ModelAndView("rooky/edit");
-		Rooky rooky;
+		result = new ModelAndView("student/edit");
+		Student student;
 		if (binding.hasErrors()) {
 			result.addObject("errors", binding.getAllErrors());
 			actorForm.setTermsAndCondicions(false);
@@ -126,10 +125,10 @@ public class RookyController extends AbstractController {
 		} else
 			try {
 				final UserAccount ua = this.userAccountService.reconstruct(actorForm, Authority.ROOKY);
-				rooky = this.rookyService.reconstruct(actorForm, binding);
-				rooky.setUserAccount(ua);
-				this.registerService.saveRooky(rooky, binding);
-				result.addObject("alert", "rooky.edit.correct");
+				student = this.studentService.reconstruct(actorForm, binding);
+				student.setUserAccount(ua);
+				this.registerService.saveStudent(student, binding);
+				result.addObject("alert", "student.edit.correct");
 				result.addObject("actorForm", actorForm);
 			} catch (final ValidationException oops) {
 				result.addObject("errors", binding.getAllErrors());
@@ -137,7 +136,7 @@ public class RookyController extends AbstractController {
 				result.addObject("actorForm", actorForm);
 			} catch (final Throwable e) {
 				if (e.getMessage().contains("username is register"))
-					result.addObject("alert", "rooky.edit.usernameIsUsed");
+					result.addObject("alert", "student.edit.usernameIsUsed");
 				result.addObject("errors", binding.getAllErrors());
 				actorForm.setTermsAndCondicions(false);
 				result.addObject("actorForm", actorForm);
@@ -150,7 +149,7 @@ public class RookyController extends AbstractController {
 	// GDPR -----------------------------------------------------------
 	@RequestMapping(value = "/deletePersonalData")
 	public ModelAndView deletePersonalData() {
-		this.rookyService.deletePersonalData();
+		this.studentService.deletePersonalData();
 
 		final ModelAndView result = new ModelAndView("redirect:../j_spring_security_logout");
 		return result;
@@ -168,7 +167,7 @@ public class RookyController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final ActorForm actorForm, final String messageCode) {
 		final ModelAndView result;
 
-		result = new ModelAndView("rooky/edit");
+		result = new ModelAndView("student/edit");
 		result.addObject("actorForm", actorForm);
 		result.addObject("cardmakes", this.configurationParametersService.find().getCreditCardMake());
 		result.addObject("countryPhoneCode", this.configurationParametersService.find().getCountryPhoneCode());

@@ -11,11 +11,13 @@ import org.springframework.validation.BindingResult;
 import security.UserAccount;
 import security.UserAccountRepository;
 import services.AdministratorService;
-import services.RookyService;
+import services.StudentService;
 import services.UserAccountService;
 import domain.Actor;
 import domain.Administrator;
-import domain.Rooky;
+import domain.Certifier;
+import domain.Student;
+import domain.Teacher;
 import forms.ActorForm;
 
 @Service
@@ -32,7 +34,13 @@ public class RegisterService {
 	private UserAccountRepository	userAccountRepository;
 
 	@Autowired
-	private RookyService			rookyService;
+	private StudentService			studentService;
+
+	@Autowired
+	private CertifierService		certifierService;
+
+	@Autowired
+	private TeacherService			teacherService;
 
 
 	public Administrator saveAdmin(final Administrator admin, final BindingResult binding) {
@@ -65,16 +73,16 @@ public class RegisterService {
 		return result;
 	}
 
-	public Rooky saveRooky(final Rooky rooky, final BindingResult binding) {
-		Rooky result;
-		final UserAccount ua = rooky.getUserAccount();
+	public Student saveStudent(final Student student, final BindingResult binding) {
+		Student result;
+		final UserAccount ua = student.getUserAccount();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		final String hash = encoder.encodePassword(ua.getPassword(), null);
-		if (rooky.getId() == 0) {
+		if (student.getId() == 0) {
 			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
 			ua.setPassword(hash);
-			rooky.setUserAccount(ua);
-			result = this.rookyService.save(rooky);
+			student.setUserAccount(ua);
+			result = this.studentService.save(student);
 			UserAccount uaSaved = result.getUserAccount();
 			uaSaved.setAuthorities(ua.getAuthorities());
 			uaSaved.setUsername(ua.getUsername());
@@ -82,13 +90,73 @@ public class RegisterService {
 			uaSaved = this.userAccountService.save(uaSaved);
 			result.setUserAccount(uaSaved);
 		} else {
-			final Rooky old = this.rookyService.findOne(rooky.getId());
+			final Student old = this.studentService.findOne(student.getId());
 
 			ua.setPassword(hash);
 			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
 				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
 
-			result = this.rookyService.save(rooky);
+			result = this.studentService.save(student);
+
+		}
+
+		return result;
+	}
+
+	public Teacher saveTeacher(final Teacher teacher, final BindingResult binding) {
+		Teacher result;
+		final UserAccount ua = teacher.getUserAccount();
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String hash = encoder.encodePassword(ua.getPassword(), null);
+		if (teacher.getId() == 0) {
+			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+			ua.setPassword(hash);
+			teacher.setUserAccount(ua);
+			result = this.teacherService.save(teacher);
+			UserAccount uaSaved = result.getUserAccount();
+			uaSaved.setAuthorities(ua.getAuthorities());
+			uaSaved.setUsername(ua.getUsername());
+			uaSaved.setPassword(ua.getPassword());
+			uaSaved = this.userAccountService.save(uaSaved);
+			result.setUserAccount(uaSaved);
+		} else {
+			final Teacher old = this.teacherService.findOne(teacher.getId());
+
+			ua.setPassword(hash);
+			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
+				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+
+			result = this.teacherService.save(teacher);
+
+		}
+
+		return result;
+	}
+
+	public Certifier saveCertifier(final Certifier certifier, final BindingResult binding) {
+		Certifier result;
+		final UserAccount ua = certifier.getUserAccount();
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String hash = encoder.encodePassword(ua.getPassword(), null);
+		if (certifier.getId() == 0) {
+			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+			ua.setPassword(hash);
+			certifier.setUserAccount(ua);
+			result = this.certifierService.save(certifier);
+			UserAccount uaSaved = result.getUserAccount();
+			uaSaved.setAuthorities(ua.getAuthorities());
+			uaSaved.setUsername(ua.getUsername());
+			uaSaved.setPassword(ua.getPassword());
+			uaSaved = this.userAccountService.save(uaSaved);
+			result.setUserAccount(uaSaved);
+		} else {
+			final Certifier old = this.certifierService.findOne(certifier.getId());
+
+			ua.setPassword(hash);
+			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
+				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+
+			result = this.certifierService.save(certifier);
 
 		}
 

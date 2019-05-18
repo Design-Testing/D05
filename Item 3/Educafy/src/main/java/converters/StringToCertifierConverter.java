@@ -8,21 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import repositories.RookyRepository;
-import domain.Rooky;
+import repositories.CertifierRepository;
+import domain.Certifier;
 
 @Component
 @Transactional
-public class StringToRookyConverter implements Converter<String, Rooky> {
+public class StringToCertifierConverter implements Converter<String, Certifier> {
 
 	@Autowired
-	private RookyRepository	rookyRepository;
+	private CertifierRepository	certifierRepository;
 
 
 	@Override
-	public Rooky convert(final String text) {
+	public Certifier convert(final String text) {
 
-		final Rooky result;
+		final Certifier result;
 		final int id;
 
 		try {
@@ -30,7 +30,7 @@ public class StringToRookyConverter implements Converter<String, Rooky> {
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = this.rookyRepository.findOne(id);
+				result = this.certifierRepository.findOne(id);
 			}
 
 		} catch (final Throwable oops) {

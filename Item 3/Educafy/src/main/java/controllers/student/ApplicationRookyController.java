@@ -1,5 +1,5 @@
 
-package controllers.rooky;
+package controllers.student;
 
 import java.util.Collection;
 

@@ -2,31 +2,26 @@
 package domain;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.SafeHtml;
-import org.springframework.format.annotation.DateTimeFormat;
+
+import services.Lesson;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Finder extends DomainEntity {
 
-	private String					keyword;
-	private Date					minDeadline;
-	private Date					maxDeadline;
-	private Double					minSalary;
-	private Double					maxSalary;
-	private Date					creationDate;
-	private Collection<Position>	positions;
+	private String				keyword;
+	private String				teacherName;
+	private String				subjectName;
+	private String				subjectLevel;
+
+	private Collection<Lesson>	lessons;
 
 
 	@SafeHtml
@@ -38,62 +33,40 @@ public class Finder extends DomainEntity {
 		this.keyword = keyword;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	public Date getMinDeadline() {
-		return this.minDeadline;
+	@SafeHtml
+	public String getTeacherName() {
+		return this.teacherName;
 	}
 
-	public void setMinDeadline(final Date minDeadline) {
-		this.minDeadline = minDeadline;
+	public void setTeacherName(final String teacherName) {
+		this.teacherName = teacherName;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	public Date getMaxDeadline() {
-		return this.maxDeadline;
+	@SafeHtml
+	public String getSubjectName() {
+		return this.subjectName;
 	}
 
-	public void setMaxDeadline(final Date maxDeadline) {
-		this.maxDeadline = maxDeadline;
+	public void setSubjectName(final String subjectName) {
+		this.subjectName = subjectName;
 	}
 
-	@Min(0)
-	public Double getMinSalary() {
-		return this.minSalary;
+	@SafeHtml
+	public String getSubjectLevel() {
+		return this.subjectLevel;
 	}
 
-	public void setMinSalary(final Double minSalary) {
-		this.minSalary = minSalary;
-	}
-
-	@Min(0)
-	public Double getMaxSalary() {
-		return this.maxSalary;
-	}
-
-	public void setMaxSalary(final Double maxSalary) {
-		this.maxSalary = maxSalary;
-	}
-
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	public Date getCreationDate() {
-		return this.creationDate;
-	}
-
-	public void setCreationDate(final Date creationDate) {
-		this.creationDate = creationDate;
+	public void setSubjectLevel(final String subjectLevel) {
+		this.subjectLevel = subjectLevel;
 	}
 
 	@ManyToMany
-	public Collection<Position> getPositions() {
-		return this.positions;
+	public Collection<Lesson> getLessons() {
+		return this.lessons;
 	}
 
-	public void setPositions(final Collection<Position> positions) {
-		this.positions = positions;
+	public void setLessons(final Collection<Lesson> lessons) {
+		this.lessons = lessons;
 	}
 
 }

@@ -9,10 +9,9 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import repositories.AdministratorRepository;
-import repositories.AuditorRepository;
-import repositories.CompanyRepository;
-import repositories.ProviderRepository;
-import repositories.RookyRepository;
+import repositories.CertifierRepository;
+import repositories.StudentRepository;
+import repositories.TeacherRepository;
 import domain.Actor;
 
 @Component
@@ -20,19 +19,16 @@ import domain.Actor;
 public class StringToActorConverter implements Converter<String, Actor> {
 
 	@Autowired
-	private CompanyRepository		companyRepository;
-
-	@Autowired
-	private RookyRepository			rookyRepository;
-
-	@Autowired
 	private AdministratorRepository	administratorRepository;
 
 	@Autowired
-	private ProviderRepository		providerRepository;
+	private CertifierRepository		certifierRepository;
 
 	@Autowired
-	private AuditorRepository		auditorRepository;
+	private TeacherRepository		teacherRepository;
+
+	@Autowired
+	private StudentRepository		studentRepository;
 
 
 	@Override
@@ -46,15 +42,13 @@ public class StringToActorConverter implements Converter<String, Actor> {
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = this.companyRepository.findOne(id);
+				result = this.studentRepository.findOne(id);
 				if (result == null)
-					result = this.rookyRepository.findOne(id);
+					result = this.teacherRepository.findOne(id);
 				if (result == null)
 					result = this.administratorRepository.findOne(id);
 				if (result == null)
-					result = this.providerRepository.findOne(id);
-				if (result == null)
-					result = this.auditorRepository.findOne(id);
+					result = this.certifierRepository.findOne(id);
 			}
 
 		} catch (final Throwable oops) {
