@@ -133,7 +133,6 @@
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="" />
 		<property name="vat" value="0.21" />
-		<property name="creditCard" ref="creditCard1" />
 		<property name="userAccount" ref="userAccountSystem" />
 	</bean>
 	<!-- ========================= ======== =========================== -->
@@ -309,10 +308,10 @@
 		</property>
 	</bean>
 
-	<bean id="outBoxProvider1" class="domain.Folder">
+	<bean id="outBoxStudent1" class="domain.Folder">
 		<property name="name" value="Out box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider1" />
+		<property name="actor" ref="student1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -320,10 +319,10 @@
 		</property>
 	</bean>
 
-	<bean id="inBoxProvider1" class="domain.Folder">
+	<bean id="inBoxStudent1" class="domain.Folder">
 		<property name="name" value="In box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider1" />
+		<property name="actor" ref="student1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -331,10 +330,10 @@
 		</property>
 	</bean>
 
-	<bean id="trashBoxProvider1" class="domain.Folder">
+	<bean id="trashBoxStudent1" class="domain.Folder">
 		<property name="name" value="Trash box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider1" />
+		<property name="actor" ref="student1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -343,10 +342,10 @@
 	</bean>
 
 
-	<bean id="notificationBoxProvider1" class="domain.Folder">
+	<bean id="notificationBoxStudent1" class="domain.Folder">
 		<property name="name" value="Notification box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider1" />
+		<property name="actor" ref="student1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -354,10 +353,10 @@
 		</property>
 	</bean>
 
-	<bean id="spamBoxProvider1" class="domain.Folder">
+	<bean id="spamBoxStudent1" class="domain.Folder">
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider1" />
+		<property name="actor" ref="student1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -367,10 +366,10 @@
 
 	<!-- ========================================= -->
 
-	<bean id="outBoxProvider2" class="domain.Folder">
+	<bean id="outBoxStudent2" class="domain.Folder">
 		<property name="name" value="Out box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider2" />
+		<property name="actor" ref="student2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -378,10 +377,10 @@
 		</property>
 	</bean>
 
-	<bean id="inBoxProvider2" class="domain.Folder">
+	<bean id="inBoxStudent2" class="domain.Folder">
 		<property name="name" value="In box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider2" />
+		<property name="actor" ref="student2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -389,10 +388,10 @@
 		</property>
 	</bean>
 
-	<bean id="trashBoxProvider2" class="domain.Folder">
+	<bean id="trashBoxStudent2" class="domain.Folder">
 		<property name="name" value="Trash box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider2" />
+		<property name="actor" ref="student2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -401,10 +400,10 @@
 	</bean>
 
 
-	<bean id="notificationBoxProvider2" class="domain.Folder">
+	<bean id="notificationBoxStudent2" class="domain.Folder">
 		<property name="name" value="Notification box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider2" />
+		<property name="actor" ref="student2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -412,10 +411,10 @@
 		</property>
 	</bean>
 
-	<bean id="spamBoxProvider2" class="domain.Folder">
+	<bean id="spamBoxStudent2" class="domain.Folder">
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="provider2" />
+		<property name="actor" ref="student2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -425,10 +424,10 @@
 
 	<!-- ========================================= -->
 
-	<bean id="outBoxRooky1" class="domain.Folder">
+	<bean id="outBoxStudent3" class="domain.Folder">
 		<property name="name" value="Out box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky1" />
+		<property name="actor" ref="student3" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -436,10 +435,10 @@
 		</property>
 	</bean>
 
-	<bean id="inBoxRooky1" class="domain.Folder">
+	<bean id="inBoxStudent3" class="domain.Folder">
 		<property name="name" value="In box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky1" />
+		<property name="actor" ref="student3" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -447,10 +446,10 @@
 		</property>
 	</bean>
 
-	<bean id="trashBoxRooky1" class="domain.Folder">
+	<bean id="trashBoxStudent3" class="domain.Folder">
 		<property name="name" value="Trash box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky1" />
+		<property name="actor" ref="student3" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -459,10 +458,10 @@
 	</bean>
 
 
-	<bean id="notificationBoxRooky1" class="domain.Folder">
+	<bean id="notificationBoxStudent3" class="domain.Folder">
 		<property name="name" value="Notification box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky1" />
+		<property name="actor" ref="student3" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -470,10 +469,10 @@
 		</property>
 	</bean>
 
-	<bean id="spamBoxRooky1" class="domain.Folder">
+	<bean id="spamBoxStudent3" class="domain.Folder">
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky1" />
+		<property name="actor" ref="student3" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -483,10 +482,10 @@
 
 	<!-- ========================================= -->
 
-	<bean id="outBoxRooky2" class="domain.Folder">
+	<bean id="outBoxTeacher1" class="domain.Folder">
 		<property name="name" value="Out box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky2" />
+		<property name="actor" ref="teacher1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -494,10 +493,10 @@
 		</property>
 	</bean>
 
-	<bean id="inBoxRooky2" class="domain.Folder">
+	<bean id="inBoxTeacher1" class="domain.Folder">
 		<property name="name" value="In box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky2" />
+		<property name="actor" ref="teacher1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -505,10 +504,10 @@
 		</property>
 	</bean>
 
-	<bean id="trashBoxRooky2" class="domain.Folder">
+	<bean id="trashBoxTeacher1" class="domain.Folder">
 		<property name="name" value="Trash box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky2" />
+		<property name="actor" ref="teacher1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -517,10 +516,10 @@
 	</bean>
 
 
-	<bean id="notificationBoxRooky2" class="domain.Folder">
+	<bean id="notificationBoxTeacher1" class="domain.Folder">
 		<property name="name" value="Notification box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky2" />
+		<property name="actor" ref="teacher1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -528,10 +527,10 @@
 		</property>
 	</bean>
 
-	<bean id="spamBoxRooky2" class="domain.Folder">
+	<bean id="spamBoxTeacher1" class="domain.Folder">
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="rooky2" />
+		<property name="actor" ref="teacher1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -541,10 +540,10 @@
 
 	<!-- ========================================= -->
 
-	<bean id="outBoxCompany1" class="domain.Folder">
+	<bean id="outBoxTeacher2" class="domain.Folder">
 		<property name="name" value="Out box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company1" />
+		<property name="actor" ref="teacher2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -552,10 +551,10 @@
 		</property>
 	</bean>
 
-	<bean id="inBoxCompany1" class="domain.Folder">
+	<bean id="inBoxTeacher2" class="domain.Folder">
 		<property name="name" value="In box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company1" />
+		<property name="actor" ref="teacher2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -563,10 +562,10 @@
 		</property>
 	</bean>
 
-	<bean id="trashBoxCompany1" class="domain.Folder">
+	<bean id="trashBoxTeacher2" class="domain.Folder">
 		<property name="name" value="Trash box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company1" />
+		<property name="actor" ref="teacher2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -575,10 +574,10 @@
 	</bean>
 
 
-	<bean id="notificationBoxCompany1" class="domain.Folder">
+	<bean id="notificationBoxTeacher2" class="domain.Folder">
 		<property name="name" value="Notification box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company1" />
+		<property name="actor" ref="teacher2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -586,10 +585,10 @@
 		</property>
 	</bean>
 
-	<bean id="spamBoxCompany1" class="domain.Folder">
+	<bean id="spamBoxTeacher2" class="domain.Folder">
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company1" />
+		<property name="actor" ref="teacher2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -599,10 +598,10 @@
 
 	<!-- ========================================= -->
 
-	<bean id="outBoxCompany2" class="domain.Folder">
+	<bean id="outBoxCertifier1" class="domain.Folder">
 		<property name="name" value="Out box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company2" />
+		<property name="actor" ref="certifier1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -610,10 +609,10 @@
 		</property>
 	</bean>
 
-	<bean id="inBoxCompany2" class="domain.Folder">
+	<bean id="inBoxCertifier1" class="domain.Folder">
 		<property name="name" value="In box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company2" />
+		<property name="actor" ref="certifier1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -621,10 +620,10 @@
 		</property>
 	</bean>
 
-	<bean id="trashBoxCompany2" class="domain.Folder">
+	<bean id="trashBoxCertifier1" class="domain.Folder">
 		<property name="name" value="Trash box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company2" />
+		<property name="actor" ref="certifier1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -633,10 +632,10 @@
 	</bean>
 
 
-	<bean id="notificationBoxCompany2" class="domain.Folder">
+	<bean id="notificationBoxCertifier1" class="domain.Folder">
 		<property name="name" value="Notification box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company2" />
+		<property name="actor" ref="certifier1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -644,71 +643,10 @@
 		</property>
 	</bean>
 
-	<bean id="spamBoxCompany2" class="domain.Folder">
+	<bean id="spamBoxCertifier1" class="domain.Folder">
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="company2" />
-		<property name="messages">
-			<list>
-				<!-- <ref bean="message1"/> -->
-			</list>
-		</property>
-	</bean>
-
-
-
-
-	<!-- ========================================= -->
-
-	<bean id="outBoxAuditor1" class="domain.Folder">
-		<property name="name" value="Out box" />
-		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor1" />
-		<property name="messages">
-			<list>
-				<!-- <ref bean="message1"/> -->
-			</list>
-		</property>
-	</bean>
-
-	<bean id="inBoxAuditor1" class="domain.Folder">
-		<property name="name" value="In box" />
-		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor1" />
-		<property name="messages">
-			<list>
-				<!-- <ref bean="message1"/> -->
-			</list>
-		</property>
-	</bean>
-
-	<bean id="trashBoxAuditor1" class="domain.Folder">
-		<property name="name" value="Trash box" />
-		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor1" />
-		<property name="messages">
-			<list>
-				<!-- <ref bean="message1"/> -->
-			</list>
-		</property>
-	</bean>
-
-
-	<bean id="notificationBoxAuditor1" class="domain.Folder">
-		<property name="name" value="Notification box" />
-		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor1" />
-		<property name="messages">
-			<list>
-				<!-- <ref bean="message1"/> -->
-			</list>
-		</property>
-	</bean>
-
-	<bean id="spamBoxAuditor1" class="domain.Folder">
-		<property name="name" value="Spam box" />
-		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor1" />
+		<property name="actor" ref="certifier1" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -718,10 +656,10 @@
 
 	<!-- ========================================= -->
 
-	<bean id="outBoxAuditor2" class="domain.Folder">
+	<bean id="outBoxCertifier2" class="domain.Folder">
 		<property name="name" value="Out box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor2" />
+		<property name="actor" ref="certifier2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -729,10 +667,10 @@
 		</property>
 	</bean>
 
-	<bean id="inBoxAuditor2" class="domain.Folder">
+	<bean id="inBoxCertifier2" class="domain.Folder">
 		<property name="name" value="In box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor2" />
+		<property name="actor" ref="certifier2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -740,10 +678,10 @@
 		</property>
 	</bean>
 
-	<bean id="trashBoxAuditor2" class="domain.Folder">
+	<bean id="trashBoxCertifier2" class="domain.Folder">
 		<property name="name" value="Trash box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor2" />
+		<property name="actor" ref="certifier2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -752,10 +690,10 @@
 	</bean>
 
 
-	<bean id="notificationBoxAuditor2" class="domain.Folder">
+	<bean id="notificationBoxCertifier2" class="domain.Folder">
 		<property name="name" value="Notification box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor2" />
+		<property name="actor" ref="certifier2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -763,10 +701,10 @@
 		</property>
 	</bean>
 
-	<bean id="spamBoxAuditor2" class="domain.Folder">
+	<bean id="spamBoxCertifier2" class="domain.Folder">
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
-		<property name="actor" ref="auditor2" />
+		<property name="actor" ref="certifier2" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -774,7 +712,7 @@
 		</property>
 	</bean>
 
-
+	
 	<!-- =================================================================== 
 		======= ADMINISTRATOR ========= =================================================================== -->
 
@@ -791,7 +729,6 @@
 		<property name="phone" value="+34647607406" />
 		<property name="address" value="Reina Mercedes" />
 		<property name="vat" value="0.21" />
-		<property name="creditCard" ref="creditCard2" />
 		<property name="userAccount" ref="userAccountAdmin1" />
 	</bean>
 
@@ -808,17 +745,16 @@
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="Reina Mercedes" />
 		<property name="vat" value="0.21" />
-		<property name="creditCard" ref="creditCard3" />
 		<property name="userAccount" ref="userAccountAdmin2" />
 	</bean>
 
 
 	<!-- =================================================================== 
-		======= ROOKY ========= =================================================================== -->
+		======= STUDENT ========= =================================================================== -->
 
-	<bean id="rooky1" class="domain.Rooky">
+	<bean id="student1" class="domain.Student">
 		<!-- Actor -->
-		<property name="name" value="Rooky1" />
+		<property name="name" value="student1" />
 		<property name="surname">
 			<list>
 				<value>Garcia</value>
@@ -829,15 +765,14 @@
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="Reina Mercedes" />
 		<property name="vat" value="0.21" />
-		<property name="creditCard" ref="creditCard4" />
-		<property name="userAccount" ref="userAccountRooky1" />
+		<property name="userAccount" ref="userAccountStudent1" />
 		<property name="finder" ref="finder1" />
 
 	</bean>
 
-	<bean id="rooky2" class="domain.Rooky">
+	<bean id="student2" class="domain.Student">
 		<!-- Actor -->
-		<property name="name" value="Rooky2" />
+		<property name="name" value="student2" />
 		<property name="surname">
 			<list>
 				<value>Lanzas</value>
@@ -848,48 +783,62 @@
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="Reina Mercedes" />
 		<property name="vat" value="0.21" />
-		<property name="creditCard" ref="creditCard5" />
-		<property name="userAccount" ref="userAccountRooky2" />
+		<property name="userAccount" ref="userAccountStudent2" />
 		<property name="finder" ref="finder2" />
 	</bean>
-
-	<!-- =================================================================== 
-		======= COMPANY ========= =================================================================== -->
-
-	<bean id="company1" class="domain.Company">
+	
+		<bean id="student3" class="domain.Student">
 		<!-- Actor -->
-		<property name="name" value="Company1" />
+		<property name="name" value="student3" />
 		<property name="surname">
 			<list>
-				<value>Company's</value>
+				<value>Surname</value>
 			</list>
 		</property>
 		<property name="photo" value="http://tinyurl.com/picture.png" />
-		<property name="email" value="company1@gmail.es" />
+		<property name="email" value="cejas@gmail.es" />
+		<property name="phone" value="+34424424424" />
+		<property name="address" value="Avd de la Paz" />
+		<property name="vat" value="0.21" />
+		<property name="userAccount" ref="userAccountStudent3" />
+		<property name="finder" ref="finder3" />
+	</bean>
+	
+	
+
+	<!-- =================================================================== 
+		======= CERTIFIER ========= =================================================================== -->
+
+	<bean id="certifier1" class="domain.Certifier">
+		<!-- Actor -->
+		<property name="name" value="Certifier1" />
+		<property name="surname">
+			<list>
+				<value>Certifier's</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="certifier1@gmail.es" />
 		<property name="phone" value="+34647307480" />
 		<property name="address" value="Reina Mercedes" />
 		<property name="vat" value="0.21" />
-		<property name="creditCard" ref="creditCard6" />
-		<property name="userAccount" ref="userAccountCompany1" />
-		<property name="commercialName" value="commercialName1" />
+		<property name="userAccount" ref="userAccountCertifier1" />
 	</bean>
 
-	<bean id="company2" class="domain.Company">
+	<bean id="certifier2" class="domain.Certifier">
 		<!-- Actor -->
-		<property name="name" value="Company2" />
+		<property name="name" value="Certifier2" />
 		<property name="surname">
 			<list>
-				<value>Company's</value>
+				<value>Certifier's</value>
 			</list>
 		</property>
 		<property name="photo" value="http://tinyurl.com/picture.png" />
-		<property name="email" value="company2@gmail.es" />
+		<property name="email" value="certifier2@gmail.es" />
 		<property name="phone" value="+34647307484" />
 		<property name="address" value="Reina Mercedes" />
 		<property name="vat" value="0.21" />
-		<property name="creditCard" ref="creditCard7" />
-		<property name="userAccount" ref="userAccountCompany2" />
-		<property name="commercialName" value="commercialName2" />
+		<property name="userAccount" ref="userAccountCertifier2" />
 	</bean>
 
 	<!-- =================================================================== 
@@ -936,123 +885,173 @@
 		======= CreditCard ========= =================================================================== -->
 
 	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holderName" value="Customer 1" />
+		<property name="holderName" value="HolderName 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716477920082572" />
 		<property name="expirationMonth" value="06" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="163" />
+		<property name="actor" ref="student1" />
 	</bean>
 
 	<bean id="creditCard2" class="domain.CreditCard">
-		<property name="holderName" value="Customer 2" />
+		<property name="holderName" value="HolderName 2" />
 		<property name="make" value="MASTER" />
 		<property name="number" value="5498128346540526" />
 		<property name="expirationMonth" value="10" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="728" />
+		<property name="actor" ref="student1" />
 	</bean>
 
 	<bean id="creditCard3" class="domain.CreditCard">
-		<property name="holderName" value="Sponsor 1" />
+		<property name="holderName" value="HolderName 1" />
 		<property name="make" value="AMEX" />
 		<property name="number" value="375278545368168" />
 		<property name="expirationMonth" value="06" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="533" />
+		<property name="actor" ref="student1" />
 	</bean>
 
 	<bean id="creditCard4" class="domain.CreditCard">
-		<property name="holderName" value="Sponsor 2" />
+		<property name="holderName" value="HolderName 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4532787155338743" />
 		<property name="expirationMonth" value="10" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="266" />
+		<property name="actor" ref="student1" />
 	</bean>
 
 	<bean id="creditCard5" class="domain.CreditCard">
-		<property name="holderName" value="Sponsor 3" />
+		<property name="holderName" value="HolderName 3" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716699361876929" />
 		<property name="expirationMonth" value="02" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="885" />
+		<property name="actor" ref="student1" />
 	</bean>
 
 	<bean id="creditCard6" class="domain.CreditCard">
-		<property name="holderName" value="Company 1" />
+		<property name="holderName" value="HolderName 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4231348143458624" />
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="22" />
 		<property name="cvv" value="837" />
+		<property name="actor" ref="student2" />
 	</bean>
 
 	<bean id="creditCard7" class="domain.CreditCard">
-		<property name="holderName" value="Company 2" />
+		<property name="holderName" value="HolderName 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4294148159742547" />
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="988" />
+		<property name="actor" ref="student2" />
 	</bean>
 
-	<!-- Credit cards asignadas a Providers 1 y 2 -->
 	<bean id="creditCard8" class="domain.CreditCard">
-		<property name="holderName" value="Provider 1" />
+		<property name="holderName" value="HolderName 1" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5547165664775350" />
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="475" />
+		<property name="actor" ref="student2" />
 	</bean>
 
 	<bean id="creditCard9" class="domain.CreditCard">
-		<property name="holderName" value="Provider 1" />
+		<property name="holderName" value="HolderName 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4410435734979051" />
 		<property name="expirationMonth" value="03" />
 		<property name="expirationYear" value="27" />
 		<property name="cvv" value="941" />
+		<property name="actor" ref="student2" />
 	</bean>
 
-	<!-- Credit cards asignadas a Sponsorship 1 y 2 -->
 	<bean id="creditCard10" class="domain.CreditCard">
-		<property name="holderName" value="Sponsorship 1" />
+		<property name="holderName" value="HolderName 1" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5316710759043864" />
 		<property name="expirationMonth" value="01" />
 		<property name="expirationYear" value="26" />
 		<property name="cvv" value="408" />
+		<property name="actor" ref="student2" />
 	</bean>
 
 	<bean id="creditCard11" class="domain.CreditCard">
-		<property name="holderName" value="Sponsorship 2" />
+		<property name="holderName" value="HolderName 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5384948404521051" />
 		<property name="expirationMonth" value="01" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="906" />
+		<property name="actor" ref="student2" />
 	</bean>
 
-	<!-- Credit cards asignadas a Auditor 1 y 2 -->
 	<bean id="creditCard12" class="domain.CreditCard">
-		<property name="holderName" value="Auditor 1" />
+		<property name="holderName" value="HolderName 1" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5316710759043864" />
 		<property name="expirationMonth" value="01" />
 		<property name="expirationYear" value="26" />
 		<property name="cvv" value="408" />
+		<property name="actor" ref="student2" />
 	</bean>
 
 	<bean id="creditCard13" class="domain.CreditCard">
-		<property name="holderName" value="Auditor 2" />
+		<property name="holderName" value="HolderName 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5384948404521051" />
 		<property name="expirationMonth" value="01" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="906" />
+		<property name="actor" ref="student2" />
+	</bean>
+	
+	<bean id="creditCard14" class="domain.CreditCard">
+		<property name="holderName" value="HolderName 1" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4716477920082572" />
+		<property name="expirationMonth" value="06" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="163" />
+		<property name="actor" ref="student3" />
+	</bean>
+
+	<bean id="creditCard15" class="domain.CreditCard">
+		<property name="holderName" value="HolderName 2" />
+		<property name="brandName" value="MASTER" />
+		<property name="number" value="5498128346540526" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="728" />
+		<property name="actor" ref="student3" />
+	</bean>
+
+	<bean id="creditCard16" class="domain.CreditCard">
+		<property name="holderName" value="HolderName 1" />
+		<property name="brandName" value="AMEX" />
+		<property name="number" value="375278545368168" />
+		<property name="expirationMonth" value="06" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="533" />
+		<property name="actor" ref="student3" />
+	</bean>
+
+	<bean id="creditCard17" class="domain.CreditCard">
+		<property name="holderName" value="HolderName 2" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4532787155338743" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="266" />
+		<property name="actor" ref="student3" />
 	</bean>
 
 	<!-- =================================================================== 
@@ -1103,6 +1102,42 @@
 		</property>
 	</bean>
 
+	<!-- =================================================================== 
+		======= FINDER ========= =================================================================== -->
+
+	<bean id="finder1" class="domain.Finder">
+		<!-- Finder -->
+		<property name="keyword" value="pepe" />
+
+		<!-- Relations -->
+		<property name="lessons">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="finder2" class="domain.Finder">
+		<!-- Finder -->
+
+		<!-- Relations -->
+		<property name="lessons">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="finder1" class="domain.Finder">
+		<!-- Finder -->
+		<property name="teacherName" value="John" />
+		<property name="subjectName" value="IT" />
+		<property name="subjectLevel" value="4ESO" />
+
+		<!-- Relations -->
+		<property name="lessons">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 
 	<!-- =================================================================== 
@@ -1550,4 +1585,35 @@
 
 	</bean>
 
+	<!-- =================================================================== 
+		======= SOCIAL PROFILES ========= =================================================================== -->
+
+	<bean id="socialProfileStudent1" class="domain.SocialProfile">
+		<property name="nick" value="nickstudent1" />
+		<property name="socialNetwork" value="socialnetworkstudent1" />
+		<property name="profileLink" value="http://www.linkstudent1.com" />
+		<property name="actor" ref="student1" />
+	</bean>
+
+	<bean id="socialProfileStudent2" class="domain.SocialProfile">
+		<property name="nick" value="nickstudent2" />
+		<property name="socialNetwork" value="socialnetworkstudent2" />
+		<property name="profileLink" value="http://www.linkstudent2.com" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+	<bean id="socialProfileTeacher1" class="domain.SocialProfile">
+		<property name="nick" value="nickteacher1" />
+		<property name="socialNetwork" value="socialnetworkteacher1" />
+		<property name="profileLink" value="http://www.linkteacher1.com" />
+		<property name="actor" ref="teacher1" />
+	</bean>
+
+	<bean id="socialProfileTeacher2" class="domain.SocialProfile">
+		<property name="nick" value="nickteacher2" />
+		<property name="socialNetwork" value="socialnetworkteacher2" />
+		<property name="profileLink" value="http://www.linkteacher2.com" />
+		<property name="actor" ref="teacher2" />
+	</bean>
+	
 </beans>
