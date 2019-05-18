@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Curricula;
-import domain.PersonalData;
+import domain.Curriculum;
+import domain.PersonalRecord;
 import domain.Rooky;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -74,14 +74,14 @@ public class CurriculaServiceTest extends AbstractTest {
 			this.authenticate(user);
 			if (delete) {
 				final Rooky hacker = this.hackerService.findByPrincipal();
-				final Curricula curricula = this.curriculaService.findCurriculaByRooky(hacker.getId()).iterator().next();
+				final Curriculum curricula = this.curriculaService.findCurriculaByRooky(hacker.getId()).iterator().next();
 				this.curriculaService.delete(curricula);
 			} else {
-				final Curricula curricula = this.curriculaService.create();
-				PersonalData pd = curricula.getPersonalRecord();
+				final Curriculum curricula = this.curriculaService.create();
+				PersonalRecord pd = curricula.getPersonalRecord();
 				pd = this.personalDataService.save(pd);
 				curricula.setPersonalRecord(pd);
-				final Curricula saved = this.curriculaService.save(curricula);
+				final Curriculum saved = this.curriculaService.save(curricula);
 				Assert.isTrue(saved.getId() != 0);
 			}
 			this.curriculaService.flush();

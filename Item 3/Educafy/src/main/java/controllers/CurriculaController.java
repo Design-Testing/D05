@@ -22,9 +22,9 @@ import services.CurriculaService;
 import services.RookyService;
 import domain.Company;
 import domain.Curricula;
-import domain.EducationData;
-import domain.MiscellaneousData;
-import domain.PersonalData;
+import domain.EducationRecord;
+import domain.MiscellaneousRecord;
+import domain.PersonalRecord;
 import domain.PositionData;
 import domain.Rooky;
 
@@ -49,10 +49,10 @@ public class CurriculaController extends AbstractController {
 		final Curricula curricula = this.curriculaService.findOne(curriculaId);
 
 		if (!(curricula == null)) {
-			final PersonalData personalData = curricula.getPersonalRecord();
-			final Collection<EducationData> educationDatas = curricula.getEducations();
+			final PersonalRecord personalData = curricula.getPersonalRecord();
+			final Collection<EducationRecord> educationDatas = curricula.getEducations();
 			final Collection<PositionData> positionDatas = curricula.getPositions();
-			final Collection<MiscellaneousData> miscellaneousRecords = curricula.getMiscellaneous();
+			final Collection<MiscellaneousRecord> miscellaneousRecords = curricula.getMiscellaneous();
 
 			res = new ModelAndView("curricula/display");
 			res.addObject("curricula", curricula);

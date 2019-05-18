@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.EducationDataRepository;
-import domain.Curricula;
-import domain.EducationData;
+import domain.Curriculum;
+import domain.EducationRecord;
 import domain.Rooky;
 
 @Service
@@ -30,8 +30,8 @@ public class EducationDataService {
 
 	//Metodos CRUD
 
-	public EducationData create() {
-		final EducationData eData = new EducationData();
+	public EducationRecord create() {
+		final EducationRecord eData = new EducationRecord();
 		eData.setDegree("");
 		eData.setInstitution("");
 		eData.setStartDate(new Date(System.currentTimeMillis() - 1));
@@ -39,20 +39,20 @@ public class EducationDataService {
 		return eData;
 	}
 
-	public Collection<EducationData> findAll() {
-		final Collection<EducationData> res = this.educationDataRepository.findAll();
+	public Collection<EducationRecord> findAll() {
+		final Collection<EducationRecord> res = this.educationDataRepository.findAll();
 		Assert.notNull(res);
 		return res;
 	}
 
-	public EducationData findOne(final int id) {
+	public EducationRecord findOne(final int id) {
 		Assert.isTrue(id != 0);
-		final EducationData res = this.educationDataRepository.findOne(id);
+		final EducationRecord res = this.educationDataRepository.findOne(id);
 		Assert.notNull(res);
 		return res;
 	}
 
-	public EducationData save(final EducationData educationData, final int curriculaId) {
+	public EducationRecord save(final EducationRecord educationData, final int curriculaId) {
 		final Rooky me = this.hackerService.findByPrincipal();
 		Assert.notNull(me, "You must be logged in the system");
 		Assert.notNull(educationData);
@@ -60,13 +60,13 @@ public class EducationDataService {
 			Assert.isTrue(educationData.getEndDate().after(educationData.getStartDate()), "End date must be after start date");
 		if (educationData.getId() != 0)
 			Assert.isTrue(this.hackerService.hasEducationData(me.getId(), educationData.getId()), "This personal data is not of your property");
-		final EducationData res = this.educationDataRepository.save(educationData);
+		final EducationRecord res = this.educationDataRepository.save(educationData);
 
 		Assert.notNull(res);
 
-		final Curricula curricula = this.curriculaService.findOne(curriculaId);
+		final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 		if (educationData.getId() == 0) {
-			final Collection<EducationData> misc = curricula.getEducations();
+			final Collection<EducationRecord> misc = curricula.getEducations();
 			misc.add(educationData);
 			curricula.setEducations(misc);
 			this.curriculaService.save(curricula);
@@ -74,17 +74,17 @@ public class EducationDataService {
 		return res;
 	}
 
-	public void delete(final EducationData mR) {
+	public void delete(final EducationRecord mR) {
 		final Rooky me = this.hackerService.findByPrincipal();
 		Assert.notNull(me, "You must be logged in the system");
 		Assert.isTrue(this.hackerService.findRookyByEducationDatas(mR.getId()) == me, "No puede borrar un EducationData que no pertenezca a su historia.");
 		Assert.notNull(mR);
 		Assert.isTrue(mR.getId() != 0);
-		final EducationData res = this.findOne(mR.getId());
+		final EducationRecord res = this.findOne(mR.getId());
 
-		final Curricula curricula = this.curriculaService.findCurriculaByEducationData(res.getId());
+		final Curriculum curricula = this.curriculaService.findCurriculaByEducationData(res.getId());
 
-		final Collection<EducationData> educationDatas = curricula.getEducations();
+		final Collection<EducationRecord> educationDatas = curricula.getEducations();
 
 		Assert.isTrue(this.hackerService.hasEducationData(me.getId(), res.getId()), "This personal data is not of your property");
 
@@ -97,8 +97,8 @@ public class EducationDataService {
 
 	}
 
-	final EducationData makeCopyAndSave(final EducationData ed, final Curricula curricula) {
-		EducationData result = this.create();
+	final EducationRecord makeCopyAndSave(final EducationRecord ed, final Curriculum curricula) {
+		EducationRecord result = this.create();
 		result.setDegree(ed.getDegree());
 		result.setEndDate(ed.getEndDate());
 		result.setInstitution(ed.getInstitution());

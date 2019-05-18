@@ -1059,12 +1059,12 @@
 		======= Configuration Parameters ========= =================================================================== -->
 
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
-		<property name="sysName" value="Acme Rookies" />
+		<property name="sysName" value="Estudify" />
 		<property name="banner" value="https://i.ibb.co/HpCD1x8/logo1.png" />
 		<property name="welcomeMessageEn"
-			value="Welcome to Acme Rookies! We're IT Rookies' favourite job marketplace!" />
+			value="Welcome to Estudify! Where student find the individual lessons they are looking for!" />
 		<property name="welcomeMessageEsp"
-			value="¡Bienvenidos a Acme Rookies! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
+			value="¡Bienvenidos a Estudify! ¡El lugar donde los estudiantes encuentran las clases particulares que estaban buscando!" />
 		<property name="countryPhoneCode" value="+34" />
 		<property name="spamWords">
 			<list>
@@ -1079,43 +1079,9 @@
 				<value>ha sido seleccionado</value>
 			</list>
 		</property>
-		<property name="positiveWords">
-			<list>
-				<value>good</value>
-				<value>factastic</value>
-				<value>excellent</value>
-				<value>great</value>
-				<value>amazing</value>
-				<value>terrific</value>
-				<value>beautiful</value>
-				<value>bueno</value>
-				<value>buena</value>
-				<value>fantástico</value>
-				<value>fantástica</value>
-				<value>excelente</value>
-				<value>genial</value>
-				<value>terrorífico</value>
-				<value>bonito</value>
-				<value>bonita</value>
-			</list>
-		</property>
-		<property name="negativeWords">
-			<list>
-				<value>not</value>
-				<value>bad</value>
-				<value>horrible</value>
-				<value>average</value>
-				<value>disaster</value>
-				<value>malo</value>
-				<value>media</value>
-				<value>desastre</value>
-			</list>
-		</property>
 		<property name="maxFinderResults" value="10" />
 		<property name="finderTime" value="1" />
-		<property name="rebranding" value="false" />
 		<property name="vat" value="0.21" />
-		<property name="flatFare" value="10.0" />
 		<property name="creditCardMake">
 			<list>
 				<value>VISA</value>
@@ -1125,9 +1091,181 @@
 				<value>FLY</value>
 			</list>
 		</property>
+		<property name="subjectLevels">
+			<list>
+				<value>1ESO</value>
+				<value>2ESO</value>
+				<value>3ESO</value>
+				<value>4ESO</value>
+				<value>1BACH</value>
+				<value>2BACH</value>
+			</list>
+		</property>
 	</bean>
 
+
+
 <!-- =================================================================== 
+		======= CURRICULA ========= =================================================================== -->
+
+	<bean id="curriculum1" class="domain.Curriculum">
+		<property name="personalRecord" ref="personalRecord1" />
+		<property name="educationRecords">
+			<list>
+				<ref bean="educationRecord1" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord1" />
+			</list>
+		</property>
+		<property name="teacher" ref="teacher1" />
+	</bean>
+
+	<bean id="curriculum2" class="domain.Curriculum">
+		<property name="personalRecord" ref="personalRecord2" />
+		<property name="educationRecords">
+			<list>
+				<ref bean="educationRecord2" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord2" />
+			</list>
+		</property>
+		<property name="teacher" ref="teacher2" />
+	</bean>
+
+
+</beans>
+	<bean id="curriculum3" class="domain.Curriculum">
+		<property name="personalRecord" ref="personalRecord3" />
+		<property name="educationRecords">
+			<list>
+				<ref bean="educationRecord3" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord3" />
+			</list>
+		</property>
+		<property name="teacher" ref="teacher3" />
+	</bean>
+
+	
+	
+	<!-- =================================================================== 
+		======= PERSONAL DATA ========= =================================================================== -->
+
+	<bean id="personalRecord1" class="domain.PersonalRecord">
+		<property name="fullName" value="Teacher 1" />
+		<property name="statement" value="Statement Teacher 1" />
+		<property name="github" value="http://www.githubTeacher1.com" />
+		<property name="photo" value="http://photoTeacher1.com" />
+		<property name="linkedin" value="http://www.linkedInTeacher1.com" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="personalRecord2" class="domain.PersonalRecord">
+		<property name="fullName" value="Teacher 2" />
+		<property name="statement" value="Statement Teacher 2" />
+		<property name="github" value="http://www.githubTeacher2.com" />
+		<property name="photo" value="http://photoTeacher2.com" />
+		<property name="linkedin" value="http://www.linkedInTeacher2.com" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="personalRecord3" class="domain.PersonalRecord">
+		<property name="fullName" value="Teacher 2" />
+		<property name="statement" value="Statement Teacher 2" />
+		<property name="github" value="http://www.githubTeacher2.com" />
+		<property name="photo" value="http://photoTeacher3.com" />
+		<property name="linkedin" value="http://www.linkedInTeacher2.com" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+	
+	<!-- =================================================================== 
+		======= EDUCATION RECORD ========= =================================================================== -->
+
+	<bean id="educationRecord1" class="domain.EducationRecord">
+		<property name="degree" value="Informática" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="7" />
+		<property name="attachment" value="http://attachment1.com" />
+		<property name="startDate" value="2014/04/11 13:00" />
+		<property name="endDate" value="2018/04/11 13:00" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="educationRecord2" class="domain.EducationRecord">
+		<property name="degree" value="Magisterio" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="8" />
+		<property name="attachment" value="http://attachment2.com" />
+		<property name="startDate" value="2018/04/11 13:00" />
+		<property name="endDate" value="2019/04/11 13:00" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+	
+	<bean id="educationRecord3" class="domain.EducationRecord">
+		<property name="degree" value="Farmacia" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="7" />
+		<property name="attachment" value="http://attachment3.com" />
+		<property name="startDate" value="2018/04/11 13:00" />
+		<property name="endDate" value="2019/04/11 13:00" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= MISCELLANEOUS RECORD ========= =================================================================== -->
+
+	<bean id="miscellaneousRecord1" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 1" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment11.com</value>
+				<value>http://attachment12.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="miscellaneousRecord2" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 2" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment21.com</value>
+				<value>http://attachment22.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+	
+	<bean id="miscellaneousRecord3" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 3" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment31.com</value>
+				<value>http://attachment32.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+	
+	<!-- =================================================================== 
 		======= Reservation ========= 
 		=================================================================== -->
 
@@ -1155,36 +1293,4 @@
 		<property name="exam" ref="exam2"/>
 	</bean>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </beans>
-

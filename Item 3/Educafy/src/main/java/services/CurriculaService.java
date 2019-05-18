@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CurriculaRepository;
-import domain.Curricula;
-import domain.EducationData;
-import domain.MiscellaneousData;
-import domain.PersonalData;
+import domain.Curriculum;
+import domain.EducationRecord;
+import domain.MiscellaneousRecord;
+import domain.PersonalRecord;
 import domain.PositionData;
 import domain.Rooky;
 
@@ -40,11 +40,11 @@ public class CurriculaService {
 	private MiscellaneousDataService	miscellaneousDataService;
 
 
-	public Curricula create() {
-		final Curricula curricula = new Curricula();
+	public Curriculum create() {
+		final Curriculum curricula = new Curriculum();
 		final Rooky hacker = this.hackerService.findByPrincipal();
 
-		final PersonalData personalData = this.personalDataService.create();
+		final PersonalRecord personalData = this.personalDataService.create();
 
 		personalData.setFullName(hacker.getName());
 		personalData.setStatement("Statement " + hacker.getName());
@@ -55,20 +55,20 @@ public class CurriculaService {
 		final Collection<PositionData> positionData = new ArrayList<PositionData>();
 		curricula.setPositions(positionData);
 
-		final Collection<MiscellaneousData> miscellaneousData = new ArrayList<MiscellaneousData>();
+		final Collection<MiscellaneousRecord> miscellaneousData = new ArrayList<MiscellaneousRecord>();
 		curricula.setMiscellaneous(miscellaneousData);
 
-		final Collection<EducationData> educationData = new ArrayList<EducationData>();
+		final Collection<EducationRecord> educationData = new ArrayList<EducationRecord>();
 		curricula.setEducations(educationData);
 
 		return curricula;
 
 	}
 
-	public Curricula createForNewRooky() {
-		final Curricula curricula = new Curricula();
+	public Curriculum createForNewRooky() {
+		final Curriculum curricula = new Curriculum();
 
-		final PersonalData personalData = this.personalDataService.create();
+		final PersonalRecord personalData = this.personalDataService.create();
 
 		personalData.setFullName("full name");
 		personalData.setStatement("statement");
@@ -78,33 +78,33 @@ public class CurriculaService {
 		final Collection<PositionData> positionData = new ArrayList<PositionData>();
 		curricula.setPositions(positionData);
 
-		final Collection<MiscellaneousData> miscellaneousData = new ArrayList<MiscellaneousData>();
+		final Collection<MiscellaneousRecord> miscellaneousData = new ArrayList<MiscellaneousRecord>();
 		curricula.setMiscellaneous(miscellaneousData);
 
-		final Collection<EducationData> educationData = new ArrayList<EducationData>();
+		final Collection<EducationRecord> educationData = new ArrayList<EducationRecord>();
 		curricula.setEducations(educationData);
 
 		return curricula;
 
 	}
 
-	public Collection<Curricula> findAll() {
-		Collection<Curricula> res = new ArrayList<>();
+	public Collection<Curriculum> findAll() {
+		Collection<Curriculum> res = new ArrayList<>();
 		res = this.curriculaRepository.findAll();
 		Assert.notNull(res, "Find all returns a null collection");
 		return res;
 	}
 
-	public Curricula findOne(final int curriculaId) {
+	public Curriculum findOne(final int curriculaId) {
 		Assert.isTrue(curriculaId != 0);
-		final Curricula res = this.curriculaRepository.findOne(curriculaId);
+		final Curriculum res = this.curriculaRepository.findOne(curriculaId);
 		Assert.notNull(res);
 		return res;
 	}
 
-	public Curricula save(final Curricula curricula) {
+	public Curriculum save(final Curriculum curricula) {
 		Assert.notNull(curricula);
-		final Curricula res;
+		final Curriculum res;
 		final Rooky hacker = this.hackerService.findByPrincipal();
 		if (curricula.getId() != 0)
 			Assert.isTrue(this.hackerService.findRookyByCurricula(curricula.getId()).equals(hacker), "logged actor doesnt match curricula's owner");
@@ -114,11 +114,11 @@ public class CurriculaService {
 		return res;
 	}
 
-	public void delete(final Curricula curricula) {
+	public void delete(final Curriculum curricula) {
 		Assert.notNull(curricula);
 		Assert.isTrue(curricula.getId() != 0);
 		final Rooky hacker = this.hackerService.findByPrincipal();
-		final Curricula retrieved = this.findOne(curricula.getId());
+		final Curriculum retrieved = this.findOne(curricula.getId());
 		Assert.isTrue(this.hackerService.findRookyByCurricula(retrieved.getId()) == hacker, "Not possible to delete the curricula of other hacker.");
 		this.curriculaRepository.delete(retrieved.getId());
 	}
@@ -134,54 +134,54 @@ public class CurriculaService {
 		return res;
 	}
 
-	public Collection<Curricula> findCurriculaByRooky(final int id) {
-		final Collection<Curricula> result = this.curriculaRepository.findCurriculaByRooky(id);
+	public Collection<Curriculum> findCurriculaByRooky(final int id) {
+		final Collection<Curriculum> result = this.curriculaRepository.findCurriculaByRooky(id);
 		return result;
 	}
 
-	public Curricula findCurriculaByPersonalData(final int id) {
-		final Curricula result = this.curriculaRepository.findCurriculaByPersonalData(id);
+	public Curriculum findCurriculaByPersonalData(final int id) {
+		final Curriculum result = this.curriculaRepository.findCurriculaByPersonalData(id);
 		Assert.notNull(result, "findCurriculaByPersonalData returns null");
 		return result;
 	}
 
-	public Curricula findCurriculaByEducationData(final int id) {
-		final Curricula result = this.curriculaRepository.findCurriculaByEducationData(id);
+	public Curriculum findCurriculaByEducationData(final int id) {
+		final Curriculum result = this.curriculaRepository.findCurriculaByEducationData(id);
 		Assert.notNull(result, "findCurriculaByEducationData returns null");
 		return result;
 	}
 
-	public Curricula findCurriculaByPositionData(final int id) {
-		final Curricula result = this.curriculaRepository.findCurriculaByPositionData(id);
+	public Curriculum findCurriculaByPositionData(final int id) {
+		final Curriculum result = this.curriculaRepository.findCurriculaByPositionData(id);
 		Assert.notNull(result, "findCurriculaByPositionData returns null");
 		return result;
 	}
 
-	public Curricula findCurriculaByMiscellaneousData(final int id) {
-		final Curricula result = this.curriculaRepository.findCurriculaByMiscellaneousData(id);
+	public Curriculum findCurriculaByMiscellaneousData(final int id) {
+		final Curriculum result = this.curriculaRepository.findCurriculaByMiscellaneousData(id);
 		Assert.notNull(result, "findCurriculaByMiscellanousData returns null");
 		return result;
 	}
 
-	public Curricula makeCopyAndSave(final Curricula curricula) {
-		Curricula result = this.create();
+	public Curriculum makeCopyAndSave(final Curriculum curricula) {
+		Curriculum result = this.create();
 		result.setRooky(curricula.getRooky());
 
-		final PersonalData pd = this.personalDataService.makeCopyAndSave(curricula.getPersonalRecord());
+		final PersonalRecord pd = this.personalDataService.makeCopyAndSave(curricula.getPersonalRecord());
 		result.setPersonalRecord(pd);
-		final Collection<EducationData> eds = new ArrayList<EducationData>();
+		final Collection<EducationRecord> eds = new ArrayList<EducationRecord>();
 		result.setEducations(eds);
-		final Collection<MiscellaneousData> mds = new ArrayList<MiscellaneousData>();
+		final Collection<MiscellaneousRecord> mds = new ArrayList<MiscellaneousRecord>();
 		result.setMiscellaneous(mds);
 		final Collection<PositionData> pds = new ArrayList<PositionData>();
 		result.setPositions(pds);
 		result = this.save(result);
 
-		for (final EducationData ed : curricula.getEducations())
+		for (final EducationRecord ed : curricula.getEducations())
 			eds.add(this.educationDataService.makeCopyAndSave(ed, result));
 		result.setEducations(eds);
 
-		for (final MiscellaneousData md : curricula.getMiscellaneous())
+		for (final MiscellaneousRecord md : curricula.getMiscellaneous())
 			mds.add(this.miscellaneousDataService.makeCopyAndSave(md, result));
 		result.setMiscellaneous(mds);
 
@@ -201,8 +201,8 @@ public class CurriculaService {
 		this.curriculaRepository.flush();
 	}
 
-	public Collection<Curricula> findCurriculasByCompany(final int id) {
-		final Collection<Curricula> result = this.curriculaRepository.findCurriculasByCompany(id);
+	public Collection<Curriculum> findCurriculasByCompany(final int id) {
+		final Collection<Curriculum> result = this.curriculaRepository.findCurriculasByCompany(id);
 		Assert.notNull(result, "set of curriculas found of a compy is null");
 		return result;
 	}

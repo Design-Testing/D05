@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Curricula;
-import domain.EducationData;
-import domain.PersonalData;
+import domain.Curriculum;
+import domain.EducationRecord;
+import domain.PersonalRecord;
 import domain.Rooky;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -80,12 +80,12 @@ public class EducationDataServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(user);
-			Curricula curricula = this.curriculaService.create();
-			PersonalData pd = curricula.getPersonalRecord();
+			Curriculum curricula = this.curriculaService.create();
+			PersonalRecord pd = curricula.getPersonalRecord();
 			pd = this.personalDataService.save(pd);
 			curricula.setPersonalRecord(pd);
 			curricula = this.curriculaService.save(curricula);
-			final EducationData lRec = this.educationDataService.create();
+			final EducationRecord lRec = this.educationDataService.create();
 			lRec.setDegree(degree);
 			lRec.setInstitution(institution);
 			lRec.setMark(mark);
@@ -96,7 +96,7 @@ public class EducationDataServiceTest extends AbstractTest {
 			start = (new SimpleDateFormat("yyyy-MM-dd")).parse(startDate);
 			lRec.setStartDate(start);
 			lRec.setEndDate(end);
-			final EducationData lRecSaved = this.educationDataService.save(lRec, curricula.getId());
+			final EducationRecord lRecSaved = this.educationDataService.save(lRec, curricula.getId());
 			Assert.isTrue(lRecSaved.getId() != 0);
 			this.educationDataService.flush();
 			this.unauthenticate();
@@ -146,9 +146,9 @@ public class EducationDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(user);
 			final Rooky principal = this.hackerService.findByPrincipal();
-			final Collection<Curricula> curriculas = this.curriculaService.findCurriculaByRooky(principal.getId());
-			final Curricula curricula = curriculas.iterator().next();
-			final EducationData lR = curricula.getEducations().iterator().next();
+			final Collection<Curriculum> curriculas = this.curriculaService.findCurriculaByRooky(principal.getId());
+			final Curriculum curricula = curriculas.iterator().next();
+			final EducationRecord lR = curricula.getEducations().iterator().next();
 			lR.setInstitution(institution);
 			lR.setDegree(degree);
 			lR.setMark(mark);
@@ -198,7 +198,7 @@ public class EducationDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(actor);
 			final Rooky hacker = this.hackerService.findByPrincipal();
-			final EducationData lRec = this.curriculaService.findCurriculaByRooky(hacker.getId()).iterator().next().getEducations().iterator().next();
+			final EducationRecord lRec = this.curriculaService.findCurriculaByRooky(hacker.getId()).iterator().next().getEducations().iterator().next();
 			this.educationDataService.delete(lRec);
 			this.educationDataService.flush();
 			this.unauthenticate();

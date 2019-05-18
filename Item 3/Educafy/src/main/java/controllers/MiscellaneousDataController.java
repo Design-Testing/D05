@@ -20,8 +20,8 @@ import services.CurriculaService;
 import services.MiscellaneousDataService;
 import services.RookyService;
 import domain.Company;
-import domain.Curricula;
-import domain.MiscellaneousData;
+import domain.Curriculum;
+import domain.MiscellaneousRecord;
 import domain.Rooky;
 
 @Controller
@@ -45,7 +45,7 @@ public class MiscellaneousDataController {
 	public ModelAndView create(@RequestParam final int curriculaId) {
 
 		ModelAndView result;
-		final MiscellaneousData miscellaneousData = this.miscellaneousDataService.create();
+		final MiscellaneousRecord miscellaneousData = this.miscellaneousDataService.create();
 
 		result = new ModelAndView("miscellaneousData/edit");
 		result.addObject("miscellaneousData", miscellaneousData);
@@ -59,7 +59,7 @@ public class MiscellaneousDataController {
 	public ModelAndView edit(@RequestParam final int miscellaneousDataId, @RequestParam final int curriculaId) {
 		ModelAndView result;
 		try {
-			final MiscellaneousData miscellaneousData;
+			final MiscellaneousRecord miscellaneousData;
 			final Rooky rooky = this.rookyService.findByPrincipal();
 			miscellaneousData = this.miscellaneousDataService.findOne(miscellaneousDataId);
 
@@ -79,7 +79,7 @@ public class MiscellaneousDataController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@RequestParam final int curriculaId, @Valid final MiscellaneousData miscellaneousData, final BindingResult bindingResult) {
+	public ModelAndView save(@RequestParam final int curriculaId, @Valid final MiscellaneousRecord miscellaneousData, final BindingResult bindingResult) {
 		ModelAndView result;
 		if (bindingResult.hasErrors()) {
 			result = this.createEditModelAndView(miscellaneousData);
@@ -88,7 +88,7 @@ public class MiscellaneousDataController {
 			try {
 				this.miscellaneousDataService.save(miscellaneousData, curriculaId);
 
-				final Curricula curricula = this.curriculaService.findOne(curriculaId);
+				final Curriculum curricula = this.curriculaService.findOne(curriculaId);
 				result = new ModelAndView("curricula/display");
 				result.addObject("curricula", curricula);
 				result.addObject("curriculaId", curricula.getId());
@@ -107,7 +107,7 @@ public class MiscellaneousDataController {
 
 		ModelAndView res;
 
-		final MiscellaneousData miscellaneousData = this.miscellaneousDataService.findOne(miscellaneousDataId);
+		final MiscellaneousRecord miscellaneousData = this.miscellaneousDataService.findOne(miscellaneousDataId);
 
 		if (miscellaneousData != null) {
 
@@ -116,7 +116,7 @@ public class MiscellaneousDataController {
 			res.addObject("curriculaId", this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousData.getId()).getId());
 			res.addObject("buttons", false);
 
-			final Curricula curricula = this.curriculaService.findOne(this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousData.getId()).getId());
+			final Curriculum curricula = this.curriculaService.findOne(this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousData.getId()).getId());
 
 			final UserAccount logged = LoginService.getPrincipal();
 
@@ -145,8 +145,8 @@ public class MiscellaneousDataController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int miscellaneousDataId) {
 		ModelAndView result;
-		final MiscellaneousData miscellaneousData = this.miscellaneousDataService.findOne(miscellaneousDataId);
-		final Curricula curricula = this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousDataId);
+		final MiscellaneousRecord miscellaneousData = this.miscellaneousDataService.findOne(miscellaneousDataId);
+		final Curriculum curricula = this.curriculaService.findCurriculaByMiscellaneousData(miscellaneousDataId);
 		this.miscellaneousDataService.delete(miscellaneousData);
 
 		result = new ModelAndView("curricula/display");
@@ -157,7 +157,7 @@ public class MiscellaneousDataController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final MiscellaneousData miscellaneousData) {
+	protected ModelAndView createEditModelAndView(final MiscellaneousRecord miscellaneousData) {
 		ModelAndView result;
 
 		result = this.createEditModelAndView(miscellaneousData, null);
@@ -166,7 +166,7 @@ public class MiscellaneousDataController {
 	}
 	// Edition ---------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final MiscellaneousData miscellaneousData, final String message) {
+	protected ModelAndView createEditModelAndView(final MiscellaneousRecord miscellaneousData, final String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("miscellaneousData/edit");

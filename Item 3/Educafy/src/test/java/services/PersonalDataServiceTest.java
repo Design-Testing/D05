@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Curricula;
-import domain.PersonalData;
+import domain.Curriculum;
+import domain.PersonalRecord;
 import domain.Rooky;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -70,13 +70,13 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(user);
-			final PersonalData incRec = this.personalDataService.create();
+			final PersonalRecord incRec = this.personalDataService.create();
 			incRec.setFullName(fullName);
 			incRec.setStatement(statement);
 			incRec.setLinkedin(linkedin);
 			incRec.setGithub(github);
 			incRec.setPhone(phone);
-			final PersonalData incRecSaved = this.personalDataService.save(incRec);
+			final PersonalRecord incRecSaved = this.personalDataService.save(incRec);
 			Assert.isTrue(incRecSaved.getId() != 0);
 			this.personalDataService.flush();
 			this.unauthenticate();
@@ -125,8 +125,8 @@ public class PersonalDataServiceTest extends AbstractTest {
 		try {
 			this.authenticate(user);
 			final Rooky owner = this.hackerService.findOne(this.getEntityId(userProp));
-			final PersonalData iR;
-			final Curricula curricula = this.curriculaService.findCurriculaByRooky(owner.getId()).iterator().next();
+			final PersonalRecord iR;
+			final Curriculum curricula = this.curriculaService.findCurriculaByRooky(owner.getId()).iterator().next();
 			iR = curricula.getPersonalRecord();
 			iR.setFullName(fullName);
 			iR.setStatement(statement);

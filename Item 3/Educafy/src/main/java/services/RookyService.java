@@ -21,7 +21,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.CreditCard;
-import domain.Curricula;
+import domain.Curriculum;
 import domain.Finder;
 import domain.Rooky;
 import forms.ActorForm;
@@ -77,9 +77,9 @@ public class RookyService {
 			result = this.rookyRepository.save(rooky);
 			//			this.folderService.setFoldersByDefault(result);
 
-			final Curricula curricula = this.curriculaService.createForNewRooky();
+			final Curriculum curricula = this.curriculaService.createForNewRooky();
 			curricula.setRooky(result);
-			final Curricula res = this.curriculaRepository.save(curricula);
+			final Curriculum res = this.curriculaRepository.save(curricula);
 			Assert.notNull(res);
 
 		} else {

@@ -7,6 +7,6 @@ import javax.persistence.Entity;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Auditor extends Actor {
+public class Certifier extends Actor {
 
 }
