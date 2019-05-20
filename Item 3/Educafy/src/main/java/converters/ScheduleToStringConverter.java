@@ -6,21 +6,21 @@ import javax.transaction.Transactional;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import domain.Application;
+import domain.Schedule;
 
 @Component
 @Transactional
-public class ApplicationToStringConverter implements Converter<Application, String> {
+public class ScheduleToStringConverter implements Converter<Schedule, String> {
 
 	@Override
-	public String convert(final Application application) {
+	public String convert(final Schedule schedule) {
 
 		String result;
 
-		if (application == null)
+		if (schedule == null)
 			result = null;
 		else
-			result = String.valueOf(application.getId());
+			result = String.valueOf(schedule.getId());
 
 		return result;
 

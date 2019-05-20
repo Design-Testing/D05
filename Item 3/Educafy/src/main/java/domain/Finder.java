@@ -10,8 +10,6 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.validator.constraints.SafeHtml;
 
-import services.Lesson;
-
 @Entity
 @Access(AccessType.PROPERTY)
 public class Finder extends DomainEntity {

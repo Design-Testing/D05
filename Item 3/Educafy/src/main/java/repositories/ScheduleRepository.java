@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Reservation;
+import domain.Schedule;
 
 @Repository
-public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
+public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
 
 	@Query("select r from Reservation r join r.lesson l where l.id=?1")
 	public Collection<Reservation> findAllReservationByLesson(int lessonId);
