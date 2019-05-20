@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.ValidationException;
 
@@ -19,6 +20,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Curriculum;
 import domain.Teacher;
 import forms.ActorForm;
 
@@ -27,22 +29,25 @@ import forms.ActorForm;
 public class TeacherService {
 
 	@Autowired
-	private TeacherRepository	teacherRepository;
+	private TeacherRepository		teacherRepository;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private UserAccountService	userAccountService;
-	//
-	//	@Autowired
-	//	private CurriculaService	curriculaService;
+	private UserAccountService		userAccountService;
 
 	@Autowired
-	private CurriculaRepository	curriculaRepository;
+	private CurriculaService		curriculaService;
 
 	@Autowired
-	private Validator			validator;
+	private CurriculaRepository		curriculaRepository;
+
+	@Autowired
+	private AdministratorService	administratorService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	public Teacher create() {
@@ -59,28 +64,28 @@ public class TeacherService {
 		return result;
 	}
 
-	//	public Teacher save(final Teacher teacher) {
-	//		Assert.notNull(teacher);
-	//		Teacher result;
-	//
-	//		if (teacher.getId() == 0) {
-	//			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
-	//			result = this.teacherRepository.save(teacher);
-	//			//			this.folderService.setFoldersByDefault(result);
-	//
-	//			final Curriculum curricula = this.curriculaService.createForNewTeacher();
-	//			curricula.setTeacher(result);
-	//			final Curriculum res = this.curriculaRepository.save(curricula);
-	//			Assert.notNull(res);
-	//
-	//		} else {
-	//			this.actorService.checkForSpamWords(teacher);
-	//			final Actor principal = this.actorService.findByPrincipal();
-	//			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
-	//			result = (Teacher) this.actorService.save(teacher);
-	//		}
-	//		return result;
-	//	}
+	public Teacher save(final Teacher teacher) {
+		Assert.notNull(teacher);
+		Teacher result;
+
+		if (teacher.getId() == 0) {
+			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
+			result = this.teacherRepository.save(teacher);
+			//			this.folderService.setFoldersByDefault(result);
+
+			final Curriculum curricula = this.curriculaService.createForNewTeacher();
+			curricula.setTeacher(result);
+			final Curriculum res = this.curriculaRepository.save(curricula);
+			Assert.notNull(res);
+
+		} else {
+			this.actorService.checkForSpamWords(teacher);
+			final Actor principal = this.actorService.findByPrincipal();
+			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
+			result = (Teacher) this.actorService.save(teacher);
+		}
+		return result;
+	}
 
 	public void delete(final Teacher teacher) {
 		Assert.notNull(teacher);
@@ -213,4 +218,21 @@ public class TeacherService {
 	//		return result;
 	//	}
 
+	public void deletePersonalData() {
+		final Teacher principal = this.findByPrincipal();
+		final List<String> s = new ArrayList<>();
+		s.add("DELETED");
+		principal.setAddress(null);
+		principal.setEmail("DELETED@mail.de");
+		principal.setSurname(s);
+		//principal.setName("");
+		principal.setPhone(null);
+		principal.setPhoto(null);
+		principal.setSpammer(false);
+		principal.setVat(0.0);
+		final Authority ban = new Authority();
+		ban.setAuthority(Authority.BANNED);
+		principal.getUserAccount().getAuthorities().add(ban);
+		this.teacherRepository.save(principal);
+	}
 }

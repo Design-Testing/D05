@@ -49,20 +49,20 @@ public class ScheduleService {
 		final Schedule result;
 
 		if (schedule.getId() == 0) {
-			final int[] lunes = new int[24];
-			schedule.setLunes(lunes);
+			final int[] monday = new int[24];
+			schedule.setMonday(monday);
 
-			final int[] martes = new int[24];
-			schedule.setMartes(martes);
+			final int[] tuesday = new int[24];
+			schedule.setTuesday(tuesday);
 
-			final int[] miercoles = new int[24];
-			schedule.setMiercoles(miercoles);
+			final int[] wednesday = new int[24];
+			schedule.setWednesday(wednesday);
 
-			final int[] jueves = new int[24];
-			schedule.setJueves(jueves);
+			final int[] thursday = new int[24];
+			schedule.setThursday(thursday);
 
-			final int[] viernes = new int[24];
-			schedule.setViernes(viernes);
+			final int[] friday = new int[24];
+			schedule.setFriday(friday);
 
 			schedule.setTeacher(principal);
 		} else

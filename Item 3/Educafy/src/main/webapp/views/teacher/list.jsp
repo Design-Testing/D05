@@ -12,11 +12,11 @@
 
 <security:authorize access="hasRole('ADMIN')">
 	
-	<acme:button url="company/computeScores.do" name="display" code="company.compute.scores"/>
+	<acme:button url="teacher/computeScores.do" name="display" code="teacher.compute.scores"/>
 </security:authorize>
 
 <display:table name="companies" id="row"
-	requestURI="company/list.do" pagesize="5"
+	requestURI="teacher/list.do" pagesize="5"
 	class="displaytag">
 
 
@@ -26,10 +26,10 @@
 	
 	<jstl:choose>
 	<jstl:when test="${not empty row.score}">
-		<display:column property="score" titleKey="company.score" />
+		<display:column property="score" titleKey="teacher.score" />
 	</jstl:when>
 	<jstl:otherwise>
-		<display:column titleKey="company.score">
+		<display:column titleKey="teacher.score">
 			<jstl:out value="-"></jstl:out>
 		</display:column>
 	</jstl:otherwise>
@@ -37,13 +37,13 @@
 
 	
 	<display:column>
-	<acme:button url="company/display.do?companyId=${row.id}" name="display" code="company.display"/>
+	<acme:button url="teacher/display.do?teacherId=${row.id}" name="display" code="teacher.display"/>
 	</display:column>
 	
 	<security:authorize access="hasRole('ADMIN')">
 	
 		<display:column>
-	<acme:button url="company/computeScore.do?companyId=${row.id}" name="display" code="company.compute.score"/>
+	<acme:button url="teacher/computeScore.do?teacherId=${row.id}" name="display" code="teacher.compute.score"/>
 	</display:column>
 	
 	</security:authorize>

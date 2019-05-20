@@ -39,4 +39,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 
 	//	@Query("select a.teacher from Application a where a.curricula.id=?1")
 	//	Teacher findTeacherByCopyCurricula(int curriculaId);
+
 }

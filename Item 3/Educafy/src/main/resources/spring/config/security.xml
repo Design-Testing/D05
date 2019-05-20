@@ -70,15 +70,13 @@
 		<security:intercept-url pattern="/position/display.do" access="permitAll" />
  		<security:intercept-url pattern="/position/company/**" access="hasRole('COMPANY')" /> 
  		
-		<!-- COMPANY -->
-		<security:intercept-url pattern="/company/list.do" access="permitAll" />
-		<security:intercept-url pattern="/company/display.do" access="permitAll" />
-		<security:intercept-url pattern="/company/create.do" access="permitAll" />
-		<security:intercept-url pattern="/company/edit.do" access="permitAll" />
-		<security:intercept-url pattern="/company/display2.do" access="hasRole('COMPANY')" />
-		<security:intercept-url pattern="/company/deletePersonalData.do" access="hasRole('COMPANY')" />
-		<security:intercept-url pattern="/company/computeScore.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/company/computeScores.do" access="hasRole('ADMIN')" />
+		<!-- TEACHER -->
+		<security:intercept-url pattern="/teacher/list.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/display.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/create.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/edit.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/display2.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/teacher/deletePersonalData.do" access="hasRole('TEACHER')" />
 		
 		<!-- PROVIDER -->
 		<security:intercept-url pattern="/provider/list.do" access="permitAll" />
