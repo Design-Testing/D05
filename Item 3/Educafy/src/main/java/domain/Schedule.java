@@ -10,54 +10,54 @@ import javax.persistence.ManyToOne;
 @Access(AccessType.PROPERTY)
 public class Schedule extends DomainEntity {
 
-	private int[]	lunes;
-	private int[]	martes;
-	private int[]	miercoles;
-	private int[]	jueves;
-	private int[]	viernes;
+	private int[]	monday;
+	private int[]	tuesday;
+	private int[]	wednesday;
+	private int[]	thursday;
+	private int[]	friday;
 
 	//Relaciones
 	private Teacher	teacher;
 
 
-	public int[] getLunes() {
-		return this.lunes;
+	public int[] getMonday() {
+		return this.monday;
 	}
 
-	public void setLunes(final int[] lunes) {
-		this.lunes = lunes;
+	public void setMonday(final int[] monday) {
+		this.monday = monday;
 	}
 
-	public int[] getMartes() {
-		return this.martes;
+	public int[] getTuesday() {
+		return this.tuesday;
 	}
 
-	public void setMartes(final int[] martes) {
-		this.martes = martes;
+	public void setTuesday(final int[] tuesday) {
+		this.tuesday = tuesday;
 	}
 
-	public int[] getMiercoles() {
-		return this.miercoles;
+	public int[] getWednesday() {
+		return this.wednesday;
 	}
 
-	public void setMiercoles(final int[] miercoles) {
-		this.miercoles = miercoles;
+	public void setWednesday(final int[] wednesday) {
+		this.wednesday = wednesday;
 	}
 
-	public int[] getJueves() {
-		return this.jueves;
+	public int[] getThursday() {
+		return this.thursday;
 	}
 
-	public void setJueves(final int[] jueves) {
-		this.jueves = jueves;
+	public void setThursday(final int[] thursday) {
+		this.thursday = thursday;
 	}
 
-	public int[] getViernes() {
-		return this.viernes;
+	public int[] getFriday() {
+		return this.friday;
 	}
 
-	public void setViernes(final int[] viernes) {
-		this.viernes = viernes;
+	public void setFriday(final int[] friday) {
+		this.friday = friday;
 	}
 
 	@ManyToOne(optional = false)
