@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "actor, father, isSystemFolder")
+	@Index(columnList = "actor, isSystemFolder")
 })
 public class Folder extends DomainEntity {
 

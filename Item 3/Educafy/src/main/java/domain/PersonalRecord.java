@@ -19,8 +19,8 @@ public class PersonalRecord extends DomainEntity {
 	private String	github;
 	private String	linkedin;
 	private String	photo;
-	private boolean	isCertified;
-	private boolean	isDraft;
+	private Boolean	isCertified;
+	private Boolean	isDraft;
 
 
 	@NotBlank
@@ -65,24 +65,6 @@ public class PersonalRecord extends DomainEntity {
 		this.github = github;
 	}
 
-	@NotNull
-	public boolean isCertified() {
-		return this.isCertified;
-	}
-
-	public void setCertified(final boolean isCertified) {
-		this.isCertified = isCertified;
-	}
-
-	@NotNull
-	public boolean isDraft() {
-		return this.isDraft;
-	}
-
-	public void setDraft(final boolean isDraft) {
-		this.isDraft = isDraft;
-	}
-
 	@URL
 	public String getPhoto() {
 		return this.photo;
@@ -90,6 +72,24 @@ public class PersonalRecord extends DomainEntity {
 
 	public void setPhoto(final String photo) {
 		this.photo = photo;
+	}
+
+	@NotNull
+	public Boolean getIsCertified() {
+		return this.isCertified;
+	}
+
+	public void setIsCertified(final Boolean isCertified) {
+		this.isCertified = isCertified;
+	}
+
+	@NotNull
+	public Boolean getIsDraft() {
+		return this.isDraft;
+	}
+
+	public void setIsDraft(final Boolean isDraft) {
+		this.isDraft = isDraft;
 	}
 
 }

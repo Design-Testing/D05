@@ -36,7 +36,7 @@ public class LessonService {
 		lesson.setTeacher(principal);
 		final String ticker = this.generateTicker(principal.getName());
 		lesson.setTicker(ticker);
-		lesson.setDraft(true);
+		lesson.setIsDraft(true);
 
 		return lesson;
 	}
@@ -62,7 +62,7 @@ public class LessonService {
 
 		if (lesson.getId() != 0) {
 			Assert.isTrue(lesson.getTeacher().equals(principal));
-			Assert.isTrue(lesson.isDraft(), "No puede modificar una posición que ya no esta en DRAFT MODE.");
+			Assert.isTrue(lesson.getIsDraft(), "No puede modificar una posición que ya no esta en DRAFT MODE.");
 		}
 		result = this.lessonRepository.save(lesson);
 		return result;
@@ -77,7 +77,7 @@ public class LessonService {
 		Assert.isTrue(retrieved.getTeacher().equals(principal));
 		final List<Reservation> reservations = (List<Reservation>) this.reservationService.findAllReservationByLesson(lesson.getId());
 		Assert.isTrue(reservations.isEmpty(), "No puede borrar una lesson que tenga reservations.");
-		this.lessonRepository.delete(lesson);
+		this.lessonRepository.delete(retrieved);
 	}
 
 	/* ========================= OTHER METHODS =========================== */
@@ -96,8 +96,8 @@ public class LessonService {
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Lesson result;
 		Assert.isTrue(lesson.getTeacher().equals(teacher), "No puede ejecutar ninguna acción sobre una lesson que no le pertenece.");
-		Assert.isTrue(lesson.isDraft(), "Para poner una position en FINAL MODE debe de estar anteriormente en DRAFT MODE.");
-		lesson.setDraft(false);
+		Assert.isTrue(lesson.getIsDraft(), "Para poner una position en FINAL MODE debe de estar anteriormente en DRAFT MODE.");
+		lesson.setIsDraft(false);
 		result = this.lessonRepository.save(lesson);
 		return result;
 	}

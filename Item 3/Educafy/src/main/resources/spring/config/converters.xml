@@ -35,6 +35,10 @@
 	<bean class="converters.ScheduleToStringConverter"/>
 	<bean class="converters.StringToScheduleConverter"/>
 	
+	<!-- RESERVATION -->
+	<bean class="converters.ReservationToStringConverter"/>
+	<bean class="converters.StringToReservationConverter"/>
+	
 	<!-- ACTOR -->
 	<bean class="converters.ActorToStringConverter"/>
 	<bean class="converters.StringToActorConverter"/>
