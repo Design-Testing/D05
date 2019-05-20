@@ -1819,7 +1819,7 @@
 		<property name="price" value="16.5" />
 		<property name="isDraft" value="false" />
 		<property name="teacher" ref="teacher1" />
-		<property name="category" ref="category1" />
+		<property name="subject" ref="subject1" />
 	</bean>
 
 	<bean id="lesson2" class="domain.Lesson">
@@ -1829,7 +1829,7 @@
 		<property name="price" value="16.5" />
 		<property name="isDraft" value="false" />
 		<property name="teacher" ref="teacher2" />
-		<property name="category" ref="category2" />
+		<property name="subject" ref="subject2" />
 	</bean>
 
 	<bean id="lesson3" class="domain.Lesson">
@@ -1839,7 +1839,7 @@
 		<property name="price" value="16.5" />
 		<property name="isDraft" value="false" />
 		<property name="teacher" ref="teacher1" />
-		<property name="category" ref="category2" />
+		<property name="subject" ref="subject2" />
 	</bean>
 
 	<bean id="lesson4" class="domain.Lesson">
@@ -1849,7 +1849,7 @@
 		<property name="price" value="16.5" />
 		<property name="isDraft" value="false" />
 		<property name="teacher" ref="teacher2" />
-		<property name="category" ref="category1" />
+		<property name="subject" ref="subject1" />
 	</bean>
 
 	<!-- =================================================================== 
@@ -1884,28 +1884,28 @@
 	</bean>
 
 	<!-- =================================================================== 
-		======= Category ========= =================================================================== -->
+		======= Subject ========= =================================================================== -->
 
-	<bean id="category1" class="domain.Category">
-		<property name="name" value="Category1" />
+	<bean id="subject1" class="domain.Subject">
+		<property name="name" value="Subject1" />
 		<property name="description" value="Description1" />
 		<property name="level" value="Level1" />
 	</bean>
 
-	<bean id="category2" class="domain.Category">
-		<property name="name" value="Category2" />
+	<bean id="subject2" class="domain.Subject">
+		<property name="name" value="Subject2" />
 		<property name="description" value="Description2" />
 		<property name="level" value="Level2" />
 	</bean>
 
-	<bean id="category3" class="domain.Category">
-		<property name="name" value="Category3" />
+	<bean id="subject3" class="domain.Subject">
+		<property name="name" value="Subject3" />
 		<property name="description" value="Description3" />
 		<property name="level" value="Level3" />
 	</bean>
 
-	<bean id="category4" class="domain.Category">
-		<property name="name" value="Category4" />
+	<bean id="subject4" class="domain.Subject">
+		<property name="name" value="Subject4" />
 		<property name="description" value="Description4" />
 		<property name="level" value="Level4" />
 	</bean>
