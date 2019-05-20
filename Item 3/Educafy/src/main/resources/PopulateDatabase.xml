@@ -757,7 +757,7 @@
 			</list>
 		</property>
 	</bean>
-		<!-- ========================================= -->
+	<!-- ========================================= -->
 
 	<bean id="outBoxTeacher1" class="domain.Folder">
 		<property name="name" value="Out box" />
@@ -814,8 +814,8 @@
 			</list>
 		</property>
 	</bean>
-	
-		<!-- ========================================= -->
+
+	<!-- ========================================= -->
 
 	<bean id="outBoxTeacher2" class="domain.Folder">
 		<property name="name" value="Out box" />
@@ -912,7 +912,6 @@
 
 
 	<!-- =================================================================== 
-
 		======= TEACHER ========= =================================================================== -->
 
 	<bean id="teacher1" class="domain.Teacher">
@@ -953,7 +952,8 @@
 	<!-- =================================================================== 
 		======= ROOKY ========= =================================================================== -->
 
-		======= STUDENT ========= =================================================================== -->
+	<!-- ======= STUDENT =========
+	=================================================================== -->
 
 
 	<bean id="student1" class="domain.Student">
@@ -990,8 +990,8 @@
 		<property name="userAccount" ref="userAccountStudent2" />
 		<property name="finder" ref="finder2" />
 	</bean>
-	
-		<bean id="student3" class="domain.Student">
+
+	<bean id="student3" class="domain.Student">
 		<!-- Actor -->
 		<property name="name" value="student3" />
 		<property name="surname">
@@ -1007,8 +1007,8 @@
 		<property name="userAccount" ref="userAccountStudent3" />
 		<property name="finder" ref="finder3" />
 	</bean>
-	
-	
+
+
 
 	<!-- =================================================================== 
 		======= CERTIFIER ========= =================================================================== -->
@@ -1217,7 +1217,7 @@
 		<property name="cvv" value="906" />
 		<property name="actor" ref="student2" />
 	</bean>
-	
+
 	<bean id="creditCard14" class="domain.CreditCard">
 		<property name="holderName" value="HolderName 1" />
 		<property name="brandName" value="VISA" />
@@ -1257,7 +1257,7 @@
 		<property name="cvv" value="266" />
 		<property name="actor" ref="student3" />
 	</bean>
-	
+
 	<!-- Credit cards asignadas a Teacher 1 y 2 -->
 	<bean id="creditCard14" class="domain.CreditCard">
 		<property name="holderName" value="Teacher 1" />
@@ -1647,14 +1647,14 @@
 		<property name="startHour" value="12" />
 		<property name="endHour" value="13" />
 		<property name="dayNumber" value="4" />
-		<property name="" ref="reservation1" />
+		<property name="reservation" ref="reservation1" />
 	</bean>
 
 	<bean id="timePeriod2" class="domain.TimePeriod">
 		<property name="startHour" value="16" />
 		<property name="endHour" value="18" />
 		<property name="dayNumber" value="1" />
-		<property name="" ref="reservation2" />
+		<property name="reservation" ref="reservation2" />
 	</bean>
 
 	<!-- =================================================================== 
@@ -1805,108 +1805,109 @@
 				<value>24</value>
 			</array>
 		</property>
+		<property name="teacher" ref="teacher1" />
 
 	</bean>
-	
+
 	<!-- =================================================================== 
 		======= Lesson ========= =================================================================== -->
-	
+
 	<bean id="lesson1" class="domain.Lesson">
-		<property name="ticker" value="657945JEYTS"/>
-		<property name="title" value="Lesson1"/>
-		<property name="description" value="Description1"/>
-		<property name="price" value="16.5"/>
-		<property name="isDraft" value="false"/>
-		<property name="teacher" ref="teacher1"/>
-		<property name="category" ref="category1"/>
+		<property name="ticker" value="657945JEYTS" />
+		<property name="title" value="Lesson1" />
+		<property name="description" value="Description1" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher1" />
+		<property name="category" ref="category1" />
 	</bean>
-	
+
 	<bean id="lesson2" class="domain.Lesson">
-		<property name="ticker" value="652945JKYTS"/>
-		<property name="title" value="Lesson2"/>
-		<property name="description" value="Description2"/>
-		<property name="price" value="16.5"/>
-		<property name="isDraft" value="false"/>
-		<property name="teacher" ref="teacher2"/>
-		<property name="category" ref="category2"/>
+		<property name="ticker" value="652945JKYTS" />
+		<property name="title" value="Lesson2" />
+		<property name="description" value="Description2" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher2" />
+		<property name="category" ref="category2" />
 	</bean>
-	
+
 	<bean id="lesson3" class="domain.Lesson">
-		<property name="ticker" value="637955JUYTO"/>
-		<property name="title" value="Lesson3"/>
-		<property name="description" value="Description3"/>
-		<property name="price" value="16.5"/>
-		<property name="isDraft" value="false"/>
-		<property name="teacher" ref="teacher1"/>
-		<property name="category" ref="category2"/>
+		<property name="ticker" value="637955JUYTO" />
+		<property name="title" value="Lesson3" />
+		<property name="description" value="Description3" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher1" />
+		<property name="category" ref="category2" />
 	</bean>
-	
+
 	<bean id="lesson4" class="domain.Lesson">
-		<property name="ticker" value="457945JEITS"/>
-		<property name="title" value="Lesson4"/>
-		<property name="description" value="Description4"/>
-		<property name="price" value="16.5"/>
-		<property name="isDraft" value="false"/>
-		<property name="teacher" ref="teacher2"/>
-		<property name="category" ref="category1"/>
+		<property name="ticker" value="457945JEITS" />
+		<property name="title" value="Lesson4" />
+		<property name="description" value="Description4" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher2" />
+		<property name="category" ref="category1" />
 	</bean>
-	
+
 	<!-- =================================================================== 
 		======= Assesment ========= =================================================================== -->
-		
+
 	<bean id="assesment1" class="domain.Assesment">
-		<property name="score" value="4"/>
-		<property name="comment" value="Bien trabajado"/>
-		<property name="lesson" ref="lesson1"/>
-		<property name="student" ref="student1"/>
+		<property name="score" value="4" />
+		<property name="comment" value="Bien trabajado" />
+		<property name="lesson" ref="lesson1" />
+		<property name="student" ref="student1" />
 	</bean>
-	
+
 	<bean id="assesment2" class="domain.Assesment">
-		<property name="score" value="3"/>
-		<property name="comment" value="Bien trabajado"/>
-		<property name="lesson" ref="lesson2"/>
-		<property name="student" ref="student1"/>
+		<property name="score" value="3" />
+		<property name="comment" value="Bien trabajado" />
+		<property name="lesson" ref="lesson2" />
+		<property name="student" ref="student1" />
 	</bean>
-	
+
 	<bean id="assesment3" class="domain.Assesment">
-		<property name="score" value="4"/>
-		<property name="comment" value="Enhorabuena !"/>
-		<property name="lesson" ref="lesson3"/>
-		<property name="student" ref="student2"/>
+		<property name="score" value="4" />
+		<property name="comment" value="Enhorabuena !" />
+		<property name="lesson" ref="lesson3" />
+		<property name="student" ref="student2" />
 	</bean>
-	
+
 	<bean id="assesment4" class="domain.Assesment">
-		<property name="score" value="4"/>
-		<property name="comment" value="Bien hecho"/>
-		<property name="lesson" ref="lesson4"/>
-		<property name="student" ref="student2"/>
+		<property name="score" value="4" />
+		<property name="comment" value="Bien hecho" />
+		<property name="lesson" ref="lesson4" />
+		<property name="student" ref="student2" />
 	</bean>
-	
+
 	<!-- =================================================================== 
 		======= Category ========= =================================================================== -->
-	
+
 	<bean id="category1" class="domain.Category">
-		<property name="name" value="Category1"/>
-		<property name="description" value="Description1"/>
-		<property name="level" value="Level1"/>
+		<property name="name" value="Category1" />
+		<property name="description" value="Description1" />
+		<property name="level" value="Level1" />
 	</bean>
-	
+
 	<bean id="category2" class="domain.Category">
-		<property name="name" value="Category2"/>
-		<property name="description" value="Description2"/>
-		<property name="level" value="Level2"/>
+		<property name="name" value="Category2" />
+		<property name="description" value="Description2" />
+		<property name="level" value="Level2" />
 	</bean>
-	
+
 	<bean id="category3" class="domain.Category">
-		<property name="name" value="Category3"/>
-		<property name="description" value="Description3"/>
-		<property name="level" value="Level3"/>
+		<property name="name" value="Category3" />
+		<property name="description" value="Description3" />
+		<property name="level" value="Level3" />
 	</bean>
-	
+
 	<bean id="category4" class="domain.Category">
-		<property name="name" value="Category4"/>
-		<property name="description" value="Description4"/>
-		<property name="level" value="Level4"/>
+		<property name="name" value="Category4" />
+		<property name="description" value="Description4" />
+		<property name="level" value="Level4" />
 	</bean>
 
 	<!-- =================================================================== 
@@ -1939,5 +1940,5 @@
 		<property name="profileLink" value="http://www.linkteacher2.com" />
 		<property name="actor" ref="teacher2" />
 	</bean>
-	
+
 </beans>
