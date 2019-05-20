@@ -22,4 +22,9 @@ public class ReservationService {
 		final Collection<Reservation> res = this.reservationRepository.findAllReservationByLesson(lessonId);
 		return res;
 	}
+
+	public Collection<Reservation> findAllReservationByStudent(final int studentId) {
+		final Collection<Reservation> res = this.reservationRepository.findAllReservationByStudent(studentId);
+		return res;
+	}
 }
