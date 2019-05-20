@@ -6,15 +6,20 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.LessonRepository;
 import domain.Lesson;
 import domain.Reservation;
 import domain.Teacher;
+import forms.LessonForm;
 
 @Service
 @Transactional
@@ -28,6 +33,9 @@ public class LessonService {
 
 	@Autowired
 	private ReservationService	reservationService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	public Lesson create() {
@@ -124,4 +132,26 @@ public class LessonService {
 			this.generateTicker(companyName);
 		return res;
 	}
+
+	public Lesson reconstruct(final LessonForm lessonForm, final BindingResult binding) {
+		Lesson result;
+
+		if (lessonForm.getId() == 0)
+			result = this.create();
+		else
+			result = this.findOne(lessonForm.getId());
+
+		result.setVersion(lessonForm.getVersion());
+		result.setTitle(lessonForm.getTitle());
+		result.setDescription(lessonForm.getDescription());
+		result.setPrice(lessonForm.getPrice());
+
+		this.validator.validate(result, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
+
+		return result;
+	}
+
 }
