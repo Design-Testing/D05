@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Category extends DomainEntity {
+public class Subject extends DomainEntity {
 
 	private String	name;
 	private String	description;

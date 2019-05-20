@@ -1,11 +1,12 @@
+
 package repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import domain.PositionData;
+import domain.Subject;
 
 @Repository
-public interface PositionDataRepository extends JpaRepository<PositionData, Integer>{
+public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
 }

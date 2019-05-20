@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -39,6 +40,7 @@ public class Exam extends DomainEntity {
 		this.score = score;
 	}
 
+	@OneToMany
 	public Collection<Question> getQuestions() {
 		return this.questions;
 	}

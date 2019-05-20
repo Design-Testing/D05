@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -18,11 +19,11 @@ public class Lesson extends DomainEntity {
 	private String		ticker;
 	private String		title;
 	private String		description;
-	private double		price;
-	private boolean		isDraft;
+	private Double		price;
+	private Boolean		isDraft;
 
-	private Teacher		teacher;
-	private Category	category;
+	private Teacher	teacher;
+	private Subject	subject;
 
 
 	@NotBlank
@@ -54,19 +55,20 @@ public class Lesson extends DomainEntity {
 		this.description = description;
 	}
 
-	public double getPrice() {
+	@Min(0)
+	public Double getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(final double price) {
+	public void setPrice(final Double price) {
 		this.price = price;
 	}
 
-	public boolean isDraft() {
+	public Boolean getIsDraft() {
 		return this.isDraft;
 	}
 
-	public void setDraft(final boolean isDraft) {
+	public void setIsDraft(final Boolean isDraft) {
 		this.isDraft = isDraft;
 	}
 
@@ -82,12 +84,12 @@ public class Lesson extends DomainEntity {
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Category getCategory() {
-		return this.category;
+	public Subject getSubject() {
+		return this.subject;
 	}
 
-	public void setCategory(final Category category) {
-		this.category = category;
+	public void setSubject(final Subject subject) {
+		this.subject = subject;
 	}
 
 }

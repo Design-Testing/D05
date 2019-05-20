@@ -45,47 +45,47 @@ public class MessageController extends AbstractController {
 	private ConfigurationParametersService	configurationParametersService;
 
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam final int folderId) {
-		final ModelAndView res;
-		final Collection<Message> messages;
-		final Folder folder = this.folderService.findOne(folderId);
-
-		if (folder != null && folder.getFather() == null) {
-			final int userId = this.actorService.findByPrincipal().getUserAccount().getId();
-			final Folder father = this.folderService.findOne(folderId);
-			final Collection<Folder> folders = this.folderService.findAll();
-			folders.retainAll(this.folderService.findAllByFatherId(father.getId()));
-
-			messages = this.messageService.findAllByFolderIdAndUserId(folderId, userId);
-
-			res = new ModelAndView("message/list");
-			res.addObject("m", messages);
-			res.addObject("folder", folder);
-			res.addObject("folders", folders);
-			res.addObject("requestURI", "message/list.do?folderId=" + folderId);
-			final String banner = this.configurationParametersService.find().getBanner();
-			res.addObject("banner", banner);
-		} else if (folder != null && folder.getFather() != null) {
-			final Collection<Folder> folders = this.folderService.findAllByFatherId(folderId);
-
-			final int userId = this.actorService.findByPrincipal().getUserAccount().getId();
-
-			messages = this.messageService.findAllByFolderIdAndUserId(folderId, userId);
-
-			res = new ModelAndView("message/list");
-			res.addObject("m", messages);
-			res.addObject("folder", folder);
-			res.addObject("folders", folders);
-			res.addObject("requestURI", "message/list.do?folderId=" + folderId);
-			final String banner = this.configurationParametersService.find().getBanner();
-			res.addObject("banner", banner);
-		} else
-			res = new ModelAndView("redirect:misc/403");
-
-		return res;
-
-	}
+	//	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	//	public ModelAndView list(@RequestParam final int folderId) {
+	//		final ModelAndView res;
+	//		final Collection<Message> messages;
+	//		final Folder folder = this.folderService.findOne(folderId);
+	//
+	//		if (folder != null && folder.getFather() == null) {
+	//			final int userId = this.actorService.findByPrincipal().getUserAccount().getId();
+	//			final Folder father = this.folderService.findOne(folderId);
+	//			final Collection<Folder> folders = this.folderService.findAll();
+	//			folders.retainAll(this.folderService.findAllByFatherId(father.getId()));
+	//
+	//			messages = this.messageService.findAllByFolderIdAndUserId(folderId, userId);
+	//
+	//			res = new ModelAndView("message/list");
+	//			res.addObject("m", messages);
+	//			res.addObject("folder", folder);
+	//			res.addObject("folders", folders);
+	//			res.addObject("requestURI", "message/list.do?folderId=" + folderId);
+	//			final String banner = this.configurationParametersService.find().getBanner();
+	//			res.addObject("banner", banner);
+	//		} else if (folder != null && folder.getFather() != null) {
+	//			final Collection<Folder> folders = this.folderService.findAllByFatherId(folderId);
+	//
+	//			final int userId = this.actorService.findByPrincipal().getUserAccount().getId();
+	//
+	//			messages = this.messageService.findAllByFolderIdAndUserId(folderId, userId);
+	//
+	//			res = new ModelAndView("message/list");
+	//			res.addObject("m", messages);
+	//			res.addObject("folder", folder);
+	//			res.addObject("folders", folders);
+	//			res.addObject("requestURI", "message/list.do?folderId=" + folderId);
+	//			final String banner = this.configurationParametersService.find().getBanner();
+	//			res.addObject("banner", banner);
+	//		} else
+	//			res = new ModelAndView("redirect:misc/403");
+	//
+	//		return res;
+	//
+	//	}
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 

@@ -27,8 +27,8 @@ public class EducationRecord extends DomainEntity {
 	private Date	startDate;
 	private Date	endDate;
 	private String	attachment;
-	private boolean	isCertified;
-	private boolean	isDraft;
+	private Boolean	isCertified;
+	private Boolean	isDraft;
 
 
 	@NotBlank
@@ -102,20 +102,20 @@ public class EducationRecord extends DomainEntity {
 	}
 
 	@NotNull
-	public boolean isCertified() {
+	public Boolean getIsCertified() {
 		return this.isCertified;
 	}
 
-	public void setCertified(final boolean isCertified) {
+	public void setIsCertified(final Boolean isCertified) {
 		this.isCertified = isCertified;
 	}
 
 	@NotNull
-	public boolean isDraft() {
+	public Boolean getIsDraft() {
 		return this.isDraft;
 	}
 
-	public void setDraft(final boolean isDraft) {
+	public void setIsDraft(final Boolean isDraft) {
 		this.isDraft = isDraft;
 	}
 
