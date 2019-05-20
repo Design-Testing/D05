@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -22,17 +23,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Reservation extends DomainEntity {
 
-	private String		status;
-	private Date		moment;
-	private String		explanation;
-	private Double		cost;
-	private Integer		hourWeek;
+	private String				status;
+	private Date				moment;
+	private String				explanation;
+	private Double				cost;
+	private Integer				hourWeek;
 
 	//Relaciones
-	private Student		student;
-	private Lesson		lesson;
-	private CreditCard	creditCard;
-	private Exam		exam;
+	private Student				student;
+	private Lesson				lesson;
+	private CreditCard			creditCard;
+	private Collection<Exam>	exams;
 
 
 	@Pattern(regexp = "^(APPROVED|PENDING|REJECTED|FINAL)$")
@@ -110,12 +111,12 @@ public class Reservation extends DomainEntity {
 	}
 
 	@OneToMany
-	public Exam getExam() {
-		return this.exam;
+	public Collection<Exam> getExams() {
+		return this.exams;
 	}
 
-	public void setExam(final Exam exam) {
-		this.exam = exam;
+	public void setExams(final Collection<Exam> exams) {
+		this.exams = exams;
 	}
 
 }
