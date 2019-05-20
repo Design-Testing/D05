@@ -8,21 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import repositories.ApplicationRepository;
-import domain.Application;
+import repositories.ScheduleRepository;
+import domain.Schedule;
 
 @Component
 @Transactional
-public class StringToApplicationConverter implements Converter<String, Application> {
+public class StringToScheduleConverter implements Converter<String, Schedule> {
 
 	@Autowired
-	private ApplicationRepository	applicationRepository;
+	private ScheduleRepository	scheduleRepository;
 
 
 	@Override
-	public Application convert(final String text) {
+	public Schedule convert(final String text) {
 
-		final Application result;
+		final Schedule result;
 		final int id;
 
 		try {
@@ -30,7 +30,7 @@ public class StringToApplicationConverter implements Converter<String, Applicati
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = this.applicationRepository.findOne(id);
+				result = this.scheduleRepository.findOne(id);
 			}
 
 		} catch (final Throwable oops) {

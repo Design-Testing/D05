@@ -119,24 +119,24 @@ public class ConfigurationParametersService {
 		return this.configurationParametersRepository.findSysName();
 	}
 
-	public void rebranding(final String newSysName) {
-		this.administratorService.findByPrincipal();
-		Assert.notNull(newSysName);
-		Assert.isTrue(!newSysName.isEmpty());
-		final ConfigurationParameters cfg = this.find();
-		Assert.isTrue(!cfg.isRebranding());
-		final String sysName = this.findSysName();
-		String welEn = cfg.getWelcomeMessageEn();
-		String welEs = cfg.getWelcomeMessageEsp();
-		welEn = welEn.replace(sysName, newSysName);
-		welEs = welEs.replace(sysName, newSysName);
-		cfg.setWelcomeMessageEn(welEn);
-		cfg.setWelcomeMessageEsp(welEs);
-		cfg.setSysName(newSysName);
-		cfg.setRebranding(true);
-		this.save(cfg);
-		this.messageService.rebrandNotification(sysName);
-	}
+	//	public void rebranding(final String newSysName) {
+	//		this.administratorService.findByPrincipal();
+	//		Assert.notNull(newSysName);
+	//		Assert.isTrue(!newSysName.isEmpty());
+	//		final ConfigurationParameters cfg = this.find();
+	//		Assert.isTrue(!cfg.isRebranding());
+	//		final String sysName = this.findSysName();
+	//		String welEn = cfg.getWelcomeMessageEn();
+	//		String welEs = cfg.getWelcomeMessageEsp();
+	//		welEn = welEn.replace(sysName, newSysName);
+	//		welEs = welEs.replace(sysName, newSysName);
+	//		cfg.setWelcomeMessageEn(welEn);
+	//		cfg.setWelcomeMessageEsp(welEs);
+	//		cfg.setSysName(newSysName);
+	//		cfg.setRebranding(true);
+	//		this.save(cfg);
+	//		this.messageService.rebrandNotification(sysName);
+	//	}
 
 	public ConfigurationParameters find() {
 		final ConfigurationParameters res = (ConfigurationParameters) this.configurationParametersRepository.findAll().toArray()[0];
