@@ -22,8 +22,8 @@ public class Lesson extends DomainEntity {
 	private Double		price;
 	private Boolean		isDraft;
 
-	private Teacher		teacher;
-	private Category	category;
+	private Teacher	teacher;
+	private Subject	subject;
 
 
 	@NotBlank
@@ -84,12 +84,12 @@ public class Lesson extends DomainEntity {
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Category getCategory() {
-		return this.category;
+	public Subject getSubject() {
+		return this.subject;
 	}
 
-	public void setCategory(final Category category) {
-		this.category = category;
+	public void setSubject(final Subject subject) {
+		this.subject = subject;
 	}
 
 }
