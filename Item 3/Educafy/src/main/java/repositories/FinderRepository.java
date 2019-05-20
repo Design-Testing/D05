@@ -20,6 +20,6 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 	@Query("select sum(case when f.positions.size=0 then 1.0 else 0.0 end) / sum(case when f.positions.size>0 then 1.0 else 0.0 end) from Finder f")
 	Double findRatioFinders();
 
-	@Query("select m.finder from Rooky m where m.id=?1")
-	Finder findRookyFinder(int id);
+	@Query("select m.finder from Student m where m.id=?1")
+	Finder findStudentFinder(int id);
 }

@@ -1,5 +1,5 @@
 
-package controllers.rooky;
+package controllers.student;
 
 import javax.validation.Valid;
 
@@ -17,8 +17,8 @@ import controllers.AbstractController;
 import domain.Finder;
 
 @Controller
-@RequestMapping("/finder/rooky")
-public class FinderRookyController extends AbstractController {
+@RequestMapping("/finder/student")
+public class FinderStudentController extends AbstractController {
 
 	@Autowired
 	private FinderService	finderService;
@@ -40,7 +40,7 @@ public class FinderRookyController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 		final Finder finder;
-		finder = this.finderService.findRookyFinder();
+		finder = this.finderService.findStudentFinder();
 		Assert.notNull(finder);
 		result = this.createEditModelAndView(finder);
 		return result;
@@ -76,7 +76,7 @@ public class FinderRookyController extends AbstractController {
 				final String lang = LocaleContextHolder.getLocale().getLanguage();
 				result = this.createEditModelAndView(saved);
 				result.addObject("lang", lang);
-				result.addObject("requestURI", "finder/rooky/edit.do");
+				result.addObject("requestURI", "finder/student/edit.do");
 			} catch (final Throwable e) {
 				result = this.createEditModelAndView(finder, "finder.commit.error");
 			}

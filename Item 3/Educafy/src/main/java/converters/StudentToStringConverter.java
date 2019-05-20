@@ -6,21 +6,21 @@ import javax.transaction.Transactional;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import domain.Rooky;
+import domain.Student;
 
 @Component
 @Transactional
-public class RookyToStringConverter implements Converter<Rooky, String> {
+public class StudentToStringConverter implements Converter<Student, String> {
 
 	@Override
-	public String convert(final Rooky rooky) {
+	public String convert(final Student student) {
 
 		String result;
 
-		if (rooky == null)
+		if (student == null)
 			result = null;
 		else
-			result = String.valueOf(rooky.getId());
+			result = String.valueOf(student.getId());
 
 		return result;
 

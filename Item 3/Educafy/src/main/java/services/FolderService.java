@@ -36,7 +36,6 @@ public class FolderService {
 		final Collection<Message> ms = new ArrayList<>();
 		folder.setIsSystemFolder(false);
 		folder.setMessages(ms);
-		folder.setFather(null);
 		return folder;
 	}
 
@@ -45,7 +44,6 @@ public class FolderService {
 		final Collection<Message> ms = new ArrayList<>();
 		folder.setIsSystemFolder(false);
 		folder.setMessages(ms);
-		folder.setFather(father);
 		return folder;
 	}
 
@@ -71,7 +69,6 @@ public class FolderService {
 		Assert.isTrue(f.getId() != 0);
 		Assert.isTrue(a.getId() != 0);
 
-		f.setFather(father);
 		f.setActor(a);
 		this.folderRepository.save(f);
 
@@ -88,9 +85,7 @@ public class FolderService {
 			a.setSpammer(true);
 
 		if (f.getId() == 0 && father.getId() != 0) {
-			Assert.isTrue(f.getFather() != null);
 			f.setActor(a);
-			f.setFather(father);
 			saved = this.folderRepository.save(f);
 		} else {
 			final Collection<Folder> fs = this.findAllByUserId(a.getUserAccount().getId());
@@ -110,7 +105,6 @@ public class FolderService {
 		if (bool)
 			a.setSpammer(true);
 		if (f.getId() == 0) {
-			Assert.isTrue(f.getFather() == null);
 			f.setActor(a);
 			saved = this.folderRepository.save(f);
 		} else {
@@ -166,7 +160,6 @@ public class FolderService {
 		inbox.setIsSystemFolder(true);
 		inbox.setActor(actor);
 		inbox.setMessages(messages);
-		inbox.setFather(null);
 		this.save(inbox, actor);
 		folders.add(inbox);
 
@@ -175,7 +168,6 @@ public class FolderService {
 		outbox.setIsSystemFolder(true);
 		outbox.setActor(actor);
 		outbox.setMessages(messages);
-		outbox.setFather(null);
 		this.save(outbox, actor);
 		folders.add(outbox);
 
@@ -184,7 +176,6 @@ public class FolderService {
 		trash.setIsSystemFolder(true);
 		trash.setActor(actor);
 		trash.setMessages(messages);
-		trash.setFather(null);
 		this.save(trash, actor);
 		folders.add(trash);
 
@@ -193,7 +184,6 @@ public class FolderService {
 		spam.setIsSystemFolder(true);
 		spam.setActor(actor);
 		spam.setMessages(messages);
-		spam.setFather(null);
 		this.save(spam, actor);
 		folders.add(spam);
 
@@ -202,7 +192,6 @@ public class FolderService {
 		notification.setIsSystemFolder(true);
 		notification.setActor(actor);
 		notification.setMessages(messages);
-		notification.setFather(null);
 		this.save(notification, actor);
 		folders.add(notification);
 

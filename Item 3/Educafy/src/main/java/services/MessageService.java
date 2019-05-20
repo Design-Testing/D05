@@ -15,8 +15,6 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Folder;
 import domain.Message;
-import domain.Provider;
-import domain.Sponsorship;
 
 @Service
 @Transactional
@@ -321,43 +319,6 @@ public class MessageService {
 			inboxMessages.add(sent);
 			notificationBox.setMessages(inboxMessages);
 			this.folderService.save(notificationBox, r);
-		}
-	}
-
-	public void sponsorshipDisplayedMessage(final Sponsorship sp) {
-		final Message m = new Message();
-		final Collection<String> tags = new ArrayList<>();
-		m.setTags(tags);
-		final Administrator sender = this.administratorService.findSystem();
-		final Provider provider = sp.getProvider();
-		final double flatFare = this.configurationParametersService.find().getFlatFare();
-		final double vat = this.configurationParametersService.find().getVat();
-
-		m.setSubject("Sponsorship of " + sp.getPosition().getTitle() + ": " + sp.getPosition().getTicker() + " displayed.\n" + "Patrocinio de " + sp.getPosition().getTitle() + ": " + sp.getPosition().getTicker() + " mostrado.");
-		m.setBody("System charge you a flat fare of " + flatFare + " (+" + flatFare * vat + " VAT).\n" + "El sistema le carga una tarifa plana de " + flatFare + " (+" + flatFare * vat + " IVA).");
-		m.setPriority("HIGH");
-		m.setSender(sender);
-
-		final Collection<Actor> recipients = new ArrayList<>();
-		recipients.add(provider);
-		m.setRecipients(recipients);
-
-		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
-		final Collection<Message> outboxMessages = outbox.getMessages();
-		final Date moment = new Date(System.currentTimeMillis() - 1000);
-		m.setMoment(moment);
-		Folder inbox;
-		final Message sent = this.save(m);
-
-		outboxMessages.add(sent);
-		outbox.setMessages(outboxMessages);
-
-		for (final Actor r : recipients) {
-			inbox = this.folderService.findInboxByUserId(r.getUserAccount().getId());
-			final Collection<Message> inboxMessages = inbox.getMessages();
-			inboxMessages.add(sent);
-			inbox.setMessages(inboxMessages);
-			this.folderService.save(inbox, r);
 		}
 	}
 
