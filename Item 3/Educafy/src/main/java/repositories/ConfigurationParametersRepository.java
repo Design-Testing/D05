@@ -10,12 +10,6 @@ import domain.ConfigurationParameters;
 
 public interface ConfigurationParametersRepository extends JpaRepository<ConfigurationParameters, Integer> {
 
-	@Query("select nw from ConfigurationParameters cfgp join cfgp.negativeWords nw")
-	Collection<String> findNegativeWords();
-
-	@Query("select pw from ConfigurationParameters cfgp join cfgp.positiveWords pw")
-	Collection<String> findPositiveWords();
-
 	@Query("select sw from ConfigurationParameters cfgp join cfgp.spamWords sw")
 	Collection<String> findSpamWords();
 
@@ -30,5 +24,8 @@ public interface ConfigurationParametersRepository extends JpaRepository<Configu
 
 	@Query("select c.sysName from ConfigurationParameters c")
 	String findSysName();
+
+	@Query("select subL from ConfigurationParameters cfgp join cfgp.subjectLevels subL")
+	Collection<String> findSubjectLevels();
 
 }
