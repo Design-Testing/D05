@@ -16,8 +16,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
-import domain.Curriculum;
-import domain.Finder;
 import domain.Student;
 
 @Service
@@ -36,8 +34,8 @@ public class StudentService {
 	@Autowired
 	private UserAccountService	userAccountService;
 
-	@Autowired
-	private CurriculaService	curriculaService;
+	//	@Autowired
+	//	private CurriculaService	curriculaService;
 
 	@Autowired
 	private CurriculaRepository	curriculaRepository;
@@ -60,30 +58,30 @@ public class StudentService {
 		return result;
 	}
 
-	public Student save(final Student student) {
-		Assert.notNull(student);
-		Student result;
-
-		if (student.getId() == 0) {
-			final Finder finder = this.finderService.createForNewStudent();
-			student.setFinder(finder);
-			this.actorService.setAuthorityUserAccount(Authority.STUDENT, student);
-			result = this.studentRepository.save(student);
-			//			this.folderService.setFoldersByDefault(result);
-
-			final Curriculum curricula = this.curriculaService.createForNewStudent();
-			curricula.setStudent(result);
-			final Curriculum res = this.curriculaRepository.save(curricula);
-			Assert.notNull(res);
-
-		} else {
-			this.actorService.checkForSpamWords(student);
-			final Actor principal = this.actorService.findByPrincipal();
-			Assert.isTrue(principal.getId() == student.getId(), "You only can edit your info");
-			result = (Student) this.actorService.save(student);
-		}
-		return result;
-	}
+	//	public Student save(final Student student) {
+	//		Assert.notNull(student);
+	//		Student result;
+	//
+	//		if (student.getId() == 0) {
+	//			final Finder finder = this.finderService.createForNewStudent();
+	//			student.setFinder(finder);
+	//			this.actorService.setAuthorityUserAccount(Authority.STUDENT, student);
+	//			result = this.studentRepository.save(student);
+	//			//			this.folderService.setFoldersByDefault(result);
+	//
+	//			final Curriculum curricula = this.curriculaService.createForNewStudent();
+	//			curricula.setStudent(result);
+	//			final Curriculum res = this.curriculaRepository.save(curricula);
+	//			Assert.notNull(res);
+	//
+	//		} else {
+	//			this.actorService.checkForSpamWords(student);
+	//			final Actor principal = this.actorService.findByPrincipal();
+	//			Assert.isTrue(principal.getId() == student.getId(), "You only can edit your info");
+	//			result = (Student) this.actorService.save(student);
+	//		}
+	//		return result;
+	//	}
 
 	// TODO: delete all information but name including folders and their messages (but no as senders!!)
 	public void delete(final Student student) {

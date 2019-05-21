@@ -29,21 +29,21 @@
 </jstl:if>
 <acme:display code="teacher.email" value="${teacher.email}"/>
 <acme:display code="teacher.phone" value="${teacher.phone}"/>
-<acme:display code="teacher.commercialName" value="${teacher.commercialName}"/>
 <acme:display code="teacher.address" value="${teacher.address}"/>
 <acme:display code="teacher.vat" value="${teacher.vat}"/>
 <acme:display code="teacher.score" value="${teacher.score}"/>
 
 <br>
-<security:authorize access="hasRole('HACKER')">
-	<jstl:set var="hk" value="1"/>
-</security:authorize>
+
+<acme:button url="curriculum/display.do?teacherId=${row.id}" name="display" code="teacher.curriculum"/>
+<acme:button url="lesson/myLessons.do?teacherId=${row.id}" name="display" code="teacher.lessons"/>
+<acme:button url="assesment/myAssesments.do?teacherId=${row.id}" name="display" code="teacher.assesments"/>
+<acme:button url="comment/myComments.do?teacherId=${row.id}" name="display" code="teacher.comment"/>
+
 <jstl:choose>
-	<jstl:when test="${hk eq 1}">
-		<acme:button url="lesson/teacher/list.do" name="back" code="back"/>
+	<jstl:when test="${rol eq teacher}">
 	</jstl:when>
 	<jstl:otherwise>
-		<acme:button url="lesson/list.do" name="listPositions" code="back"/>
+	<acme:button url="teacher/list.do" name="back" code="teacher.back"/>
 	</jstl:otherwise>
 </jstl:choose>
-<input type="button" name="teacherList" value="<spring:message code="teacherList" /> ${teacher.commercialName}" onclick="javascript: relativeRedir('position/teacherList.do?companyId=${company.id}');" />

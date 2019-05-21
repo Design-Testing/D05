@@ -12,19 +12,13 @@ package controllers;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-import javax.validation.ValidationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
-import security.UserAccount;
 import services.AssesmentService;
 import services.ConfigurationParametersService;
 import services.LessonService;
@@ -82,13 +76,16 @@ public class TeacherController extends AbstractController {
 		final ModelAndView result;
 		final Teacher teacher = this.teacherService.findOne(teacherId);
 		final Collection<Lesson> lessons = this.lessonService.findAllLessonsByTeacher(teacherId);
+		//TODO: Sacar curriculum del teacher
 		final Collection<Assesment> assesments = this.assesmentService.findAllAssesmentByTeacher(teacherId);
+		//TODO: Sacar los comments del teacher
 		if (teacher != null) {
 			result = new ModelAndView("teacher/display");
 			result.addObject("teacher", teacher);
 			result.addObject("lessons", lessons);
 			//			result.addObject("curriculum", curriculum);
 			result.addObject("assesments", assesments);
+			//			result.addObject("comments", comments);
 			result.addObject("displayButtons", true);
 		} else
 			result = new ModelAndView("redirect:misc/403");
@@ -110,6 +107,22 @@ public class TeacherController extends AbstractController {
 
 	}
 
+	// LIST --------------------------------------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		final ModelAndView result;
+		final Collection<Teacher> teachers;
+
+		teachers = this.teacherService.findAll();
+
+		result = new ModelAndView("teacher/list");
+		result.addObject("teachers", teachers);
+		result.addObject("requetURI", "teacher/list.do");
+
+		return result;
+	}
+
 	// EDIT -----------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -127,38 +140,38 @@ public class TeacherController extends AbstractController {
 
 	// SAVE -----------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final ActorForm actorForm, final BindingResult binding) {
-		ModelAndView result;
-		result = new ModelAndView("student/edit");
-		Teacher teacher;
-		if (binding.hasErrors()) {
-			result.addObject("errors", binding.getAllErrors());
-			actorForm.setTermsAndCondicions(false);
-			result.addObject("actorForm", actorForm);
-		} else
-			try {
-				final UserAccount ua = this.userAccountService.reconstruct(actorForm, Authority.TEACHER);
-				teacher = this.teacherService.reconstruct(actorForm, binding);
-				teacher.setUserAccount(ua);
-				this.registerService.saveTeacher(teacher, binding);
-				result.addObject("alert", "teacher.edit.correct");
-				result.addObject("actorForm", actorForm);
-			} catch (final ValidationException oops) {
-				result.addObject("errors", binding.getAllErrors());
-				actorForm.setTermsAndCondicions(false);
-				result.addObject("actorForm", actorForm);
-			} catch (final Throwable e) {
-				if (e.getMessage().contains("username is register"))
-					result.addObject("alert", "teacher.edit.usernameIsUsed");
-				result.addObject("errors", binding.getAllErrors());
-				actorForm.setTermsAndCondicions(false);
-				result.addObject("actorForm", actorForm);
-			}
-		result.addObject("cardmakes", this.configurationParametersService.find().getCreditCardMake());
-		result.addObject("countryPhoneCode", this.configurationParametersService.find().getCountryPhoneCode());
-		return result;
-	}
+	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	//	public ModelAndView save(@Valid final ActorForm actorForm, final BindingResult binding) {
+	//		ModelAndView result;
+	//		result = new ModelAndView("student/edit");
+	//		Teacher teacher;
+	//		if (binding.hasErrors()) {
+	//			result.addObject("errors", binding.getAllErrors());
+	//			actorForm.setTermsAndCondicions(false);
+	//			result.addObject("actorForm", actorForm);
+	//		} else
+	//			try {
+	//				final UserAccount ua = this.userAccountService.reconstruct(actorForm, Authority.TEACHER);
+	//				teacher = this.teacherService.reconstruct(actorForm, binding);
+	//				teacher.setUserAccount(ua);
+	//				this.registerService.saveTeacher(teacher, binding);
+	//				result.addObject("alert", "teacher.edit.correct");
+	//				result.addObject("actorForm", actorForm);
+	//			} catch (final ValidationException oops) {
+	//				result.addObject("errors", binding.getAllErrors());
+	//				actorForm.setTermsAndCondicions(false);
+	//				result.addObject("actorForm", actorForm);
+	//			} catch (final Throwable e) {
+	//				if (e.getMessage().contains("username is register"))
+	//					result.addObject("alert", "teacher.edit.usernameIsUsed");
+	//				result.addObject("errors", binding.getAllErrors());
+	//				actorForm.setTermsAndCondicions(false);
+	//				result.addObject("actorForm", actorForm);
+	//			}
+	//		result.addObject("cardmakes", this.configurationParametersService.find().getCreditCardMake());
+	//		result.addObject("countryPhoneCode", this.configurationParametersService.find().getCountryPhoneCode());
+	//		return result;
+	//	}
 
 	// GDPR -----------------------------------------------------------
 	@RequestMapping(value = "/deletePersonalData")

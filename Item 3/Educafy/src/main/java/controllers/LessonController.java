@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AssesmentService;
 import services.LessonService;
+import domain.Assesment;
 import domain.Lesson;
 
 @Controller
@@ -19,9 +21,12 @@ import domain.Lesson;
 public class LessonController extends AbstractController {
 
 	@Autowired
-	private LessonService	lessonService;
+	private LessonService		lessonService;
 
-	final String			lang	= LocaleContextHolder.getLocale().getLanguage();
+	@Autowired
+	private AssesmentService	assesmentService;
+
+	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
 
 	// DISPLAY --------------------------------------------------------
@@ -30,11 +35,15 @@ public class LessonController extends AbstractController {
 	public ModelAndView display(@RequestParam final int lessonId) {
 		final ModelAndView result;
 		final Lesson lesson;
+		Collection<Assesment> assesments;
 
 		lesson = this.lessonService.findOne(lessonId);
+		assesments = this.assesmentService.findAllAssesmentByLesson(lessonId);
+
 		if (lesson != null) {
 			result = new ModelAndView("lesson/display");
 			result.addObject("lesson", lesson);
+			result.addObject("assesments", assesments);
 			result.addObject("lang", this.lang);
 		} else
 			result = new ModelAndView("redirect:misc/403");
@@ -55,6 +64,23 @@ public class LessonController extends AbstractController {
 		result.addObject("lessons", lessons);
 		result.addObject("lang", this.lang);
 		result.addObject("requetURI", "lesson/list.do");
+
+		return result;
+	}
+
+	// LIST --------------------------------------------------------
+
+	@RequestMapping(value = "/myLessons", method = RequestMethod.GET)
+	public ModelAndView myLessons(@RequestParam final int teacherId) {
+		final ModelAndView result;
+		final Collection<Lesson> lessons;
+
+		lessons = this.lessonService.findAllLessonsByTeacher(teacherId);
+
+		result = new ModelAndView("lesson/list");
+		result.addObject("lessons", lessons);
+		result.addObject("lang", this.lang);
+		result.addObject("requetURI", "lesson/myLessons.do");
 
 		return result;
 	}

@@ -142,19 +142,19 @@ public class LessonService {
 	}
 
 	//TODO: Revisar ticker
-	private String generateTicker(final String companyName) {
+	private String generateTicker(final String nameTeacher) {
 		String res = "";
 		final Integer n1 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n2 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n3 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n4 = (int) Math.floor(Math.random() * 9 + 1);
-		final String word = companyName.substring(0, 4).toUpperCase();
+		final String word = nameTeacher.substring(0, 4).toUpperCase();
 		final String ticker = word + '-' + n1 + n2 + n3 + n4;
 		res = ticker;
 
 		final Collection<Lesson> less = this.lessonRepository.getLessonWithTicker(ticker);
 		if (!less.isEmpty())
-			this.generateTicker(companyName);
+			this.generateTicker(nameTeacher);
 		return res;
 	}
 

@@ -20,7 +20,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
-import domain.Curriculum;
 import domain.Teacher;
 import forms.ActorForm;
 
@@ -37,8 +36,8 @@ public class TeacherService {
 	@Autowired
 	private UserAccountService		userAccountService;
 
-	@Autowired
-	private CurriculaService		curriculaService;
+	//	@Autowired
+	//	private CurriculaService		curriculaService;
 
 	@Autowired
 	private CurriculaRepository		curriculaRepository;
@@ -64,28 +63,34 @@ public class TeacherService {
 		return result;
 	}
 
-	public Teacher save(final Teacher teacher) {
-		Assert.notNull(teacher);
-		Teacher result;
-
-		if (teacher.getId() == 0) {
-			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
-			result = this.teacherRepository.save(teacher);
-			//			this.folderService.setFoldersByDefault(result);
-
-			final Curriculum curricula = this.curriculaService.createForNewTeacher();
-			curricula.setTeacher(result);
-			final Curriculum res = this.curriculaRepository.save(curricula);
-			Assert.notNull(res);
-
-		} else {
-			this.actorService.checkForSpamWords(teacher);
-			final Actor principal = this.actorService.findByPrincipal();
-			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
-			result = (Teacher) this.actorService.save(teacher);
-		}
-		return result;
+	public Collection<Teacher> findAll() {
+		final Collection<Teacher> teachers = this.teacherRepository.findAll();
+		Assert.notNull(teachers);
+		return teachers;
 	}
+
+	//	public Teacher save(final Teacher teacher) {
+	//		Assert.notNull(teacher);
+	//		Teacher result;
+	//
+	//		if (teacher.getId() == 0) {
+	//			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
+	//			result = this.teacherRepository.save(teacher);
+	//			//			this.folderService.setFoldersByDefault(result);
+	//
+	//			final Curriculum curricula = this.curriculaService.createForNewTeacher();
+	//			curricula.setTeacher(result);
+	//			final Curriculum res = this.curriculaRepository.save(curricula);
+	//			Assert.notNull(res);
+	//
+	//		} else {
+	//			this.actorService.checkForSpamWords(teacher);
+	//			final Actor principal = this.actorService.findByPrincipal();
+	//			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
+	//			result = (Teacher) this.actorService.save(teacher);
+	//		}
+	//		return result;
+	//	}
 
 	public void delete(final Teacher teacher) {
 		Assert.notNull(teacher);
