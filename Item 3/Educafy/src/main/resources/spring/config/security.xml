@@ -63,12 +63,11 @@
 		<security:intercept-url pattern="/application/rooky/**" access="permitAll" /> 
 		
 		
-		<!-- POSITION -->
- 		<security:intercept-url pattern="/position/list.do" access="permitAll" />
- 		<security:intercept-url pattern="/position/companyList.do" access="permitAll" />
- 		<security:intercept-url pattern="/position/rooky/list.do" access="hasRole('ROOKY')"/>
-		<security:intercept-url pattern="/position/display.do" access="permitAll" />
- 		<security:intercept-url pattern="/position/company/**" access="hasRole('COMPANY')" /> 
+		<!-- LESSON -->
+ 		<security:intercept-url pattern="/lesson/list.do" access="permitAll" />
+		<security:intercept-url pattern="/lesson/display.do" access="permitAll" />
+ 		<security:intercept-url pattern="/lesson/teacher/**" access="hasRole('TEACHER')" /> 
+ 		<security:intercept-url pattern="/lesson/student/**" access="hasRole('STUDENT')" /> 
  		
 		<!-- TEACHER -->
 		<security:intercept-url pattern="/teacher/list.do" access="permitAll" />

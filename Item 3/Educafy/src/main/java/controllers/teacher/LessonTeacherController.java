@@ -74,7 +74,7 @@ public class LessonTeacherController extends AbstractController {
 		final ModelAndView result;
 		final Collection<Lesson> lessons;
 
-		lessons = this.lessonService.findAllByPrincipal();
+		lessons = this.lessonService.findAllByTeacher();
 
 		result = new ModelAndView("lesson/list");
 		result.addObject("lessons", lessons);

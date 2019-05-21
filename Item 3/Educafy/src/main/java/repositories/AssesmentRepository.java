@@ -15,4 +15,7 @@ public interface AssesmentRepository extends JpaRepository<Assesment, Integer> {
 	@Query("select a from Assesment a where a.student.userAccount.id=?1")
 	Collection<Assesment> findAllAssesmentByStudentId(int studentUAId);
 
+	@Query("select a from Assesment a join a.lesson l where l.teacher.userAccount.id=?1")
+	Collection<Assesment> findAllAssesmentByTeacher(int teacherUAId);
+
 }

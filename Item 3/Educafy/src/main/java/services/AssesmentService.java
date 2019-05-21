@@ -13,6 +13,7 @@ import repositories.AssesmentRepository;
 import domain.Assesment;
 import domain.Lesson;
 import domain.Student;
+import domain.Teacher;
 
 @Service
 @Transactional
@@ -23,6 +24,9 @@ public class AssesmentService {
 
 	@Autowired
 	private StudentService		studentService;
+
+	@Autowired
+	private TeacherService		teacherService;
 
 	@Autowired
 	private LessonService		lessonService;
@@ -70,6 +74,13 @@ public class AssesmentService {
 		final Student principal = this.studentService.findByPrincipal();
 		res = this.assesmentRepository.findAllAssesmentByStudentId(principal.getUserAccount().getId());
 		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<Assesment> findAllAssesmentByTeacher(final int teacherId) {
+		Collection<Assesment> res = new ArrayList<>();
+		final Teacher teacher = this.teacherService.findOne(teacherId);
+		res = this.assesmentRepository.findAllAssesmentByTeacher(teacher.getUserAccount().getId());
 		return res;
 	}
 

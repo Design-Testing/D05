@@ -10,6 +10,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 
@@ -23,10 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
 import security.UserAccount;
+import services.AssesmentService;
 import services.ConfigurationParametersService;
+import services.LessonService;
 import services.TeacherService;
 import services.UserAccountService;
 import services.auxiliary.RegisterService;
+import domain.Assesment;
+import domain.Lesson;
 import domain.Teacher;
 import forms.ActorForm;
 
@@ -45,6 +51,12 @@ public class TeacherController extends AbstractController {
 
 	@Autowired
 	private ConfigurationParametersService	configurationParametersService;
+
+	@Autowired
+	private LessonService					lessonService;
+
+	@Autowired
+	private AssesmentService				assesmentService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -69,9 +81,14 @@ public class TeacherController extends AbstractController {
 	public ModelAndView displayTabla(@RequestParam final int teacherId) {
 		final ModelAndView result;
 		final Teacher teacher = this.teacherService.findOne(teacherId);
+		final Collection<Lesson> lessons = this.lessonService.findAllLessonsByTeacher(teacherId);
+		final Collection<Assesment> assesments = this.assesmentService.findAllAssesmentByTeacher(teacherId);
 		if (teacher != null) {
 			result = new ModelAndView("teacher/display");
 			result.addObject("teacher", teacher);
+			result.addObject("lessons", lessons);
+			//			result.addObject("curriculum", curriculum);
+			result.addObject("assesments", assesments);
 			result.addObject("displayButtons", true);
 		} else
 			result = new ModelAndView("redirect:misc/403");
@@ -79,19 +96,15 @@ public class TeacherController extends AbstractController {
 		return result;
 
 	}
-
 	// DISPLAY PRINCIPAL -----------------------------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		final ModelAndView result;
 		final Teacher teacher = this.teacherService.findByPrincipal();
-		if (teacher != null) {
-			result = new ModelAndView("teacher/display");
-			result.addObject("teacher", teacher);
-			result.addObject("displayButtons", true);
-		} else
-			result = new ModelAndView("redirect:misc/403");
+		result = new ModelAndView("teacher/display");
+		result.addObject("teacher", teacher);
+		result.addObject("displayButtons", true);
 
 		return result;
 

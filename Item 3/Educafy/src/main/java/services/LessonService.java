@@ -18,6 +18,7 @@ import org.springframework.validation.Validator;
 import repositories.LessonRepository;
 import domain.Lesson;
 import domain.Reservation;
+import domain.Student;
 import domain.Teacher;
 import forms.LessonForm;
 
@@ -30,6 +31,9 @@ public class LessonService {
 
 	@Autowired
 	private TeacherService		teacherService;
+
+	@Autowired
+	private StudentService		studentService;
 
 	@Autowired
 	private ReservationService	reservationService;
@@ -90,11 +94,32 @@ public class LessonService {
 
 	/* ========================= OTHER METHODS =========================== */
 
-	public Collection<Lesson> findAllByPrincipal() {
+	public Collection<Lesson> findAllByTeacher() {
 		Collection<Lesson> res = new ArrayList<>();
 		final Teacher principal = this.teacherService.findByPrincipal();
 		res = this.lessonRepository.findAllLessonByTeacherId(principal.getUserAccount().getId());
 		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<Lesson> findAllLessonsByTeacher(final int teacherId) {
+		Collection<Lesson> res = new ArrayList<>();
+		res = this.lessonRepository.findAllLessonByTeacherId(teacherId);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<Lesson> findAllByStudent() {
+		Collection<Lesson> res = new ArrayList<>();
+		final Student principal = this.studentService.findByPrincipal();
+		res = this.lessonRepository.findAllLessonByStudentId(principal.getUserAccount().getId());
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<Lesson> findAllFinalMode() {
+		Collection<Lesson> res = new ArrayList<>();
+		res = this.lessonRepository.findAllFinalMode();
 		return res;
 	}
 
