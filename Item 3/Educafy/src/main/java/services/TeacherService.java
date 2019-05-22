@@ -14,7 +14,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.CurriculaRepository;
 import repositories.TeacherRepository;
 import security.Authority;
 import security.LoginService;
@@ -35,12 +34,6 @@ public class TeacherService {
 
 	@Autowired
 	private UserAccountService		userAccountService;
-
-	//	@Autowired
-	//	private CurriculaService		curriculaService;
-
-	@Autowired
-	private CurriculaRepository		curriculaRepository;
 
 	@Autowired
 	private AdministratorService	administratorService;
@@ -78,9 +71,9 @@ public class TeacherService {
 	//			result = this.teacherRepository.save(teacher);
 	//			//			this.folderService.setFoldersByDefault(result);
 	//
-	//			final Curriculum curricula = this.curriculaService.createForNewTeacher();
+	//			final Curriculum curriculum = this.curriculaService.createForNewTeacher();
 	//			curricula.setTeacher(result);
-	//			final Curriculum res = this.curriculaRepository.save(curricula);
+	//			final Curriculum res = this.curriculumRepository.save(curriculum);
 	//			Assert.notNull(res);
 	//
 	//		} else {
@@ -172,56 +165,6 @@ public class TeacherService {
 
 		return teacher;
 	}
-
-	public Teacher findTeacherByCurricula(final int curriculaId) {
-		final Teacher result = this.teacherRepository.findTeacherByCurricula(curriculaId);
-		return result;
-	}
-
-	public Teacher findTeacherByPersonalRecord(final int personalRecorId) {
-		final Teacher result = this.teacherRepository.findTeacherByPersonalRecord(personalRecorId);
-		return result;
-	}
-
-	public Teacher findTeacherByMiscellaneous(final int miscellaneousRecordId) {
-		final Teacher result = this.teacherRepository.findTeacherByMiscellaneous(miscellaneousRecordId);
-		return result;
-	}
-
-	public Teacher findTeacherByEducationRecords(final int educationRecordId) {
-		final Teacher result = this.teacherRepository.findTeacherByEducationRecords(educationRecordId);
-		return result;
-	}
-
-	public Boolean hasPersonalRecord(final int teacherId, final int personalRecordId) {
-		final Boolean result = this.teacherRepository.hasPersonalRecord(teacherId, personalRecordId);
-		Assert.notNull(result, "hasPersonalData returns null");
-		return result;
-	}
-
-	public Boolean hasEducationRecord(final int teacherId, final int educationRecordId) {
-		final Boolean result = this.teacherRepository.hasEducationRecord(teacherId, educationRecordId);
-		Assert.notNull(result, "hasEducationData returns null");
-		return result;
-	}
-
-	public Boolean hasMiscellaneousRecord(final int teacherId, final int dataId) {
-		final Boolean result = this.teacherRepository.hasMiscellaneousRecord(teacherId, dataId);
-		Assert.notNull(result, "hasMiscellanousData returns null");
-		return result;
-	}
-
-	public Boolean hasCurricula(final int teacherId, final int miscellaneousRecordId) {
-		final Boolean result = this.teacherRepository.hasCurricula(teacherId, miscellaneousRecordId);
-		Assert.notNull(result, "hasCurricula returns null");
-		return result;
-	}
-
-	//	public Teacher findTeacherByCopyCurricula(final int curriculaId) {
-	//		final Teacher result = this.teacherRepository.findTeacherByCopyCurricula(curriculaId);
-	//		Assert.notNull(result, "teacher found by copy of curricula is null");
-	//		return result;
-	//	}
 
 	public void deletePersonalData() {
 		final Teacher principal = this.findByPrincipal();

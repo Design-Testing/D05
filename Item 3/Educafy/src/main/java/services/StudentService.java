@@ -1,8 +1,6 @@
 
 package services;
 
-import java.util.Collection;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.Validator;
 
-import repositories.CurriculaRepository;
 import repositories.StudentRepository;
 import security.Authority;
 import security.LoginService;
@@ -33,12 +30,6 @@ public class StudentService {
 
 	@Autowired
 	private UserAccountService	userAccountService;
-
-	//	@Autowired
-	//	private CurriculaService	curriculaService;
-
-	@Autowired
-	private CurriculaRepository	curriculaRepository;
 
 	@Autowired
 	private Validator			validator;
@@ -133,28 +124,6 @@ public class StudentService {
 		return student;
 	}
 
-	/**
-	 * The average, minimum, maximum and standard deviation of the number of applications per student
-	 * 
-	 * @author a8081
-	 */
-	public Double[] getStatisticsOfApplicationsPerStudent() {
-		final Double[] res = this.studentRepository.getStatisticsOfApplicationsPerStudent();
-		Assert.notNull(res);
-		return res;
-	}
-
-	/**
-	 * Students who have made more applications
-	 * 
-	 * @author a8081
-	 */
-	public Collection<Student> getStudentsMoreApplications() {
-		final Collection<Student> res = this.studentRepository.getStudentsMoreApplications();
-		Assert.notNull(res);
-		return res;
-	}
-
 	public void flush() {
 		this.studentRepository.flush();
 	}
@@ -207,65 +176,5 @@ public class StudentService {
 	//
 	//		return student;
 	//	}
-	public Student findStudentByCurricula(final int id) {
-		final Student result = this.studentRepository.findStudentByCurricula(id);
-		return result;
-	}
-
-	public Student findStudentByPersonalData(final int id) {
-		final Student result = this.studentRepository.findStudentByPersonalData(id);
-		return result;
-	}
-
-	public Student findStudentByMiscellaneous(final int id) {
-		final Student result = this.studentRepository.findStudentByMiscellaneous(id);
-		return result;
-	}
-
-	public Student findStudentByEducationDatas(final int id) {
-		final Student result = this.studentRepository.findStudentByEducationDatas(id);
-		return result;
-	}
-
-	public Student findStudentByPositionDatas(final int id) {
-		final Student result = this.studentRepository.findStudentByPositionDatas(id);
-		return result;
-	}
-
-	public Boolean hasPersonalData(final int studentId, final int dataId) {
-		final Boolean result = this.studentRepository.hasPersonalData(studentId, dataId);
-		Assert.notNull(result, "hasPersonalData returns null");
-		return result;
-	}
-
-	public Boolean hasEducationData(final int studentId, final int dataId) {
-		final Boolean result = this.studentRepository.hasEducationData(studentId, dataId);
-		Assert.notNull(result, "hasEducationData returns null");
-		return result;
-	}
-
-	public Boolean hasPositionData(final int studentId, final int dataId) {
-		final Boolean result = this.studentRepository.hasPositionData(studentId, dataId);
-		Assert.notNull(result, "hasPositionData returns null");
-		return result;
-	}
-
-	public Boolean hasMiscellaneousData(final int studentId, final int dataId) {
-		final Boolean result = this.studentRepository.hasMiscellaneousData(studentId, dataId);
-		Assert.notNull(result, "hasMiscellanousData returns null");
-		return result;
-	}
-
-	public Boolean hasCurricula(final int studentId, final int dataId) {
-		final Boolean result = this.studentRepository.hasCurricula(studentId, dataId);
-		Assert.notNull(result, "hasCurricula returns null");
-		return result;
-	}
-
-	public Student findStudentByCopyCurricula(final int id) {
-		final Student result = this.studentRepository.findStudentByCopyCurricula(id);
-		Assert.notNull(result, "student found by copy of curricula is null");
-		return result;
-	}
 
 }

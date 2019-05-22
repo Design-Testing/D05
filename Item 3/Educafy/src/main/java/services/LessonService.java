@@ -3,7 +3,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.ValidationException;
@@ -18,7 +17,6 @@ import org.springframework.validation.Validator;
 import repositories.LessonRepository;
 import domain.Lesson;
 import domain.Reservation;
-import domain.Student;
 import domain.Teacher;
 import forms.LessonForm;
 
@@ -109,14 +107,6 @@ public class LessonService {
 		return res;
 	}
 
-	public Collection<Lesson> findAllByStudent() {
-		Collection<Lesson> res = new ArrayList<>();
-		final Student principal = this.studentService.findByPrincipal();
-		res = this.lessonRepository.findAllLessonByStudentId(principal.getUserAccount().getId());
-		Assert.notNull(res);
-		return res;
-	}
-
 	public Collection<Lesson> findAllFinalMode() {
 		Collection<Lesson> res = new ArrayList<>();
 		res = this.lessonRepository.findAllFinalMode();
@@ -133,12 +123,6 @@ public class LessonService {
 		lesson.setIsDraft(false);
 		result = this.lessonRepository.save(lesson);
 		return result;
-	}
-
-	public Collection<Lesson> findPositions(final String keyword, final Double minSalary, final Double maxSalary, final Date minDeadline, final Date maxDeadline) {
-		final Collection<Lesson> res = this.lessonRepository.findLessons(keyword, minSalary, maxSalary, minDeadline, maxDeadline);
-		Assert.notNull(res);
-		return res;
 	}
 
 	//TODO: Revisar ticker
