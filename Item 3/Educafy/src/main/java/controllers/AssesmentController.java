@@ -15,7 +15,7 @@ import services.AssesmentService;
 import domain.Assesment;
 
 @Controller
-@RequestMapping("/assesment/teacher")
+@RequestMapping("/assesment")
 public class AssesmentController extends AbstractController {
 
 	@Autowired

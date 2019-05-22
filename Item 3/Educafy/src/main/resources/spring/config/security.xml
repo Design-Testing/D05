@@ -54,17 +54,9 @@
 		<!-- CONFIGURATION PARAMETERS -->
 		<security:intercept-url pattern="/configurationParameters/administrator/**" access="hasRole('ADMIN')" />
 		
-		<!-- PROBLEM -->
-		<security:intercept-url pattern="/problem/company/**" access="hasRole('COMPANY')" /> 
-		
 		<!-- SUBJECT -->
 		<security:intercept-url pattern="/subject/**" access="hasRole('ADMIN')" /> 
-		
-		<!-- APPLICATION -->
-		<security:intercept-url pattern="/application/company/**" access="hasRole('COMPANY')" /> 
-		<security:intercept-url pattern="/application/rooky/**" access="permitAll" /> 
-		
-		
+	
 		<!-- LESSON -->
  		<security:intercept-url pattern="/lesson/list.do" access="permitAll" />
  		<security:intercept-url pattern="/lesson/myLessons.do" access="permitAll" />
@@ -86,97 +78,34 @@
 		<security:intercept-url pattern="/assesment/student/**" access="hasRole('STUDENT')" />
 		<security:intercept-url pattern="/assesment/teacher/**" access="hasRole('TEACHER')" />
 		
-		<!-- AUDITOR -->
-		<security:intercept-url pattern="/auditor/list.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/auditor/display.do" access="hasAnyRole('ADMIN', 'AUDITOR')" />
-		<security:intercept-url pattern="/auditor/create.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/auditor/edit.do" access="hasAnyRole('ADMIN', 'AUDITOR')" />
-		<security:intercept-url pattern="/auditor/display2.do" access="hasAnyRole('ADMIN', 'AUDITOR')" />
-		<security:intercept-url pattern="/auditor/deletePersonalData.do" access="hasRole('AUDITOR')" />
-		
-		<!-- AUDIT -->
-		<security:intercept-url pattern="/audit/auditor/create.do" access="hasRole('AUDITOR')" />
-		<security:intercept-url pattern="/audit/auditor/edit.do" access="hasAnyRole('AUDITOR')" />
-		<security:intercept-url pattern="/audit/auditor/toFinal.do" access="hasRole('AUDITOR')" />
-		<security:intercept-url pattern="/audit/auditor/display.do" access="permitAll" />
-		<security:intercept-url pattern="/audit/auditor/listDraft.do" access="hasRole('AUDITOR')" />
-		<security:intercept-url pattern="/audit/auditor/listFinal.do" access="hasRole('AUDITOR')" />
-		<security:intercept-url pattern="/audit/auditor/listAll.do" access="permitAll" />
-		<security:intercept-url pattern="/audit/auditor/delete.do" access="hasRole('AUDITOR')" />
-		<security:intercept-url pattern="/audit/auditor/listFreePositions.do" access="hasRole('AUDITOR')" />
-		
-		<!-- ROOKY -->
-		<security:intercept-url pattern="/rooky/create.do" access="permitAll" />
-		<security:intercept-url pattern="/rooky/edit.do" access="permitAll" />
-		<security:intercept-url pattern="/rooky/displayTabla.do" access="permitAll" />
-		<security:intercept-url pattern="/rooky/deletePersonalData.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/rooky/display.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/finder/rooky/edit.do" access="hasRole('ROOKY')"/>
-		
 		<!-- FINDER -->
 		<security:intercept-url pattern="/finder/search.do" access="permitAll"/>
 		<security:intercept-url pattern="/finder/searching.do" access="permitAll"/>
 		
 		<!-- MESSAGE -->
-		<security:intercept-url pattern="/message/create.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/edit.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/send.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/display.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/list.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/delete.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/move.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/saveMove.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/copy.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/message/saveCopy.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
+		<security:intercept-url pattern="/message/create.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/edit.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/send.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/display.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/list.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/delete.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/move.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/saveMove.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/copy.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/message/saveCopy.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
 		<security:intercept-url pattern="/message/broadcast.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/message/saveBroadcast.do" access="hasRole('ADMIN')" />
 		
-		<!-- ITEM -->
-
-		<security:intercept-url pattern="/item/provider/list.do" access="hasRole('PROVIDER')" />
-		<security:intercept-url pattern="/item/provider/listAll.do" access="permitAll" />
-		<security:intercept-url pattern="/item/provider/listByProvider.do" access="permitAll" />
-		<security:intercept-url pattern="/item/provider/create.do" access="hasRole('PROVIDER')" />
-		<security:intercept-url pattern="/item/provider/edit.do" access="hasRole('PROVIDER')" />
-		<security:intercept-url pattern="/item/provider/delete.do" access="hasRole('PROVIDER')" />
-		<security:intercept-url pattern="/item/provider/display.do" access="permitAll" />
-		
 		<!-- FOLDER -->
-		<security:intercept-url pattern="/folder/list.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/folder/listFolder.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" /> 
-		<security:intercept-url pattern="/folder/edit.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" /> 
-		<security:intercept-url pattern="/folder/create.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/folder/view.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/folder/display.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/folder/createInFolder.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/folder/saveInFather.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-		<security:intercept-url pattern="/folder/delete.do" access="hasAnyRole('ADMIN', 'ROOKY', 'COMPANY', 'SUPER')" />
-
-		<!-- History & Records -->
-		
-		<security:intercept-url pattern="/curricula/list.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/curricula/display.do" access="hasAnyRole('ROOKY' , 'COMPANY')" />
-		<security:intercept-url pattern="/curricula/displayAll.do" access="hasAnyRole('ROOKY' , 'COMPANY')" />
-		<security:intercept-url pattern="/curricula/create.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/curricula/edit.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/curricula/delete.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/curricula/listForAnonymous.do" access="permitAll" />
-		<security:intercept-url pattern="/personalData/create.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/personalData/edit.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/personalData/delete.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/personalData/display.do" access="hasAnyRole('ROOKY' , 'COMPANY')" />
-		<security:intercept-url pattern="/educationData/delete.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/educationData/create.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/educationData/edit.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/educationData/display.do" access="hasAnyRole('ROOKY' , 'COMPANY')" />
-		<security:intercept-url pattern="/miscellaneousData/create.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/miscellaneousData/edit.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/miscellaneousData/delete.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/miscellaneousData/display.do" access="hasAnyRole('ROOKY' , 'COMPANY')" />
-		<security:intercept-url pattern="/positionData/create.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/positionData/edit.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/positionData/delete.do" access="hasRole('ROOKY')" />
-		<security:intercept-url pattern="/positionData/display.do" access="hasAnyRole('ROOKY' , 'COMPANY')" />
+		<security:intercept-url pattern="/folder/list.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/folder/listFolder.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" /> 
+		<security:intercept-url pattern="/folder/edit.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" /> 
+		<security:intercept-url pattern="/folder/create.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/folder/view.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/folder/display.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/folder/createInFolder.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/folder/saveInFather.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
+		<security:intercept-url pattern="/folder/delete.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
 
 		<!-- IS AUTHENTICATED -->
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
