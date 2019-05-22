@@ -43,9 +43,20 @@
 	<bean class="converters.ActorToStringConverter"/>
 	<bean class="converters.StringToActorConverter"/>
 	
+	<!-- CERTIFIER -->
+	<bean class="converters.CertifierToStringConverter"/>
+	<bean class="converters.StringToCertifierConverter"/>
+	
+	<!-- FINDER -->
+	<bean class="converters.FinderToStringConverter"/>
+	<bean class="converters.StringToFinderConverter"/>
+	
+	
 	<!-- CONFIGURATION PARAMETERS -->
 	<bean class="converters.ConfigurationParametersToStringConverter"/>
 	<bean class="converters.StringToConfigurationParametersConverter"/>
+	
+	
 		
 	</util:list>
 	
