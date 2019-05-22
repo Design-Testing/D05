@@ -1242,6 +1242,7 @@
 	<bean id="exam1" class="domain.Exam">
 		<property name="title" value="Title Exam 1" />
 		<property name="score" value="10.0" />
+		<property name="status" value="EVALUATED"/>
 		<property name="questions">
 			<list>
 				<ref bean="question1" />
@@ -1252,7 +1253,7 @@
 
 	<bean id="exam2" class="domain.Exam">
 		<property name="title" value="Title Exam 2" />
-		<property name="score" value="10.0" />
+		<property name="status" value="SUBMITTED"/>
 		<property name="questions">
 			<list>
 				<ref bean="question3" />
@@ -1263,7 +1264,7 @@
 
 	<bean id="exam3" class="domain.Exam">
 		<property name="title" value="Title Exam 3" />
-		<property name="score" value="10.0" />
+		<property name="status" value="INPROGRESS"/>
 		<property name="questions">
 			<list>
 				<ref bean="question5" />
@@ -1274,7 +1275,7 @@
 
 	<bean id="exam4" class="domain.Exam">
 		<property name="title" value="Title Exam 4" />
-		<property name="score" value="10.0" />
+		<property name="status" value="PENDING" />
 		<property name="questions">
 			<list>
 				<ref bean="question7" />
@@ -1308,22 +1309,18 @@
 
 	<bean id="question5" class="domain.Question">
 		<property name="question" value="Question 5" />
-		<property name="answer" value="Answer 5" />
 	</bean>
 
 	<bean id="question6" class="domain.Question">
 		<property name="question" value="Question 6" />
-		<property name="answer" value="Answer 6" />
 	</bean>
 
 	<bean id="question7" class="domain.Question">
 		<property name="question" value="Question 7" />
-		<property name="answer" value="Answer 7" />
 	</bean>
 
 	<bean id="question8" class="domain.Question">
 		<property name="question" value="Question 8" />
-		<property name="answer" value="Answer 8" />
 	</bean>
 
 
@@ -1378,7 +1375,7 @@
 		<property name="moment" value="2019/05/10 20:30" />
 		<property name="explanation" value="Explanation of Reservation 1" />
 		<property name="cost" value="20.5" />
-		<property name="hourWeek" value="5" />
+		<property name="hoursWeek" value="5" />
 		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson1" />
 		<property name="creditCard" ref="creditCard1" />
@@ -1394,7 +1391,7 @@
 		<property name="moment" value="2019/05/11 20:30" />
 		<property name="explanation" value="Explanation of Reservation 2" />
 		<property name="cost" value="15.5" />
-		<property name="hourWeek" value="3" />
+		<property name="hoursWeek" value="3" />
 		<property name="student" ref="student2" />
 		<property name="lesson" ref="lesson2" />
 		<property name="creditCard" ref="creditCard2" />
@@ -1458,27 +1455,35 @@
 		======= Subject ========= =================================================================== -->
 
 	<bean id="subject1" class="domain.Subject">
-		<property name="name" value="Subject1" />
-		<property name="description" value="Description1" />
-		<property name="level" value="Level1" />
+		<property name="nameEn" value="Subject1" />
+		<property name="nameEs" value="Asignatura1" />
+		<property name="descriptionEn" value="Description1" />
+		<property name="descriptionEs" value="Descripcion1" />
+		<property name="level" value="1ESO" />
 	</bean>
 
 	<bean id="subject2" class="domain.Subject">
-		<property name="name" value="Subject2" />
-		<property name="description" value="Description2" />
-		<property name="level" value="Level2" />
+		<property name="nameEn" value="Subject2" />
+		<property name="nameEs" value="Asignatura2" />
+		<property name="descriptionEn" value="Description2" />
+		<property name="descriptionEs" value="Descripcion2" />
+		<property name="level" value="2ESO" />
 	</bean>
 
 	<bean id="subject3" class="domain.Subject">
-		<property name="name" value="Subject3" />
-		<property name="description" value="Description3" />
-		<property name="level" value="Level3" />
+		<property name="nameEn" value="Subject3" />
+		<property name="nameEs" value="Asignatura3" />
+		<property name="descriptionEn" value="Description3" />
+		<property name="descriptionEs" value="Descripcion3" />
+		<property name="level" value="1BACH" />
 	</bean>
 
 	<bean id="subject4" class="domain.Subject">
-		<property name="name" value="Subject4" />
-		<property name="description" value="Description4" />
-		<property name="level" value="Level4" />
+		<property name="nameEn" value="Subject4" />
+		<property name="nameEs" value="Asignatura4" />
+		<property name="descriptionEn" value="Description4" />
+		<property name="descriptionEs" value="Descripcion4" />
+		<property name="level" value="2BACH" />
 	</bean>
 
 	<!-- =================================================================== 
