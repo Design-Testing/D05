@@ -40,6 +40,7 @@
 			<li><a class="fNiv" href="company/list.do"><spring:message code="master.page.company.list" /></a></li>
 			<li><a class="fNiv" href="provider/list.do"><spring:message code="master.page.provider.list" /></a></li>
 			<li><a href="position/list.do"><spring:message code="master.page.position.list" /></a></li>
+			<li><a href="subject/list.do"><spring:message code="master.page.subject.list" /></a></li>
 			<li><a href="dashboard/administrator/statistics.do"><spring:message	code="master.page.dashboard" /></a></li>
 			<li><a href="administrator/create.do"><spring:message	code="master.page.create.administrator" /></a></li>
 			<li><a href="auditor/create.do"><spring:message	code="master.page.create.auditor" /></a></li>

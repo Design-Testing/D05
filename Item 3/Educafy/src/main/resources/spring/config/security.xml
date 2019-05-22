@@ -57,6 +57,8 @@
 		<!-- PROBLEM -->
 		<security:intercept-url pattern="/problem/company/**" access="hasRole('COMPANY')" /> 
 		
+		<!-- SUBJECT -->
+		<security:intercept-url pattern="/subject/**" access="hasRole('ADMIN')" /> 
 		
 		<!-- APPLICATION -->
 		<security:intercept-url pattern="/application/company/**" access="hasRole('COMPANY')" /> 
