@@ -71,7 +71,7 @@ public class RegisterService {
 
 		return result;
 	}
-	//
+
 	//	public Student saveStudent(final Student student, final BindingResult binding) {
 	//		Student result;
 	//		final UserAccount ua = student.getUserAccount();
@@ -131,7 +131,7 @@ public class RegisterService {
 	//
 	//		return result;
 	//	}
-	//
+
 	//	public Certifier saveCertifier(final Certifier certifier, final BindingResult binding) {
 	//		Certifier result;
 	//		final UserAccount ua = certifier.getUserAccount();
@@ -161,7 +161,7 @@ public class RegisterService {
 	//
 	//		return result;
 	//	}
-	//
+
 	public ActorForm inyect(final Actor actor) {
 		final ActorForm result = new ActorForm();
 

@@ -63,33 +63,26 @@
 		<security:intercept-url pattern="/application/rooky/**" access="permitAll" /> 
 		
 		
-		<!-- POSITION -->
- 		<security:intercept-url pattern="/position/list.do" access="permitAll" />
- 		<security:intercept-url pattern="/position/companyList.do" access="permitAll" />
- 		<security:intercept-url pattern="/position/rooky/list.do" access="hasRole('ROOKY')"/>
-		<security:intercept-url pattern="/position/display.do" access="permitAll" />
- 		<security:intercept-url pattern="/position/company/**" access="hasRole('COMPANY')" /> 
+		<!-- LESSON -->
+ 		<security:intercept-url pattern="/lesson/list.do" access="permitAll" />
+ 		<security:intercept-url pattern="/lesson/myLessons.do" access="permitAll" />
+		<security:intercept-url pattern="/lesson/display.do" access="permitAll" />
+ 		<security:intercept-url pattern="/lesson/teacher/**" access="hasRole('TEACHER')" /> 
+ 		<security:intercept-url pattern="/lesson/student/**" access="hasRole('STUDENT')" /> 
  		
-		<!-- COMPANY -->
-		<security:intercept-url pattern="/company/list.do" access="permitAll" />
-		<security:intercept-url pattern="/company/display.do" access="permitAll" />
-		<security:intercept-url pattern="/company/create.do" access="permitAll" />
-		<security:intercept-url pattern="/company/edit.do" access="permitAll" />
-		<security:intercept-url pattern="/company/display2.do" access="hasRole('COMPANY')" />
-		<security:intercept-url pattern="/company/deletePersonalData.do" access="hasRole('COMPANY')" />
-		<security:intercept-url pattern="/company/computeScore.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/company/computeScores.do" access="hasRole('ADMIN')" />
+		<!-- TEACHER -->
+		<security:intercept-url pattern="/teacher/list.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/display.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/create.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/edit.do" access="permitAll" />
+		<security:intercept-url pattern="/teacher/display2.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/teacher/deletePersonalData.do" access="hasRole('TEACHER')" />
 		
-		<!-- PROVIDER -->
-		<security:intercept-url pattern="/provider/list.do" access="permitAll" />
-		<security:intercept-url pattern="/provider/display.do" access="permitAll" />
-		<security:intercept-url pattern="/provider/create.do" access="permitAll" />
-		<security:intercept-url pattern="/provider/edit.do" access="permitAll" />
-		<security:intercept-url pattern="/provider/display2.do" access="hasRole('PROVIDER')" />
-		<security:intercept-url pattern="/provider/deletePersonalData.do" access="hasRole('PROVIDER')" />
-		<security:intercept-url pattern="/sponsorship/provider/**" access="hasRole('PROVIDER')" /> 
-		<security:intercept-url pattern="/position/provider/**" access="hasRole('PROVIDER')" /> 
-		
+		<!-- ASSESMENT -->
+		<security:intercept-url pattern="/assesment/list.do" access="permitAll" />
+		<security:intercept-url pattern="/assesment/display.do" access="permitAll" />
+		<security:intercept-url pattern="/assesment/student/**" access="hasRole('STUDENT')" />
+		<security:intercept-url pattern="/assesment/teacher/**" access="hasRole('TEACHER')" />
 		
 		<!-- AUDITOR -->
 		<security:intercept-url pattern="/auditor/list.do" access="hasRole('ADMIN')" />

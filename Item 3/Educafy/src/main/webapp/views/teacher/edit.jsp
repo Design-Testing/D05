@@ -51,45 +51,32 @@
 	</jstl:if>
 	<br>
 
-<form:form modelAttribute="companyForm" action="company/edit.do" method="POST">
+<form:form modelAttribute="actorForm" action="teacher/edit.do" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<acme:textbox code="company.edit.userAccountuser" path="userAccountuser" />
-	<acme:password code="company.edit.userAccountpassword" path="userAccountpassword" />
+	<acme:textbox code="teacher.edit.userAccountuser" path="userAccountuser" />
+	<acme:password code="teacher.edit.userAccountpassword" path="userAccountpassword" />
 
-	<acme:textbox code="company.edit.name" path="name" />
-	<acme:textarea code="company.edit.surname" path="surname" />
-	<acme:textbox code="company.edit.photo" path="photo" />
-	<acme:textbox code="company.edit.email" path="email"
+	<acme:textbox code="teacher.edit.name" path="name" />
+	<acme:textarea code="teacher.edit.surname" path="surname" />
+	<acme:textbox code="teacher.edit.photo" path="photo" />
+	<acme:textbox code="teacher.edit.email" path="email"
 		placeholder="id@domain / alias id@domain / id@ / alias id@" size="45" />
 	<div>
 		<form:label path="phone">
-			<spring:message code="company.edit.phone" />
+			<spring:message code="teacher.edit.phone" />
 		</form:label>
 		<form:input path="phone" onblur="phoneFun()" />
 		<form:errors path="phone" cssClass="error" />
 	</div>
 	
-	<acme:textbox code="company.edit.address" path="address" />
-	<acme:numberbox code="company.edit.vat" path="vat" min="0" max="1"/>
+	<acme:textbox code="teacher.edit.address" path="address" />
+	<acme:numberbox code="teacher.edit.vat" path="vat" min="0" max="1"/>
 	
-	<h3><spring:message code="company.edit.creditCard"/></h3>
-	<acme:textbox code="company.edit.holder" path="holderName" />
-	<form:label path="make">
-		<spring:message code="company.edit.make" />
-	</form:label>
-	<form:select path="make">
-		<form:options items="${cardmakes}"/>
-	</form:select>
-	<form:errors path="make" cssClass="error" />
-	<acme:textbox code="company.edit.number" path="number" />
-	<acme:textbox code="company.edit.expirationMonth" path="expirationMonth" />
-	<acme:textbox code="company.edit.expirationYear" path="expirationYear" />
-	<acme:numberbox code="company.edit.cvv" path="cvv" min="100" max="999"/>
 	<br/>
 
 	<jstl:choose>
-	    <jstl:when test="${companyForm.termsAndCondicions == true}">
+	    <jstl:when test="${actorForm.termsAndCondicions == true}">
 	        <form:hidden path="termsAndCondicions"/>
 	    </jstl:when>    
 	    <jstl:otherwise>
@@ -100,6 +87,6 @@
 	<br/>
 
 	<input type="submit" name="save"
-		value="<spring:message code="company.edit.submit" />" />
+		value="<spring:message code="teacher.edit.submit" />" />
 	
 </form:form>

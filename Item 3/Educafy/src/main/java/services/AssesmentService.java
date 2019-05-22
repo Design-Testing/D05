@@ -4,15 +4,21 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AssesmentRepository;
 import domain.Assesment;
 import domain.Lesson;
 import domain.Student;
+import domain.Teacher;
+import forms.AssesmentForm;
 
 @Service
 @Transactional
@@ -25,7 +31,13 @@ public class AssesmentService {
 	private StudentService		studentService;
 
 	@Autowired
+	private TeacherService		teacherService;
+
+	@Autowired
 	private LessonService		lessonService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	public Assesment create() {
@@ -65,12 +77,53 @@ public class AssesmentService {
 
 	/* ========================= OTHER METHODS =========================== */
 
-	public Collection<Assesment> findAllByPrincipal() {
+	public Collection<Assesment> findAllByStudentPrincipal() {
 		Collection<Assesment> res = new ArrayList<>();
 		final Student principal = this.studentService.findByPrincipal();
 		res = this.assesmentRepository.findAllAssesmentByStudentId(principal.getUserAccount().getId());
 		Assert.notNull(res);
 		return res;
+	}
+
+	public Collection<Assesment> findAllByTeacherPrincipal() {
+		Collection<Assesment> res = new ArrayList<>();
+		final Teacher principal = this.teacherService.findByPrincipal();
+		res = this.assesmentRepository.findAllAssesmentByTeacher(principal.getUserAccount().getId());
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<Assesment> findAllAssesmentByTeacher(final int teacherId) {
+		Collection<Assesment> res = new ArrayList<>();
+		final Teacher teacher = this.teacherService.findOne(teacherId);
+		res = this.assesmentRepository.findAllAssesmentByTeacher(teacher.getUserAccount().getId());
+		return res;
+	}
+
+	public Collection<Assesment> findAllAssesmentByLesson(final int lessonId) {
+		Collection<Assesment> res = new ArrayList<>();
+		res = this.assesmentRepository.findAllAssesmentByLesson(lessonId);
+		return res;
+	}
+
+	public Assesment reconstruct(final AssesmentForm assesmentForm, final BindingResult binding) {
+		Assesment result;
+
+		if (assesmentForm.getId() == 0)
+			result = this.create();
+		else
+			result = this.findOne(assesmentForm.getId());
+
+		result.setVersion(assesmentForm.getVersion());
+		result.setScore(assesmentForm.getScore());
+		result.setComment(assesmentForm.getComment());
+
+		this.validator.validate(result, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
+
+		return result;
 	}
 
 }

@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.ValidationException;
 
@@ -27,22 +28,25 @@ import forms.ActorForm;
 public class TeacherService {
 
 	@Autowired
-	private TeacherRepository	teacherRepository;
+	private TeacherRepository		teacherRepository;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private UserAccountService	userAccountService;
-	//
+	private UserAccountService		userAccountService;
+
 	//	@Autowired
-	//	private CurriculaService	curriculaService;
+	//	private CurriculaService		curriculaService;
 
 	@Autowired
-	private CurriculaRepository	curriculaRepository;
+	private CurriculaRepository		curriculaRepository;
 
 	@Autowired
-	private Validator			validator;
+	private AdministratorService	administratorService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	public Teacher create() {
@@ -57,6 +61,12 @@ public class TeacherService {
 		final Teacher result = this.teacherRepository.findOne(teacherId);
 		Assert.notNull(result);
 		return result;
+	}
+
+	public Collection<Teacher> findAll() {
+		final Collection<Teacher> teachers = this.teacherRepository.findAll();
+		Assert.notNull(teachers);
+		return teachers;
 	}
 
 	//	public Teacher save(final Teacher teacher) {
@@ -213,4 +223,21 @@ public class TeacherService {
 	//		return result;
 	//	}
 
+	public void deletePersonalData() {
+		final Teacher principal = this.findByPrincipal();
+		final List<String> s = new ArrayList<>();
+		s.add("DELETED");
+		principal.setAddress(null);
+		principal.setEmail("DELETED@mail.de");
+		principal.setSurname(s);
+		//principal.setName("");
+		principal.setPhone(null);
+		principal.setPhoto(null);
+		principal.setSpammer(false);
+		principal.setVat(0.0);
+		final Authority ban = new Authority();
+		ban.setAuthority(Authority.BANNED);
+		principal.getUserAccount().getAuthorities().add(ban);
+		this.teacherRepository.save(principal);
+	}
 }
