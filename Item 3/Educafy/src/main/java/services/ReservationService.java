@@ -79,11 +79,11 @@ public class ReservationService {
 			Assert.isTrue(principal.getUserAccount().getAuthorities().contains("STUDENT"), "Las reservas solo pueden ser creadas por estudiantes");
 			Assert.notNull(reservation.getHoursWeek(), "Debe indicar las horas semanales que desea.");
 			Assert.isTrue(reservation.getStatus().equals("PENDING"));
-			reservation.setCost(reservation.getHoursWeek() * 10.0);
+			reservation.setCost(reservation.getHoursWeek() * reservation.getLesson().getPrice());
 		} else if (reservation.getStatus().equals("FINAL")) {
 			Assert.isTrue(!this.findOne(reservation.getId()).getStatus().equals("FINAL"), "No se puede modificar una reserva que se encuentre en modo FINAL");
 			Assert.notNull(reservation.getCreditCard());
-		} else if (reservation.getStatus().equals("PENDING"))
+		} else if (reservation.getStatus().equals("REVIEWING"))
 			Assert.notNull(reservation.getExplanation(), "Debe indicar una explicacion.");
 		else if (reservation.getStatus().equals("ACCEPTED"))
 			reservation.setExplanation("");
@@ -107,14 +107,14 @@ public class ReservationService {
 
 	/* ========================= OTHER METHODS =========================== */
 
-	public Reservation toPendingMode(final int reservationId) {
+	public Reservation toReviewingMode(final int reservationId) {
 		final Reservation reservation = this.findOne(reservationId);
 		Assert.notNull(reservation);
 		final Student student = this.studentService.findByPrincipal();
 		final Reservation result;
 		Assert.isTrue(reservation.getStudent().equals(student), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Pendiente debe de estar anteriormente Aceptada.");
-		reservation.setStatus("PENDING");
+		reservation.setStatus("REVIEWING");
 		result = this.reservationRepository.save(reservation);
 		return result;
 	}
@@ -125,7 +125,7 @@ public class ReservationService {
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Reservation result;
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(teacher.getUserAccount().getId()).contains(reservation.getLesson()), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
-		Assert.isTrue(reservation.getStatus().equals("PENDING"), "Para poner una Reserva en Aceptada debe de estar anteriormente Pendiente.");
+		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("REVIEWING"), "Esta Reserva no puede ser aceptada.");
 		reservation.setStatus("ACCEPTED");
 		result = this.reservationRepository.save(reservation);
 		return result;
@@ -137,7 +137,7 @@ public class ReservationService {
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Reservation result;
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(teacher.getUserAccount().getId()).contains(reservation.getLesson()), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
-		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Rechaza debe de estar anteriormente Aceptada o Pendiente.");
+		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("ACCEPTED") || reservation.getStatus().equals("REVIEWING"), "Para poner una Reserva en Rechaza debe de estar anteriormente Aceptada o Pendiente.");
 		reservation.setStatus("REJECTED");
 		result = this.reservationRepository.save(reservation);
 		return result;

@@ -37,7 +37,7 @@ public class Reservation extends DomainEntity {
 	private Collection<Exam>	exams;
 
 
-	@Pattern(regexp = "^(APPROVED|PENDING|REJECTED|FINAL)$")
+	@Pattern(regexp = "^(PENDING|APPROVED|REVIEWING|REJECTED|FINAL)$")
 	public String getStatus() {
 		return this.status;
 	}
