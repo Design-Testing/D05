@@ -33,6 +33,7 @@
 		<value>/views/dashboard/tiles.xml</value>
 		<value>/views/lesson/tiles.xml</value>
 		<value>/views/assesment/tiles.xml</value>
+		<value>/views/subject/tiles.xml</value>
 		
 		
 		

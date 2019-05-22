@@ -14,7 +14,7 @@ import domain.Subject;
 
 @Service
 @Transactional
-public class SubjecService {
+public class SubjectService {
 
 	@Autowired
 	private SubjectRepository	subjectRepository;

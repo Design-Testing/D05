@@ -1458,27 +1458,35 @@
 		======= Subject ========= =================================================================== -->
 
 	<bean id="subject1" class="domain.Subject">
-		<property name="name" value="Subject1" />
-		<property name="description" value="Description1" />
-		<property name="level" value="Level1" />
+		<property name="nameEn" value="Subject1" />
+		<property name="nameEs" value="Asignatura1" />
+		<property name="descriptionEn" value="Description1" />
+		<property name="descriptionEs" value="Descripcion1" />
+		<property name="level" value="1ESO" />
 	</bean>
 
 	<bean id="subject2" class="domain.Subject">
-		<property name="name" value="Subject2" />
-		<property name="description" value="Description2" />
-		<property name="level" value="Level2" />
+		<property name="nameEn" value="Subject2" />
+		<property name="nameEs" value="Asignatura2" />
+		<property name="descriptionEn" value="Description2" />
+		<property name="descriptionEs" value="Descripcion2" />
+		<property name="level" value="2ESO" />
 	</bean>
 
 	<bean id="subject3" class="domain.Subject">
-		<property name="name" value="Subject3" />
-		<property name="description" value="Description3" />
-		<property name="level" value="Level3" />
+		<property name="nameEn" value="Subject3" />
+		<property name="nameEs" value="Asignatura3" />
+		<property name="descriptionEn" value="Description3" />
+		<property name="descriptionEs" value="Descripcion3" />
+		<property name="level" value="1BACH" />
 	</bean>
 
 	<bean id="subject4" class="domain.Subject">
-		<property name="name" value="Subject4" />
-		<property name="description" value="Description4" />
-		<property name="level" value="Level4" />
+		<property name="nameEn" value="Subject4" />
+		<property name="nameEs" value="Asignatura4" />
+		<property name="descriptionEn" value="Description4" />
+		<property name="descriptionEs" value="Descripcion4" />
+		<property name="level" value="2BACH" />
 	</bean>
 
 	<!-- =================================================================== 
