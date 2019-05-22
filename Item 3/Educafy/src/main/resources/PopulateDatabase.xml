@@ -1242,6 +1242,7 @@
 	<bean id="exam1" class="domain.Exam">
 		<property name="title" value="Title Exam 1" />
 		<property name="score" value="10.0" />
+		<property name="status" value="EVALUATED"/>
 		<property name="questions">
 			<list>
 				<ref bean="question1" />
@@ -1252,7 +1253,7 @@
 
 	<bean id="exam2" class="domain.Exam">
 		<property name="title" value="Title Exam 2" />
-		<property name="score" value="10.0" />
+		<property name="status" value="SUBMITTED"/>
 		<property name="questions">
 			<list>
 				<ref bean="question3" />
@@ -1263,7 +1264,7 @@
 
 	<bean id="exam3" class="domain.Exam">
 		<property name="title" value="Title Exam 3" />
-		<property name="score" value="10.0" />
+		<property name="status" value="INPROGRESS"/>
 		<property name="questions">
 			<list>
 				<ref bean="question5" />
@@ -1274,7 +1275,7 @@
 
 	<bean id="exam4" class="domain.Exam">
 		<property name="title" value="Title Exam 4" />
-		<property name="score" value="10.0" />
+		<property name="status" value="PENDING" />
 		<property name="questions">
 			<list>
 				<ref bean="question7" />
@@ -1308,22 +1309,18 @@
 
 	<bean id="question5" class="domain.Question">
 		<property name="question" value="Question 5" />
-		<property name="answer" value="Answer 5" />
 	</bean>
 
 	<bean id="question6" class="domain.Question">
 		<property name="question" value="Question 6" />
-		<property name="answer" value="Answer 6" />
 	</bean>
 
 	<bean id="question7" class="domain.Question">
 		<property name="question" value="Question 7" />
-		<property name="answer" value="Answer 7" />
 	</bean>
 
 	<bean id="question8" class="domain.Question">
 		<property name="question" value="Question 8" />
-		<property name="answer" value="Answer 8" />
 	</bean>
 
 
@@ -1378,7 +1375,7 @@
 		<property name="moment" value="2019/05/10 20:30" />
 		<property name="explanation" value="Explanation of Reservation 1" />
 		<property name="cost" value="20.5" />
-		<property name="hourWeek" value="5" />
+		<property name="hoursWeek" value="5" />
 		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson1" />
 		<property name="creditCard" ref="creditCard1" />
@@ -1394,7 +1391,7 @@
 		<property name="moment" value="2019/05/11 20:30" />
 		<property name="explanation" value="Explanation of Reservation 2" />
 		<property name="cost" value="15.5" />
-		<property name="hourWeek" value="3" />
+		<property name="hoursWeek" value="3" />
 		<property name="student" ref="student2" />
 		<property name="lesson" ref="lesson2" />
 		<property name="creditCard" ref="creditCard2" />

@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
@@ -27,7 +28,7 @@ public class Reservation extends DomainEntity {
 	private Date				moment;
 	private String				explanation;
 	private Double				cost;
-	private Integer				hourWeek;
+	private Integer				hoursWeek;
 
 	//Relaciones
 	private Student				student;
@@ -36,7 +37,7 @@ public class Reservation extends DomainEntity {
 	private Collection<Exam>	exams;
 
 
-	@Pattern(regexp = "^(APPROVED|PENDING|REJECTED|FINAL)$")
+	@Pattern(regexp = "^(PENDING|APPROVED|REVIEWING|REJECTED|FINAL)$")
 	public String getStatus() {
 		return this.status;
 	}
@@ -74,13 +75,14 @@ public class Reservation extends DomainEntity {
 		this.cost = cost;
 	}
 
+	@NotNull
 	@Range(min = 1, max = 10)
-	public Integer getHourWeek() {
-		return this.hourWeek;
+	public Integer getHoursWeek() {
+		return this.hoursWeek;
 	}
 
-	public void setHourWeek(final Integer hourWeek) {
-		this.hourWeek = hourWeek;
+	public void setHoursWeek(final Integer hoursWeek) {
+		this.hoursWeek = hoursWeek;
 	}
 
 	@ManyToOne(optional = false)
