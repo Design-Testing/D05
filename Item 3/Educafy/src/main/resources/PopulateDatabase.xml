@@ -1511,5 +1511,57 @@
 		<property name="profileLink" value="http://www.linkteacher2.com" />
 		<property name="actor" ref="teacher2" />
 	</bean>
+	
+	<!-- =================================================================== 
+		======= COMMENTS ========= 
+		=================================================================== -->
+		
+		<bean id="comment1" class="domain.Comment">
+		<property name="text" value="Text of comment 1"/>
+		<property name="moment" value="2019/05/12 20:45"/>
+		<property name="assesment" ref="assesment1"/>
+		</bean>
+		
+		<bean id="comment2" class="domain.Comment">
+		<property name="text" value="Text of comment 2"/>
+		<property name="moment" value="2019/05/12 10:45"/>
+		<property name="assesment" ref="assesment1"/>
+		</bean>
+		
+		<bean id="comment3" class="domain.Comment">
+		<property name="text" value="Text of comment 3"/>
+		<property name="moment" value="2019/05/12 21:45"/>
+		<property name="assesment" ref="assesment2"/>
+		</bean>
+		
+		<bean id="comment4" class="domain.Comment">
+		<property name="text" value="Text of comment 4"/>
+		<property name="moment" value="2019/05/12 20:40"/>
+		<property name="assesment" ref="assesment2"/>
+		</bean>
+		
+		<bean id="comment5" class="domain.Comment">
+		<property name="text" value="Text of comment 5"/>
+		<property name="moment" value="2019/05/12 22:45"/>
+		<property name="assesment" ref="assesment3"/>
+		</bean>
+		
+		<bean id="comment6" class="domain.Comment">
+		<property name="text" value="Text of comment 6"/>
+		<property name="moment" value="2019/05/12 11:45"/>
+		<property name="assesment" ref="assesment3"/>
+		</bean>
+		
+		<bean id="comment7" class="domain.Comment">
+		<property name="text" value="Text of comment 7"/>
+		<property name="moment" value="2019/05/12 09:45"/>
+		<property name="assesment" ref="assesment4"/>
+		</bean>
+		
+		<bean id="comment8" class="domain.Comment">
+		<property name="text" value="Text of comment 8"/>
+		<property name="moment" value="2019/05/12 14:45"/>
+		<property name="assesment" ref="assesment4"/>
+		</bean>
 
 </beans>

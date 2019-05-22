@@ -42,12 +42,6 @@ public class LessonService {
 
 	public Lesson create() {
 		final Lesson lesson = new Lesson();
-		final Teacher principal = this.teacherService.findByPrincipal();
-		lesson.setTeacher(principal);
-		final String ticker = this.generateTicker(principal.getName());
-		lesson.setTicker(ticker);
-		lesson.setIsDraft(true);
-
 		return lesson;
 	}
 
@@ -70,9 +64,15 @@ public class LessonService {
 		final Teacher principal = this.teacherService.findByPrincipal();
 		final Lesson result;
 
-		if (lesson.getId() != 0) {
+		if (lesson.getId() == 0) {
+			lesson.setTeacher(principal);
+			final String ticker = this.generateTicker(principal.getName());
+			lesson.setTicker(ticker);
+			lesson.setIsDraft(true);
+		} else {
 			Assert.isTrue(lesson.getTeacher().equals(principal));
 			Assert.isTrue(lesson.getIsDraft(), "No puede modificar una posición que ya no esta en DRAFT MODE.");
+
 		}
 		result = this.lessonRepository.save(lesson);
 		return result;

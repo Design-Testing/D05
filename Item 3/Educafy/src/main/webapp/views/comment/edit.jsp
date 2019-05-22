@@ -8,19 +8,18 @@
 
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="assesment/student/edit.do" modelAttribute="assesmentForm" method="POST">
+<form:form action="comment/teacher/edit.do" modelAttribute="commentForm" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<input type="hidden" name="lessonId" value="${lessonId}" />
+	<input type="hidden" name="assesmentId" value="${assesmentId}" />
 	
-	<acme:textbox code="assesment.score" path="score"/>
-	<acme:textarea code="assesment.comment" path="comment"/>
+	<acme:textarea code="comment.text" path="text"/>
 
 <br>
 
 	<input type="submit" name="save"
-		value="<spring:message code="assesment.submit" />" />
+		value="<spring:message code="comment.submit" />" />
 	
-	<acme:button url="lesson/student/myLessons.do" name="back" code="assesment.back"/>
+	<acme:button url="assesment/teacher/myAssesments.do" name="back" code="comment.back"/>
 
 </form:form>

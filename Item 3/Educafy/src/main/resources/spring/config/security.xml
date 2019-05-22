@@ -75,6 +75,11 @@
 		<security:intercept-url pattern="/assesment/student/**" access="hasRole('STUDENT')" />
 		<security:intercept-url pattern="/assesment/teacher/**" access="hasRole('TEACHER')" />
 		
+		<!-- COMMENT -->
+		<security:intercept-url pattern="/comment/list.do" access="permitAll" />
+		<security:intercept-url pattern="/comment/display.do" access="permitAll" />
+		<security:intercept-url pattern="/comment/teacher/**" access="hasRole('TEACHER')" />
+		
 		<!-- FINDER -->
 		<security:intercept-url pattern="/finder/search.do" access="permitAll"/>
 		<security:intercept-url pattern="/finder/searching.do" access="permitAll"/>
