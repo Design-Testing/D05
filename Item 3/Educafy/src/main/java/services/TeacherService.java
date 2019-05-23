@@ -183,4 +183,10 @@ public class TeacherService {
 		principal.getUserAccount().getAuthorities().add(ban);
 		this.teacherRepository.save(principal);
 	}
+
+	public Teacher findTeacherByCurriculum(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByCurriculum(id);
+		Assert.notNull(res);
+		return null;
+	}
 }
