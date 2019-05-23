@@ -77,27 +77,6 @@ public class AssesmentStudentController extends AbstractController {
 		return result;
 	}
 
-	// DISPLAY --------------------------------------------------------
-
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int assesmentId) {
-		final ModelAndView result;
-		final Assesment assesment;
-		final Student student;
-
-		assesment = this.assesmentService.findOne(assesmentId);
-		student = this.studentService.findByPrincipal();
-
-		result = new ModelAndView("assesment/display");
-		result.addObject("assesment", assesment);
-		result.addObject("student", student);
-		result.addObject("studentId", student.getId());
-		result.addObject("rol", "student");
-		result.addObject("lang", this.lang);
-
-		return result;
-	}
-
 	// EDIT --------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

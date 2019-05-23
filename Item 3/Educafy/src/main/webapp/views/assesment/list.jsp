@@ -22,6 +22,16 @@
 	<display:column property="score" titleKey="assesment.score" />
 	
 	<display:column property="lesson" titleKey="assesment.lesson" />
+	
+	<display:column>
+		<acme:button url="assesment/display.do?assesmentId=${row.id}" name="display" code="assesment.display"/>
+	</display:column>
+	
+	<security:authorize access="hasRole('TEACHER')">
+	<display:column>
+		<acme:button url="comment/teacher/create.do?assesmentId=${row.id}" name="create" code="assesment.comment.create"/>
+	</display:column>
+	</security:authorize>
 
 </display:table>
 

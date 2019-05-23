@@ -25,5 +25,7 @@ img.resize {
 
 <acme:display code="assesment.student" value="${assesment.student.name}"/>
 
+<acme:button url="comment/list.do?assesmentId=${assesment.id}" name="list" code="comment.list"/>
+
 <br><br>
 

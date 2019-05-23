@@ -48,90 +48,47 @@
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
-		<!-- ========================================  COMPANY  ================================================ -->
+		<!-- ========================================  TEACHER  ====================================================== -->
 		<!-- ========================================================================================================= -->
 		
-		<security:authorize access="hasRole('COMPANY')">
-			<!-- APPLICATIONS -->
-			<li><a class="fNiv"><spring:message	code="master.page.applications" /></a>
+		<security:authorize access="hasRole('TEACHER')">
+			<!-- LESSONS -->
+			<li><a class="fNiv"><spring:message	code="master.page.lessons" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="application/company/list.do"><spring:message code="master.page.application.list" /></a></li>
-					<li><a href="application/company/listSubmitted.do"><spring:message code="master.page.application.listSubmitted" /></a></li>
-					<li><a href="application/company/listAccepted.do"><spring:message code="master.page.application.listAccepted" /></a></li>
-					<li><a href="application/company/listRejected.do"><spring:message code="master.page.application.listRejected" /></a></li>
+					<li><a href="lesson/teacher/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
+					<li><a href="lesson/teacher/create.do"><spring:message code="master.page.lesson.create" /></a></li>
 				</ul>
 			</li>
 			
-			<li><a href="finder/searching.do"><spring:message code="master.page.finder.rooky.edit" /></a></li>
-			<li><a href="company/list.do"><spring:message code="master.page.company.list" /></a></li>
-			<li><a class="fNiv" href="provider/list.do"><spring:message code="master.page.provider.list" /></a></li>
-			<li><a href="position/list.do"><spring:message code="master.page.position.public.list" /></a></li>
-			<li><a href="problem/company/list.do"><spring:message code="master.page.problem" /></a></li>
+			<li><a href="assesment/teacher/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
 			
-			<!-- POSITION -->
-			<li><a class="fNiv"><spring:message	code="master.page.position" /></a>
+			<!-- COMMENT -->
+			<li><a class="fNiv"><spring:message	code="master.page.comment" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="position/company/create.do"><spring:message code="master.page.position.create" /></a></li>
-					<li><a href="position/company/myPositions.do"><spring:message code="master.page.position.myPositions" /></a></li>										
+					<li><a href="comment/teacher/create.do"><spring:message code="master.page.comment.create" /></a></li>
+					<li><a href="comment/teacher/myComments.do"><spring:message code="master.page.comment.list" /></a></li>										
 				</ul>
 			</li>
 			
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
-		<!-- ========================================  PROVIDER  ================================================ -->
+		<!-- ========================================  STUDENT  ====================================================== -->
 		<!-- ========================================================================================================= -->
 		
-		<security:authorize access="hasRole('PROVIDER')">
-			<li><a href="finder/searching.do"><spring:message code="master.page.finder.rooky.edit" /></a></li>
-			<li><a href="company/list.do"><spring:message code="master.page.company.list" /></a></li>
-			<li><a class="fNiv" href="provider/list.do"><spring:message code="master.page.provider.list" /></a></li>
-			<li><a href="position/list.do"><spring:message code="master.page.position.public.list" /></a></li>
-			<li><a href="item/provider/list.do"><spring:message code="master.page.my.items" /></a></li>
-			<%-- POSITION --%>
-			<li><a href="position/provider/list.do"><spring:message code="master.page.position.myPositions" /></a></li>
-			<%-- SPONSORSHIP --%>
-			<li><a href="sponsorship/provider/list.do"><spring:message code="master.page.provider.sponsorship" /></a></li>
-		
-		</security:authorize>
-		
-		<!-- ========================================================================================================= -->
-		<!-- ========================================  ROOKY  ================================================ -->
-		<!-- ========================================================================================================= -->
-		
-		<security:authorize access="hasRole('ROOKY')">
-			<li><a class="fNiv"><spring:message	code="master.page.applications" /></a>
+		<security:authorize access="hasRole('STUDENT')">
+			<!-- ASSESMENTS -->
+			<li><a class="fNiv"><spring:message	code="master.page.assesments" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="application/rooky/listPending.do"><spring:message code="master.page.application.listPending" /></a></li>
-					<li><a href="application/rooky/listSubmitted.do"><spring:message code="master.page.application.listSubmitted" /></a></li>
-					<li><a href="application/rooky/listAccepted.do"><spring:message code="master.page.application.listAccepted" /></a></li>
-					<li><a href="application/rooky/listRejected.do"><spring:message code="master.page.application.listRejected" /></a></li>
+					<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
+					<li><a href="assesment/student/create.do"><spring:message code="master.page.assesment.create" /></a></li>
 				</ul>
 			</li>
-			<li><a href="finder/rooky/edit.do"><spring:message code="master.page.finder.rooky.edit" /></a></li>
-			<li><a class="fNiv" href="company/list.do"><spring:message code="master.page.company.list" /></a></li>
-			<li><a class="fNiv" href="provider/list.do"><spring:message code="master.page.provider.list" /></a></li>
-			<li><a href="position/rooky/list.do"><spring:message code="master.page.position.list" /></a></li>
-			<li><a href="curricula/displayAll.do"><spring:message code="master.page.curricula" /></a></li>
 			
-		</security:authorize>
-		
-		<!-- ========================================================================================================= -->
-		<!-- ========================================  AUDITOR  ================================================ -->
-		<!-- ========================================================================================================= -->
-		
-		<security:authorize access="hasRole('AUDITOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.audits" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="audit/auditor/listDraft.do"><spring:message code="master.page.audit.listDraft" /></a></li>
-					<li><a href="audit/auditor/listFinal.do"><spring:message code="master.page.audit.listFinal" /></a></li>
-				</ul>
-			</li>
-			<li><a href="audit/auditor/listFreePositions.do"><spring:message code="master.page.audit.free.positions" /></a></li>
+			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
 		</security:authorize>
 		
@@ -142,14 +99,8 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="company/list.do"><spring:message code="master.page.company.list" /></a></li>
-			<li><a class="fNiv" href="provider/list.do"><spring:message code="master.page.provider.list" /></a></li>
-			<li><a href="finder/searching.do"><spring:message code="master.page.finder.rooky.edit" /></a></li>
-			<li><a href="position/list.do"><spring:message code="master.page.position.list" /></a></li>
-			<li><a class="fNiv" href="company/create.do"><spring:message code="master.page.company.register" /></a></li>
-			<li><a href="item/provider/listAll.do"><spring:message code="master.page.item.list" /></a></li>
-			<li><a class="fNiv" href="rooky/create.do"><spring:message code="master.page.rooky.register" /></a></li>
-			<li><a class="fNiv" href="provider/create.do"><spring:message code="master.page.provider.register" /></a></li>			
+			<li><a class="fNiv" href="lesson/list.do"><spring:message code="master.page.lesson.list" /></a></li>
+			<li><a class="fNiv" href="teacher/create.do"><spring:message code="master.page.teacher.register" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -160,25 +111,21 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-						<security:authorize access="hasRole('COMPANY')">
-							<li><a href="company/edit.do"><spring:message code="master.page.company.edit" /></a></li>
-							<li><a href="company/display2.do"><spring:message code="master.page.company.display" /></a></li>
+						<security:authorize access="hasRole('TEACHER')">
+							<li><a href="teacher/edit.do"><spring:message code="master.page.teacher.edit" /></a></li>
+							<li><a href="teacher/display2.do"><spring:message code="master.page.teacher.display" /></a></li>
 						</security:authorize>
 						<security:authorize access="hasRole('ADMIN')">
 							<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.edit" /></a></li>
 							<li><a href="administrator/display.do"><spring:message code="master.page.administrator.display" /></a></li>
 						</security:authorize>
-						<security:authorize access="hasRole('ROOKY')">
-							<li><a href="rooky/edit.do"><spring:message code="master.page.rooky.edit" /></a></li>
-							<li><a href="rooky/display.do"><spring:message code="master.page.rooky.display" /></a></li>
+						<security:authorize access="hasRole('STUDENT')">
+							<li><a href="student/edit.do"><spring:message code="master.page.student.edit" /></a></li>
+							<li><a href="student/display.do"><spring:message code="master.page.student.display" /></a></li>
 						</security:authorize>
-						<security:authorize access="hasRole('AUDITOR')">
-							<li><a href="auditor/edit.do"><spring:message code="master.page.auditor.edit" /></a></li>
-							<li><a href="auditor/display2.do"><spring:message code="master.page.auditor.display" /></a></li>
-						</security:authorize>
-						<security:authorize access="hasRole('PROVIDER')">
-							<li><a href="provider/edit.do"><spring:message code="master.page.provider.edit" /></a></li>
-							<li><a href="provider/display2.do"><spring:message code="master.page.provider.display" /></a></li>
+						<security:authorize access="hasRole('CERTIFIER')">
+							<li><a href="certifier/edit.do"><spring:message code="master.page.certifier.edit" /></a></li>
+							<li><a href="certifier/display2.do"><spring:message code="master.page.certifier.display" /></a></li>
 						</security:authorize>
 					<li><a href="folder/list.do"><spring:message code="master.page.folder.list" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>

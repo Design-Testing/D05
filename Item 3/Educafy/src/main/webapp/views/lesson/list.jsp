@@ -23,8 +23,6 @@
 	
 	<display:column property="teacher.name" titleKey="lesson.teacher" />
 	
-	<display:column property="subject.name" titleKey="lesson.subject" />
-	
 	<security:authorize access="hasRole('TEACHER')">
 	<display:column>
 		<acme:button url="lesson/teacher/edit.do?lessonId=${row.id}" name="edit" code="lesson.edit"/>
