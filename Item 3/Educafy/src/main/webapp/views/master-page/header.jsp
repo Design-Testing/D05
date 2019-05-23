@@ -181,6 +181,7 @@
 							<li><a href="provider/display2.do"><spring:message code="master.page.provider.display" /></a></li>
 						</security:authorize>
 					<li><a href="folder/list.do"><spring:message code="master.page.folder.list" /></a></li>
+					<li><a href="socialProfile/list.do"><spring:message code="master.page.socialProfile" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

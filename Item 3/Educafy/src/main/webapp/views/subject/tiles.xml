@@ -21,19 +21,19 @@
 		<put-attribute name="body" value="/views/subject/display.jsp" />
 	</definition>
 	
-	<definition name="lesson/list" extends="master.page">	
-		<put-attribute name="title" value="Lesson: List" />
-		<put-attribute name="body" value="/views/lesson/list.jsp" />
+	<definition name="subject/list" extends="master.page">	
+		<put-attribute name="title" value="Subject: List" />
+		<put-attribute name="body" value="/views/subject/list.jsp" />
 	</definition>
 	
-	<definition name="lesson/edit" extends="master.page">	
-		<put-attribute name="title" value="Lesson: Edit" />
-		<put-attribute name="body" value="/views/lesson/edit.jsp" />
+	<definition name="subject/edit" extends="master.page">	
+		<put-attribute name="title" value="Subject: Edit" />
+		<put-attribute name="body" value="/views/subject/edit.jsp" />
 	</definition>
 	
-	<definition name="lesson/error" extends="master.page">	
-		<put-attribute name="title" value="Lesson: Error" />
-		<put-attribute name="body" value="/views/lesson/error.jsp" />
+	<definition name="subject/error" extends="master.page">	
+		<put-attribute name="title" value="Subject: Error" />
+		<put-attribute name="body" value="/views/subject/error.jsp" />
 	</definition>
 
 	

@@ -14,7 +14,6 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="rebranding" />
 	
 	<form:label path="sysName">
 		<spring:message code="configurationParameters.sysName" />:
@@ -38,24 +37,6 @@
 	</form:label>
 	<form:input path="welcomeMessageEn"/>
 	<form:errors cssClass="error" path="welcomeMessageEn" />
-	<br>
-	<br>
-	
-	<form:label path="positiveWords">
-		<spring:message code="configurationParameters.positiveWords" />:
-	</form:label>
-	<br>
-	<form:textarea path="positiveWords"/>
-	<form:errors cssClass="error" path="positiveWords" />
-	<br>
-	<br>
-	
-	<form:label path="negativeWords">
-		<spring:message code="configurationParameters.negativeWords" />:
-	</form:label>
-	<br>
-	<form:textarea path="negativeWords"/>
-	<form:errors cssClass="error" path="negativeWords" />
 	<br>
 	<br>
 	
@@ -92,6 +73,15 @@
 	<br>
 	<br>
 	
+	<form:label path="subjectLevels">
+		<spring:message code="configurationParameters.subjectLevels" />:
+	</form:label>
+	<br>
+	<form:textarea path="subjectLevels"/>
+	<form:errors cssClass="error" path="subjectLevels" />
+	<br>
+	<br>
+	
 	<form:label path="countryPhoneCode">
 		<spring:message code="configurationParameters.countryPhoneCode" />:
 	</form:label>
@@ -106,6 +96,15 @@
 	<br>
 	<form:textarea path="creditCardMake"/>
 	<form:errors cssClass="error" path="creditCardMake" />
+	<br>
+	<br>
+	
+	<form:label path="vat">
+		<spring:message code="configurationParameters.vat" />:
+	</form:label>
+	<br>
+	<form:textarea path="vat"/>
+	<form:errors cssClass="error" path="vat" />
 	<br>
 	<br>
 	
