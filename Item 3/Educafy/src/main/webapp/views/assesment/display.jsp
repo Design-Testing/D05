@@ -50,8 +50,6 @@ img.resize {
 				</display:column>
 			</jstl:otherwise>
 			</jstl:choose>
-		
-		
 		</display:table>
 	</jstl:when>
 	<jstl:otherwise>
@@ -59,7 +57,7 @@ img.resize {
 	</jstl:otherwise>
 </jstl:choose>
 
-<br>
+<br><br>
 
 <jstl:choose>
 	<jstl:when test="${rol eq 'teacher'}">

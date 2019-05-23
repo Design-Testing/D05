@@ -41,7 +41,7 @@ img.resize {
 			code="lesson.back" />
 	</jstl:when>
 	<jstl:otherwise>
-		<acme:button url="assesment/display.do?lessonId=${comment.assesment.id}" name="back" code="lesson.back" />
+		<acme:button url="assesment/display.do?assesmentId=${comment.assesment.id}" name="back" code="lesson.back" />
 	</jstl:otherwise>
 </jstl:choose>
 

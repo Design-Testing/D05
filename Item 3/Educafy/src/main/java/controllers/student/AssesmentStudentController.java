@@ -24,7 +24,6 @@ import services.StudentService;
 import controllers.AbstractController;
 import domain.Assesment;
 import domain.Comment;
-import domain.Lesson;
 import domain.Student;
 import forms.AssesmentForm;
 
@@ -63,20 +62,14 @@ public class AssesmentStudentController extends AbstractController {
 	// LIST --------------------------------------------------------
 
 	@RequestMapping(value = "/myAssesments", method = RequestMethod.GET)
-	public ModelAndView myAssesments(@RequestParam final int lessonId) {
+	public ModelAndView myAssesments() {
 		final ModelAndView result;
 		final Collection<Assesment> assesments;
-		Lesson lesson;
 
 		assesments = this.assesmentService.findAllByStudentPrincipal();
-		lesson = this.lessonService.findOne(lessonId);
 
-		if (lesson != null) {
-			result = new ModelAndView("assesment/list");
-			result.addObject("assesments", assesments);
-		} else
-			result = new ModelAndView("redirect:/misc/403.jsp");
-
+		result = new ModelAndView("assesment/list");
+		result.addObject("assesments", assesments);
 		result.addObject("lang", this.lang);
 		result.addObject("rol", "student");
 		result.addObject("requetURI", "assesment/student/myAssesments.do");

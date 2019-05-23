@@ -133,6 +133,7 @@ public class AssesmentService {
 		else
 			result = this.findOne(assesmentForm.getId());
 
+		result.setId(assesmentForm.getId());
 		result.setVersion(assesmentForm.getVersion());
 		result.setScore(assesmentForm.getScore());
 		result.setComment(assesmentForm.getComment());
@@ -144,5 +145,4 @@ public class AssesmentService {
 
 		return result;
 	}
-
 }

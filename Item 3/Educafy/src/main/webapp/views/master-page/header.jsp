@@ -73,6 +73,7 @@
 					
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
+			
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
