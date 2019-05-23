@@ -82,6 +82,9 @@
 		<security:intercept-url pattern="/finder/search.do" access="permitAll"/>
 		<security:intercept-url pattern="/finder/searching.do" access="permitAll"/>
 		
+		<!-- SOCIAL PROFILE -->
+		<security:intercept-url pattern="/socialProfile/**" access="permitAll"/>
+		
 		<!-- MESSAGE -->
 		<security:intercept-url pattern="/message/create.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
 		<security:intercept-url pattern="/message/edit.do" access="hasAnyRole('ADMIN', 'STUDENT', 'TEACHER', 'CERTIFIER')" />
