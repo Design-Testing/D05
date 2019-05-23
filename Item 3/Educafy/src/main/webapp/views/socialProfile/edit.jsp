@@ -8,20 +8,20 @@
 
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="subject/edit.do" modelAttribute="subject" method="POST">
+<jstl:if test="${not empty alert}">
+	<script>
+		alert('<spring:message code="${alert}"/>');
+	</script>
+</jstl:if>
+
+
+<form:form modelAttribute="socialProfile" action="socialProfile/edit.do" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	<form:hidden path="actor"/>
 	
-	<acme:textbox code="subject.nameEn" path="nameEn"/>
-	<acme:textbox code="subject.nameEs" path="nameEs"/>
-	<acme:textbox code="subject.descriptionEn" path="descriptionEn"/>
-	<acme:textbox code="subject.descriptionEs" path="descriptionEs"/>
-	<acme:textbox code="subject.level" path="level"/>
-<br>
-
-	<input type="submit" name="save"
-		value="<spring:message code="subject.save" />" />
-	
-	<acme:button url="subject/list.do" name="back" code="subject.back"/>
-
+	<acme:textbox code="socialProfile.nick" path="nick" />
+	<acme:textbox code="socialProfile.socialNetwork" path="socialNetwork" />
+	<acme:textbox code="socialProfile.link" path="profileLink" />
+	<acme:submit code="socialProfile.edit.submit" name="submit"/>
 </form:form>

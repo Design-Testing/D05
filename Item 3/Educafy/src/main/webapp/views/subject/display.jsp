@@ -18,7 +18,7 @@ img.resize {
 </style>
 
 <jstl:choose>
-	<jstl:when test="${lang eq 'EN'}">
+	<jstl:when test="${lang eq 'en'}">
 		<acme:display code="subject.nameEn" value="${subject.nameEn}"/>
 		
 		<acme:display code="subject.descriptionEn" value="${subject.descriptionEn}"/>
@@ -30,6 +30,12 @@ img.resize {
 	</jstl:otherwise>
 </jstl:choose>
 
-<acme:display code="subject.level" value="${lesson.level}"/>
+<acme:display code="subject.level" value="${subject.level}"/>
+
+<br>
+
+<jstl:if test="${empty lessons}">
+		<acme:button url="subject/delete.do?subjectId=${subject.id}" name="back" code="subject.delete"/>
+</jstl:if>
 
 <acme:button url="subject/list.do" name="back" code="subject.back"/>

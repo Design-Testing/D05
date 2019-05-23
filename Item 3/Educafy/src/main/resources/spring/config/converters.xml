@@ -60,6 +60,10 @@
 	<bean class="converters.ConfigurationParametersToStringConverter"/>
 	<bean class="converters.StringToConfigurationParametersConverter"/>
 	
+	<!-- SUBJECT -->
+	<bean class="converters.SubjectToStringConverter"/>
+	<bean class="converters.StringToSubjectConverter"/>
+	
 	
 		
 	</util:list>

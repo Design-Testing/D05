@@ -31,9 +31,6 @@ public class ConfigurationParametersService {
 	@Autowired
 	private ActorService						actorService;
 
-	@Autowired
-	private MessageService						messageService;
-
 
 	public ConfigurationParameters create() {
 		final Actor principal = this.administratorService.findByPrincipal();
