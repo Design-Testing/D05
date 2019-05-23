@@ -18,4 +18,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	@Query("select r from Reservation r where r.student.userAccount.id=?1")
 	public Collection<Reservation> findAllReservationByStudent(int studentId);
 
+	@Query("select r from Reservation r join r.lesson l where l.teacher.userAccount.id=?1")
+	public Collection<Reservation> findAllReservationByTeacher(int teacherId);
 }

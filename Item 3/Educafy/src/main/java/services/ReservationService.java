@@ -4,10 +4,14 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ReservationRepository;
 import domain.Actor;
@@ -34,6 +38,9 @@ public class ReservationService {
 
 	@Autowired
 	private LessonService			lessonService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	public Reservation create() {
@@ -69,7 +76,28 @@ public class ReservationService {
 		return res;
 	}
 
-	public Reservation save(final Reservation reservation) {
+	public Collection<Reservation> findAllReservationByTeacher(final int teacherId) {
+		final Collection<Reservation> res = this.reservationRepository.findAllReservationByTeacher(teacherId);
+		return res;
+	}
+
+	public Collection<Reservation> findAllByStudent() {
+		Collection<Reservation> res = new ArrayList<>();
+		final Student principal = this.studentService.findByPrincipal();
+		res = this.reservationRepository.findAllReservationByStudent(principal.getUserAccount().getId());
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<Reservation> findAllByTeacher() {
+		Collection<Reservation> res = new ArrayList<>();
+		final Teacher principal = this.teacherService.findByPrincipal();
+		res = this.reservationRepository.findAllReservationByTeacher(principal.getUserAccount().getId());
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Reservation save(final Reservation reservation, final BindingResult binding) {
 		Assert.notNull(reservation);
 		final Reservation result;
 		final Actor principal = this.actorService.findByPrincipal();
@@ -89,6 +117,10 @@ public class ReservationService {
 			reservation.setExplanation("");
 		else if (reservation.getStatus().equals("REJECTED"))
 			Assert.notNull(reservation.getExplanation(), "Debe indicar una explicacion.");
+
+		this.validator.validate(reservation, binding);
+		if (binding.hasErrors())
+			throw new ValidationException();
 		result = this.reservationRepository.save(reservation);
 		return result;
 
@@ -99,13 +131,16 @@ public class ReservationService {
 		Assert.isTrue(reservation.getId() != 0);
 		Assert.isTrue(reservation.getStatus().equals("FINAL"));
 		final Actor principal = this.actorService.findByPrincipal();
-		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(principal.getUserAccount().getId()).contains(reservation.getLesson()) || reservation.getStudent().equals(principal),
-			"No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
+		Assert.isTrue(this.belongsToTeacher(principal, reservation) || reservation.getStudent().equals(principal), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		final Reservation retrieved = this.findOne(reservation.getId());
 		this.reservationRepository.delete(retrieved);
 	}
 
 	/* ========================= OTHER METHODS =========================== */
+
+	public Boolean belongsToTeacher(final Actor principal, final Reservation reservation) {
+		return this.lessonService.findAllLessonsByTeacher(principal.getUserAccount().getId()).contains(reservation.getLesson());
+	}
 
 	public Reservation toReviewingMode(final int reservationId) {
 		final Reservation reservation = this.findOne(reservationId);
