@@ -1488,6 +1488,14 @@
 		<property name="descriptionEs" value="Descripcion4" />
 		<property name="level" value="2BACH" />
 	</bean>
+	
+	<bean id="subject5" class="domain.Subject">
+		<property name="nameEn" value="Subject5" />
+		<property name="nameEs" value="Asignatura5" />
+		<property name="descriptionEn" value="Description5" />
+		<property name="descriptionEs" value="Descripcion5" />
+		<property name="level" value="2BACH" />
+	</bean>
 
 	<!-- =================================================================== 
 		======= SOCIAL PROFILES ========= =================================================================== -->

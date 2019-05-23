@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ConfigurationParametersService;
+import services.LessonService;
 import services.SubjectService;
+import domain.Lesson;
 import domain.Subject;
 
 @Controller
@@ -27,7 +29,7 @@ public class SubjectController extends AbstractController {
 	private SubjectService					subjectService;
 
 	@Autowired
-	private LessonController				lessonController;
+	private LessonService					lessonService;
 
 	@Autowired
 	private ActorService					actorService;
@@ -99,6 +101,7 @@ public class SubjectController extends AbstractController {
 	public ModelAndView delete(@RequestParam final int subjectId) {
 		ModelAndView result;
 		final Subject subject = this.subjectService.findOne(subjectId);
+
 		try {
 			this.subjectService.delete(subject);
 			result = new ModelAndView("redirect:list.do");
@@ -115,6 +118,7 @@ public class SubjectController extends AbstractController {
 	public ModelAndView display(@RequestParam final int subjectId) {
 		final ModelAndView result;
 		final Subject subject;
+		final Collection<Lesson> lessons = this.lessonService.findAllBySubject(subjectId);
 
 		subject = this.subjectService.findOne(subjectId);
 
@@ -122,6 +126,7 @@ public class SubjectController extends AbstractController {
 			result = new ModelAndView("subject/display");
 			result.addObject("subject", subject);
 			result.addObject("lang", this.lang);
+			result.addObject("lessons", lessons);
 		} else
 			result = new ModelAndView("redirect:misc/403");
 
@@ -137,10 +142,10 @@ public class SubjectController extends AbstractController {
 
 		subjects = this.subjectService.findAll();
 
-		result = new ModelAndView("lesson/list");
+		result = new ModelAndView("subject/list");
 		result.addObject("subjects", subjects);
 		result.addObject("lang", this.lang);
-		result.addObject("requetURI", "subject/list.do");
+		result.addObject("requestURI", "subject/list.do");
 
 		return result;
 	}

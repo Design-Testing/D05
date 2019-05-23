@@ -107,6 +107,12 @@ public class LessonService {
 		return res;
 	}
 
+	public Collection<Lesson> findAllBySubject(final int subjectId) {
+		Collection<Lesson> res = new ArrayList<>();
+		res = this.lessonRepository.findAllBySubject(subjectId);
+		return res;
+	}
+
 	public Collection<Lesson> findAllFinalMode() {
 		Collection<Lesson> res = new ArrayList<>();
 		res = this.lessonRepository.findAllFinalMode();
