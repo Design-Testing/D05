@@ -63,15 +63,6 @@
 			
 			<li><a href="assesment/teacher/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
 			
-			<!-- COMMENT -->
-			<li><a class="fNiv"><spring:message	code="master.page.comment" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="comment/teacher/create.do"><spring:message code="master.page.comment.create" /></a></li>
-					<li><a href="comment/teacher/myComments.do"><spring:message code="master.page.comment.list" /></a></li>										
-				</ul>
-			</li>
-			
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
@@ -79,15 +70,7 @@
 		<!-- ========================================================================================================= -->
 		
 		<security:authorize access="hasRole('STUDENT')">
-			<!-- ASSESMENTS -->
-			<li><a class="fNiv"><spring:message	code="master.page.assesments" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
-					<li><a href="assesment/student/create.do"><spring:message code="master.page.assesment.create" /></a></li>
-				</ul>
-			</li>
-			
+					
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
 		</security:authorize>

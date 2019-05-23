@@ -49,6 +49,23 @@ public class CommentTeacherController extends AbstractController {
 		return result;
 	}
 
+	// DISPLAY --------------------------------------------------------
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int commentId) {
+		final ModelAndView result;
+		final Comment comment;
+
+		comment = this.commentService.findOne(commentId);
+
+		result = new ModelAndView("comment/display");
+		result.addObject("comment", comment);
+		result.addObject("rol", "teacher");
+		result.addObject("lang", this.lang);
+
+		return result;
+	}
+
 	// EDIT --------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

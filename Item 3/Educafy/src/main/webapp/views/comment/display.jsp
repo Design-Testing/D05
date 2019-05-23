@@ -17,7 +17,7 @@ img.resize {
 }
 </style>
 
-<acme:display code="comment.text" value="${comment.moment}"/>
+<acme:display code="comment.text" value="${comment.text}"/>
 
 <jstl:choose>
 	<jstl:when test="${lang eq 'en' }">
@@ -29,8 +29,19 @@ img.resize {
 			value="${comment.moment}" type="both" pattern="dd/MM/yyyy HH:mm" />
 	</jstl:otherwise>
 </jstl:choose>
+<br>
 
 <acme:display code="comment.assesment" value="${comment.assesment.lesson.title}"/>
 
-<br><br>
+<br>
+
+<jstl:choose>
+	<jstl:when test="${rol eq 'teacher'}">
+		<acme:button url="assesment/teacher/display.do?assesmentId=${comment.assesment.id}" name="back"
+			code="lesson.back" />
+	</jstl:when>
+	<jstl:otherwise>
+		<acme:button url="assesment/display.do?lessonId=${comment.assesment.id}" name="back" code="lesson.back" />
+	</jstl:otherwise>
+</jstl:choose>
 

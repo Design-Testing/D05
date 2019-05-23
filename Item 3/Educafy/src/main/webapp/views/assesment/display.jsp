@@ -25,7 +25,53 @@ img.resize {
 
 <acme:display code="assesment.student" value="${assesment.student.name}"/>
 
-<acme:button url="comment/list.do?assesmentId=${assesment.id}" name="list" code="comment.list"/>
+<h3><spring:message code="assesment.comments"/></h3>
+<security:authorize access="hasRole('TEACHER')">
+	<acme:button url="comment/teacher/create.do?assesmentId=${assesment.id}" name="create" code="assesment.comment.create"/>
+</security:authorize>
 
-<br><br>
+<jstl:choose>
+	<jstl:when test="${not empty comments}">
+		<display:table name="comments" id="row"
+				requestURI="${requestURI}" pagesize="5"
+				class="displaytag">
+			
+			<display:column property="text" titleKey="comment.text" />
+			
+			<jstl:choose>
+			<jstl:when test="${rol eq 'teacher'}">
+				<display:column>
+				<acme:button url="comment/teacher/display.do?commentId=${row.id}" name="display" code="assesment.display"/>
+				</display:column>
+			</jstl:when>
+			<jstl:otherwise>
+				<display:column>
+				<acme:button url="comment/display.do?commentId=${row.id}" name="display" code="assesment.display"/>
+				</display:column>
+			</jstl:otherwise>
+			</jstl:choose>
+		
+		
+		</display:table>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="no.comment"/>
+	</jstl:otherwise>
+</jstl:choose>
+
+<br>
+
+<jstl:choose>
+	<jstl:when test="${rol eq 'teacher'}">
+		<acme:button url="lesson/teacher/display.do?lessonId=${assesment.lesson.id}" name="back"
+			code="lesson.back" />
+	</jstl:when>
+	<jstl:when test="${rol eq 'student'}">
+		<acme:button url="lesson/student/display.do?lessonId=${assesment.lesson.id}" name="back"
+			code="lesson.back" />
+	</jstl:when>
+	<jstl:otherwise>
+		<acme:button url="lesson/display.do?lessonId=${assesment.lesson.id}" name="back" code="lesson.back" />
+	</jstl:otherwise>
+</jstl:choose>
 

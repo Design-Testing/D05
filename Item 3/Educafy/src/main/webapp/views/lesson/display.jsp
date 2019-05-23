@@ -1,57 +1,105 @@
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
 img.resize {
-  max-width:10%;
-  max-height:10%;
+	max-width: 10%;
+	max-height: 10%;
 }
 </style>
 
-<acme:display code="lesson.ticker" value="${lesson.ticker}"/>
+<acme:display code="lesson.ticker" value="${lesson.ticker}" />
 
-<acme:display code="lesson.title" value="${lesson.title}"/>
+<acme:display code="lesson.title" value="${lesson.title}" />
 
-<acme:display code="lesson.description" value="${lesson.description}"/>
+<acme:display code="lesson.description" value="${lesson.description}" />
 
-<acme:display code="lesson.price" value="${lesson.price}"/>
+<acme:display code="lesson.price" value="${lesson.price}" />
 
+<spring:message code="lesson.isDraft"/>:
 <jstl:choose>
 	<jstl:when test="${lesson.isDraft eq true}">
-		<spring:message code="lesson.isDraft"/>: <spring:message code="lesson.isDraft.true"/>
+		<spring:message code="lesson.isDraft.true" />
 	</jstl:when>
 	<jstl:otherwise>
-		<spring:message code="lesson.isDraft"/>: <spring:message code="lesson.isDraft.false"/>
+		<spring:message code="lesson.isDraft.false" />
+	</jstl:otherwise>
+</jstl:choose>
+<br>
+<acme:display code="lesson.teacher" value="${lesson.teacher.name}" />
+
+<jstl:choose>
+	<jstl:when test="${lang eq 'en' }">
+		<acme:display code="lesson.subject" value="${lesson.subject.nameEn}" />
+	</jstl:when>
+	<jstl:otherwise>
+		<acme:display code="lesson.subject" value="${lesson.subject.nameEs}" />
 	</jstl:otherwise>
 </jstl:choose>
 
-<acme:display code="lesson.teacher" value="${lesson.teacher.name}"/>
-<acme:button url="teacher/display.do?teacherId=${lesson.teacher.id}" name="displayTeacher" code="lesson.display"/>
-<br><br>
+<h3><spring:message code="lesson.assesments"/></h3>
+<security:authorize access="hasRole('STUDENT')">
+	<acme:button url="assesment/student/create.do?lessonId=${lesson.id}" name="create" code="lesson.assesment.create"/>
+</security:authorize>
 
-<acme:display code="lesson.subject" value="${lesson.subject.name}"/>
-
-
-<br><br>
+<jstl:choose>
+	<jstl:when test="${not empty assesments}">
+		<display:table name="assesments" id="row" requestURI="${requestURI}" pagesize="5"
+		class="displaytag">
+		
+		<display:column property="lesson.title" titleKey="assesment.lesson" />
+		
+		<display:column property="score" titleKey="assesment.score" />
+		
+			<jstl:choose>
+			<jstl:when test="${rol eq 'teacher'}">
+				<display:column>
+				<acme:button url="assesment/teacher/display.do?assesmentId=${row.id}" name="display"
+					code="assesment.display" />
+				</display:column>
+			</jstl:when>
+			<jstl:when test="${rol eq 'student'}">
+				<display:column>
+				<acme:button url="assesment/student/display.do?assesmentId=${row.id}" name="display"
+					code="assesment.display" />
+				</display:column>
+			</jstl:when>
+			<jstl:otherwise>
+				<display:column>
+				<acme:button url="assesment/display.do?assesmentId=${row.id}" name="display" code="assesment.display" />
+				</display:column>
+			</jstl:otherwise>
+			</jstl:choose>
+		
+		</display:table>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="no.assesment"/>
+	</jstl:otherwise>
+</jstl:choose>
 
 
 <jstl:choose>
-	<jstl:when test="${rol eq 'teacher' }">
-		<acme:button url="lesson/teacher/myLessons.do" name="back" code="lesson.back"/>
+	<jstl:when test="${rol eq 'teacher'}">
+		<acme:button url="lesson/teacher/myLessons.do" name="back"
+			code="lesson.back" />
 	</jstl:when>
 	<jstl:when test="${rol eq 'student'}">
-		<acme:button url="lesson/student/myLessons.do" name="back" code="lesson.back"/>
+		<acme:button url="lesson/student/myLessons.do" name="back"
+			code="lesson.back" />
 	</jstl:when>
 	<jstl:otherwise>
-		<acme:button url="lesson/list.do" name="back" code="lesson.back"/>
+		<acme:button url="lesson/list.do" name="back" code="lesson.back" />
 	</jstl:otherwise>
 </jstl:choose>

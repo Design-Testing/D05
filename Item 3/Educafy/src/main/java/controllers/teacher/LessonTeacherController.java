@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AssesmentService;
 import services.LessonService;
 import services.TeacherService;
 import controllers.AbstractController;
+import domain.Assesment;
 import domain.Lesson;
 import domain.Teacher;
 import forms.LessonForm;
@@ -28,12 +30,15 @@ import forms.LessonForm;
 public class LessonTeacherController extends AbstractController {
 
 	@Autowired
-	private LessonService	lessonService;
+	private LessonService		lessonService;
 
 	@Autowired
-	private TeacherService	teacherService;
+	private TeacherService		teacherService;
 
-	final String			lang	= LocaleContextHolder.getLocale().getLanguage();
+	@Autowired
+	private AssesmentService	assesmentService;
+
+	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
 
 	// CREATE  ---------------------------------------------------------------
@@ -53,12 +58,15 @@ public class LessonTeacherController extends AbstractController {
 		final ModelAndView result;
 		final Lesson lesson;
 		final Teacher teacher;
+		Collection<Assesment> assesments;
 
 		lesson = this.lessonService.findOne(lessonId);
 		teacher = this.teacherService.findByPrincipal();
+		assesments = this.assesmentService.findAllAssesmentByLesson(lessonId);
 
 		result = new ModelAndView("lesson/display");
 		result.addObject("lesson", lesson);
+		result.addObject("assesments", assesments);
 		result.addObject("teacher", teacher);
 		result.addObject("teacherId", lesson.getTeacher().getId());
 		result.addObject("rol", "teacher");

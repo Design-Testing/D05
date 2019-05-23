@@ -116,4 +116,7 @@ public class CommentService {
 		return res;
 	}
 
+	public void deleteInBatch(final Collection<Comment> comments) {
+		this.commentRepository.deleteInBatch(comments);
+	}
 }

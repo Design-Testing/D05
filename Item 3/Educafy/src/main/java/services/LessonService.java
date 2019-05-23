@@ -15,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.LessonRepository;
+import domain.Assesment;
 import domain.Lesson;
 import domain.Reservation;
+import domain.Student;
 import domain.Teacher;
 import forms.LessonForm;
 
@@ -31,10 +33,13 @@ public class LessonService {
 	private TeacherService		teacherService;
 
 	@Autowired
-	private StudentService		studentService;
+	private ReservationService	reservationService;
 
 	@Autowired
-	private ReservationService	reservationService;
+	private AssesmentService	assesmentService;
+
+	@Autowired
+	private StudentService		studentService;
 
 	@Autowired
 	private Validator			validator;
@@ -87,9 +92,10 @@ public class LessonService {
 		Assert.isTrue(retrieved.getTeacher().equals(principal));
 		final List<Reservation> reservations = (List<Reservation>) this.reservationService.findAllReservationByLesson(lesson.getId());
 		Assert.isTrue(reservations.isEmpty(), "No puede borrar una lesson que tenga reservations.");
+		final List<Assesment> assesments = (List<Assesment>) this.assesmentService.findAllAssesmentByLesson(lesson.getId());
+		this.assesmentService.deleteInBatch(assesments);
 		this.lessonRepository.delete(retrieved);
 	}
-
 	/* ========================= OTHER METHODS =========================== */
 
 	public Collection<Lesson> findAllByTeacher() {
@@ -161,6 +167,14 @@ public class LessonService {
 			throw new ValidationException();
 
 		return result;
+	}
+
+	public Collection<Lesson> findAllByStudent() {
+		Collection<Lesson> res = new ArrayList<>();
+		final Student principal = this.studentService.findByPrincipal();
+		res = this.lessonRepository.findAllLessonByStudentId(principal.getUserAccount().getId());
+		Assert.notNull(res);
+		return res;
 	}
 
 }
