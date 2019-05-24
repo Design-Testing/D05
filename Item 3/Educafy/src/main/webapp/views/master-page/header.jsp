@@ -146,10 +146,10 @@
 			<li><a class="fNiv" href="provider/list.do"><spring:message code="master.page.provider.list" /></a></li>
 			<li><a href="finder/searching.do"><spring:message code="master.page.finder.rooky.edit" /></a></li>
 			<li><a href="position/list.do"><spring:message code="master.page.position.list" /></a></li>
-			<li><a class="fNiv" href="company/create.do"><spring:message code="master.page.company.register" /></a></li>
+			<li><a class="fNiv" href="teacher/create.do"><spring:message code="master.page.teacher.register" /></a></li>
 			<li><a href="item/provider/listAll.do"><spring:message code="master.page.item.list" /></a></li>
-			<li><a class="fNiv" href="rooky/create.do"><spring:message code="master.page.rooky.register" /></a></li>
-			<li><a class="fNiv" href="provider/create.do"><spring:message code="master.page.provider.register" /></a></li>			
+			<li><a class="fNiv" href="student/create.do"><spring:message code="master.page.student.register" /></a></li>
+			<li><a class="fNiv" href="certifier/create.do"><spring:message code="master.page.certifier.register" /></a></li>			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

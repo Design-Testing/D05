@@ -1009,7 +1009,7 @@
 
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
 		<property name="sysName" value="Estudify" />
-		<property name="banner" value="https://i.ibb.co/HpCD1x8/logo1.png" />
+		<property name="banner" value="https://i.ibb.co/W3c4rmh/logo.png" />
 		<property name="welcomeMessageEn"
 			value="Welcome to Estudify! Where student find the individual lessons they are looking for!" />
 		<property name="welcomeMessageEsp"
