@@ -72,6 +72,11 @@
 		<security:intercept-url pattern="/teacher/display2.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/teacher/deletePersonalData.do" access="hasRole('TEACHER')" />
 		
+		<!-- CURRICULUM -->
+		<security:intercept-url pattern="/curriculum/create.do" access="permitAll" />
+		<security:intercept-url pattern="/curriculum/display.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/curriculum/delete.do" access="hasRole('TEACHER')" />
+		
 		<!-- CREDIT CARD -->
 		<security:intercept-url pattern="/creditCard/student/**" access="hasRole('STUDENT')" />
 		
