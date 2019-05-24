@@ -24,4 +24,7 @@ public interface CurriculumRepository extends JpaRepository<Curriculum, Integer>
 	@Query("select c from Curriculum c join c.miscellaneousRecords e where e.id=?1")
 	Curriculum findCurriculumByMiscellaneousRecord(int id);
 
+	@Query("select c from Curriculum c where c.ticker=?1")
+	Collection<Curriculum> getCurriculumWithTicker(String ticker);
+
 }

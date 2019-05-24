@@ -99,8 +99,12 @@ public class CurriculumService {
 		Assert.notNull(curriculum);
 		final Curriculum res;
 		final Teacher teacher = this.teacherService.findByPrincipal();
-		if (curriculum.getId() != 0)
+		if (curriculum.getId() != 0) {
 			Assert.isTrue(this.teacherService.findTeacherByCurriculum(curriculum.getId()).equals(teacher), "logged actor doesnt match curriculum's owner");
+			final Curriculum retrieved = this.findOne(curriculum.getId());
+			//curriculum.setTicker(retrieved.getTicker());
+		}
+
 		else
 			curriculum.setTeacher(teacher);
 		res = this.curriculumRepository.save(curriculum);
@@ -153,7 +157,7 @@ public class CurriculumService {
 		final String ticker = word + '-' + n1 + n2 + n3 + n4;
 		res = ticker;
 
-		final Collection<Curriculum> cs = this.curriculumRepository.getCurriculaWithTicker(ticker);
+		final Collection<Curriculum> cs = this.curriculumRepository.getCurriculumWithTicker(ticker);
 		if (!cs.isEmpty())
 			this.generateTicker(teacherName);
 		return res;
