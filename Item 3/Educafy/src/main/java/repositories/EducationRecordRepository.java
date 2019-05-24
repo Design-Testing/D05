@@ -3,9 +3,9 @@ package repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import domain.MiscellaneousRecord;
+import domain.EducationRecord;
 
 @Repository
-public interface MiscellaneousDataRepository extends JpaRepository<MiscellaneousRecord, Integer>{
+public interface EducationRecordRepository extends JpaRepository<EducationRecord, Integer>{
 
 }
