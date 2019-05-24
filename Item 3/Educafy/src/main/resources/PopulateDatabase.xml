@@ -1328,7 +1328,7 @@
 		======= Lesson ========= =================================================================== -->
 
 	<bean id="lesson1" class="domain.Lesson">
-		<property name="ticker" value="657945JEYTS" />
+		<property name="ticker" value="EYTS-6579" />
 		<property name="title" value="Lesson1" />
 		<property name="description" value="Description1" />
 		<property name="price" value="16.5" />
@@ -1338,7 +1338,7 @@
 	</bean>
 
 	<bean id="lesson2" class="domain.Lesson">
-		<property name="ticker" value="652945JKYTS" />
+		<property name="ticker" value="KYTS-6529" />
 		<property name="title" value="Lesson2" />
 		<property name="description" value="Description2" />
 		<property name="price" value="16.5" />
@@ -1348,7 +1348,7 @@
 	</bean>
 
 	<bean id="lesson3" class="domain.Lesson">
-		<property name="ticker" value="637955JUYTO" />
+		<property name="ticker" value="UYTO-6379" />
 		<property name="title" value="Lesson3" />
 		<property name="description" value="Description3" />
 		<property name="price" value="16.5" />
@@ -1358,7 +1358,7 @@
 	</bean>
 
 	<bean id="lesson4" class="domain.Lesson">
-		<property name="ticker" value="457945JEITS" />
+		<property name="ticker" value="EITS-4579" />
 		<property name="title" value="Lesson4" />
 		<property name="description" value="Description4" />
 		<property name="price" value="16.5" />

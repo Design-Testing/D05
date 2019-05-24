@@ -60,10 +60,11 @@ public class CommentService {
 		Assert.notNull(comment);
 		final Teacher principal = this.teacherService.findByPrincipal();
 		final Comment result;
+		Assesment assesment;
+		assesment = this.assesmentService.findOne(assesmentId);
 
 		if (comment.getId() == 0) {
-			Assert.isTrue(comment.getAssesment().getLesson().getTeacher().equals(principal), "No puede realizar un comentario a una evaluación que no le pertenece.");
-			final Assesment assesment = this.assesmentService.findOne(assesmentId);
+			Assert.isTrue(assesment.getLesson().getTeacher().equals(principal), "No puede realizar un comentario a una evaluación que no le pertenece.");
 			comment.setAssesment(assesment);
 			final Date moment = new Date(System.currentTimeMillis() - 1);
 			comment.setMoment(moment);

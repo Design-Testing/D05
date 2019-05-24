@@ -51,6 +51,9 @@ public class LessonService {
 
 	public Lesson create() {
 		final Lesson lesson = new Lesson();
+		final Teacher principal = this.teacherService.findByPrincipal();
+		final String ticker = this.generateTicker(principal.getName());
+		lesson.setTicker(ticker);
 		return lesson;
 	}
 
@@ -76,8 +79,6 @@ public class LessonService {
 
 		if (lesson.getId() == 0) {
 			lesson.setTeacher(principal);
-			final String ticker = this.generateTicker(principal.getName());
-			lesson.setTicker(ticker);
 			lesson.setIsDraft(true);
 			subject = this.subjectService.findOne(subjectId);
 			lesson.setSubject(subject);
@@ -145,19 +146,37 @@ public class LessonService {
 	}
 
 	//TODO: Revisar ticker
-	private String generateTicker(final String nameTeacher) {
+	//	private String generateTicker(final String nameTeacher) {
+	//		String res = "";
+	//		final Integer n1 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final Integer n2 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final Integer n3 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final Integer n4 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final String word = nameTeacher.substring(0, 4).toUpperCase();
+	//		final String ticker = word + '-' + n1 + n2 + n3 + n4;
+	//		res = ticker;
+	//
+	//		final Collection<Lesson> less = this.lessonRepository.getLessonWithTicker(ticker);
+	//		if (!less.isEmpty())
+	//			this.generateTicker(nameTeacher);
+	//		return res;
+	//	}
+
+	private String generateTicker(final String teacherName) {
 		String res = "";
+		final String az = "ABCDEFGHYJKLMNOPQRSTUVWXYZ";
 		final Integer n1 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n2 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n3 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n4 = (int) Math.floor(Math.random() * 9 + 1);
-		final String word = nameTeacher.substring(0, 4).toUpperCase();
+		final char ch = az.charAt(n1);
+		final String word = teacherName.substring(0, 4).toUpperCase();
 		final String ticker = word + '-' + n1 + n2 + n3 + n4;
 		res = ticker;
 
-		final Collection<Lesson> less = this.lessonRepository.getLessonWithTicker(ticker);
-		if (!less.isEmpty())
-			this.generateTicker(nameTeacher);
+		final Collection<Lesson> cs = this.lessonRepository.getLessonWithTicker(ticker);
+		if (!cs.isEmpty())
+			this.generateTicker(teacherName);
 		return res;
 	}
 

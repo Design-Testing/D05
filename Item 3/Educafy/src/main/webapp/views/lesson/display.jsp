@@ -73,6 +73,5 @@ img.resize {
 	</jstl:otherwise>
 </jstl:choose>
 
-
 <acme:button url="subject/display.do?subjectId=${lesson.subject.id}" name="back" code="lesson.back" />
 

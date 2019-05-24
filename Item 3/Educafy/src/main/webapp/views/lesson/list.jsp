@@ -27,10 +27,29 @@
 	<security:authorize access="hasRole('TEACHER')">
 		<display:column>
 			<jstl:if test="${row.isDraft}">
+				<acme:button url="lesson/teacher/edit.do?lessonId=${row.id}&subjectId=${row.subject.id}" name="edit" code="lesson.edit"/>
+			</jstl:if>
+		</display:column>
+		
+		<display:column>
+			<jstl:if test="${row.isDraft}">
 				<acme:button url="lesson/teacher/finalMode.do?lessonId=${row.id}" name="finalMode" code="lesson.finalMode"/>
 			</jstl:if>
 		</display:column>
+		
+		<security:authorize access="hasRole('TEACHER')">
+			<jstl:choose>
+				<jstl:when test="${not empty reservations}">
+				</jstl:when>
+				<jstl:otherwise>
+					<acme:button url="lesson/teacher/delete.do?lessonId=${lesson.id}" name="delete" code="lesson.delete"/>
+				</jstl:otherwise>
+			</jstl:choose>
+		</security:authorize>
+		
 	</security:authorize>
+	
+	
 	
 
 </display:table>

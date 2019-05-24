@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CommentService;
 import services.TeacherService;
 import controllers.AbstractController;
-import controllers.CommentController;
+import controllers.AssesmentController;
 import domain.Comment;
 import domain.Teacher;
 import forms.CommentForm;
@@ -31,7 +31,7 @@ public class CommentTeacherController extends AbstractController {
 	private CommentService		commentService;
 
 	@Autowired
-	private CommentController	commentController;
+	private AssesmentController	assesmentController;
 
 	@Autowired
 	private TeacherService		teacherService;
@@ -76,7 +76,7 @@ public class CommentTeacherController extends AbstractController {
 		String paramAssesmentId;
 		Integer assesmentId;
 
-		paramAssesmentId = request.getParameter("lessonId");
+		paramAssesmentId = request.getParameter("assesmentId");
 		assesmentId = paramAssesmentId.isEmpty() ? null : Integer.parseInt(paramAssesmentId);
 
 		final Comment comment = this.commentService.reconstruct(commentForm, binding);
@@ -87,7 +87,7 @@ public class CommentTeacherController extends AbstractController {
 		} else
 			try {
 				this.commentService.save(comment, assesmentId);
-				result = this.commentController.list(assesmentId);
+				result = this.assesmentController.display(assesmentId);
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(comment, assesmentId, "commit.assesment.error");
 			} catch (final Throwable oops) {

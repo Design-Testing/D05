@@ -21,6 +21,7 @@ import services.AssesmentService;
 import services.LessonService;
 import services.TeacherService;
 import controllers.AbstractController;
+import controllers.SubjectController;
 import domain.Lesson;
 import domain.Teacher;
 import forms.LessonForm;
@@ -37,6 +38,9 @@ public class LessonTeacherController extends AbstractController {
 
 	@Autowired
 	private AssesmentService	assesmentService;
+
+	@Autowired
+	private SubjectController	subjectController;
 
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
@@ -133,7 +137,7 @@ public class LessonTeacherController extends AbstractController {
 		} else
 			try {
 				this.lessonService.save(lesson, subjectId);
-				result = this.myLessons();
+				result = this.subjectController.display(subjectId);
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(lesson, subjectId, "commit.lesson.error");
 			} catch (final Throwable oops) {
@@ -151,7 +155,6 @@ public class LessonTeacherController extends AbstractController {
 		final Lesson lesson = this.lessonService.findOne(lessonId);
 		this.lessonService.delete(lesson);
 		return this.myLessons();
-
 	}
 
 	// ANCILLIARY METHODS --------------------------------------------------------
