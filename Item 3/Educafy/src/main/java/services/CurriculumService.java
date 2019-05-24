@@ -47,6 +47,10 @@ public class CurriculumService {
 
 		curriculum.setPersonalRecord(personalRecord);
 
+		curriculum.setTeacher(teacher);
+
+		//curriculum.setTicker(this.generateTicker(curriculum.getTeacher().getName()));
+
 		final Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
 		curriculum.setMiscellaneousRecords(miscellaneousRecord);
 
@@ -137,6 +141,22 @@ public class CurriculumService {
 
 	public void flush() {
 		this.curriculumRepository.flush();
+	}
+
+	private String generateTicker(final String teacherName) {
+		String res = "";
+		final Integer n1 = (int) Math.floor(Math.random() * 9 + 1);
+		final Integer n2 = (int) Math.floor(Math.random() * 9 + 1);
+		final Integer n3 = (int) Math.floor(Math.random() * 9 + 1);
+		final Integer n4 = (int) Math.floor(Math.random() * 9 + 1);
+		final String word = teacherName.substring(0, 4).toUpperCase();
+		final String ticker = word + '-' + n1 + n2 + n3 + n4;
+		res = ticker;
+
+		final Collection<Curriculum> cs = this.curriculumRepository.getCurriculaWithTicker(ticker);
+		if (!cs.isEmpty())
+			this.generateTicker(teacherName);
+		return res;
 	}
 
 }
