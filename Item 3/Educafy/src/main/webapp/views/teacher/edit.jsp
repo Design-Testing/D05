@@ -8,7 +8,7 @@
 
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-	<script>
+<script>
 	function phoneFun() {
 		var x = document.getElementById("phone");
 		var telefono = x.value;
@@ -26,7 +26,7 @@
 			}
 		}
 	}
-	</script>
+</script>
 
 <jstl:if test="${not empty alert}">
 	<script>
