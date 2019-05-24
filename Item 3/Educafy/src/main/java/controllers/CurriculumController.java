@@ -1,8 +1,6 @@
 
 package controllers;
 
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import services.CurriculumService;
 import services.TeacherService;
 import domain.Curriculum;
-import domain.MiscellaneousRecord;
 import domain.Teacher;
 
 @Controller
@@ -31,25 +31,68 @@ public class CurriculumController extends AbstractController {
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView display(@RequestParam final int curriculumId) {
 		final ModelAndView res;
-		final Teacher teacher = this.teacherService.findByPrincipal();
-		final Curriculum curriculum = teacher.getCurriculum();
+		final Curriculum curriculum = this.curriculumService.findOne(curriculumId);
 		if (!(curriculum == null)) {
-			final InceptionRecord inceptionRecord = curriculum.getInceptionRecord();
-			final Collection<PeriodRecord> periodRecords = curriculum.getPeriodRecords();
-			final Collection<LegalRecord> legalRecords = curriculum.getLegalRecords();
-			final Collection<LinkRecord> linkRecords = curriculum.getLinkRecords();
-			final Collection<MiscellaneousRecord> miscellaneousRecords = curriculum.getMiscellaneousRecords();
 
 			res = new ModelAndView("curriculum/display");
+
+			final UserAccount logged = LoginService.getPrincipal();
 			res.addObject("curriculum", curriculum);
 			res.addObject("buttons", true);
-			res.addObject("inceptionRecord", inceptionRecord);
-			res.addObject("periodrecords", periodRecords);
-			res.addObject("legalRecord", legalRecords);
-			res.addObject("linkRecords", linkRecords);
-			res.addObject("miscellaneousRecords", miscellaneousRecords);
+
+			final Authority authTeacher = new Authority();
+			authTeacher.setAuthority(Authority.TEACHER);
+			final Authority authStudent = new Authority();
+			authTeacher.setAuthority(Authority.STUDENT);
+			final Authority authCertifier = new Authority();
+			authTeacher.setAuthority(Authority.CERTIFIER);
+			if (logged.getAuthorities().contains(authTeacher)) {
+				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
+					res.addObject("buttons", true);
+				else
+					res.addObject("buttonsAnonymous", true);
+			} else if (logged.getAuthorities().contains(authStudent))
+				res.addObject("buttonsAnonymous", true);
+			else if (logged.getAuthorities().contains(authCertifier))
+				res.addObject("buttonsCertifier", true);
+		} else {
+			res = new ModelAndView("curriculum/create");
+			res.addObject("curriculum", curriculum);
+		}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		final ModelAndView res;
+		final Teacher teacher = this.teacherService.findByPrincipal();
+		final Curriculum curriculum = this.curriculumService.findCurriculumByTeacher(teacher.getId());
+		if (!(curriculum == null)) {
+
+			res = new ModelAndView("curriculum/display");
+
+			final UserAccount logged = LoginService.getPrincipal();
+			res.addObject("curriculum", curriculum);
+			res.addObject("buttons", true);
+
+			final Authority authTeacher = new Authority();
+			authTeacher.setAuthority(Authority.TEACHER);
+			final Authority authStudent = new Authority();
+			authTeacher.setAuthority(Authority.STUDENT);
+			final Authority authCertifier = new Authority();
+			authTeacher.setAuthority(Authority.CERTIFIER);
+			if (logged.getAuthorities().contains(authTeacher)) {
+				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
+					res.addObject("buttons", true);
+				else
+					res.addObject("buttonsAnonymous", true);
+			} else if (logged.getAuthorities().contains(authStudent))
+				res.addObject("buttonsAnonymous", true);
+			else if (logged.getAuthorities().contains(authCertifier))
+				res.addObject("buttonsCertifier", true);
 		} else {
 			res = new ModelAndView("curriculum/create");
 			res.addObject("curriculum", curriculum);
@@ -62,14 +105,13 @@ public class CurriculumController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		final Teacher teacher = this.teacherService.findByPrincipal();
-		if (teacher.getCurriculum() == null) {
+		if (this.curriculumService.findCurriculumByTeacher(teacher.getId()) == null) {
 			final Curriculum curriculum = this.curriculumService.create();
-			teacher.setCurriculum(curriculum);
 			this.curriculumService.save(curriculum);
-			result = this.list();
+			result = this.display();
 			result.addObject("curriculum", curriculum);
 		}
-		result = this.list();
+		result = this.display();
 		return result;
 	}
 
@@ -83,10 +125,9 @@ public class CurriculumController extends AbstractController {
 			try {
 				if (curriculum.getVersion() == 0) {
 					final Teacher teacher = this.teacherService.findByPrincipal();
-					teacher.setCurriculum(curriculum);
 					this.curriculumService.save(curriculum);
 				}
-				result = this.list();
+				result = this.display();
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(curriculum, "general.commit.error");
 			}
@@ -104,6 +145,7 @@ public class CurriculumController extends AbstractController {
 		result.addObject("curriculum", curriculum);
 		return result;
 	}
+
 	protected ModelAndView createEditModelAndView(final Curriculum curriculum) {
 		ModelAndView result;
 

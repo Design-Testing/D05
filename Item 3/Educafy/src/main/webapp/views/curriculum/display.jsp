@@ -18,38 +18,42 @@
         </ul>
     </div>
 	<display:table pagesize="10" class="displaytag" keepStatus="true"
-               name="personalRecord" requestURI="${requestURI}" id="row">
+               name="curriculum.personalRecord" requestURI="${requestURI}" id="row">
     <!-- Attributes -->
 	
-    <spring:message var="fullname" code="record.fullname"/>
-    <display:column property="fullname" title="${fullname}" sortable="true"/>
+    <spring:message var="fullName" code="record.fullname"/>
+    <display:column property="fullName" title="${fullname}" sortable="true"/>
     <spring:message var="statement" code="record.statement"/>
     <display:column property="statement" title="${statement}" sortable="true"/>
-   	<jstl:if test="${buttons}">
-   	<security:authorize access="hasRole('TEACHER')">
-	<display:column>
+    <jstl:choose>
+    <jstl:when test="${buttons}">
+			<security:authorize access="hasRole('TEACHER')">
+				<display:column>
                 <input type="button" name="edit"
                     value="<spring:message code="record.edit" />"
                     onclick="relativeRedir('personalRecord/edit.do?personalRecordId=${row.id}')" />
                
-	</display:column>
-		<input type="button" name="display"
+					</display:column>
+					<display:column>
+					<input type="button" name="display"
                 value="<spring:message code="record.display" />"
                 onclick="relativeRedir('personalRecord/display.do?personalRecordId=${row.id}')" />
-	<display:column>
+					</display:column>
+					<display:column>
                 <jstl:if test="${row.isDraft eq true}">
                 	<input type="button" name="display"
-                	value="<spring:message code="record.display" />"
+                	value="<spring:message code="record.toFinal" />"
                 	onclick="relativeRedir('personalRecord/toFinal.do?personalRecordId=${row.id}')" />
                 </jstl:if>
                 <jstl:if test="${row.isDraft eq false}">
                 	<jstl:out value="In final mode" />
                 </jstl:if>
-	</display:column>
-	<display:column>
-	</display:column>
+		</display:column>
+		<display:column>
+		</display:column>
 	</security:authorize>
-	</jstl:if>
+	</jstl:when>
+   <jstl:otherwise>
 	<jstl:if test="${row.isCertified eq true}">
 	<display:column>
 			<input type="button" name="display"
@@ -62,6 +66,8 @@
 			<jstl:out value="Not certified" />
 	</display:column>
     </jstl:if>
+    </jstl:otherwise>
+    </jstl:choose>
 	</display:table>
 
    <%-- Education records --%>
@@ -79,8 +85,9 @@
     <display:column property="degree" title="${degree}" sortable="true"/>
     <spring:message var="institution" code="record.institution"/>
     <display:column property="institution" title="${institution}" sortable="true"/>
+    <jstl:choose>
+    <jstl:when test="${buttons}">
     <security:authorize access="hasRole('TEACHER')">
-    <jstl:if test="${button}">
 	<display:column>
             <input type="button" name="edit"
                 value="<spring:message code="record.edit" />"
@@ -91,14 +98,15 @@
                 value="<spring:message code="record.delete" />"
                 onclick="relativeRedir('educationRecord/delete.do?educationRecordId=${row.id}')" />
 	</display:column>
+	<display:column>
 			<input type="button" name="display"
                 value="<spring:message code="record.display" />"
                 onclick="relativeRedir('educationRecord/display.do?educationRecordId=${row.id}')" />
-	</jstl:if>
+	</display:column>
 	<display:column>
                 <jstl:if test="${row.isDraft eq true}">
                 	<input type="button" name="display"
-                	value="<spring:message code="record.display" />"
+                	value="<spring:message code="record.toFinal" />"
                 	onclick="relativeRedir('educationRecord/toFinal.do?educationRecordId=${row.id}')" />
                 </jstl:if>
                 <jstl:if test="${row.isDraft eq false}">
@@ -106,6 +114,8 @@
                 </jstl:if>
 	</display:column>
 	</security:authorize>
+	</jstl:when>
+   <jstl:otherwise>
 	<jstl:if test="${row.isCertified eq true}">
 	<display:column>
 			<input type="button" name="display"
@@ -118,6 +128,8 @@
 			<jstl:out value="Not certified" />
 	</display:column>
     </jstl:if>
+    </jstl:otherwise>
+    </jstl:choose>
 	</display:table>
 	<br />
 	<jstl:if test="${buttons}">
@@ -142,8 +154,9 @@
     <display:column property="freeText" title="${freeText}" sortable="true"/>
     <spring:message var="attachments" code="record.attachments"/>
     <display:column property="attachments" title="${attachments}" sortable="true"/>
+    <jstl:choose>
+    <jstl:when test="${buttons}">
     <security:authorize access="hasRole('TEACHER')">
-    <jstl:if test="${buttons}">
 	<display:column>
             <input type="button" name="edit"
                 value="<spring:message code="record.edit" />"
@@ -160,15 +173,16 @@
 	<display:column>
                 <jstl:if test="${row.isDraft eq true}">
                 	<input type="button" name="display"
-                	value="<spring:message code="record.display" />"
+                	value="<spring:message code="record.toFinal" />"
                 	onclick="relativeRedir('miscellaneousRecord/toFinal.do?miscellaneousRecordId=${row.id}')" />
                 </jstl:if>
                 <jstl:if test="${row.isDraft eq false}">
                 	<jstl:out value="In final mode" />
                 </jstl:if>
 	</display:column>
-	</jstl:if>
 	</security:authorize>
+	</jstl:when>
+   <jstl:otherwise>
 	<jstl:if test="${row.isCertified eq true}">
 	<display:column>
 			<input type="button" name="display"
@@ -181,6 +195,8 @@
 			<jstl:out value="Not certified" />
 	</display:column>
     </jstl:if>
+    </jstl:otherwise>
+    </jstl:choose>
         
 	</display:table>
 	<br />
