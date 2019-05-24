@@ -129,19 +129,18 @@ public class LessonTeacherController extends AbstractController {
 		paramSubjectId = request.getParameter("subjectId");
 		subjectId = paramSubjectId.isEmpty() ? null : Integer.parseInt(paramSubjectId);
 
-		final Lesson lesson = this.lessonService.reconstruct(lessonForm, binding);
-
 		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(lesson, subjectId);
+			result = this.createEditModelAndView(lessonForm, subjectId);
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
+				final Lesson lesson = this.lessonService.reconstruct(lessonForm, binding);
 				this.lessonService.save(lesson, subjectId);
 				result = this.subjectController.display(subjectId);
 			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView(lesson, subjectId, "commit.lesson.error");
+				result = this.createEditModelAndView(lessonForm, subjectId, "commit.lesson.error");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(lesson, subjectId, "commit.lesson.error");
+				result = this.createEditModelAndView(lessonForm, subjectId, "commit.lesson.error");
 				result.addObject("errors", binding.getAllErrors());
 			}
 
@@ -178,6 +177,24 @@ public class LessonTeacherController extends AbstractController {
 
 		result = new ModelAndView("lesson/edit");
 		result.addObject("lessonForm", this.constructPruned(lesson)); //this.constructPruned(position)
+		result.addObject("subjectId", subjectId);
+		result.addObject("message", messageCode);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final LessonForm lesson, final int subjectId) {
+		ModelAndView result;
+		result = this.createEditModelAndView(lesson, subjectId, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final LessonForm lessonForm, final int subjectId, final String messageCode) {
+		Assert.notNull(lessonForm);
+		final ModelAndView result;
+
+		result = new ModelAndView("lesson/edit");
+		result.addObject("lessonForm", lessonForm);
 		result.addObject("subjectId", subjectId);
 		result.addObject("message", messageCode);
 
