@@ -1099,7 +1099,7 @@
 		======= CURRICULA ========= =================================================================== -->
 
 	<bean id="curriculum1" class="domain.Curriculum">
-		<property name="ticker" value="657945JEASD" />
+		<property name="ticker" value="COMM-1234" />
 		<property name="personalRecord" ref="personalRecord1" />
 		<property name="educationRecords">
 			<list>
@@ -1115,7 +1115,7 @@
 	</bean>
 
 	<bean id="curriculum2" class="domain.Curriculum">
-		<property name="ticker" value="657945JEKJH" />
+		<property name="ticker" value="COMX-1231" />
 		<property name="personalRecord" ref="personalRecord2" />
 		<property name="educationRecords">
 			<list>
