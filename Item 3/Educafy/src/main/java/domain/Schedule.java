@@ -1,8 +1,11 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -10,53 +13,58 @@ import javax.persistence.ManyToOne;
 @Access(AccessType.PROPERTY)
 public class Schedule extends DomainEntity {
 
-	private int[]	monday;
-	private int[]	tuesday;
-	private int[]	wednesday;
-	private int[]	thursday;
-	private int[]	friday;
+	private Collection<String>	monday;
+	private Collection<String>	tuesday;
+	private Collection<String>	wednesday;
+	private Collection<String>	thursday;
+	private Collection<String>	friday;
 
 	//Relaciones
-	private Teacher	teacher;
+	private Teacher				teacher;
 
 
-	public int[] getMonday() {
+	@ElementCollection
+	public Collection<String> getMonday() {
 		return this.monday;
 	}
 
-	public void setMonday(final int[] monday) {
+	public void setMonday(final Collection<String> monday) {
 		this.monday = monday;
 	}
 
-	public int[] getTuesday() {
+	@ElementCollection
+	public Collection<String> getTuesday() {
 		return this.tuesday;
 	}
 
-	public void setTuesday(final int[] tuesday) {
+	public void setTuesday(final Collection<String> tuesday) {
 		this.tuesday = tuesday;
 	}
 
-	public int[] getWednesday() {
+	@ElementCollection
+	public Collection<String> getWednesday() {
 		return this.wednesday;
 	}
 
-	public void setWednesday(final int[] wednesday) {
+	public void setWednesday(final Collection<String> wednesday) {
 		this.wednesday = wednesday;
 	}
 
-	public int[] getThursday() {
+	@ElementCollection
+	public Collection<String> getThursday() {
 		return this.thursday;
 	}
 
-	public void setThursday(final int[] thursday) {
+	public void setThursday(final Collection<String> thursday) {
 		this.thursday = thursday;
 	}
 
-	public int[] getFriday() {
+	@ElementCollection
+	public Collection<String> getFriday() {
 		return this.friday;
 	}
 
-	public void setFriday(final int[] friday) {
+	public void setFriday(final Collection<String> friday) {
 		this.friday = friday;
 	}
 

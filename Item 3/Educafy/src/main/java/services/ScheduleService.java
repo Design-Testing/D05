@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,19 +50,19 @@ public class ScheduleService {
 		final Schedule result;
 
 		if (schedule.getId() == 0) {
-			final int[] monday = new int[24];
+			final List<String> monday = new ArrayList<>();
 			schedule.setMonday(monday);
 
-			final int[] tuesday = new int[24];
+			final List<String> tuesday = new ArrayList<>();
 			schedule.setTuesday(tuesday);
 
-			final int[] wednesday = new int[24];
+			final List<String> wednesday = new ArrayList<>();
 			schedule.setWednesday(wednesday);
 
-			final int[] thursday = new int[24];
+			final List<String> thursday = new ArrayList<>();
 			schedule.setThursday(thursday);
 
-			final int[] friday = new int[24];
+			final List<String> friday = new ArrayList<>();
 			schedule.setFriday(friday);
 
 			schedule.setTeacher(principal);
