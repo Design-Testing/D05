@@ -41,7 +41,9 @@
 				<jstl:when test="${not empty reservations}">
 				</jstl:when>
 				<jstl:otherwise>
-					<acme:button url="lesson/teacher/delete.do?lessonId=${lesson.id}" name="delete" code="lesson.delete"/>
+					<display:column>
+					<acme:button url="lesson/teacher/delete.do?lessonId=${row.id}" name="delete" code="lesson.delete"/>
+					</display:column>
 				</jstl:otherwise>
 			</jstl:choose>
 		
