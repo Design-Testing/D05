@@ -31,6 +31,12 @@
 			<spring:message code="creditCard.display" />
 		</a>
 	</display:column>
+	
+	<display:column>
+		<a href="creditCard/${rol}/delete.do?creditCardId=${row.id}">
+			<spring:message code="creditCard.delete" />
+		</a>
+	</display:column>
 
 
 </display:table>
@@ -38,3 +44,7 @@
 <input type="button" name="create"
 	value="<spring:message code="creditCard.create" />"
 	onclick="javascript: relativeRedir('creditCard/${rol}/create.do');" />
+
+<jstl:if test="${not empty msg}">
+	<h3 style="color: red;"><spring:message code="${msg}"/></h3>
+</jstl:if>

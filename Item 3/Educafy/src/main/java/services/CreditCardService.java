@@ -84,9 +84,9 @@ public class CreditCardService {
 	}
 
 	// delete
-	public void delete(final CreditCard c) {
-		Assert.notNull(c);
-		Assert.isTrue(c.getId() != 0);
+	public void delete(final int creditCardId) {
+		Assert.isTrue(creditCardId != 0);
+		final CreditCard c = this.findOne(creditCardId);
 		Assert.isTrue(this.findAll().contains(c));
 
 		final Actor principal = this.actorService.findByPrincipal();
@@ -102,7 +102,7 @@ public class CreditCardService {
 	}
 
 	// auxiliar
-	boolean tarjetaCaducada(final CreditCard c) {
+	public boolean tarjetaCaducada(final CreditCard c) {
 		boolean res = false;
 		final boolean mesCaducado = c.getExpirationMonth() < LocalDate.now().getMonthOfYear();
 		final boolean mismoAnyo = (2000 + c.getExpirationYear()) == LocalDate.now().getYear();

@@ -25,7 +25,7 @@
 	<br />
 	<br />
 
-	<acme:textbox path="number" code="creditCard.number"/>
+	<acme:numberbox min="0" path="number" code="creditCard.number"/>
 	<acme:textbox code="creditCard.expirationMonth" path="expirationMonth" />
 	<acme:textbox code="creditCard.expirationYear" path="expirationYear" />
 	<acme:numberbox code="creditCard.cvv" path="cvv" min="100" max="999"/>

@@ -48,8 +48,6 @@ public class CreditCardStudentController extends AbstractController {
 		result = new ModelAndView("creditCard/list");
 		result.addObject("myCards", myCards);
 		result.addObject("rol", "student");
-		final String banner = this.configurationParametersService.find().getBanner();
-		result.addObject("banner", banner);
 		return result;
 	}
 
@@ -80,9 +78,6 @@ public class CreditCardStudentController extends AbstractController {
 				result = new ModelAndView("creditCard/display");
 				result.addObject("creditCard", creditCard);
 				result.addObject("rol", "student");
-
-				final String banner = this.configurationParametersService.find().getBanner();
-				result.addObject("banner", banner);
 			} else
 				result = new ModelAndView("redirect:/misc/403.jsp");
 		} else
@@ -122,37 +117,36 @@ public class CreditCardStudentController extends AbstractController {
 			try {
 				this.studentService.findByPrincipal();
 				this.creditCardService.save(creditCard);
-				result = new ModelAndView("redirect:/application/student/list.do");
-				final String banner = this.configurationParametersService.find().getBanner();
-				result.addObject("banner", banner);
+				result = new ModelAndView("redirect:/creditCard/student/list.do");
 			} catch (final Throwable oops) {
 				String errorMessage = "creditCard.commit.error";
 				if (oops.getMessage().contains("message.error"))
 					errorMessage = oops.getMessage();
+				if (this.creditCardService.tarjetaCaducada(creditCard))
+					errorMessage = "creditCard.tarjeta.caducada";
 				result = this.createEditModelAndView(creditCard, errorMessage);
 			}
 		return result;
 
 	}
-	/*
-	 * // DELETE --------------------------------------
-	 * 
-	 * @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	 * public ModelAndView delete(final CreditCard creditCard, final BindingResult bindingResult) {
-	 * ModelAndView result;
-	 * 
-	 * try {
-	 * this.creditCardService.delete(creditCard);
-	 * result = new ModelAndView("redirect:/application/student/list.do");
-	 * final String banner = this.configurationParametersService.find().getBanner();
-	 * result.addObject("banner", banner);
-	 * } catch (final Throwable oops) {
-	 * result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
-	 * }
-	 * 
-	 * return result;
-	 * }
-	 */
+
+	// DELETE --------------------------------------
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int creditCardId) {
+		ModelAndView result;
+
+		try {
+			this.creditCardService.delete(creditCardId);
+			result = new ModelAndView("redirect:/creditCard/student/list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/creditCard/student/list.do");
+			result.addObject("msg", "creditCard.delete.error");
+		}
+
+		return result;
+	}
+
 	// Ancillary methods -------------------------------------
 
 	protected ModelAndView createEditModelAndView(final CreditCard creditCard) {
@@ -173,9 +167,6 @@ public class CreditCardStudentController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("rol", "student");
 		result.addObject("brandNames", brandNames);
-
-		final String banner = this.configurationParametersService.find().getBanner();
-		result.addObject("banner", banner);
 
 		return result;
 	}

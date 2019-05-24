@@ -38,15 +38,6 @@
 <jstl:out value="${creditCard.cvv}" />
 <br />
 
-<jstl:if test="${rol == 'customer' }">
-		<input type="button" name="back"
-			value="<spring:message code="creditCard.back"/>"
-			onclick="javascript:relativeRedir('creditCard/customer/list.do');" />
-	</jstl:if>
-	<jstl:if test="${rol == 'sponsor' }">
-
-
-		<input type="button" name="back"
-			value="<spring:message code="creditCard.back"/>"
-			onclick="javascript:relativeRedir('creditCard/sponsor/list.do');" />
-	</jstl:if>
+<input type="button" name="back"
+	value="<spring:message code="creditCard.back"/>"
+	onclick="javascript:relativeRedir('creditCard/student/list.do');" />
