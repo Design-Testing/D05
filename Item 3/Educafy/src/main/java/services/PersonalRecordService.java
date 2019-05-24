@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PersonalRecordRepository;
+import domain.Certifier;
 import domain.PersonalRecord;
 import domain.Teacher;
 
@@ -22,6 +23,9 @@ public class PersonalRecordService {
 	@Autowired
 	private TeacherService				teacherService;
 
+	@Autowired
+	private CertifierService			certifierService;
+
 
 	//Metodos CRUD
 
@@ -31,6 +35,9 @@ public class PersonalRecordService {
 		res.setStatement("");
 		res.setGithub("http://www.github.com");
 		res.setLinkedin("http://www.linkedin.com");
+		res.setPhoto("http://testPhoto.com");
+		res.setIsCertified(false);
+		res.setIsDraft(true);
 		return res;
 	}
 
@@ -51,6 +58,8 @@ public class PersonalRecordService {
 		final Teacher me = this.teacherService.findByPrincipal();
 		Assert.notNull(me, "You must be logged in the system");
 		Assert.notNull(personalRecord);
+		Assert.isTrue(personalRecord.getIsCertified() == false, "Personal record can not be certified");
+		Assert.isTrue(personalRecord.getIsDraft() == true, "Perosnal record must be in draft mode");
 		if (personalRecord.getId() != 0)
 			Assert.isTrue(this.teacherService.findTeacherByPersonalRecord(personalRecord.getId()) == me);
 		final PersonalRecord saved = this.personalRecordRepository.save(personalRecord);
@@ -58,31 +67,19 @@ public class PersonalRecordService {
 		return saved;
 	}
 
-	public PersonalRecord saveCopy(final PersonalRecord personalRecord) {
-		final Teacher me = this.teacherService.findByPrincipal();
-		Assert.notNull(me, "You must be logged in the system");
-		Assert.notNull(personalRecord);
-		Assert.notNull(personalRecord.getFullName());
-		Assert.notNull(personalRecord.getStatement());
-		Assert.notNull(personalRecord.getGithub());
-		Assert.notNull(personalRecord.getLinkedin());
-		if (personalRecord.getId() != 0)
-			Assert.isTrue(this.teacherService.findTeacherByPersonalRecord(personalRecord.getId()) == me);
-		final PersonalRecord saved = this.personalRecordRepository.save(personalRecord);
-		Assert.notNull(this.findOne(saved.getId()));
-		return saved;
-	}
-
-	final PersonalRecord makeCopyAndSave(final PersonalRecord p) {
-		PersonalRecord result = this.create();
-		result.setFullName(p.getFullName());
-		result.setStatement(p.getStatement());
-		result.setGithub(p.getGithub());
-		result.setLinkedin(p.getLinkedin());
-		Assert.notNull(result, "copy of personal record is null");
-		result = this.save(result);
-		Assert.notNull(result, "retrieved personal record is null");
-		return result;
+	public PersonalRecord certify(final PersonalRecord personalRecord) {
+		final Certifier me = this.certifierService.findByPrincipal();
+		Assert.notNull(me);
+		Assert.isTrue(personalRecord.getIsCertified() == false, "the record is already certified");
+		Assert.isTrue(personalRecord.getIsDraft() == true, "the personal record is not in draft mode");
+		final PersonalRecord retrieved = this.findOne(personalRecord.getId());
+		Assert.isTrue(retrieved.getFullName().equals(personalRecord.getFullName()));
+		Assert.isTrue(retrieved.getGithub().equals(personalRecord.getGithub()));
+		Assert.isTrue(retrieved.getLinkedin().equals(personalRecord.getLinkedin()));
+		Assert.isTrue(retrieved.getPhoto().equals(personalRecord.getPhoto()));
+		Assert.isTrue(retrieved.getStatement().equals(personalRecord.getStatement()));
+		final PersonalRecord res = this.personalRecordRepository.save(personalRecord);
+		return res;
 	}
 
 	public void flush() {
