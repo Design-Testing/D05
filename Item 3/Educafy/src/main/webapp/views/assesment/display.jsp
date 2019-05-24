@@ -26,10 +26,6 @@ img.resize {
 <acme:display code="assesment.student" value="${assesment.student.name}"/>
 
 <h3><spring:message code="assesment.comments"/></h3>
-<security:authorize access="hasRole('TEACHER')">
-	<acme:button url="comment/teacher/create.do?assesmentId=${assesment.id}" name="create" code="assesment.comment.create"/>
-</security:authorize>
-
 <jstl:choose>
 	<jstl:when test="${not empty comments}">
 		<display:table name="comments" id="row"

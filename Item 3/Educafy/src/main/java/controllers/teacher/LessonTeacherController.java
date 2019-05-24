@@ -152,9 +152,16 @@ public class LessonTeacherController extends AbstractController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(final int lessonId) {
+		ModelAndView result;
 		final Lesson lesson = this.lessonService.findOne(lessonId);
-		this.lessonService.delete(lesson);
-		return this.myLessons();
+		try {
+			this.lessonService.delete(lesson);
+			result = this.myLessons();
+		} catch (final Throwable opps) {
+			result = new ModelAndView("lesson/error");
+			result.addObject("msg", "commit.lesson.delete.error");
+		}
+		return result;
 	}
 
 	// ANCILLIARY METHODS --------------------------------------------------------
