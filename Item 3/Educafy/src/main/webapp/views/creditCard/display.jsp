@@ -15,7 +15,7 @@
 
 <spring:message code="creditCard.brandName" />
 :
-<jstl:out value="${creditCard.brandName}" />
+<jstl:out value="${creditCard.make}" />
 <br />
 
 <spring:message code="creditCard.number" />

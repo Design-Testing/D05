@@ -18,7 +18,7 @@
 		</a>
 	</display:column>
 	<display:column property="holderName" titleKey="creditCard.holderName" />
-	<display:column property="brandName" titleKey="creditCard.brandName" />
+	<display:column property="make" titleKey="creditCard.brandName" />
 
 	<display:column property="expirationMonth"
 		titleKey="creditCard.expirationMonth" />
