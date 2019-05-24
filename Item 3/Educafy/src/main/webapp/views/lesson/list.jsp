@@ -24,40 +24,14 @@
 	
 	<display:column property="teacher.name" titleKey="lesson.teacher" />
 	
-	<jstl:choose>
-	<jstl:when test="${rol eq 'teacher'}">
-		<display:column>
-			<acme:button url="lesson/teacher/display.do?lessonId=${row.id}" name="display"
-			code="lesson.display" />
-		</display:column>
-	</jstl:when>
-	<jstl:when test="${rol eq 'student'}">
-		<display:column>
-		<acme:button url="lesson/student/display.do?lessonId=${row.id}" name="display"
-			code="lesson.display" />
-		</display:column>
-	</jstl:when>
-	<jstl:otherwise>
-		<display:column>
-			<acme:button url="lesson/display.do?lessonId=${row.id}" name="display" code="lesson.display" />
-		</display:column>
-	</jstl:otherwise>
-	</jstl:choose>
-	
 	<security:authorize access="hasRole('TEACHER')">
-	<display:column>
-		<acme:button url="lesson/teacher/edit.do?lessonId=${row.id}" name="edit" code="lesson.edit"/>
-	</display:column>
-	<display:column>
-		<acme:button url="lesson/teacher/delete.do?lessonId=${row.id}" name="delete" code="lesson.delete"/>
-	</display:column>
+		<display:column>
+			<jstl:if test="${row.isDraft}">
+				<acme:button url="lesson/teacher/finalMode.do?lessonId=${row.id}" name="finalMode" code="lesson.finalMode"/>
+			</jstl:if>
+		</display:column>
 	</security:authorize>
 	
-	<security:authorize access="hasRole('STUDENT')">
-	<display:column>
-		<acme:button url="reservation/student/create.do?lessonId=${row.id}" name="create" code="reservation.create"/>
-	</display:column>
-	</security:authorize>
 
 </display:table>
 

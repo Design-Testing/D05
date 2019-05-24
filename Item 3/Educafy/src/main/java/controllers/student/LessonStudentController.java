@@ -8,16 +8,13 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AssesmentService;
 import services.LessonService;
 import services.StudentService;
 import controllers.AbstractController;
-import domain.Assesment;
 import domain.Lesson;
-import domain.Student;
 
 @Controller
 @RequestMapping("/lesson/student")
@@ -53,29 +50,4 @@ public class LessonStudentController extends AbstractController {
 
 		return result;
 	}
-
-	// DISPLAY --------------------------------------------------------
-
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int lessonId) {
-		final ModelAndView result;
-		final Lesson lesson;
-		final Student student;
-		Collection<Assesment> assesments;
-
-		lesson = this.lessonService.findOne(lessonId);
-		student = this.studentService.findByPrincipal();
-		assesments = this.assesmentService.findAllAssesmentByLesson(lessonId);
-
-		result = new ModelAndView("lesson/display");
-		result.addObject("lesson", lesson);
-		result.addObject("assesments", assesments);
-		result.addObject("student", student);
-		result.addObject("studentId", student.getId());
-		result.addObject("rol", "student");
-		result.addObject("lang", this.lang);
-
-		return result;
-	}
-
 }

@@ -14,7 +14,9 @@
 	<jstl:set var="rolURL" value="/${rol}" />
 </jstl:if>
 
-<acme:button url="subject/create.do" name="create" code="subject.create"/>
+	<security:authorize access="hasRole('ADMIN')">
+		<acme:button url="subject/create.do" name="create" code="subject.create"/>
+	</security:authorize>
 
 <display:table name="subjects" id="row"
 		requestURI="${requestURI}" pagesize="5"
@@ -35,14 +37,16 @@
 	
 	<display:column property="level" titleKey="subject.level" />
 	
+	<security:authorize access="hasRole('ADMIN')">
 	<display:column>
 		<acme:button url="subject/edit.do?subjectId=${row.id}" name="edit" code="subject.edit"/>
 	</display:column>
+	</security:authorize>
 	
 	<display:column>
 		<acme:button url="subject/display.do?subjectId=${row.id}" name="display" code="subject.display"/>
 	</display:column>
-	
+		
 	
 </display:table>
 

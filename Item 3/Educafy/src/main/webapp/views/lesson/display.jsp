@@ -62,25 +62,9 @@ img.resize {
 		
 		<display:column property="score" titleKey="assesment.score" />
 		
-			<jstl:choose>
-			<jstl:when test="${rol eq 'teacher'}">
-				<display:column>
-				<acme:button url="assesment/teacher/display.do?assesmentId=${row.id}" name="display"
-					code="assesment.display" />
-				</display:column>
-			</jstl:when>
-			<jstl:when test="${rol eq 'student'}">
-				<display:column>
-				<acme:button url="assesment/student/display.do?assesmentId=${row.id}" name="display"
-					code="assesment.display" />
-				</display:column>
-			</jstl:when>
-			<jstl:otherwise>
-				<display:column>
-				<acme:button url="assesment/display.do?assesmentId=${row.id}" name="display" code="assesment.display" />
-				</display:column>
-			</jstl:otherwise>
-			</jstl:choose>
+		<display:column>
+			<acme:button url="assesment/display.do?assesmentId=${row.id}" name="display" code="assesment.display" />
+		</display:column>
 		
 		</display:table>
 	</jstl:when>
@@ -90,16 +74,5 @@ img.resize {
 </jstl:choose>
 
 
-<jstl:choose>
-	<jstl:when test="${rol eq 'teacher'}">
-		<acme:button url="lesson/teacher/myLessons.do" name="back"
-			code="lesson.back" />
-	</jstl:when>
-	<jstl:when test="${rol eq 'student'}">
-		<acme:button url="lesson/student/myLessons.do" name="back"
-			code="lesson.back" />
-	</jstl:when>
-	<jstl:otherwise>
-		<acme:button url="lesson/list.do" name="back" code="lesson.back" />
-	</jstl:otherwise>
-</jstl:choose>
+<acme:button url="subject/display.do?subjectId=${lesson.subject.id}" name="back" code="lesson.back" />
+

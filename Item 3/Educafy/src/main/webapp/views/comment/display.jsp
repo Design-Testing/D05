@@ -35,13 +35,5 @@ img.resize {
 
 <br>
 
-<jstl:choose>
-	<jstl:when test="${rol eq 'teacher'}">
-		<acme:button url="assesment/teacher/display.do?assesmentId=${comment.assesment.id}" name="back"
-			code="lesson.back" />
-	</jstl:when>
-	<jstl:otherwise>
-		<acme:button url="assesment/display.do?assesmentId=${comment.assesment.id}" name="back" code="lesson.back" />
-	</jstl:otherwise>
-</jstl:choose>
+<acme:button url="assesment/display.do?assesmentId=${comment.assesment.id}" name="back" code="lesson.back" />
 

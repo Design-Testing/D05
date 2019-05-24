@@ -11,6 +11,8 @@
 <form:form action="lesson/teacher/edit.do" modelAttribute="lessonForm" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	<input type="hidden" name="subjectId" value="${subjectId}" />
+	
 	
 	<acme:textbox code="lesson.title" path="title"/>
 	<acme:textarea code="lesson.description" path="description"/>
@@ -22,6 +24,12 @@
 	<input type="submit" name="save"
 		value="<spring:message code="lesson.submit" />" />
 	
-	<acme:button url="lesson/teacher/myLessons.do" name="back" code="lesson.back"/>
-
+	<jstl:choose>
+	<jstl:when test="${lessonForm.id eq 0}">
+		<acme:button url="subject/display.do?subjectId=${subjectId}" name="back" code="lesson.back"/>
+	</jstl:when>
+	<jstl:otherwise>
+		<acme:button url="lesson/teacher/myLessons.do" name="back" code="lesson.back"/>
+	</jstl:otherwise>
+	</jstl:choose>
 </form:form>

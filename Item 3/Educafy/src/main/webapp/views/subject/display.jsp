@@ -32,10 +32,46 @@ img.resize {
 
 <acme:display code="subject.level" value="${subject.level}"/>
 
-<br>
+<h3><spring:message code="subject.lessons"/></h3>
+<security:authorize access="hasRole('TEACHER')">
+	<acme:button url="lesson/teacher/create.do?subjectId=${subject.id}" name="create" code="subject.lesson.create"/>
+</security:authorize>
+
+	<jstl:choose>
+	<jstl:when test="${not empty lessons}">
+		<display:table name="lessons" id="row"
+		requestURI="${requestURI}" pagesize="5"
+		class="displaytag">
+
+	<display:column property="title" titleKey="lesson.title" />
+	
+	<display:column property="teacher.name" titleKey="lesson.teacher" />
+
+		<display:column>
+			<acme:button url="lesson/display.do?lessonId=${row.id}" name="display" code="lesson.display" />
+		</display:column>
+
+	<security:authorize access="hasRole('STUDENT')">
+	<display:column>
+		<acme:button url="reservation/student/create.do?lessonId=${row.id}" name="create" code="reservation.create"/>
+	</display:column>
+	</security:authorize>
+	
+</display:table>
+		
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="no.lessons"/>
+	</jstl:otherwise>
+</jstl:choose>
+	
+
+<br><br>
 
 <jstl:if test="${empty lessons}">
 		<acme:button url="subject/delete.do?subjectId=${subject.id}" name="back" code="subject.delete"/>
 </jstl:if>
+
+
 
 <acme:button url="subject/list.do" name="back" code="subject.back"/>

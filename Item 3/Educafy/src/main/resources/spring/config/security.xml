@@ -55,7 +55,14 @@
 		<security:intercept-url pattern="/configurationParameters/administrator/**" access="hasRole('ADMIN')" />
 		
 		<!-- SUBJECT -->
-		<security:intercept-url pattern="/subject/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/subject/create.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/subject/edit.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/subject/delete.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/subject/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/subject/display.do" access="permitAll" /> 
+		
+		
+		 
 	
 		<!-- LESSON -->
  		<security:intercept-url pattern="/lesson/list.do" access="permitAll" />

@@ -53,13 +53,7 @@
 		
 		<security:authorize access="hasRole('TEACHER')">
 			<!-- LESSONS -->
-			<li><a class="fNiv"><spring:message	code="master.page.lessons" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="lesson/teacher/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
-					<li><a href="lesson/teacher/create.do"><spring:message code="master.page.lesson.create" /></a></li>
-				</ul>
-			</li>
+			<li><a href="lesson/teacher/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
 			<li><a href="assesment/teacher/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
 			
@@ -73,6 +67,7 @@
 					
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
+			<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
 			
 		</security:authorize>
 		
@@ -88,6 +83,7 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a href="subject/list.do"><spring:message code="master.page.subject.list" /></a></li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 

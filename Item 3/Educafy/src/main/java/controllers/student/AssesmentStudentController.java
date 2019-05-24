@@ -19,9 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AssesmentService;
 import services.CommentService;
-import services.LessonService;
 import services.StudentService;
 import controllers.AbstractController;
+import controllers.LessonController;
 import domain.Assesment;
 import domain.Comment;
 import domain.Student;
@@ -32,21 +32,18 @@ import forms.AssesmentForm;
 public class AssesmentStudentController extends AbstractController {
 
 	@Autowired
-	private AssesmentService		assesmentService;
+	private AssesmentService	assesmentService;
 
 	@Autowired
-	private StudentService			studentService;
+	private StudentService		studentService;
 
 	@Autowired
-	private CommentService			commentService;
+	private CommentService		commentService;
 
 	@Autowired
-	private LessonService			lessonService;
+	private LessonController	lessonController;
 
-	@Autowired
-	private LessonStudentController	lessonStudentController;
-
-	final String					lang	= LocaleContextHolder.getLocale().getLanguage();
+	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
 
 	// CREATE  ---------------------------------------------------------------
@@ -139,7 +136,7 @@ public class AssesmentStudentController extends AbstractController {
 		} else
 			try {
 				this.assesmentService.save(assesment, lessonId);
-				result = this.lessonStudentController.display(lessonId);
+				result = this.lessonController.display(lessonId);
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(assesment, lessonId, "commit.assesment.error");
 			} catch (final Throwable oops) {

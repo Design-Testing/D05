@@ -21,6 +21,6 @@
 	<input type="submit" name="save"
 		value="<spring:message code="assesment.submit" />" />
 	
-	<acme:button url="lesson/student/display.do?lessonId=${lessonId}" name="back" code="assesment.back"/>
+	<acme:button url="lesson/display.do?lessonId=${lessonId}" name="back" code="assesment.back"/>
 
 </form:form>

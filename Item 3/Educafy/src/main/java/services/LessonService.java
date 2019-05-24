@@ -19,6 +19,7 @@ import domain.Assesment;
 import domain.Lesson;
 import domain.Reservation;
 import domain.Student;
+import domain.Subject;
 import domain.Teacher;
 import forms.LessonForm;
 
@@ -40,6 +41,9 @@ public class LessonService {
 
 	@Autowired
 	private StudentService		studentService;
+
+	@Autowired
+	private SubjectService		subjectService;
 
 	@Autowired
 	private Validator			validator;
@@ -64,16 +68,19 @@ public class LessonService {
 		return res;
 	}
 
-	public Lesson save(final Lesson lesson) {
+	public Lesson save(final Lesson lesson, final int subjectId) {
 		Assert.notNull(lesson);
 		final Teacher principal = this.teacherService.findByPrincipal();
 		final Lesson result;
+		Subject subject;
 
 		if (lesson.getId() == 0) {
 			lesson.setTeacher(principal);
 			final String ticker = this.generateTicker(principal.getName());
 			lesson.setTicker(ticker);
 			lesson.setIsDraft(true);
+			subject = this.subjectService.findOne(subjectId);
+			lesson.setSubject(subject);
 		} else {
 			Assert.isTrue(lesson.getTeacher().equals(principal));
 			Assert.isTrue(lesson.getIsDraft(), "No puede modificar una posición que ya no esta en DRAFT MODE.");
