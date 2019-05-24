@@ -122,34 +122,19 @@ public class FolderService {
 		return this.configurationParametersService.checkForSpamWords(words);
 	}
 
-	//	public void delete(final Folder f) {
-	//		Assert.notNull(f);
-	//		Assert.isTrue(!f.getIsSystemFolder());
-	//		Assert.isTrue(f.getId() != 0);
-	//
-	//		final Actor principal = this.actorService.findByPrincipal();
-	//		final Collection<Folder> fs = this.findAllByUserId(principal.getUserAccount().getId());
-	//		final Collection<Message> ms = this.messageService.findAllByFolderIdAndUserId(f.getId(), principal.getUserAccount().getId());
-	//		final Collection<Folder> folders = this.findAllByFatherId(f.getId());
-	//		Assert.isTrue(fs.contains(f));
-	//
-	//		if (!ms.isEmpty() && !folders.isEmpty()) {
-	//			this.messageService.deleteAll(ms, f);
-	//			this.deleteAll(folders);
-	//		} else if (!ms.isEmpty() && folders.isEmpty())
-	//			this.messageService.deleteAll(ms, f);
-	//		else if (ms.isEmpty() && !folders.isEmpty())
-	//			this.deleteAll(folders);
-	//
-	//		this.folderRepository.delete(f);
-	//
-	//	}
+	public void delete(final Folder f) {
+		Assert.notNull(f);
+		Assert.isTrue(!f.getIsSystemFolder());
+		Assert.isTrue(f.getId() != 0);
 
-	//	public void deleteAll(final Collection<Folder> fs) {
-	//		Assert.notEmpty(fs);
-	//		for (final Folder f : fs)
-	//			this.delete(f);
-	//	}
+		final Actor principal = this.actorService.findByPrincipal();
+		final Collection<Folder> fs = this.findAllByUserId(principal.getUserAccount().getId());
+		final Collection<Message> ms = this.messageService.findAllByFolderIdAndUserId(f.getId(), principal.getUserAccount().getId());
+		Assert.isTrue(fs.contains(f));
+		if (!ms.isEmpty())
+			this.messageService.deleteAll(ms, f);
+		this.folderRepository.delete(f);
+	}
 
 	public Collection<Folder> setFoldersByDefault(final Actor actor) {
 		final Collection<Folder> folders = new ArrayList<Folder>();
