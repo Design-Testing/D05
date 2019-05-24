@@ -30,8 +30,8 @@ public class CurriculumController extends AbstractController {
 	private TeacherService		teacherService;
 
 
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int curriculumId) {
+	@RequestMapping(value = "/displayById", method = RequestMethod.GET)
+	public ModelAndView displayById(@RequestParam final int curriculumId) {
 		final ModelAndView res;
 		final Curriculum curriculum = this.curriculumService.findOne(curriculumId);
 		if (!(curriculum == null)) {
