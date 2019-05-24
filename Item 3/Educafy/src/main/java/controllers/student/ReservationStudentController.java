@@ -85,31 +85,6 @@ public class ReservationStudentController extends AbstractController {
 		return result;
 	}
 
-	//	// TO ACCEPTED --------------------------------------------------------
-	//
-	//	@RequestMapping(value = "/accepted", method = RequestMethod.GET)
-	//	public ModelAndView acceptedMode(@RequestParam final int reservationId) {
-	//		ModelAndView result;
-	//		final Reservation reservation = this.reservationService.findOne(reservationId);
-	//
-	//		if (reservation == null) {
-	//			result = this.myReservations();
-	//			result.addObject("msg", "reservations.accepted.error");
-	//		} else
-	//			try {
-	//				this.reservationService.toAcceptedMode(reservationId);
-	//				result = this.myReservations();
-	//			} catch (final Throwable oops) {
-	//				String errormsg = "reservation.accepted.error";
-	//				result = this.myReservations();
-	//				if (!reservation.getStatus().equals("PENDING"))
-	//					errormsg = "reservation.accepted.no.pending";
-	//				result.addObject("msg", errormsg);
-	//			}
-	//
-	//		return result;
-	//	}
-
 	// TO FINAL --------------------------------------------------------
 
 	@RequestMapping(value = "/final", method = RequestMethod.GET)
