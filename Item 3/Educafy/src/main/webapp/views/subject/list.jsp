@@ -14,33 +14,39 @@
 	<jstl:set var="rolURL" value="/${rol}" />
 </jstl:if>
 
+	<security:authorize access="hasRole('ADMIN')">
+		<acme:button url="subject/create.do" name="create" code="subject.create"/>
+	</security:authorize>
 
-<display:table name="lessons" id="row"
+<display:table name="subjects" id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
-
-	<display:column property="title" titleKey="lesson.title" />
+		
+	<jstl:choose>
+		<jstl:when test="${lang eq 'en'}">
+			<display:column property="nameEn" titleKey="subject.name" />
+			
+			<display:column property="descriptionEn" titleKey="subject.description" />
+		</jstl:when>
+		<jstl:otherwise>
+			<display:column property="nameEs" titleKey="subject.name" />
+			
+			<display:column property="descriptionEs" titleKey="subject.description" />
+		</jstl:otherwise>
+	</jstl:choose>
 	
-	<display:column property="teacher.name" titleKey="lesson.teacher" />
+	<display:column property="level" titleKey="subject.level" />
 	
-	<display:column property="subject.name" titleKey="lesson.subject" />
-	
-	<security:authorize access="hasRole('TEACHER')">
+	<security:authorize access="hasRole('ADMIN')">
 	<display:column>
-		<acme:button url="lesson/teacher/edit.do?lessonId=${row.id}" name="edit" code="lesson.edit"/>
-		<acme:button url="lesson/teacher/delete.do?lessonId=${row.id}" name="delete" code="lesson.delete"/>
+		<acme:button url="subject/edit.do?subjectId=${row.id}" name="edit" code="subject.edit"/>
 	</display:column>
 	</security:authorize>
 	
-	<security:authorize access="hasRole('STUDENT')">
 	<display:column>
-		<acme:button url="reservation/student/create.do?lessonId=${row.id}" name="create" code="reservation.create"/>
+		<acme:button url="subject/display.do?subjectId=${row.id}" name="display" code="subject.display"/>
 	</display:column>
-	</security:authorize>
-
+		
+	
 </display:table>
-
-<jstl:if test="${not empty msg}">
-	<h3 style="color: red;"><spring:message code="${msg}"/></h3>
-</jstl:if>
 

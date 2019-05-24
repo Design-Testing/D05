@@ -224,8 +224,16 @@ public class MessageService {
 	 * */
 	public void deleteAll(final Collection<Message> ms, final Folder f) {
 		Assert.notEmpty(ms);
-		for (final Message m : ms)
-			this.deleteFromFolder(m, f);
+		Collection<Message> msUpdated = new ArrayList<>();
+
+		this.deleteInBatch(ms);
+		msUpdated = f.getMessages();
+		msUpdated.removeAll(ms);
+		f.setMessages(msUpdated);
+		this.folderService.save(f, this.actorService.findByPrincipal());
+	}
+	public void deleteInBatch(final Collection<Message> messages) {
+		this.messageRepository.deleteInBatch(messages);
 	}
 
 	/**

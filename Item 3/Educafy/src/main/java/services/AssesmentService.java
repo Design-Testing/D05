@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.ValidationException;
 
@@ -15,6 +16,7 @@ import org.springframework.validation.Validator;
 
 import repositories.AssesmentRepository;
 import domain.Assesment;
+import domain.Comment;
 import domain.Lesson;
 import domain.Student;
 import domain.Teacher;
@@ -35,6 +37,9 @@ public class AssesmentService {
 
 	@Autowired
 	private LessonService		lessonService;
+
+	@Autowired
+	private CommentService		commentService;
 
 	@Autowired
 	private Validator			validator;
@@ -75,6 +80,16 @@ public class AssesmentService {
 
 	}
 
+	public void delete(final Assesment assesment) {
+		Assert.notNull(assesment);
+		Assert.isTrue(assesment.getId() != 0);
+		final Assesment retrieved = this.findOne(assesment.getId());
+		final Student principal = this.studentService.findByPrincipal();
+		Assert.isTrue(retrieved.getStudent().equals(principal));
+		final List<Comment> comments = (List<Comment>) this.commentService.findAllCommentsByAssesment(assesment.getId());
+		this.commentService.deleteInBatch(comments);
+		this.assesmentRepository.delete(retrieved);
+	}
 	/* ========================= OTHER METHODS =========================== */
 
 	public Collection<Assesment> findAllByStudentPrincipal() {
@@ -106,6 +121,10 @@ public class AssesmentService {
 		return res;
 	}
 
+	public void deleteInBatch(final Collection<Assesment> assesments) {
+		this.assesmentRepository.deleteInBatch(assesments);
+	}
+
 	public Assesment reconstruct(final AssesmentForm assesmentForm, final BindingResult binding) {
 		Assesment result;
 
@@ -114,6 +133,7 @@ public class AssesmentService {
 		else
 			result = this.findOne(assesmentForm.getId());
 
+		result.setId(assesmentForm.getId());
 		result.setVersion(assesmentForm.getVersion());
 		result.setScore(assesmentForm.getScore());
 		result.setComment(assesmentForm.getComment());
@@ -125,5 +145,4 @@ public class AssesmentService {
 
 		return result;
 	}
-
 }

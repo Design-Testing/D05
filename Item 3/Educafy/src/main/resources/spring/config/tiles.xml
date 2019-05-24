@@ -25,7 +25,6 @@
 		
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
-		<value>/views/teacher/tiles.xml</value>
 		<value>/views/configurationParameters/tiles.xml</value>
 		<value>/views/finder/tiles.xml</value>
 		<value>/views/folder/tiles.xml</value>
@@ -35,8 +34,11 @@
 		<value>/views/assesment/tiles.xml</value>
 		<value>/views/comment/tiles.xml</value>
 		<value>/views/subject/tiles.xml</value>
-		
-		
+		<value>/views/socialProfile/tiles.xml</value>
+		<value>/views/teacher/tiles.xml</value>
+		<value>/views/student/tiles.xml</value>
+		<value>/views/certifier/tiles.xml</value>
+		<value>/views/creditCard/tiles.xml</value>
 		
 		
 	</util:list>

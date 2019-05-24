@@ -1,8 +1,6 @@
 
 package controllers.teacher;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
@@ -17,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AssesmentService;
 import services.CommentService;
 import services.TeacherService;
 import controllers.AbstractController;
-import domain.Assesment;
+import controllers.AssesmentController;
 import domain.Comment;
 import domain.Teacher;
 import forms.CommentForm;
@@ -34,7 +31,7 @@ public class CommentTeacherController extends AbstractController {
 	private CommentService		commentService;
 
 	@Autowired
-	private AssesmentService	assesmentService;
+	private AssesmentController	assesmentController;
 
 	@Autowired
 	private TeacherService		teacherService;
@@ -49,52 +46,6 @@ public class CommentTeacherController extends AbstractController {
 		ModelAndView result;
 		final Comment comment = this.commentService.create();
 		result = this.createEditModelAndView(comment, assesmentId);
-		return result;
-	}
-
-	// LIST --------------------------------------------------------
-
-	@RequestMapping(value = "/myComments", method = RequestMethod.GET)
-	public ModelAndView myComments(@RequestParam final int assesmentId) {
-		final ModelAndView result;
-		final Collection<Comment> comments;
-		Assesment assesment;
-
-		comments = this.commentService.findAllCommentsByTeacherPpal();
-		assesment = this.assesmentService.findOne(assesmentId);
-
-		if (assesment != null) {
-			result = new ModelAndView("comment/list");
-			result.addObject("comments", comments);
-		} else
-			result = new ModelAndView("redirect:/misc/403.jsp");
-
-		result.addObject("lang", this.lang);
-		result.addObject("rol", "teacher");
-		result.addObject("requetURI", "comment/teacher/myComments.do");
-		result.addObject("principalID", this.teacherService.findByPrincipal().getId());
-
-		return result;
-	}
-
-	// DISPLAY --------------------------------------------------------
-
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int commentId) {
-		final ModelAndView result;
-		final Comment comment;
-		final Teacher teacher;
-
-		comment = this.commentService.findOne(commentId);
-		teacher = this.teacherService.findByPrincipal();
-
-		result = new ModelAndView("comment/display");
-		result.addObject("comment", comment);
-		result.addObject("teacher", teacher);
-		result.addObject("teacherId", teacher.getId());
-		result.addObject("rol", "teacher");
-		result.addObject("lang", this.lang);
-
 		return result;
 	}
 
@@ -125,7 +76,7 @@ public class CommentTeacherController extends AbstractController {
 		String paramAssesmentId;
 		Integer assesmentId;
 
-		paramAssesmentId = request.getParameter("lessonId");
+		paramAssesmentId = request.getParameter("assesmentId");
 		assesmentId = paramAssesmentId.isEmpty() ? null : Integer.parseInt(paramAssesmentId);
 
 		final Comment comment = this.commentService.reconstruct(commentForm, binding);
@@ -136,7 +87,7 @@ public class CommentTeacherController extends AbstractController {
 		} else
 			try {
 				this.commentService.save(comment, assesmentId);
-				result = this.myComments(assesmentId);
+				result = this.assesmentController.display(assesmentId);
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(comment, assesmentId, "commit.assesment.error");
 			} catch (final Throwable oops) {

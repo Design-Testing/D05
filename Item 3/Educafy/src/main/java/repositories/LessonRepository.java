@@ -21,4 +21,10 @@ public interface LessonRepository extends JpaRepository<Lesson, Integer> {
 	@Query("select l from Lesson l where l.isDraft = false")
 	Collection<Lesson> findAllFinalMode();
 
+	@Query("select l from Reservation r join r.lesson l where r.student.userAccount.id=?1")
+	Collection<Lesson> findAllLessonByStudentId(int studentUAId);
+	
+	@Query("select l from Lesson l where l.subject.id =?1")
+	Collection<Lesson> findAllBySubject(Integer subjectId);
+
 }

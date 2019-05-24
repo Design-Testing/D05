@@ -8,20 +8,20 @@
 
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="lesson/teacher/edit.do" modelAttribute="lessonForm" method="POST">
+<form:form action="subject/edit.do" modelAttribute="subject" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	
-	<acme:textbox code="lesson.title" path="title"/>
-	<acme:textarea code="lesson.description" path="description"/>
-	<acme:textbox code="lesson.price" path="price"/>
-	
-
+	<acme:textbox code="subject.nameEn" path="nameEn"/>
+	<acme:textbox code="subject.nameEs" path="nameEs"/>
+	<acme:textbox code="subject.descriptionEn" path="descriptionEn"/>
+	<acme:textbox code="subject.descriptionEs" path="descriptionEs"/>
+	<acme:textbox code="subject.level" path="level"/>
 <br>
 
 	<input type="submit" name="save"
-		value="<spring:message code="lesson.submit" />" />
+		value="<spring:message code="subject.save" />" />
 	
-	<acme:button url="lesson/teacher/myLessons.do" name="back" code="lesson.back"/>
+	<acme:button url="subject/list.do" name="back" code="subject.back"/>
 
 </form:form>

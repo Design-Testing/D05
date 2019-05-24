@@ -893,7 +893,7 @@
 		======= CreditCard ========= =================================================================== -->
 
 	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716477920082572" />
 		<property name="expirationMonth" value="06" />
@@ -903,7 +903,7 @@
 	</bean>
 
 	<bean id="creditCard2" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="MASTER" />
 		<property name="number" value="5498128346540526" />
 		<property name="expirationMonth" value="10" />
@@ -913,7 +913,7 @@
 	</bean>
 
 	<bean id="creditCard3" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="AMEX" />
 		<property name="number" value="375278545368168" />
 		<property name="expirationMonth" value="06" />
@@ -923,7 +923,7 @@
 	</bean>
 
 	<bean id="creditCard4" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4532787155338743" />
 		<property name="expirationMonth" value="10" />
@@ -933,7 +933,7 @@
 	</bean>
 
 	<bean id="creditCard5" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 3" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716699361876929" />
 		<property name="expirationMonth" value="02" />
@@ -943,7 +943,7 @@
 	</bean>
 
 	<bean id="creditCard6" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4231348143458624" />
 		<property name="expirationMonth" value="11" />
@@ -953,7 +953,7 @@
 	</bean>
 
 	<bean id="creditCard7" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4294148159742547" />
 		<property name="expirationMonth" value="11" />
@@ -963,7 +963,7 @@
 	</bean>
 
 	<bean id="creditCard8" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5547165664775350" />
 		<property name="expirationMonth" value="11" />
@@ -973,7 +973,7 @@
 	</bean>
 
 	<bean id="creditCard9" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4410435734979051" />
 		<property name="expirationMonth" value="03" />
@@ -983,7 +983,7 @@
 	</bean>
 
 	<bean id="creditCard10" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5316710759043864" />
 		<property name="expirationMonth" value="01" />
@@ -994,7 +994,7 @@
 
 
 	<bean id="creditCard13" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5384948404521051" />
 		<property name="expirationMonth" value="01" />
@@ -1009,7 +1009,7 @@
 
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
 		<property name="sysName" value="Estudify" />
-		<property name="banner" value="https://i.ibb.co/HpCD1x8/logo1.png" />
+		<property name="banner" value="https://i.ibb.co/W3c4rmh/logo.png" />
 		<property name="welcomeMessageEn"
 			value="Welcome to Estudify! Where student find the individual lessons they are looking for!" />
 		<property name="welcomeMessageEsp"
@@ -1099,6 +1099,7 @@
 		======= CURRICULA ========= =================================================================== -->
 
 	<bean id="curriculum1" class="domain.Curriculum">
+		<property name="ticker" value="COMM-1234" />
 		<property name="personalRecord" ref="personalRecord1" />
 		<property name="educationRecords">
 			<list>
@@ -1114,6 +1115,7 @@
 	</bean>
 
 	<bean id="curriculum2" class="domain.Curriculum">
+		<property name="ticker" value="COMX-1231" />
 		<property name="personalRecord" ref="personalRecord2" />
 		<property name="educationRecords">
 			<list>
@@ -1328,7 +1330,7 @@
 		======= Lesson ========= =================================================================== -->
 
 	<bean id="lesson1" class="domain.Lesson">
-		<property name="ticker" value="657945JEYTS" />
+		<property name="ticker" value="EYTS-6579" />
 		<property name="title" value="Lesson1" />
 		<property name="description" value="Description1" />
 		<property name="price" value="16.5" />
@@ -1338,7 +1340,7 @@
 	</bean>
 
 	<bean id="lesson2" class="domain.Lesson">
-		<property name="ticker" value="652945JKYTS" />
+		<property name="ticker" value="KYTS-6529" />
 		<property name="title" value="Lesson2" />
 		<property name="description" value="Description2" />
 		<property name="price" value="16.5" />
@@ -1348,7 +1350,7 @@
 	</bean>
 
 	<bean id="lesson3" class="domain.Lesson">
-		<property name="ticker" value="637955JUYTO" />
+		<property name="ticker" value="UYTO-6379" />
 		<property name="title" value="Lesson3" />
 		<property name="description" value="Description3" />
 		<property name="price" value="16.5" />
@@ -1358,7 +1360,7 @@
 	</bean>
 
 	<bean id="lesson4" class="domain.Lesson">
-		<property name="ticker" value="457945JEITS" />
+		<property name="ticker" value="EITS-4579" />
 		<property name="title" value="Lesson4" />
 		<property name="description" value="Description4" />
 		<property name="price" value="16.5" />
@@ -1483,6 +1485,14 @@
 		<property name="nameEs" value="Asignatura4" />
 		<property name="descriptionEn" value="Description4" />
 		<property name="descriptionEs" value="Descripcion4" />
+		<property name="level" value="2BACH" />
+	</bean>
+	
+	<bean id="subject5" class="domain.Subject">
+		<property name="nameEn" value="Subject5" />
+		<property name="nameEs" value="Asignatura5" />
+		<property name="descriptionEn" value="Description5" />
+		<property name="descriptionEs" value="Descripcion5" />
 		<property name="level" value="2BACH" />
 	</bean>
 

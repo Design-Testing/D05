@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AssesmentService;
 import services.LessonService;
+import services.ReservationService;
 import domain.Assesment;
 import domain.Lesson;
+import domain.Reservation;
 
 @Controller
 @RequestMapping("/lesson")
@@ -26,6 +28,9 @@ public class LessonController extends AbstractController {
 	@Autowired
 	private AssesmentService	assesmentService;
 
+	@Autowired
+	private ReservationService	reservationService;
+
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
 
@@ -36,14 +41,17 @@ public class LessonController extends AbstractController {
 		final ModelAndView result;
 		final Lesson lesson;
 		Collection<Assesment> assesments;
+		Collection<Reservation> reservations;
 
 		lesson = this.lessonService.findOne(lessonId);
 		assesments = this.assesmentService.findAllAssesmentByLesson(lessonId);
+		reservations = this.reservationService.findAllReservationByLesson(lessonId);
 
 		if (lesson != null) {
 			result = new ModelAndView("lesson/display");
 			result.addObject("lesson", lesson);
 			result.addObject("assesments", assesments);
+			result.addObject("reservations", reservations);
 			result.addObject("lang", this.lang);
 		} else
 			result = new ModelAndView("redirect:misc/403");

@@ -27,6 +27,7 @@ public class SocialProfileService {
 	public SocialProfile create() {
 		final SocialProfile sp = new SocialProfile();
 		final Actor principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
 		sp.setActor(principal);
 		return sp;
 
@@ -48,14 +49,21 @@ public class SocialProfileService {
 
 	public SocialProfile save(final SocialProfile socialProfile) {
 		Assert.notNull(socialProfile);
+		final Actor principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+		Assert.isTrue(socialProfile.getActor().equals(principal));
 		final SocialProfile sProfile = this.socialProfileRepository.save(socialProfile);
 		Assert.notNull(sProfile);
+		Assert.isTrue(sProfile.getId() != 0);
 		return sProfile;
 	}
 
 	public void delete(final SocialProfile socialProfile) {
 		Assert.notNull(socialProfile);
 		Assert.isTrue(socialProfile.getId() != 0);
+		final Actor principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+		Assert.isTrue(socialProfile.getActor().equals(principal));
 		final SocialProfile res = this.findOne(socialProfile.getId());
 		this.socialProfileRepository.delete(res);
 	}
