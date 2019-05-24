@@ -10,13 +10,19 @@
 
 package controllers;
 
+import javax.validation.Valid;
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
+import security.UserAccount;
 import services.ConfigurationParametersService;
 import services.StudentService;
 import services.UserAccountService;
@@ -106,49 +112,49 @@ public class StudentController extends AbstractController {
 		return result;
 	}
 
-	//	// SAVE -----------------------------------------------------------
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	//	public ModelAndView save(@Valid final ActorForm actorForm, final BindingResult binding) {
-	//		ModelAndView result;
-	//		result = new ModelAndView("student/edit");
-	//		Student student;
-	//		if (binding.hasErrors()) {
-	//			result.addObject("errors", binding.getAllErrors());
-	//			actorForm.setTermsAndCondicions(false);
-	//			result.addObject("actorForm", actorForm);
-	//		} else
-	//			try {
-	//				final UserAccount ua = this.userAccountService.reconstruct(actorForm, Authority.ROOKY);
-	//				student = this.studentService.reconstruct(actorForm, binding);
-	//				student.setUserAccount(ua);
-	//				this.registerService.saveStudent(student, binding);
-	//				result.addObject("alert", "student.edit.correct");
-	//				result.addObject("actorForm", actorForm);
-	//			} catch (final ValidationException oops) {
-	//				result.addObject("errors", binding.getAllErrors());
-	//				actorForm.setTermsAndCondicions(false);
-	//				result.addObject("actorForm", actorForm);
-	//			} catch (final Throwable e) {
-	//				if (e.getMessage().contains("username is register"))
-	//					result.addObject("alert", "student.edit.usernameIsUsed");
-	//				result.addObject("errors", binding.getAllErrors());
-	//				actorForm.setTermsAndCondicions(false);
-	//				result.addObject("actorForm", actorForm);
-	//			}
-	//		result.addObject("cardmakes", this.configurationParametersService.find().getCreditCardMake());
-	//		result.addObject("countryPhoneCode", this.configurationParametersService.find().getCountryPhoneCode());
-	//		return result;
-	//	}
-	//
-	//	// GDPR -----------------------------------------------------------
-	//	@RequestMapping(value = "/deletePersonalData")
-	//	public ModelAndView deletePersonalData() {
-	//		this.studentService.deletePersonalData();
-	//
-	//		final ModelAndView result = new ModelAndView("redirect:../j_spring_security_logout");
-	//		return result;
-	//	}
+	// SAVE -----------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final ActorForm actorForm, final BindingResult binding) {
+		ModelAndView result;
+		result = new ModelAndView("student/edit");
+		Student student;
+		if (binding.hasErrors()) {
+			result.addObject("errors", binding.getAllErrors());
+			actorForm.setTermsAndCondicions(false);
+			result.addObject("actorForm", actorForm);
+		} else
+			try {
+				final UserAccount ua = this.userAccountService.reconstruct(actorForm, Authority.STUDENT);
+				student = this.studentService.reconstruct(actorForm, binding);
+				student.setUserAccount(ua);
+				this.registerService.saveStudent(student, binding);
+				result.addObject("alert", "student.edit.correct");
+				result.addObject("actorForm", actorForm);
+			} catch (final ValidationException oops) {
+				result.addObject("errors", binding.getAllErrors());
+				actorForm.setTermsAndCondicions(false);
+				result.addObject("actorForm", actorForm);
+			} catch (final Throwable e) {
+				if (e.getMessage().contains("username is register"))
+					result.addObject("alert", "student.edit.usernameIsUsed");
+				result.addObject("errors", binding.getAllErrors());
+				actorForm.setTermsAndCondicions(false);
+				result.addObject("actorForm", actorForm);
+			}
+		result.addObject("cardmakes", this.configurationParametersService.find().getCreditCardMake());
+		result.addObject("countryPhoneCode", this.configurationParametersService.find().getCountryPhoneCode());
+		return result;
+	}
+
+	// GDPR -----------------------------------------------------------
+	@RequestMapping(value = "/deletePersonalData")
+	public ModelAndView deletePersonalData() {
+		this.studentService.deletePersonalData();
+
+		final ModelAndView result = new ModelAndView("redirect:../j_spring_security_logout");
+		return result;
+	}
 	// ANCILLARY METHODS  ---------------------------------------------------------------		
 
 	protected ModelAndView createEditModelAndView(final ActorForm actorForm) {

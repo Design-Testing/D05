@@ -223,4 +223,9 @@ public class LessonService {
 		return res;
 	}
 
+	public Collection<Lesson> findLessons(final String keyword, final String subjectLevel, final String subjectName, final String teacherName) {
+		final Collection<Lesson> res = this.lessonRepository.findLessons(keyword, subjectLevel, subjectName, teacherName);
+		Assert.notNull(res);
+		return res;
+	}
 }

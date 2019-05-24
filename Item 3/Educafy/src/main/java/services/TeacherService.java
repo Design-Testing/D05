@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Curriculum;
 import domain.Teacher;
 import forms.ActorForm;
 
@@ -40,6 +41,9 @@ public class TeacherService {
 
 	@Autowired
 	private FolderService			folderService;
+
+	@Autowired
+	private CurriculumService		curriculumService;
 
 	@Autowired
 	private Validator				validator;
@@ -72,6 +76,10 @@ public class TeacherService {
 		if (teacher.getId() == 0) {
 			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
 			result = this.teacherRepository.save(teacher);
+			final Curriculum curricula = this.curriculumService.createForNewTeacher();
+			curricula.setTeacher(result);
+			final Curriculum res = this.curriculumService.save(curricula);
+			Assert.notNull(res);
 			this.folderService.setFoldersByDefault(result);
 		} else {
 			this.actorService.checkForSpamWords(teacher);
