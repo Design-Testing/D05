@@ -893,7 +893,7 @@
 		======= CreditCard ========= =================================================================== -->
 
 	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716477920082572" />
 		<property name="expirationMonth" value="06" />
@@ -903,7 +903,7 @@
 	</bean>
 
 	<bean id="creditCard2" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="MASTER" />
 		<property name="number" value="5498128346540526" />
 		<property name="expirationMonth" value="10" />
@@ -913,7 +913,7 @@
 	</bean>
 
 	<bean id="creditCard3" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="AMEX" />
 		<property name="number" value="375278545368168" />
 		<property name="expirationMonth" value="06" />
@@ -923,7 +923,7 @@
 	</bean>
 
 	<bean id="creditCard4" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4532787155338743" />
 		<property name="expirationMonth" value="10" />
@@ -933,7 +933,7 @@
 	</bean>
 
 	<bean id="creditCard5" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 3" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716699361876929" />
 		<property name="expirationMonth" value="02" />
@@ -943,7 +943,7 @@
 	</bean>
 
 	<bean id="creditCard6" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4231348143458624" />
 		<property name="expirationMonth" value="11" />
@@ -953,7 +953,7 @@
 	</bean>
 
 	<bean id="creditCard7" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4294148159742547" />
 		<property name="expirationMonth" value="11" />
@@ -963,7 +963,7 @@
 	</bean>
 
 	<bean id="creditCard8" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5547165664775350" />
 		<property name="expirationMonth" value="11" />
@@ -973,7 +973,7 @@
 	</bean>
 
 	<bean id="creditCard9" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4410435734979051" />
 		<property name="expirationMonth" value="03" />
@@ -983,7 +983,7 @@
 	</bean>
 
 	<bean id="creditCard10" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5316710759043864" />
 		<property name="expirationMonth" value="01" />
@@ -994,7 +994,7 @@
 
 
 	<bean id="creditCard13" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5384948404521051" />
 		<property name="expirationMonth" value="01" />
@@ -1009,7 +1009,7 @@
 
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
 		<property name="sysName" value="Estudify" />
-		<property name="banner" value="https://i.ibb.co/HpCD1x8/logo1.png" />
+		<property name="banner" value="https://i.ibb.co/W3c4rmh/logo.png" />
 		<property name="welcomeMessageEn"
 			value="Welcome to Estudify! Where student find the individual lessons they are looking for!" />
 		<property name="welcomeMessageEsp"

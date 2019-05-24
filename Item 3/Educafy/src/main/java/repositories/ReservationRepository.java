@@ -13,9 +13,12 @@ import domain.Reservation;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
 	@Query("select r from Reservation r join r.lesson l where l.id=?1")
-	public Collection<Reservation> findAllReservationByLesson(int lessonId);
+	Collection<Reservation> findAllReservationByLesson(int lessonId);
 
 	@Query("select r from Reservation r where r.student.userAccount.id=?1")
-	public Collection<Reservation> findAllReservationByStudent(int studentId);
+	Collection<Reservation> findAllReservationByStudent(int studentId);
+
+	@Query("select a from Reservation a where a.creditCard.id=?1")
+	Collection<Reservation> findAllByCreditCard(int creditCardId);
 
 }

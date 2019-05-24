@@ -72,6 +72,15 @@
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
+		<!-- ========================================  STUDENT  ================================================ -->
+		<!-- ========================================================================================================= -->
+		
+		<security:authorize access="hasRole('STUDENT')">
+			<li><a href="creditCard/student/list.do"><spring:message
+								code="master.page.student.creditCard.list" /></a></li>
+		</security:authorize>
+		
+		<!-- ========================================================================================================= -->
 		<!-- ========================================  ANONYMOUS  ================================================ -->
 		<!-- ========================================================================================================= -->
 				
@@ -80,6 +89,8 @@
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="lesson/list.do"><spring:message code="master.page.lesson.list" /></a></li>
 			<li><a class="fNiv" href="teacher/create.do"><spring:message code="master.page.teacher.register" /></a></li>
+			<li><a class="fNiv" href="student/create.do"><spring:message code="master.page.student.register" /></a></li>
+			<li><a class="fNiv" href="certifier/create.do"><spring:message code="master.page.certifier.register" /></a></li>			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

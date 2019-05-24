@@ -39,6 +39,9 @@ public class TeacherService {
 	private AdministratorService	administratorService;
 
 	@Autowired
+	private FolderService			folderService;
+
+	@Autowired
 	private Validator				validator;
 
 
@@ -62,28 +65,22 @@ public class TeacherService {
 		return teachers;
 	}
 
-	//	public Teacher save(final Teacher teacher) {
-	//		Assert.notNull(teacher);
-	//		Teacher result;
-	//
-	//		if (teacher.getId() == 0) {
-	//			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
-	//			result = this.teacherRepository.save(teacher);
-	//			//			this.folderService.setFoldersByDefault(result);
-	//
-	//			final Curriculum curriculum = this.curriculaService.createForNewTeacher();
-	//			curricula.setTeacher(result);
-	//			final Curriculum res = this.curriculumRepository.save(curriculum);
-	//			Assert.notNull(res);
-	//
-	//		} else {
-	//			this.actorService.checkForSpamWords(teacher);
-	//			final Actor principal = this.actorService.findByPrincipal();
-	//			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
-	//			result = (Teacher) this.actorService.save(teacher);
-	//		}
-	//		return result;
-	//	}
+	public Teacher save(final Teacher teacher) {
+		Assert.notNull(teacher);
+		Teacher result;
+
+		if (teacher.getId() == 0) {
+			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
+			result = this.teacherRepository.save(teacher);
+			this.folderService.setFoldersByDefault(result);
+		} else {
+			this.actorService.checkForSpamWords(teacher);
+			final Actor principal = this.actorService.findByPrincipal();
+			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
+			result = (Teacher) this.actorService.save(teacher);
+		}
+		return result;
+	}
 
 	public void delete(final Teacher teacher) {
 		Assert.notNull(teacher);

@@ -155,4 +155,11 @@ public class ReservationService {
 		return result;
 	}
 
+	public Collection<Reservation> findAllByCreditCard(final int creditCardId) {
+		Assert.isTrue(creditCardId != 0);
+		final Collection<Reservation> res = this.reservationRepository.findAllByCreditCard(creditCardId);
+		Assert.notNull(res);
+		return res;
+	}
+
 }

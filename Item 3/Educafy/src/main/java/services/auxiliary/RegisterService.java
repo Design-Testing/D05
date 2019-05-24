@@ -17,6 +17,7 @@ import services.TeacherService;
 import services.UserAccountService;
 import domain.Actor;
 import domain.Administrator;
+import domain.Teacher;
 import forms.ActorForm;
 
 @Service
@@ -102,35 +103,35 @@ public class RegisterService {
 	//		return result;
 	//	}
 	//
-	//	public Teacher saveTeacher(final Teacher teacher, final BindingResult binding) {
-	//		Teacher result;
-	//		final UserAccount ua = teacher.getUserAccount();
-	//		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-	//		final String hash = encoder.encodePassword(ua.getPassword(), null);
-	//		if (teacher.getId() == 0) {
-	//			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
-	//			ua.setPassword(hash);
-	//			teacher.setUserAccount(ua);
-	//			result = this.teacherService.save(teacher);
-	//			UserAccount uaSaved = result.getUserAccount();
-	//			uaSaved.setAuthorities(ua.getAuthorities());
-	//			uaSaved.setUsername(ua.getUsername());
-	//			uaSaved.setPassword(ua.getPassword());
-	//			uaSaved = this.userAccountService.save(uaSaved);
-	//			result.setUserAccount(uaSaved);
-	//		} else {
-	//			final Teacher old = this.teacherService.findOne(teacher.getId());
-	//
-	//			ua.setPassword(hash);
-	//			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
-	//				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
-	//
-	//			result = this.teacherService.save(teacher);
-	//
-	//		}
-	//
-	//		return result;
-	//	}
+	public Teacher saveTeacher(final Teacher teacher, final BindingResult binding) {
+		Teacher result;
+		final UserAccount ua = teacher.getUserAccount();
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String hash = encoder.encodePassword(ua.getPassword(), null);
+		if (teacher.getId() == 0) {
+			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+			ua.setPassword(hash);
+			teacher.setUserAccount(ua);
+			result = this.teacherService.save(teacher);
+			UserAccount uaSaved = result.getUserAccount();
+			uaSaved.setAuthorities(ua.getAuthorities());
+			uaSaved.setUsername(ua.getUsername());
+			uaSaved.setPassword(ua.getPassword());
+			uaSaved = this.userAccountService.save(uaSaved);
+			result.setUserAccount(uaSaved);
+		} else {
+			final Teacher old = this.teacherService.findOne(teacher.getId());
+
+			ua.setPassword(hash);
+			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
+				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+
+			result = this.teacherService.save(teacher);
+
+		}
+
+		return result;
+	}
 
 	//	public Certifier saveCertifier(final Certifier certifier, final BindingResult binding) {
 	//		Certifier result;
