@@ -34,8 +34,7 @@ function generatePDF(){
 	doc.text('<spring:message code="teacher.email"/> : <jstl:out value="${teacher.email}"/>', 10, 80)
 	doc.text('<spring:message code="teacher.address"/> : <jstl:out value="${teacher.address}"/>', 10, 90)
 	doc.text('<spring:message code="teacher.vat"/> : <jstl:out value="${teacher.vat}"/>', 10, 100)
-	doc.text('', 10, 100)
-	doc.text('<spring:message code="teacher.score"/> : <jstl:out value="${teacher.score}"/>', 10, 180)
+	doc.text('', 10, 110)
 	doc.save('<spring:message code="display.document.fileName"/>.pdf')
 }
 function deletePersonalData(){

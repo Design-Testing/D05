@@ -42,8 +42,12 @@
 	</jstl:choose>
 </jstl:forEach>
 </jstl:if>
-<acme:display code="student.email" value="${student.email}"/>
-<acme:display code="student.phone" value="${student.phone}"/>
+<jstl:if test="${not empty student.email}">
+	<acme:display code="student.email" value="${student.email}"/>
+</jstl:if>
+<jstl:if test="${not empty student.phone}">
+	<acme:display code="student.phone" value="${student.phone}"/>
+</jstl:if>
 <acme:display code="student.address" value="${student.address}"/>
 <acme:display code="student.vat" value="${student.vat}"/>
 
