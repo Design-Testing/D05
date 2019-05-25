@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Curriculum;
 import domain.Teacher;
 import forms.ActorForm;
 
@@ -40,6 +41,9 @@ public class TeacherService {
 
 	@Autowired
 	private FolderService			folderService;
+
+	@Autowired
+	private CurriculumService		curriculumService;
 
 	@Autowired
 	private Validator				validator;
@@ -72,6 +76,10 @@ public class TeacherService {
 		if (teacher.getId() == 0) {
 			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
 			result = this.teacherRepository.save(teacher);
+			final Curriculum curricula = this.curriculumService.createForNewTeacher();
+			curricula.setTeacher(result);
+			final Curriculum res = this.curriculumService.save(curricula);
+			Assert.notNull(res);
 			this.folderService.setFoldersByDefault(result);
 		} else {
 			this.actorService.checkForSpamWords(teacher);
@@ -184,34 +192,39 @@ public class TeacherService {
 	public Teacher findTeacherByCurriculum(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByCurriculum(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByPersonalRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByPersonalRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByEducationRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByEducationRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByMiscellaneousRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByMiscellaneousRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public boolean hasEducationRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasEducationRecord(teacherId, recordId);
-		return false;
+		return res;
 	}
 
 	public boolean hasMiscellaneousRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasMiscellaneousRecord(teacherId, recordId);
-		return false;
+		return res;
+	}
+
+	public boolean hasPersonalRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
+		return res;
 	}
 }

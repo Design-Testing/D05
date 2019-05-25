@@ -25,6 +25,9 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 	@Query("select c.teacher from Curriculum c join c.miscellaneousRecords e where e.id=?1")
 	Teacher findTeacherByMiscellaneousRecord(int id);
 
+	@Query("select case when (count(c) > 0) then true else false end from Curriculum c where c.personalRecord.id=?2 and c.teacher.id=?1")
+	boolean hasPersonalRecord(int teacherId, int recordId);
+
 	@Query("select case when (count(c) > 0) then true else false end from Curriculum c join c.educationRecords e where e.id=?2 and c.teacher.id=?1")
 	boolean hasEducationRecord(int teacherId, int recordId);
 
