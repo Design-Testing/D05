@@ -172,7 +172,7 @@ public class MiscellaneousRecordController extends AbstractController {
 			final MiscellaneousRecord miscellaneousRecord;
 			miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
 			this.miscellaneousRecordService.certify(miscellaneousRecord);
-			final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(miscellaneousRecord.getId());
+			final Curriculum curriculum = this.curriculumService.findCurriculumByMiscellaneousRecord(miscellaneousRecord.getId());
 
 			result = new ModelAndView("curriculum/display");
 			result.addObject("curriculum", curriculum);

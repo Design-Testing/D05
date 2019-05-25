@@ -141,7 +141,7 @@ public class EducationRecordController extends AbstractController {
 			final EducationRecord educationRecord;
 			educationRecord = this.educationRecordService.findOne(educationRecordId);
 			this.educationRecordService.certify(educationRecord);
-			final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(educationRecord.getId());
+			final Curriculum curriculum = this.curriculumService.findCurriculumByEducationRecord(educationRecord.getId());
 
 			result = new ModelAndView("curriculum/display");
 			result.addObject("curriculum", curriculum);
