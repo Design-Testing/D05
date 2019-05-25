@@ -49,7 +49,7 @@ public class CurriculumService {
 
 		curriculum.setTeacher(teacher);
 
-		//curriculum.setTicker(this.generateTicker(curriculum.getTeacher().getName()));
+		curriculum.setTicker(this.generateTicker(curriculum.getTeacher().getName()));
 
 		final Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
 		curriculum.setMiscellaneousRecords(miscellaneousRecord);
@@ -102,7 +102,7 @@ public class CurriculumService {
 		if (curriculum.getId() != 0) {
 			Assert.isTrue(this.teacherService.findTeacherByCurriculum(curriculum.getId()).getId() == teacher.getId(), "logged actor doesnt match curriculum's owner");
 			final Curriculum retrieved = this.findOne(curriculum.getId());
-			//curriculum.setTicker(retrieved.getTicker());
+			curriculum.setTicker(retrieved.getTicker());
 		}
 
 		else

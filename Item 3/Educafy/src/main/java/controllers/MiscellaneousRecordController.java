@@ -123,11 +123,16 @@ public class MiscellaneousRecordController extends AbstractController {
 			if (logged.getAuthorities().contains(authTeacher)) {
 				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
 					res.addObject("buttons", true);
-				else
+				else {
+					Assert.isTrue(miscellaneousRecord.getIsDraft() == false, "You can not see a record in draft mode");
+					Assert.isTrue(miscellaneousRecord.getIsCertified() == true, "You can not see a record that is not certified");
 					res.addObject("buttonsAnonymous", true);
-			} else if (logged.getAuthorities().contains(authStudent))
+				}
+			} else if (logged.getAuthorities().contains(authStudent)) {
+				Assert.isTrue(miscellaneousRecord.getIsDraft() == false, "You can not see a record in draft mode");
+				Assert.isTrue(miscellaneousRecord.getIsCertified() == true, "You can not see a record that is not certified");
 				res.addObject("buttonsAnonymous", true);
-			else if (logged.getAuthorities().contains(authCertifier))
+			} else if (logged.getAuthorities().contains(authCertifier))
 				res.addObject("buttonsCertifier", true);
 
 		} else
@@ -167,7 +172,7 @@ public class MiscellaneousRecordController extends AbstractController {
 			final MiscellaneousRecord miscellaneousRecord;
 			miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
 			this.miscellaneousRecordService.certify(miscellaneousRecord);
-			final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(miscellaneousRecord.getId());
+			final Curriculum curriculum = this.curriculumService.findCurriculumByMiscellaneousRecord(miscellaneousRecord.getId());
 
 			result = new ModelAndView("curriculum/display");
 			result.addObject("curriculum", curriculum);
