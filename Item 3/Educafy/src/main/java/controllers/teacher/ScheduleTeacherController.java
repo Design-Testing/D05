@@ -1,17 +1,10 @@
 
 package controllers.teacher;
 
-import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import javax.validation.ValidationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +16,7 @@ import services.TeacherService;
 import controllers.AbstractController;
 import controllers.SubjectController;
 import domain.Lesson;
+import domain.Schedule;
 import domain.Teacher;
 import forms.LessonForm;
 
@@ -48,120 +42,102 @@ public class ScheduleTeacherController extends AbstractController {
 	// CREATE  ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int subjectId) {
+	public ModelAndView create() {
 		ModelAndView result;
-		final Lesson lesson = this.lessonService.create();
-		result = this.createEditModelAndView(lesson, subjectId);
+		final Schedule schedule = this.scheduleService.create();
+		result = this.display(schedule.getId());
 		return result;
 	}
 
-	// LIST --------------------------------------------------------
+	// DISPLAY --------------------------------------------------------
 
-	@RequestMapping(value = "/myLessons", method = RequestMethod.GET)
-	public ModelAndView myLessons() {
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int teacherId) {
 		final ModelAndView result;
-		final Collection<Lesson> lessons;
+		Teacher teacher;
+		final Schedule schedule;
 
-		lessons = this.lessonService.findAllByTeacher();
+		teacher = this.teacherService.findOne(teacherId);
+		schedule = this.scheduleService.findScheduleByTeacher(teacher);
 
-		result = new ModelAndView("lesson/list");
-		result.addObject("lessons", lessons);
-		result.addObject("lang", this.lang);
-		result.addObject("rol", "teacher");
-		result.addObject("requetURI", "lesson/teacher/myLessons.do");
-		result.addObject("principalID", this.teacherService.findByPrincipal().getId());
-
-		return result;
-	}
-
-	// TO FINAL MODE --------------------------------------------------------
-
-	@RequestMapping(value = "/finalMode", method = RequestMethod.GET)
-	public ModelAndView finalMode(@RequestParam final int lessonId) {
-		ModelAndView result;
-		final Lesson lesson = this.lessonService.findOne(lessonId);
-
-		if (lesson == null) {
-			result = this.myLessons();
-			result.addObject("msg", "lesson.final.mode.error");
+		if (schedule != null) {
+			result = new ModelAndView("schedule/display");
+			result.addObject("schedule", schedule);
+			result.addObject("lang", this.lang);
 		} else
-			try {
-				this.lessonService.toFinalMode(lessonId);
-				result = this.myLessons();
-			} catch (final Throwable oops) {
-				String errormsg = "lesson.final.mode.error";
-				result = this.myLessons();
-				if (!lesson.getIsDraft())
-					errormsg = "lesson.final.no.draft";
-				result.addObject("msg", errormsg);
-			}
-
-		return result;
-	}
-
-	// EDIT --------------------------------------------------------
-
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int lessonId, @RequestParam final int subjectId) {
-		ModelAndView result;
-		Lesson lesson;
-
-		lesson = this.lessonService.findOne(lessonId);
-
-		final Teacher teacher = this.teacherService.findByPrincipal();
-
-		if ((lesson.getIsDraft() && lesson.getTeacher().equals(teacher)))
-			result = this.createEditModelAndView(lesson, subjectId);
-		else
 			result = new ModelAndView("redirect:misc/403");
 
 		return result;
 	}
 
-	// SAVE --------------------------------------------------------
+	// MYSCHEDULE --------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final LessonForm lessonForm, final BindingResult binding, final HttpServletRequest request) {
-		ModelAndView result;
-		String paramSubjectId;
-		Integer subjectId;
+	@RequestMapping(value = "/mySchedule", method = RequestMethod.GET)
+	public ModelAndView mySchedule() {
+		final ModelAndView result;
+		Teacher teacher;
+		final Schedule schedule;
 
-		paramSubjectId = request.getParameter("subjectId");
-		subjectId = paramSubjectId.isEmpty() ? null : Integer.parseInt(paramSubjectId);
+		teacher = this.teacherService.findByPrincipal();
+		schedule = this.scheduleService.findScheduleByTeacher(teacher);
 
-		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(lessonForm, subjectId);
-			result.addObject("errors", binding.getAllErrors());
+		if (schedule != null) {
+			result = new ModelAndView("schedule/display");
+			result.addObject("schedule", schedule);
+			result.addObject("lang", this.lang);
 		} else
-			try {
-				final Lesson lesson = this.lessonService.reconstruct(lessonForm, binding);
-				this.lessonService.save(lesson, subjectId);
-				result = this.subjectController.display(subjectId);
-			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView(lessonForm, subjectId, "commit.lesson.error");
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(lessonForm, subjectId, "commit.lesson.error");
-				result.addObject("errors", binding.getAllErrors());
-			}
+			result = new ModelAndView("redirect:misc/403");
 
 		return result;
 	}
 
-	// DELETE --------------------------------------------------------
-
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(final int lessonId) {
-		ModelAndView result;
-		final Lesson lesson = this.lessonService.findOne(lessonId);
-		try {
-			this.lessonService.delete(lesson);
-			result = this.myLessons();
-		} catch (final Throwable opps) {
-			result = new ModelAndView("lesson/error");
-			result.addObject("msg", "commit.lesson.delete.error");
-		}
-		return result;
-	}
+	//	// EDIT --------------------------------------------------------
+	//
+	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	//	public ModelAndView edit(@RequestParam final int lessonId, @RequestParam final int subjectId) {
+	//		ModelAndView result;
+	//		Lesson lesson;
+	//
+	//		lesson = this.lessonService.findOne(lessonId);
+	//
+	//		final Teacher teacher = this.teacherService.findByPrincipal();
+	//
+	//		if ((lesson.getIsDraft() && lesson.getTeacher().equals(teacher)))
+	//			result = this.createEditModelAndView(lesson, subjectId);
+	//		else
+	//			result = new ModelAndView("redirect:misc/403");
+	//
+	//		return result;
+	//	}
+	//
+	//	// SAVE --------------------------------------------------------
+	//
+	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	//	public ModelAndView save(@Valid final LessonForm lessonForm, final BindingResult binding, final HttpServletRequest request) {
+	//		ModelAndView result;
+	//		String paramSubjectId;
+	//		Integer subjectId;
+	//
+	//		paramSubjectId = request.getParameter("subjectId");
+	//		subjectId = paramSubjectId.isEmpty() ? null : Integer.parseInt(paramSubjectId);
+	//
+	//		if (binding.hasErrors()) {
+	//			result = this.createEditModelAndView(lessonForm, subjectId);
+	//			result.addObject("errors", binding.getAllErrors());
+	//		} else
+	//			try {
+	//				final Lesson lesson = this.lessonService.reconstruct(lessonForm, binding);
+	//				this.lessonService.save(lesson, subjectId);
+	//				result = this.subjectController.display(subjectId);
+	//			} catch (final ValidationException oops) {
+	//				result = this.createEditModelAndView(lessonForm, subjectId, "commit.lesson.error");
+	//			} catch (final Throwable oops) {
+	//				result = this.createEditModelAndView(lessonForm, subjectId, "commit.lesson.error");
+	//				result.addObject("errors", binding.getAllErrors());
+	//			}
+	//
+	//		return result;
+	//	}
 
 	// ANCILLIARY METHODS --------------------------------------------------------
 

@@ -39,6 +39,8 @@
 		<value>/views/student/tiles.xml</value>
 		<value>/views/certifier/tiles.xml</value>
 		<value>/views/creditCard/tiles.xml</value>
+		<value>/views/schedule/tiles.xml</value>
+		
 		
 		
 	</util:list>

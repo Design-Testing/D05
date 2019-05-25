@@ -61,6 +61,11 @@
 		<security:intercept-url pattern="/subject/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/subject/display.do" access="permitAll" /> 
 		
+		<!-- SCHEDULE -->
+		
+		<security:intercept-url pattern="/schedule/teacher/display.do" access="permitAll" />
+		<security:intercept-url pattern="/schedule/teacher/create.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/schedule/teacher/mySchedule.do" access="hasRole('TEACHER')" />
 		
 		 
 	

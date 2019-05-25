@@ -52,10 +52,11 @@
 		<!-- ========================================================================================================= -->
 		
 		<security:authorize access="hasRole('TEACHER')">
-			<!-- LESSONS -->
 			<li><a href="lesson/teacher/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
 			<li><a href="assesment/teacher/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
+			
+			<li><a href="schedule/teacher/mySchedule.do"><spring:message code="master.page.assesment.mySchedule" /></a></li>
 			
 		</security:authorize>
 		
