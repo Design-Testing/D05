@@ -79,6 +79,15 @@
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
+		<!-- ========================================  TEACHER  ================================================ -->
+		<!-- ========================================================================================================= -->
+		
+		<security:authorize access="hasRole('TEACHER')">
+			<li><a href="curriculum/display.do"><spring:message
+								code="master.page.my.curriculum" /></a></li>
+		</security:authorize>
+		
+		<!-- ========================================================================================================= -->
 		<!-- ========================================  ANONYMOUS  ================================================ -->
 		<!-- ========================================================================================================= -->
 				
@@ -92,7 +101,10 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+
 			<li><a href="subject/list.do"><spring:message code="master.page.subject.list" /></a></li>
+
+			<li><a class="fNiv" href="teacher/listAll.do"><spring:message code="master.page.teachers.all" /></a></li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
