@@ -17,22 +17,22 @@
 <tiles-definitions>
 	
 	<definition name="certifier/edit" extends="master.page">	
-		<put-attribute name="title" value="certifier: Edit" />
+		<put-attribute name="title" value="Certifier: Edit" />
 		<put-attribute name="body" value="/views/certifier/edit.jsp" />
 	</definition>
 	
 	<definition name="certifier/display" extends="master.page">	
-		<put-attribute name="title" value="certifier: Display" />
+		<put-attribute name="title" value="Certifier: Display" />
 		<put-attribute name="body" value="/views/certifier/display.jsp" />
 	</definition>
 	
 	<definition name="certifier/display2" extends="master.page">	
-		<put-attribute name="title" value="certifier: Display" />
+		<put-attribute name="title" value="Certifier: Display" />
 		<put-attribute name="body" value="/views/certifier/display2.jsp" />
 	</definition>
 	
 	<definition name="certifier/list" extends="master.page">	
-		<put-attribute name="title" value="certifier: List" />
+		<put-attribute name="title" value="Certifier: List" />
 		<put-attribute name="body" value="/views/certifier/list.jsp" />
 	</definition>
 	

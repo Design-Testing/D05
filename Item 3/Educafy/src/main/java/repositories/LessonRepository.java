@@ -31,4 +31,8 @@ public interface LessonRepository extends JpaRepository<Lesson, Integer> {
 	@Query("select distinct le from Lesson le join le.subject s join le.teacher t where (le.isDraft=FALSE) AND (?1='' OR le.description LIKE CONCAT('%',?1,'%') OR le.title LIKE CONCAT('%',?1,'%') OR le.ticker LIKE CONCAT('%',?1,'%') OR le.description LIKE CONCAT('%',?1,'%')) AND (?2='' OR ?2=s.level) AND (?3='' OR ?3=s.nameEs OR ?3=s.nameEn) AND (?4='' OR t.name LIKE CONCAT('%',?4,'%'))")
 	Collection<Lesson> findLessons(String keyword, String subjectLevel, String subjectName, String teacherName);
 
+	/** The average, minimum, maximum and standard deviation of lessons per teacher */
+	@Query("select avg(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0), min(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0), max(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0), stddev(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0) from Teacher c")
+	Double[] getStatisticsOfSalary();
+
 }
