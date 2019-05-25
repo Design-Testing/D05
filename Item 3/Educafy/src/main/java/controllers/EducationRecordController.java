@@ -192,9 +192,10 @@ public class EducationRecordController extends AbstractController {
 				Assert.isTrue(educationRecord.getIsDraft() == false, "You can not see a record in draft mode");
 				Assert.isTrue(educationRecord.getIsCertified() == true, "You can not see a record that is not certified");
 				res.addObject("buttonsAnonymous", true);
-			} else if (logged.getAuthorities().contains(authCertifier))
+			} else if (logged.getAuthorities().contains(authCertifier)) {
+				Assert.isTrue(educationRecord.getIsDraft() == false, "You can not see a record in draft mode");
 				res.addObject("buttonsCertifier", true);
-
+			}
 		} else
 			res = new ModelAndView("redirect:misc/403");
 
