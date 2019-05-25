@@ -44,7 +44,6 @@
 		<security:intercept-url pattern="/profile/terms.do" access="permitAll" />
 		
 		<!-- SYSTEM ADMINISTRATION -->
-		
 		<security:intercept-url pattern="/administrator/display.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/create.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMIN')" />
@@ -61,9 +60,6 @@
 		<security:intercept-url pattern="/subject/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/subject/display.do" access="permitAll" /> 
 		
-		
-		 
-	
 		<!-- LESSON -->
  		<security:intercept-url pattern="/lesson/list.do" access="permitAll" />
  		<security:intercept-url pattern="/lesson/myLessons.do" access="permitAll" />
@@ -96,6 +92,8 @@
 		<!-- FINDER -->
 		<security:intercept-url pattern="/finder/search.do" access="permitAll"/>
 		<security:intercept-url pattern="/finder/searching.do" access="permitAll"/>
+		
+		<security:intercept-url pattern="/finder/student/edit.do" access="hasRole('STUDENT')"/>
 		
 		<!-- SOCIAL PROFILE -->
 		<security:intercept-url pattern="/socialProfile/**" access="permitAll"/>

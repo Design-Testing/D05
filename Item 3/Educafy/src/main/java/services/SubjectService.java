@@ -65,4 +65,22 @@ public class SubjectService {
 		Assert.isTrue(lessons.isEmpty(), "No puedes eliminar una asignatura que tenga una clase asginada.");
 		this.subjectRepository.delete(result);
 	}
+
+	public Collection<String> subjectLevels() {
+		final Collection<String> res = this.subjectRepository.subjectLevels();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<String> subjectNamesEs() {
+		final Collection<String> res = this.subjectRepository.subjectNamesEs();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Collection<String> subjectNamesEn() {
+		final Collection<String> res = this.subjectRepository.subjectNamesEn();
+		Assert.notNull(res);
+		return res;
+	}
 }

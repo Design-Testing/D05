@@ -64,11 +64,9 @@
 		<!-- ========================================================================================================= -->
 		
 		<security:authorize access="hasRole('STUDENT')">
-					
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
-			
+			<li><a href="finder/student/edit.do"><spring:message code="master.page.finder.student.edit" /></a></li>
 			<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
-			
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->

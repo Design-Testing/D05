@@ -1060,6 +1060,7 @@
 		<property name="teacherName" value="John" />
 		<property name="subjectName" value="IT" />
 		<property name="subjectLevel" value="4ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
 
 		<!-- Relations -->
 		<property name="lessons">
@@ -1073,6 +1074,7 @@
 		<property name="teacherName" value="Patrick" />
 		<property name="subjectName" value="MAT" />
 		<property name="subjectLevel" value="3ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
 
 		<!-- Relations -->
 		<property name="lessons">
@@ -1086,6 +1088,7 @@
 		<property name="teacherName" value="Robert" />
 		<property name="subjectName" value="LENG" />
 		<property name="subjectLevel" value="4ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
 
 		<!-- Relations -->
 		<property name="lessons">
