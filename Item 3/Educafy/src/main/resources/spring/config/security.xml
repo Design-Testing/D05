@@ -71,12 +71,14 @@
 		<security:intercept-url pattern="/teacher/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/teacher/display2.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/teacher/deletePersonalData.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/teacher/listAll.do" access="permitAll" />
 		
 		<!-- CURRICULUM -->
 		<security:intercept-url pattern="/curriculum/create.do" access="permitAll" />
 		<security:intercept-url pattern="/curriculum/display.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/curriculum/delete.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/curriculum/displayById.do" access="permitAll" />
+		<security:intercept-url pattern="/curriculum/displayByTeacherId.do" access="permitAll" />
 		<security:intercept-url pattern="/personalRecord/edit.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/personalRecord/toFinal.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/personalRecord/certify.do" access="hasRole('CERTFIER')" />

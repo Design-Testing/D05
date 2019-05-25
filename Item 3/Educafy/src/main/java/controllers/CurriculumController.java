@@ -45,9 +45,9 @@ public class CurriculumController extends AbstractController {
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);
 			final Authority authStudent = new Authority();
-			authTeacher.setAuthority(Authority.STUDENT);
+			authStudent.setAuthority(Authority.STUDENT);
 			final Authority authCertifier = new Authority();
-			authTeacher.setAuthority(Authority.CERTIFIER);
+			authCertifier.setAuthority(Authority.CERTIFIER);
 			if (logged.getAuthorities().contains(authTeacher)) {
 				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
 					res.addObject("buttons", true);
@@ -74,18 +74,19 @@ public class CurriculumController extends AbstractController {
 
 			res = new ModelAndView("curriculum/display");
 
-			
 			res.addObject("curriculum", curriculum);
 			res.addObject("buttons", true);
-			
-			/*final UserAccount logged = LoginService.getPrincipal();
+
+			final UserAccount logged = LoginService.getPrincipal();
+			res.addObject("curriculum", curriculum);
+			res.addObject("buttons", true);
 
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);
 			final Authority authStudent = new Authority();
-			authTeacher.setAuthority(Authority.STUDENT);
+			authStudent.setAuthority(Authority.STUDENT);
 			final Authority authCertifier = new Authority();
-			authTeacher.setAuthority(Authority.CERTIFIER);
+			authCertifier.setAuthority(Authority.CERTIFIER);
 			if (logged.getAuthorities().contains(authTeacher)) {
 				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
 					res.addObject("buttons", true);
@@ -94,7 +95,8 @@ public class CurriculumController extends AbstractController {
 			} else if (logged.getAuthorities().contains(authStudent))
 				res.addObject("buttonsAnonymous", true);
 			else if (logged.getAuthorities().contains(authCertifier))
-				res.addObject("buttonsCertifier", true);*/
+				res.addObject("buttonsCertifier", true);
+
 		} else {
 			res = new ModelAndView("curriculum/create");
 			res.addObject("curriculum", curriculum);
@@ -146,6 +148,41 @@ public class CurriculumController extends AbstractController {
 		result = new ModelAndView("curriculum/create");
 		result.addObject("curriculum", curriculum);
 		return result;
+	}
+
+	@RequestMapping(value = "/displayByTeacherId", method = RequestMethod.GET)
+	public ModelAndView displayByTeacherId(@RequestParam final int teacherId) {
+		final ModelAndView res;
+		final Curriculum curriculum = this.curriculumService.findCurriculumByTeacher(teacherId);
+		if (!(curriculum == null)) {
+
+			res = new ModelAndView("curriculum/display");
+
+			final UserAccount logged = LoginService.getPrincipal();
+			res.addObject("curriculum", curriculum);
+			res.addObject("buttons", true);
+
+			final Authority authTeacher = new Authority();
+			authTeacher.setAuthority(Authority.TEACHER);
+			final Authority authStudent = new Authority();
+			authStudent.setAuthority(Authority.STUDENT);
+			final Authority authCertifier = new Authority();
+			authCertifier.setAuthority(Authority.CERTIFIER);
+			if (logged.getAuthorities().contains(authTeacher)) {
+				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
+					res.addObject("buttons", true);
+				else
+					res.addObject("buttonsAnonymous", true);
+			} else if (logged.getAuthorities().contains(authStudent))
+				res.addObject("buttonsAnonymous", true);
+			else if (logged.getAuthorities().contains(authCertifier))
+				res.addObject("buttonsCertifier", true);
+		} else {
+			res = new ModelAndView("curriculum/create");
+			res.addObject("curriculum", curriculum);
+		}
+
+		return res;
 	}
 
 	protected ModelAndView createEditModelAndView(final Curriculum curriculum) {

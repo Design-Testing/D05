@@ -171,6 +171,7 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv" href="teacher/listAll.do"><spring:message code="master.page.teachers.all" /></a></li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
