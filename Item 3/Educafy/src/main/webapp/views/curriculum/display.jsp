@@ -27,19 +27,18 @@
     <display:column property="statement" title="${statement}" sortable="true"/>
     <jstl:choose>
     <jstl:when test="${buttons}">
-			<security:authorize access="hasRole('TEACHER')">
-				<display:column>
-                <input type="button" name="edit"
-                    value="<spring:message code="record.edit" />"
-                    onclick="relativeRedir('personalRecord/edit.do?personalRecordId=${row.id}')" />
-               
-					</display:column>
-					<display:column>
-					<input type="button" name="display"
+    <security:authorize access="hasRole('TEACHER')">
+	<display:column>
+            <input type="button" name="edit"
+                value="<spring:message code="record.edit" />"
+                onclick="relativeRedir('personalRecord/edit.do?personalRecordId=${row.id}&curriculumId=${curriculum.id}')" />
+	</display:column>
+	<display:column>
+			<input type="button" name="display"
                 value="<spring:message code="record.display" />"
                 onclick="relativeRedir('personalRecord/display.do?personalRecordId=${row.id}')" />
-					</display:column>
-					<display:column>
+	</display:column>
+	<display:column>
                 <jstl:if test="${row.isDraft eq true}">
                 	<input type="button" name="display"
                 	value="<spring:message code="record.toFinal" />"
@@ -48,25 +47,55 @@
                 <jstl:if test="${row.isDraft eq false}">
                 	<jstl:out value="In final mode" />
                 </jstl:if>
-		</display:column>
-		<display:column>
-		</display:column>
+	</display:column>
+	<display:column>
+                <jstl:if test="${row.isCertified eq true}">
+                	<jstl:out value="Certified" />
+                </jstl:if>
+                <jstl:if test="${row.isCertified eq false}">
+                	<jstl:out value="Not certified" />
+                </jstl:if>
+	</display:column>
 	</security:authorize>
 	</jstl:when>
-   <jstl:otherwise>
-	<jstl:if test="${row.isCertified eq true}">
-	<display:column>
+   <jstl:when test="${buttonsAnonymous}">
+			<jstl:if test="${row.isCertified eq true}">
+				<display:column>
+				<input type="button" name="display"
+                value="<spring:message code="record.display" />"
+                onclick="relativeRedir('personalRecord/display.do?personalRecordId=${row.id}')" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${row.isCertified eq false}">
+				<display:column>
+				<jstl:out value="Not certified" />
+				</display:column>
+    		</jstl:if>
+    </jstl:when>
+     <jstl:when test="${buttonsCertifier}">
+     		<display:column>
 			<input type="button" name="display"
                 value="<spring:message code="record.display" />"
                 onclick="relativeRedir('personalRecord/display.do?personalRecordId=${row.id}')" />
-	</display:column>
-    </jstl:if>
-    <jstl:if test="${row.isCertified eq false}">
-	<display:column>
-			<jstl:out value="Not certified" />
-	</display:column>
-    </jstl:if>
-    </jstl:otherwise>
+			</display:column>
+			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
+				<display:column>
+				<jstl:out value="Not final" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
+				<display:column>
+				<input type="button" name="display"
+                value="<spring:message code="record.certify" />"
+                onclick="relativeRedir('personalRecord/certify.do?personalRecordId=${row.id}')" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${row.isCertified eq true}">
+				<display:column>
+				<jstl:out value="Certified" />
+				</display:column>
+    		</jstl:if>
+    </jstl:when>
     </jstl:choose>
 	</display:table>
 
@@ -113,26 +142,58 @@
                 	<jstl:out value="In final mode" />
                 </jstl:if>
 	</display:column>
+	<display:column>
+                <jstl:if test="${row.isCertified eq true}">
+                	<jstl:out value="Certified" />
+                </jstl:if>
+                <jstl:if test="${row.isCertified eq false}">
+                	<jstl:out value="Not certified" />
+                </jstl:if>
+	</display:column>
 	</security:authorize>
 	</jstl:when>
-   <jstl:otherwise>
-	<jstl:if test="${row.isCertified eq true}">
-	<display:column>
+   <jstl:when test="${buttonsAnonymous}">
+			<jstl:if test="${row.isCertified eq true}">
+				<display:column>
+				<input type="button" name="display"
+                value="<spring:message code="record.display" />"
+                onclick="relativeRedir('educationRecord/display.do?educationRecordId=${row.id}')" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${row.isCertified eq false}">
+				<display:column>
+				<jstl:out value="Not certified" />
+				</display:column>
+    		</jstl:if>
+    </jstl:when>
+     <jstl:when test="${buttonsCertifier}">
+     		<display:column>
 			<input type="button" name="display"
                 value="<spring:message code="record.display" />"
                 onclick="relativeRedir('educationRecord/display.do?educationRecordId=${row.id}')" />
-	</display:column>
-    </jstl:if>
-    <jstl:if test="${row.isCertified eq false}">
-	<display:column>
-			<jstl:out value="Not certified" />
-	</display:column>
-    </jstl:if>
-    </jstl:otherwise>
+			</display:column>
+			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
+				<display:column>
+				<jstl:out value="Not final" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
+				<display:column>
+				<input type="button" name="display"
+                value="<spring:message code="record.certify" />"
+                onclick="relativeRedir('educationRecord/certify.do?educationRecordId=${row.id}')" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${row.isCertified eq true}">
+				<display:column>
+				<jstl:out value="Certified" />
+				</display:column>
+    		</jstl:if>
+    </jstl:when>
     </jstl:choose>
 	</display:table>
 	<br />
-	<jstl:if test="${buttons}">
+	<jstl:if test="${buttons eq true}">
 	<input type="button" name="create"
     value="<spring:message code="record.create.educationRecord" />"
     onclick="relativeRedir('educationRecord/create.do?curriculumId=${curriculum.id}')" />
@@ -154,7 +215,7 @@
     <display:column property="freeText" title="${freeText}" sortable="true"/>
     <spring:message var="attachments" code="record.attachments"/>
     <display:column property="attachments" title="${attachments}" sortable="true"/>
-    <jstl:choose>
+   <jstl:choose>
     <jstl:when test="${buttons}">
     <security:authorize access="hasRole('TEACHER')">
 	<display:column>
@@ -166,7 +227,9 @@
 			<input type="button" name="delete"
                 value="<spring:message code="record.delete" />"
                 onclick="relativeRedir('miscellaneousRecord/delete.do?miscellaneousRecordId=${row.id}')" />
-                <input type="button" name="display"
+	</display:column>
+	<display:column>
+			<input type="button" name="display"
                 value="<spring:message code="record.display" />"
                 onclick="relativeRedir('miscellaneousRecord/display.do?miscellaneousRecordId=${row.id}')" />
 	</display:column>
@@ -180,24 +243,55 @@
                 	<jstl:out value="In final mode" />
                 </jstl:if>
 	</display:column>
+	<display:column>
+                <jstl:if test="${row.isCertified eq true}">
+                	<jstl:out value="Certified" />
+                </jstl:if>
+                <jstl:if test="${row.isCertified eq false}">
+                	<jstl:out value="Not certified" />
+                </jstl:if>
+	</display:column>
 	</security:authorize>
 	</jstl:when>
-   <jstl:otherwise>
-	<jstl:if test="${row.isCertified eq true}">
-	<display:column>
+   <jstl:when test="${buttonsAnonymous}">
+			<jstl:if test="${row.isCertified eq true}">
+				<display:column>
+				<input type="button" name="display"
+                value="<spring:message code="record.display" />"
+                onclick="relativeRedir('miscellaneousRecord/display.do?miscellaneousRecordId=${row.id}')" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${row.isCertified eq false}">
+				<display:column>
+				<jstl:out value="Not certified" />
+				</display:column>
+    		</jstl:if>
+    </jstl:when>
+     <jstl:when test="${buttonsCertifier}">
+     		<display:column>
 			<input type="button" name="display"
                 value="<spring:message code="record.display" />"
                 onclick="relativeRedir('miscellaneousRecord/display.do?miscellaneousRecordId=${row.id}')" />
-	</display:column>
-	</jstl:if>
-    <jstl:if test="${row.isCertified eq false}">
-	<display:column>
-			<jstl:out value="Not certified" />
-	</display:column>
-    </jstl:if>
-    </jstl:otherwise>
+			</display:column>
+			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
+				<display:column>
+				<jstl:out value="Not final" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
+				<display:column>
+				<input type="button" name="display"
+                value="<spring:message code="record.certify" />"
+                onclick="relativeRedir('miscellaneousRecord/certify.do?miscellaneousRecordId=${row.id}')" />
+				</display:column>
+    		</jstl:if>
+    		<jstl:if test="${row.isCertified eq true}">
+				<display:column>
+				<jstl:out value="Certified" />
+				</display:column>
+    		</jstl:if>
+    </jstl:when>
     </jstl:choose>
-        
 	</display:table>
 	<br />
 	<jstl:if test="${buttons}">

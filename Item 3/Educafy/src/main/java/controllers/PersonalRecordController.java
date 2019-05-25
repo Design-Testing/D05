@@ -106,9 +106,7 @@ public class PersonalRecordController extends AbstractController {
 		ModelAndView result;
 		try {
 			final PersonalRecord personalRecord;
-			final Teacher teacher = this.teacherService.findByPrincipal();
 			personalRecord = this.personalRecordService.findOne(personalRecordId);
-			Assert.isTrue(this.teacherService.hasPersonalRecord(teacher.getId(), personalRecordId), "This personal record is not of your property");
 			this.personalRecordService.certify(personalRecord);
 			final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(personalRecord.getId());
 

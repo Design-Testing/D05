@@ -40,7 +40,6 @@ public class CurriculumController extends AbstractController {
 
 			final UserAccount logged = LoginService.getPrincipal();
 			res.addObject("curriculum", curriculum);
-			res.addObject("buttons", true);
 
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);
@@ -75,11 +74,8 @@ public class CurriculumController extends AbstractController {
 			res = new ModelAndView("curriculum/display");
 
 			res.addObject("curriculum", curriculum);
-			res.addObject("buttons", true);
 
 			final UserAccount logged = LoginService.getPrincipal();
-			res.addObject("curriculum", curriculum);
-			res.addObject("buttons", true);
 
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);
@@ -160,7 +156,6 @@ public class CurriculumController extends AbstractController {
 
 			final UserAccount logged = LoginService.getPrincipal();
 			res.addObject("curriculum", curriculum);
-			res.addObject("buttons", true);
 
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);

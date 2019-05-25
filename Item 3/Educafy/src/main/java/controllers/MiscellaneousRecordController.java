@@ -109,7 +109,6 @@ public class MiscellaneousRecordController extends AbstractController {
 			res = new ModelAndView("miscellaneousRecord/display");
 			res.addObject("miscellaneousRecord", miscellaneousRecord);
 			res.addObject("curriculumId", this.curriculumService.findCurriculumByMiscellaneousRecord(miscellaneousRecord.getId()).getId());
-			res.addObject("buttons", false);
 
 			final Curriculum curriculum = this.curriculumService.findOne(this.curriculumService.findCurriculumByMiscellaneousRecord(miscellaneousRecord.getId()).getId());
 
@@ -117,9 +116,19 @@ public class MiscellaneousRecordController extends AbstractController {
 
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);
-			if (logged.getAuthorities().contains(authTeacher))
+			final Authority authStudent = new Authority();
+			authStudent.setAuthority(Authority.STUDENT);
+			final Authority authCertifier = new Authority();
+			authCertifier.setAuthority(Authority.CERTIFIER);
+			if (logged.getAuthorities().contains(authTeacher)) {
 				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
 					res.addObject("buttons", true);
+				else
+					res.addObject("buttonsAnonymous", true);
+			} else if (logged.getAuthorities().contains(authStudent))
+				res.addObject("buttonsAnonymous", true);
+			else if (logged.getAuthorities().contains(authCertifier))
+				res.addObject("buttonsCertifier", true);
 
 		} else
 			res = new ModelAndView("redirect:misc/403");
@@ -127,7 +136,6 @@ public class MiscellaneousRecordController extends AbstractController {
 		return res;
 
 	}
-
 	@RequestMapping(value = "/toFinal", method = RequestMethod.GET)
 	public ModelAndView toFinal(@RequestParam final int miscellaneousRecordId) {
 		ModelAndView result;
@@ -157,9 +165,7 @@ public class MiscellaneousRecordController extends AbstractController {
 		ModelAndView result;
 		try {
 			final MiscellaneousRecord miscellaneousRecord;
-			final Teacher teacher = this.teacherService.findByPrincipal();
 			miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
-			Assert.isTrue(this.teacherService.hasPersonalRecord(teacher.getId(), miscellaneousRecordId), "This miscellaneous record is not of your property");
 			this.miscellaneousRecordService.certify(miscellaneousRecord);
 			final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(miscellaneousRecord.getId());
 
