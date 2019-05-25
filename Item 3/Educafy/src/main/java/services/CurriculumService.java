@@ -21,19 +21,13 @@ import domain.Teacher;
 public class CurriculumService {
 
 	@Autowired
-	private CurriculumRepository		curriculumRepository;
+	private CurriculumRepository	curriculumRepository;
 
 	@Autowired
-	private TeacherService				teacherService;
+	private TeacherService			teacherService;
 
 	@Autowired
-	private PersonalRecordService		personalRecordService;
-
-	@Autowired
-	private EducationRecordService		educationRecordService;
-
-	@Autowired
-	private MiscellaneousRecordService	miscellaneousRecordService;
+	private PersonalRecordService	personalRecordService;
 
 
 	public Curriculum create() {
@@ -163,6 +157,12 @@ public class CurriculumService {
 		final Collection<Curriculum> cs = this.curriculumRepository.getCurriculumWithTicker(ticker);
 		if (!cs.isEmpty())
 			this.generateTicker(teacherName);
+		return res;
+	}
+
+	public Double findCurriculumRatio() {
+		final Double res = this.curriculumRepository.findCurriculumRatio();
+		Assert.notNull(res);
 		return res;
 	}
 

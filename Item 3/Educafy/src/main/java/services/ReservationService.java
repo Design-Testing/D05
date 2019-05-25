@@ -162,4 +162,43 @@ public class ReservationService {
 		return res;
 	}
 
+	public Double findPendingReservationRatio() {
+		Double res = this.reservationRepository.findPendingReservationRatio();
+		if (res == null)
+			res = 0.0;
+		return res;
+	}
+	public Double findAcceptedReservationRatio() {
+		Double res = this.reservationRepository.findAcceptedReservationRatio();
+		if (res == null)
+			res = 0.0;
+		return res;
+	}
+
+	public Double findRejectedReservationRatio() {
+		Double res = this.reservationRepository.findRejectedReservationRatio();
+		if (res == null)
+			res = 0.0;
+		return res;
+	}
+
+	public Double findFinalOverRejectedReservationRatio() {
+		Double res = this.reservationRepository.findFinalOverRejectedReservationRatio();
+		if (res == null)
+			res = 0.0;
+		return res;
+	}
+
+	public Double[] getStatisticsOfPassExams() {
+		final Double[] res = this.reservationRepository.getStatisticsOfPassExams();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfWeeklyCost() {
+		final Double[] res = this.reservationRepository.getStatisticsOfWeeklyCost();
+		Assert.notNull(res);
+		return res;
+	}
+
 }
