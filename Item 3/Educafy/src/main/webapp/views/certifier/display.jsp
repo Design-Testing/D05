@@ -18,32 +18,31 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<acme:display code="teacher.name" value="${teacher.name}"/>
-<spring:message code="teacher.photo"/>:<br>
-<img src="${teacher.photo}" alt="<spring:message code="teacher.alt.image"/>" width="20%" height="20%"/>
+<acme:display code="certifier.name" value="${certifier.name}"/>
+<spring:message code="certifier.photo"/>:<br>
+<img src="${certifier.photo}" alt="<spring:message code="certifier.alt.image"/>" width="20%" height="20%"/>
 <br>
-<jstl:if test="${not empty teacher.surname}">
-<jstl:forEach items="${teacher.surname}" var="df">
-	<acme:display code="teacher.surname" value="${df}"/>
+<jstl:if test="${not empty certifier.surname}">
+<jstl:forEach items="${certifier.surname}" var="df">
+	<acme:display code="certifier.surname" value="${df}"/>
 </jstl:forEach>
 </jstl:if>
-<acme:display code="teacher.email" value="${teacher.email}"/>
-<acme:display code="teacher.phone" value="${teacher.phone}"/>
-<acme:display code="teacher.address" value="${teacher.address}"/>
-<acme:display code="teacher.vat" value="${teacher.vat}"/>
-<acme:display code="teacher.score" value="${teacher.score}"/>
+<acme:display code="certifier.email" value="${certifier.email}"/>
+<acme:display code="certifier.phone" value="${certifier.phone}"/>
+<acme:display code="certifier.address" value="${certifier.address}"/>
+<acme:display code="certifier.vat" value="${certifier.vat}"/>
 
 <br>
 
-<acme:button url="curriculum/display.do?teacherId=${row.id}" name="display" code="teacher.curriculum"/>
-<acme:button url="lesson/myLessons.do?teacherId=${row.id}" name="display" code="teacher.lessons"/>
-<acme:button url="assesment/myAssesments.do?teacherId=${row.id}" name="display" code="teacher.assesments"/>
-<acme:button url="comment/myComments.do?teacherId=${row.id}" name="display" code="teacher.comment"/>
+<acme:button url="curriculum/display.do?certifierId=${row.id}" name="display" code="certifier.curriculum"/>
+<acme:button url="lesson/myLessons.do?certifierId=${row.id}" name="display" code="certifier.lessons"/>
+<acme:button url="assesment/myAssesments.do?certifierId=${row.id}" name="display" code="certifier.assesments"/>
+<acme:button url="comment/myComments.do?certifierId=${row.id}" name="display" code="certifier.comment"/>
 
 <jstl:choose>
-	<jstl:when test="${rol eq teacher}">
+	<jstl:when test="${rol eq certifier}">
 	</jstl:when>
 	<jstl:otherwise>
-	<acme:button url="teacher/list.do" name="back" code="teacher.back"/>
+	<acme:button url="certifier/list.do" name="back" code="certifier.back"/>
 	</jstl:otherwise>
 </jstl:choose>

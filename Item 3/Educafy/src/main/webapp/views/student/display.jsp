@@ -18,6 +18,34 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+
+<script>
+function generatePDF(){
+	alert('<spring:message code="display.student.document.alert"/>')
+	var doc = new jsPDF()
+	doc.text('<spring:message code="display.document.title"/>', 20, 10)
+	doc.text('', 10, 20)
+	doc.text('<spring:message code="student.name"/> : <jstl:out value="${student.name}"/>', 10, 30)
+	doc.text('<spring:message code="student.surname"/> : <jstl:out value="${student.surname}"/>', 10, 40)
+	doc.text('<spring:message code="student.photo"/> : <jstl:out value="${student.photo}"/>', 10, 50)
+	doc.text('<spring:message code="student.phone"/> : <jstl:out value="${student.phone}"/>', 10, 60)
+	doc.text('<spring:message code="student.email"/> : <jstl:out value="${student.email}"/>', 10, 70)
+	doc.text('<spring:message code="student.address"/> : <jstl:out value="${student.address}"/>', 10, 80)
+	doc.text('<spring:message code="student.vat"/> : <jstl:out value="${student.vat}"/>', 10, 90)
+	doc.text('', 10, 100)
+	doc.save('<spring:message code="display.document.fileName"/>.pdf')
+}
+function deletePersonalData(){
+	var r = confirm('<spring:message code="display.deletePersonalData"/>');
+	if (r == true) {
+		location.href = "student/deletePersonalData.do";
+	}
+}
+</script>
+
+
 <acme:display code="student.name" value="${student.name}"/>
 <jstl:choose>
 	<jstl:when test="${not empty student.photo}">
@@ -53,6 +81,16 @@
 
 <br>
 
+
+<jstl:if test="${displayButtons}">
+<br>
+	<button onClick="generatePDF()"><spring:message code="display.getData"/></button>
+	<button onClick="deletePersonalData()"><spring:message code="display.button.deletePersonalData"/></button>
+	
+<br>
+</jstl:if>
+
+<!-- 
 <acme:button url="assesment/myAssesments.do?studentId=${row.id}" name="display" code="student.assesments"/>
 <acme:button url="comment/myComments.do?studentId=${row.id}" name="display" code="student.comment"/>
-
+ -->

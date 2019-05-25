@@ -4,6 +4,7 @@ package controllers;
 import java.util.Collection;
 
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import services.ActorService;
 import services.FolderService;
 import domain.Actor;
 import domain.Folder;
+import forms.FolderForm;
 
 @Controller
 @RequestMapping("/folder")
@@ -49,29 +51,11 @@ public class FolderController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
-
 		ModelAndView res;
 		Folder folder;
 
 		folder = this.folderService.create();
 		res = this.createEditModelAndView(folder);
-		res.addObject("new", false);
-
-		return res;
-
-	}
-
-	@RequestMapping(value = "/createInFolder", method = RequestMethod.GET)
-	public ModelAndView createInFolder(final int fatherId) {
-
-		ModelAndView res;
-		Folder folder;
-
-		final Folder father = this.folderService.findOne(fatherId);
-		folder = this.folderService.createInFolder(father);
-		res = this.createEditInFolderModelAndView(folder);
-		res.addObject("new", false);
-		res.addObject("father", father);
 
 		return res;
 
@@ -93,29 +77,27 @@ public class FolderController extends AbstractController {
 			return result;
 		} else {
 			Assert.notNull(folder);
-
-			//			Assert.isTrue(!this.folderService.findAllByUserId(this.actorService.findByPrincipal().getUserAccount().getId()).contains(folder));
 			result = this.createEditModelAndView(folder);
-			result.addObject("id", folder.getId());
 		}
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Folder folder, final BindingResult binding) {
-
+	public ModelAndView save(@Valid final FolderForm folderForm, final BindingResult binding) {
 		ModelAndView res;
 		final Actor principal = this.actorService.findByPrincipal();
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(folder);
-
+			res = this.createEditModelAndView(folderForm);
 		else
 			try {
+				final Folder folder = this.folderService.reconstruct(folderForm, binding);
 				this.folderService.save(folder, principal);
 				res = new ModelAndView("redirect:list.do");
+			} catch (final ValidationException oops) {
+				res = this.createEditModelAndView(folderForm, "folder.commit.error");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(folder, "folder.commit.error");
+				res = this.createEditModelAndView(folderForm, "folder.commit.error");
 			}
 		return res;
 	}
@@ -133,7 +115,6 @@ public class FolderController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(folder, "general.commit.error");
-				result.addObject("id", folder.getId());
 			}
 
 		return result;
@@ -156,47 +137,38 @@ public class FolderController extends AbstractController {
 	}
 
 	protected ModelAndView createEditModelAndView(final Folder folder) {
-
 		ModelAndView res;
-
 		res = this.createEditModelAndView(folder, null);
-
 		return res;
-
 	}
 
 	protected ModelAndView createEditModelAndView(final Folder folder, final String messageCode) {
-
 		ModelAndView res;
-
 		res = new ModelAndView("folder/edit");
-		res.addObject("folder", folder);
-
+		res.addObject("folderForm", this.constructPruned(folder));
 		res.addObject("message", messageCode);
-
 		return res;
-
 	}
 
-	protected ModelAndView createEditInFolderModelAndView(final Folder folder) {
-
-		ModelAndView res;
-
-		res = this.createEditInFolderModelAndView(folder, null);
-
-		return res;
-
+	private FolderForm constructPruned(final Folder folder) {
+		final FolderForm pruned = new FolderForm();
+		pruned.setId(folder.getId());
+		pruned.setVersion(folder.getVersion());
+		pruned.setName(folder.getName());
+		return pruned;
 	}
 
-	protected ModelAndView createEditInFolderModelAndView(final Folder folder, final String messageCode) {
-
+	protected ModelAndView createEditModelAndView(final FolderForm folder) {
 		ModelAndView res;
-
-		res = new ModelAndView("folder/editInFolder");
-		res.addObject("folder", folder);
-		res.addObject("message", messageCode);
-
+		res = this.createEditModelAndView(folder, null);
 		return res;
+	}
 
+	protected ModelAndView createEditModelAndView(final FolderForm folder, final String messageCode) {
+		ModelAndView res;
+		res = new ModelAndView("folder/edit");
+		res.addObject("folderForm", folder);
+		res.addObject("message", messageCode);
+		return res;
 	}
 }
