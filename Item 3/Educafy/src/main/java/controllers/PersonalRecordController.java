@@ -142,9 +142,26 @@ public class PersonalRecordController extends AbstractController {
 
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);
-			if (logged.getAuthorities().contains(authTeacher))
+			final Authority authStudent = new Authority();
+			authStudent.setAuthority(Authority.STUDENT);
+			final Authority authCertifier = new Authority();
+			authCertifier.setAuthority(Authority.CERTIFIER);
+			if (logged.getAuthorities().contains(authTeacher)) {
 				if (curriculum.getTeacher().getId() == this.teacherService.findByPrincipal().getId())
 					res.addObject("buttons", true);
+				else {
+					Assert.isTrue(personalRecord.getIsDraft() == false, "You can not see a record in draft mode");
+					Assert.isTrue(personalRecord.getIsCertified() == true, "You can not see a record that is not certified");
+					res.addObject("buttonsAnonymous", true);
+				}
+			} else if (logged.getAuthorities().contains(authStudent)) {
+				Assert.isTrue(personalRecord.getIsDraft() == false, "You can not see a record in draft mode");
+				Assert.isTrue(personalRecord.getIsCertified() == true, "You can not see a record that is not certified");
+				res.addObject("buttonsAnonymous", true);
+			} else if (logged.getAuthorities().contains(authCertifier)) {
+				res.addObject("buttonsCertifier", true);
+				Assert.isTrue(personalRecord.getIsDraft() == false, "You can not see a record in draft mode");
+			}
 		} else
 			res = new ModelAndView("redirect:misc/403");
 

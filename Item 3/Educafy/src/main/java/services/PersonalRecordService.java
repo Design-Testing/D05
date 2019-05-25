@@ -72,11 +72,6 @@ public class PersonalRecordService {
 		Assert.notNull(me);
 		Assert.isTrue(this.teacherService.findTeacherByPersonalRecord(personalRecord.getId()) == me);
 		final PersonalRecord retrieved = this.findOne(personalRecord.getId());
-		Assert.isTrue(retrieved.getFullName().equals(personalRecord.getFullName()));
-		Assert.isTrue(retrieved.getGithub().equals(personalRecord.getGithub()));
-		Assert.isTrue(retrieved.getLinkedin().equals(personalRecord.getLinkedin()));
-		Assert.isTrue(retrieved.getPhoto().equals(personalRecord.getPhoto()));
-		Assert.isTrue(retrieved.getStatement().equals(personalRecord.getStatement()));
 		Assert.isTrue(retrieved.getIsDraft() == true, "the personal record is already in final mode");
 		personalRecord.setIsDraft(false);
 		final PersonalRecord res = this.personalRecordRepository.save(personalRecord);
@@ -87,11 +82,6 @@ public class PersonalRecordService {
 		final Certifier me = this.certifierService.findByPrincipal();
 		Assert.notNull(me);
 		final PersonalRecord retrieved = this.findOne(personalRecord.getId());
-		Assert.isTrue(retrieved.getFullName().equals(personalRecord.getFullName()));
-		Assert.isTrue(retrieved.getGithub().equals(personalRecord.getGithub()));
-		Assert.isTrue(retrieved.getLinkedin().equals(personalRecord.getLinkedin()));
-		Assert.isTrue(retrieved.getPhoto().equals(personalRecord.getPhoto()));
-		Assert.isTrue(retrieved.getStatement().equals(personalRecord.getStatement()));
 		Assert.isTrue(retrieved.getIsDraft() == false, "the personal record is not in final mode");
 		personalRecord.setIsCertified(true);
 		final PersonalRecord res = this.personalRecordRepository.save(personalRecord);

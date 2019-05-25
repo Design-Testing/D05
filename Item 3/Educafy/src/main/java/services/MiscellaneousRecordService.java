@@ -111,7 +111,6 @@ public class MiscellaneousRecordService {
 		Assert.notNull(me);
 		Assert.isTrue(this.teacherService.findTeacherByMiscellaneousRecord(miscellaneousRecord.getId()) == me, "No puede borrar un MiscellaneousRecord que no pertenezca a su historia.");
 		final MiscellaneousRecord retrieved = this.findOne(miscellaneousRecord.getId());
-		Assert.isTrue(retrieved.getFreeText().equals(miscellaneousRecord.getFreeText()));
 		Assert.isTrue(retrieved.getIsDraft() == true, "the miscellaneous record is already in final mode");
 		miscellaneousRecord.setIsDraft(false);
 		final MiscellaneousRecord res = this.miscellaneousRecordRepository.save(miscellaneousRecord);
@@ -122,7 +121,6 @@ public class MiscellaneousRecordService {
 		final Certifier me = this.certifierService.findByPrincipal();
 		Assert.notNull(me);
 		final MiscellaneousRecord retrieved = this.findOne(miscellaneousRecord.getId());
-		Assert.isTrue(retrieved.getFreeText().equals(miscellaneousRecord.getFreeText()));
 		Assert.isTrue(retrieved.getIsDraft() == false, "the miscellaneous record is not in final mode");
 		miscellaneousRecord.setIsCertified(true);
 		final MiscellaneousRecord res = this.miscellaneousRecordRepository.save(miscellaneousRecord);

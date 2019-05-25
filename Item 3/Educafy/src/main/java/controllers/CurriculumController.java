@@ -56,10 +56,8 @@ public class CurriculumController extends AbstractController {
 				res.addObject("buttonsAnonymous", true);
 			else if (logged.getAuthorities().contains(authCertifier))
 				res.addObject("buttonsCertifier", true);
-		} else {
-			res = new ModelAndView("curriculum/create");
-			res.addObject("curriculum", curriculum);
-		}
+		} else
+			res = new ModelAndView("curriculum/display");
 
 		return res;
 	}
@@ -93,10 +91,8 @@ public class CurriculumController extends AbstractController {
 			else if (logged.getAuthorities().contains(authCertifier))
 				res.addObject("buttonsCertifier", true);
 
-		} else {
-			res = new ModelAndView("curriculum/create");
-			res.addObject("curriculum", curriculum);
-		}
+		} else
+			res = new ModelAndView("curriculum/display");
 
 		return res;
 	}
@@ -141,7 +137,7 @@ public class CurriculumController extends AbstractController {
 		//		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Curriculum curriculum = this.curriculumService.findOne(curriculumId);
 		this.curriculumService.delete(curriculum);
-		result = new ModelAndView("curriculum/create");
+		result = this.display();
 		result.addObject("curriculum", curriculum);
 		return result;
 	}
@@ -172,10 +168,8 @@ public class CurriculumController extends AbstractController {
 				res.addObject("buttonsAnonymous", true);
 			else if (logged.getAuthorities().contains(authCertifier))
 				res.addObject("buttonsCertifier", true);
-		} else {
-			res = new ModelAndView("curriculum/create");
-			res.addObject("curriculum", curriculum);
-		}
+		} else
+			res = new ModelAndView("curriculum/display");
 
 		return res;
 	}

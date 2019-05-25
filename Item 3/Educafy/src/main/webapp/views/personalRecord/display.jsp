@@ -21,6 +21,23 @@
 
 <br>
 
-<input type="button" class="btn btn-danger" name="cancel"
+
+
+<jstl:choose>
+<jstl:when test="${buttons}">
+	<input type="button" class="btn btn-danger" name="cancel"
            value="<spring:message code="general.cancel" />"
            onclick="relativeRedir('curriculum/display.do?curriculumId=${curriculumId}');"/>
+</jstl:when>
+<jstl:when test="${buttonsAnonymous}">
+	<input type="button" class="btn btn-danger" name="cancel"
+           value="<spring:message code="general.cancel" />"
+           onclick="relativeRedir('curriculum/displayById.do?curriculumId=${curriculumId}');"/>
+</jstl:when>
+<jstl:when test="${buttonsCertifier}">
+	<input type="button" class="btn btn-danger" name="cancel"
+           value="<spring:message code="general.cancel" />"
+           onclick="relativeRedir('curriculum/displayById.do?curriculumId=${curriculumId}');"/>
+</jstl:when>
+
+</jstl:choose>
