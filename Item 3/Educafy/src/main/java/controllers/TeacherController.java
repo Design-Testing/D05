@@ -178,6 +178,16 @@ public class TeacherController extends AbstractController {
 		return result;
 	}
 
+	//list all teachers
+	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public ModelAndView listAll() {
+		ModelAndView result;
+		result = new ModelAndView("curriculum/listByTeachers");
+		final Collection<Teacher> teachers = this.teacherService.findAll();
+		result.addObject("teachers", teachers);
+		return result;
+	}
+
 	// GDPR -----------------------------------------------------------
 	@RequestMapping(value = "/deletePersonalData")
 	public ModelAndView deletePersonalData() {

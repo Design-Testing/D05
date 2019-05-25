@@ -16,6 +16,11 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+	 <div>
+        <input type="button" class="btn btn-danger" name="createFolder"
+               value="<spring:message code="general.createFolder" />"
+               onclick="relativeRedir('folder/create.do');"/>
+    </div>
     <div>
         <input type="button" class="btn btn-danger" name="createMessage"
                value="<spring:message code="message.createMessage" />"

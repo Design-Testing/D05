@@ -4,15 +4,20 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.FolderRepository;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
+import forms.FolderForm;
 
 @Service
 @Transactional
@@ -28,18 +33,13 @@ public class FolderService {
 	private MessageService					messageService;
 
 	@Autowired
+	private Validator						validator;
+
+	@Autowired
 	private ConfigurationParametersService	configurationParametersService;
 
 
 	public Folder create() {
-		final Folder folder = new Folder();
-		final Collection<Message> ms = new ArrayList<>();
-		folder.setIsSystemFolder(false);
-		folder.setMessages(ms);
-		return folder;
-	}
-
-	public Folder createInFolder(final Folder father) {
 		final Folder folder = new Folder();
 		final Collection<Message> ms = new ArrayList<>();
 		folder.setIsSystemFolder(false);
@@ -61,41 +61,6 @@ public class FolderService {
 		return res;
 	}
 
-	public void saveInFather(final Folder father, final Folder f, final Actor a) {
-		Assert.notNull(father);
-		Assert.notNull(f);
-		Assert.notNull(a);
-		Assert.isTrue(father.getId() != 0);
-		Assert.isTrue(f.getId() != 0);
-		Assert.isTrue(a.getId() != 0);
-
-		f.setActor(a);
-		this.folderRepository.save(f);
-
-	}
-	public Folder saveInFather2(final Folder father, final Folder f, final Actor a) {
-		Assert.notNull(father);
-		Assert.notNull(f);
-		Assert.notNull(a);
-
-		Folder saved;
-		final boolean bool = this.checkForSpamWords(f);
-
-		if (bool)
-			a.setSpammer(true);
-
-		if (f.getId() == 0 && father.getId() != 0) {
-			f.setActor(a);
-			saved = this.folderRepository.save(f);
-		} else {
-			final Collection<Folder> fs = this.findAllByUserId(a.getUserAccount().getId());
-			Assert.isTrue(fs.contains(f));
-			f.setActor(a);
-			saved = this.folderRepository.save(f);
-		}
-		return saved;
-	}
-
 	public Folder save(final Folder f, final Actor a) {
 		Assert.notNull(f);
 		Assert.notNull(a);
@@ -108,7 +73,6 @@ public class FolderService {
 			f.setActor(a);
 			saved = this.folderRepository.save(f);
 		} else {
-			f.setActor(a);
 			final Collection<Folder> fs = this.findAllByUserId(a.getUserAccount().getId());
 			Assert.isTrue(fs.contains(f));
 			saved = this.folderRepository.save(f);
@@ -235,6 +199,26 @@ public class FolderService {
 		Assert.isTrue(id != 0);
 
 		return this.folderRepository.findAllSystemFolderByUserId(id);
+	}
+
+	public Folder reconstruct(final FolderForm folderForm, final BindingResult binding) {
+		Folder result;
+
+		if (folderForm.getId() == 0) {
+			result = this.create();
+			result.setActor(this.actorService.findByPrincipal());
+		} else
+			result = this.findOne(folderForm.getId());
+
+		result.setVersion(folderForm.getVersion());
+		result.setName(folderForm.getName());
+
+		this.validator.validate(result, binding);
+
+		if (binding.hasErrors())
+			throw new ValidationException();
+
+		return result;
 	}
 
 }

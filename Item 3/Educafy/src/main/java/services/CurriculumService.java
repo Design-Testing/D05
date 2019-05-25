@@ -49,7 +49,7 @@ public class CurriculumService {
 
 		curriculum.setTeacher(teacher);
 
-		//curriculum.setTicker(this.generateTicker(curriculum.getTeacher().getName()));
+		curriculum.setTicker(this.generateTicker(curriculum.getTeacher().getName()));
 
 		final Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
 		curriculum.setMiscellaneousRecords(miscellaneousRecord);
@@ -100,9 +100,9 @@ public class CurriculumService {
 		final Curriculum res;
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		if (curriculum.getId() != 0) {
-			Assert.isTrue(this.teacherService.findTeacherByCurriculum(curriculum.getId()).equals(teacher), "logged actor doesnt match curriculum's owner");
+			Assert.isTrue(this.teacherService.findTeacherByCurriculum(curriculum.getId()).getId() == teacher.getId(), "logged actor doesnt match curriculum's owner");
 			final Curriculum retrieved = this.findOne(curriculum.getId());
-			//curriculum.setTicker(retrieved.getTicker());
+			curriculum.setTicker(retrieved.getTicker());
 		}
 
 		else
@@ -116,12 +116,15 @@ public class CurriculumService {
 		Assert.isTrue(curriculum.getId() != 0);
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Curriculum retrieved = this.findOne(curriculum.getId());
-		Assert.isTrue(this.teacherService.findTeacherByCurriculum(retrieved.getId()) == teacher, "Not possible to delete the curriculum of other teacher.");
+		System.out.println(teacher.getId());
+		System.out.println(retrieved.getId());
+		System.out.println("AQUI:" + this.teacherService.findTeacherByCurriculum(retrieved.getId()));
+		Assert.isTrue(this.teacherService.findTeacherByCurriculum(retrieved.getId()).getId() == teacher.getId(), "Not possible to delete the curriculum of other teacher.");
 		this.curriculumRepository.delete(retrieved.getId());
 	}
 
-	public Collection<Curriculum> findCurriculumByTeacher(final int id) {
-		final Collection<Curriculum> result = this.curriculumRepository.findCurriculumByTeacher(id);
+	public Curriculum findCurriculumByTeacher(final int id) {
+		final Curriculum result = this.curriculumRepository.findCurriculumByTeacher(id);
 		return result;
 	}
 

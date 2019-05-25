@@ -23,53 +23,52 @@
 
 <script>
 function generatePDF(){
-	alert('<spring:message code="display.teacher.document.alert"/>')
+	alert('<spring:message code="display.certifier.document.alert"/>')
 	var doc = new jsPDF()
 	doc.text('<spring:message code="display.document.title"/>', 20, 10)
 	doc.text('', 10, 20)
-	doc.text('<spring:message code="teacher.name"/> : <jstl:out value="${teacher.name}"/>', 10, 30)
-	doc.text('<spring:message code="teacher.surname"/> : <jstl:out value="${teacher.surname}"/>', 10, 50)
-	doc.text('<spring:message code="teacher.photo"/> : <jstl:out value="${teacher.photo}"/>', 10, 60)
-	doc.text('<spring:message code="teacher.phone"/> : <jstl:out value="${teacher.phone}"/>', 10, 70)
-	doc.text('<spring:message code="teacher.email"/> : <jstl:out value="${teacher.email}"/>', 10, 80)
-	doc.text('<spring:message code="teacher.address"/> : <jstl:out value="${teacher.address}"/>', 10, 90)
-	doc.text('<spring:message code="teacher.vat"/> : <jstl:out value="${teacher.vat}"/>', 10, 100)
+	doc.text('<spring:message code="certifier.name"/> : <jstl:out value="${certifier.name}"/>', 10, 30)
+	doc.text('<spring:message code="certifier.surname"/> : <jstl:out value="${certifier.surname}"/>', 10, 50)
+	doc.text('<spring:message code="certifier.photo"/> : <jstl:out value="${certifier.photo}"/>', 10, 60)
+	doc.text('<spring:message code="certifier.phone"/> : <jstl:out value="${certifier.phone}"/>', 10, 70)
+	doc.text('<spring:message code="certifier.email"/> : <jstl:out value="${certifier.email}"/>', 10, 80)
+	doc.text('<spring:message code="certifier.address"/> : <jstl:out value="${certifier.address}"/>', 10, 90)
+	doc.text('<spring:message code="certifier.vat"/> : <jstl:out value="${certifier.vat}"/>', 10, 100)
 	doc.text('', 10, 100)
-	doc.text('<spring:message code="teacher.score"/> : <jstl:out value="${teacher.score}"/>', 10, 180)
+	doc.text('<spring:message code="certifier.score"/> : <jstl:out value="${certifier.score}"/>', 10, 180)
 	doc.save('<spring:message code="display.document.fileName"/>.pdf')
 }
 function deletePersonalData(){
 	var r = confirm('<spring:message code="display.deletePersonalData"/>');
 	if (r == true) {
-		location.href = "teacher/deletePersonalData.do";
+		location.href = "certifier/deletePersonalData.do";
 	}
 }
 </script>
 
 
-<acme:display code="teacher.name" value="${teacher.name}"/><br>
+<acme:display code="certifier.name" value="${certifier.name}"/><br>
 
-<jstl:if test="${not empty teacher.surname}">
-<spring:message code="teacher.surname"/>
+<jstl:if test="${not empty certifier.surname}">
+<spring:message code="certifier.surname"/>
 <ul>
-<jstl:forEach items="${teacher.surname}" var="df">
+<jstl:forEach items="${certifier.surname}" var="df">
 	<li><jstl:out value="${df}"/></li>
 </jstl:forEach>
 </ul>
 </jstl:if>
-<jstl:if test="${not empty teacher.photo}">
-<spring:message code="teacher.photo"/>:<br>
-<img src="${teacher.photo}" alt="<spring:message code="teacher.alt.image"/>" width="20%" height="20%"/>
+<jstl:if test="${not empty certifier.photo}">
+<spring:message code="certifier.photo"/>:<br>
+<img src="${certifier.photo}" alt="<spring:message code="certifier.alt.image"/>" width="20%" height="20%"/>
 <br><br></jstl:if>
-<acme:display code="teacher.email" value="${teacher.email}"/><br>
-<jstl:if test="${not empty teacher.phone}">
-<acme:display code="teacher.phone" value="${teacher.phone}"/><br>
+<acme:display code="certifier.email" value="${certifier.email}"/><br>
+<jstl:if test="${not empty certifier.phone}">
+<acme:display code="certifier.phone" value="${certifier.phone}"/><br>
 </jstl:if>
-<jstl:if test="${not empty teacher.address}">
-<acme:display code="teacher.address" value="${teacher.address}"/><br>
+<jstl:if test="${not empty certifier.address}">
+<acme:display code="certifier.address" value="${certifier.address}"/><br>
 </jstl:if>
-<acme:display code="teacher.vat" value="${teacher.vat}"/><br>
-<acme:display code="teacher.score" value="${teacher.score}"/>
+<acme:display code="certifier.vat" value="${certifier.vat}"/><br>
 
 
 <jstl:if test="${displayButtons}">

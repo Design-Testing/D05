@@ -27,22 +27,19 @@ import forms.ActorForm;
 public class TeacherService {
 
 	@Autowired
-	private TeacherRepository		teacherRepository;
+	private TeacherRepository	teacherRepository;
 
 	@Autowired
-	private ActorService			actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private UserAccountService		userAccountService;
+	private UserAccountService	userAccountService;
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private FolderService		folderService;
 
 	@Autowired
-	private FolderService			folderService;
-
-	@Autowired
-	private Validator				validator;
+	private Validator			validator;
 
 
 	public Teacher create() {
@@ -184,34 +181,39 @@ public class TeacherService {
 	public Teacher findTeacherByCurriculum(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByCurriculum(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByPersonalRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByPersonalRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByEducationRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByEducationRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByMiscellaneousRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByMiscellaneousRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public boolean hasEducationRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasEducationRecord(teacherId, recordId);
-		return false;
+		return res;
 	}
 
 	public boolean hasMiscellaneousRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasMiscellaneousRecord(teacherId, recordId);
-		return false;
+		return res;
+	}
+
+	public boolean hasPersonalRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
+		return res;
 	}
 }

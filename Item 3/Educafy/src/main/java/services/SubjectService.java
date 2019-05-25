@@ -65,4 +65,37 @@ public class SubjectService {
 		Assert.isTrue(lessons.isEmpty(), "No puedes eliminar una asignatura que tenga una clase asginada.");
 		this.subjectRepository.delete(result);
 	}
+
+	/**
+	 * Incluye una cadena vacia en la primera posición. Está ideado para mostrar las opciones de clasificación poosibles en el buscardor o finder
+	 * */
+	public Collection<String> subjectLevels() {
+		final Collection<String> res = new ArrayList<>();
+		res.add("");
+		res.addAll(this.subjectRepository.subjectLevels());
+		Assert.notNull(res);
+		return res;
+	}
+
+	/**
+	 * Incluye una cadena vacia en la primera posición. Está ideado para mostrar las opciones de clasificación poosibles en el buscardor o finder
+	 * */
+	public Collection<String> subjectNamesEs() {
+		final Collection<String> res = new ArrayList<>();
+		res.add("");
+		res.addAll(this.subjectRepository.subjectNamesEs());
+		Assert.notNull(res);
+		return res;
+	}
+
+	/**
+	 * Incluye una cadena vacia en la primera posición. Está ideado para mostrar las opciones de clasificación poosibles en el buscardor o finder
+	 * */
+	public Collection<String> subjectNamesEn() {
+		final Collection<String> res = new ArrayList<>();
+		res.add("");
+		res.addAll(this.subjectRepository.subjectNamesEn());
+		Assert.notNull(res);
+		return res;
+	}
 }
