@@ -113,9 +113,9 @@ public class EducationRecordController extends AbstractController {
 			final EducationRecord educationRecord;
 			final Teacher teacher = this.teacherService.findByPrincipal();
 			educationRecord = this.educationRecordService.findOne(educationRecordId);
-			Assert.isTrue(this.teacherService.hasPersonalRecord(teacher.getId(), educationRecordId), "This education record is not of your property");
+			Assert.isTrue(this.teacherService.hasEducationRecord(teacher.getId(), educationRecordId), "This education record is not of your property");
 			this.educationRecordService.toFinal(educationRecord);
-			final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(educationRecord.getId());
+			final Curriculum curriculum = this.curriculumService.findCurriculumByEducationRecord(educationRecord.getId());
 
 			result = new ModelAndView("curriculum/display");
 			result.addObject("curriculum", curriculum);
