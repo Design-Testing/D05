@@ -75,7 +75,7 @@
 		
 		<!-- CURRICULUM -->
 		<security:intercept-url pattern="/curriculum/create.do" access="permitAll" />
-		<security:intercept-url pattern="/curriculum/display.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/curriculum/display.do" access="permitAll" />
 		<security:intercept-url pattern="/curriculum/delete.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/curriculum/displayById.do" access="permitAll" />
 		<security:intercept-url pattern="/curriculum/displayByTeacherId.do" access="permitAll" />

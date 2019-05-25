@@ -110,7 +110,7 @@ public class EducationRecordService {
 	public EducationRecord toFinal(final EducationRecord educationRecord) {
 		final Teacher me = this.teacherService.findByPrincipal();
 		Assert.notNull(me);
-		Assert.isTrue(this.teacherService.hasEducationRecord(me.getId(), educationRecord.getId()), "This personal record is not of your property");
+		Assert.isTrue(this.teacherService.hasEducationRecord(me.getId(), educationRecord.getId()), "This education record is not of your property");
 		final EducationRecord retrieved = this.findOne(educationRecord.getId());
 		Assert.isTrue(retrieved.getAttachment().equals(educationRecord.getAttachment()));
 		Assert.isTrue(retrieved.getDegree().equals(educationRecord.getDegree()));

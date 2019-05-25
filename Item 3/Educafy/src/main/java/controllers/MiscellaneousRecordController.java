@@ -143,9 +143,9 @@ public class MiscellaneousRecordController extends AbstractController {
 			final MiscellaneousRecord miscellaneousRecord;
 			final Teacher teacher = this.teacherService.findByPrincipal();
 			miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
-			Assert.isTrue(this.teacherService.hasPersonalRecord(teacher.getId(), miscellaneousRecordId), "This miscellaneous record is not of your property");
+			Assert.isTrue(this.teacherService.hasMiscellaneousRecord(teacher.getId(), miscellaneousRecordId), "This miscellaneous record is not of your property");
 			this.miscellaneousRecordService.toFinal(miscellaneousRecord);
-			final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(miscellaneousRecord.getId());
+			final Curriculum curriculum = this.curriculumService.findCurriculumByMiscellaneousRecord(miscellaneousRecord.getId());
 
 			result = new ModelAndView("curriculum/display");
 			result.addObject("curriculum", curriculum);
