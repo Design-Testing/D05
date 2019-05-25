@@ -14,12 +14,12 @@ import domain.DomainEntity;
 @Access(AccessType.PROPERTY)
 public class AssesmentForm extends DomainEntity {
 
-	private int		score;
+	private Integer	score;
 	private String	comment;
 
 
 	@Range(min = 0, max = 5)
-	public int getScore() {
+	public Integer getScore() {
 		return this.score;
 	}
 

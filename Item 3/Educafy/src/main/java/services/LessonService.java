@@ -15,8 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.LessonRepository;
+import domain.Assesment;
+import domain.Comment;
 import domain.Lesson;
 import domain.Reservation;
+import domain.Student;
+import domain.Subject;
 import domain.Teacher;
 import forms.LessonForm;
 
@@ -31,10 +35,19 @@ public class LessonService {
 	private TeacherService		teacherService;
 
 	@Autowired
+	private ReservationService	reservationService;
+
+	@Autowired
+	private AssesmentService	assesmentService;
+
+	@Autowired
 	private StudentService		studentService;
 
 	@Autowired
-	private ReservationService	reservationService;
+	private SubjectService		subjectService;
+
+	@Autowired
+	private CommentService		commentService;
 
 	@Autowired
 	private Validator			validator;
@@ -43,11 +56,8 @@ public class LessonService {
 	public Lesson create() {
 		final Lesson lesson = new Lesson();
 		final Teacher principal = this.teacherService.findByPrincipal();
-		lesson.setTeacher(principal);
 		final String ticker = this.generateTicker(principal.getName());
 		lesson.setTicker(ticker);
-		lesson.setIsDraft(true);
-
 		return lesson;
 	}
 
@@ -65,14 +75,21 @@ public class LessonService {
 		return res;
 	}
 
-	public Lesson save(final Lesson lesson) {
+	public Lesson save(final Lesson lesson, final int subjectId) {
 		Assert.notNull(lesson);
 		final Teacher principal = this.teacherService.findByPrincipal();
 		final Lesson result;
+		Subject subject;
 
-		if (lesson.getId() != 0) {
+		if (lesson.getId() == 0) {
+			lesson.setTeacher(principal);
+			lesson.setIsDraft(true);
+			subject = this.subjectService.findOne(subjectId);
+			lesson.setSubject(subject);
+		} else {
 			Assert.isTrue(lesson.getTeacher().equals(principal));
 			Assert.isTrue(lesson.getIsDraft(), "No puede modificar una posición que ya no esta en DRAFT MODE.");
+
 		}
 		result = this.lessonRepository.save(lesson);
 		return result;
@@ -87,9 +104,12 @@ public class LessonService {
 		Assert.isTrue(retrieved.getTeacher().equals(principal));
 		final List<Reservation> reservations = (List<Reservation>) this.reservationService.findAllReservationByLesson(lesson.getId());
 		Assert.isTrue(reservations.isEmpty(), "No puede borrar una lesson que tenga reservations.");
+		final List<Assesment> assesments = (List<Assesment>) this.assesmentService.findAllAssesmentByLesson(lesson.getId());
+		final List<Comment> comments = (List<Comment>) this.deleteCommentsByAssesment(assesments);
+		this.commentService.deleteInBatch(comments);
+		this.assesmentService.deleteInBatch(assesments);
 		this.lessonRepository.delete(retrieved);
 	}
-
 	/* ========================= OTHER METHODS =========================== */
 
 	public Collection<Lesson> findAllByTeacher() {
@@ -132,19 +152,37 @@ public class LessonService {
 	}
 
 	//TODO: Revisar ticker
-	private String generateTicker(final String nameTeacher) {
+	//	private String generateTicker(final String nameTeacher) {
+	//		String res = "";
+	//		final Integer n1 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final Integer n2 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final Integer n3 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final Integer n4 = (int) Math.floor(Math.random() * 9 + 1);
+	//		final String word = nameTeacher.substring(0, 4).toUpperCase();
+	//		final String ticker = word + '-' + n1 + n2 + n3 + n4;
+	//		res = ticker;
+	//
+	//		final Collection<Lesson> less = this.lessonRepository.getLessonWithTicker(ticker);
+	//		if (!less.isEmpty())
+	//			this.generateTicker(nameTeacher);
+	//		return res;
+	//	}
+
+	private String generateTicker(final String teacherName) {
 		String res = "";
+		final String az = "ABCDEFGHYJKLMNOPQRSTUVWXYZ";
 		final Integer n1 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n2 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n3 = (int) Math.floor(Math.random() * 9 + 1);
 		final Integer n4 = (int) Math.floor(Math.random() * 9 + 1);
-		final String word = nameTeacher.substring(0, 4).toUpperCase();
+		final char ch = az.charAt(n1);
+		final String word = teacherName.substring(0, 4).toUpperCase();
 		final String ticker = word + '-' + n1 + n2 + n3 + n4;
 		res = ticker;
 
-		final Collection<Lesson> less = this.lessonRepository.getLessonWithTicker(ticker);
-		if (!less.isEmpty())
-			this.generateTicker(nameTeacher);
+		final Collection<Lesson> cs = this.lessonRepository.getLessonWithTicker(ticker);
+		if (!cs.isEmpty())
+			this.generateTicker(teacherName);
 		return res;
 	}
 
@@ -169,4 +207,25 @@ public class LessonService {
 		return result;
 	}
 
+	public Collection<Lesson> findAllByStudent() {
+		Collection<Lesson> res = new ArrayList<>();
+		final Student principal = this.studentService.findByPrincipal();
+		res = this.lessonRepository.findAllLessonByStudentId(principal.getUserAccount().getId());
+		Assert.notNull(res);
+		return res;
+	}
+
+	private Collection<Comment> deleteCommentsByAssesment(final Collection<Assesment> assesments) {
+		final Collection<Comment> res = new ArrayList<>();
+
+		for (final Assesment a : assesments)
+			res.addAll(this.commentService.findAllCommentsByAssesment(a.getId()));
+		return res;
+	}
+
+	public Collection<Lesson> findLessons(final String keyword, final String subjectLevel, final String subjectName, final String teacherName) {
+		final Collection<Lesson> res = this.lessonRepository.findLessons(keyword, subjectLevel, subjectName, teacherName);
+		Assert.notNull(res);
+		return res;
+	}
 }

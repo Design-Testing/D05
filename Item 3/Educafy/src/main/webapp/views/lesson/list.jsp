@@ -1,3 +1,4 @@
+
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -23,20 +24,36 @@
 	
 	<display:column property="teacher.name" titleKey="lesson.teacher" />
 	
-	<display:column property="subject.name" titleKey="lesson.subject" />
-	
 	<security:authorize access="hasRole('TEACHER')">
-	<display:column>
-		<acme:button url="lesson/teacher/edit.do?lessonId=${row.id}" name="edit" code="lesson.edit"/>
-		<acme:button url="lesson/teacher/delete.do?lessonId=${row.id}" name="delete" code="lesson.delete"/>
-	</display:column>
+		<display:column>
+			<jstl:if test="${row.isDraft}">
+				<acme:button url="lesson/teacher/edit.do?lessonId=${row.id}&subjectId=${row.subject.id}" name="edit" code="lesson.edit"/>
+			</jstl:if>
+		</display:column>
+		
+		<display:column>
+			<jstl:if test="${row.isDraft}">
+				<acme:button url="lesson/teacher/finalMode.do?lessonId=${row.id}" name="finalMode" code="lesson.finalMode"/>
+			</jstl:if>
+		</display:column>
+		
+			<jstl:choose>
+				<jstl:when test="${not empty reservations}">
+				</jstl:when>
+				<jstl:otherwise>
+					<display:column>
+					<acme:button url="lesson/teacher/delete.do?lessonId=${row.id}" name="delete" code="lesson.delete"/>
+					</display:column>
+				</jstl:otherwise>
+			</jstl:choose>
+		
 	</security:authorize>
 	
 	<security:authorize access="hasRole('STUDENT')">
-	<display:column>
-		<acme:button url="reservation/student/create.do?lessonId=${row.id}" name="create" code="reservation.create"/>
-	</display:column>
-	</security:authorize>
+			<display:column>
+				<acme:button url="assesment/student/create.do?lessonId=${row.id}" name="create" code="lesson.assesment.create"/>
+			</display:column>
+		</security:authorize>
 
 </display:table>
 

@@ -34,8 +34,7 @@ function generatePDF(){
 	doc.text('<spring:message code="teacher.email"/> : <jstl:out value="${teacher.email}"/>', 10, 80)
 	doc.text('<spring:message code="teacher.address"/> : <jstl:out value="${teacher.address}"/>', 10, 90)
 	doc.text('<spring:message code="teacher.vat"/> : <jstl:out value="${teacher.vat}"/>', 10, 100)
-	doc.text('', 10, 100)
-	doc.text('<spring:message code="teacher.score"/> : <jstl:out value="${teacher.score}"/>', 10, 180)
+	doc.text('', 10, 110)
 	doc.save('<spring:message code="display.document.fileName"/>.pdf')
 }
 function deletePersonalData(){
@@ -49,18 +48,30 @@ function deletePersonalData(){
 
 <acme:display code="teacher.name" value="${teacher.name}"/><br>
 
+<jstl:choose>
+	<jstl:when test="${not empty teacher.photo}">
+		<spring:message code="teacher.photo"/>:<br>
+		<img src="${teacher.photo}" alt="<spring:message code="teacher.alt.image"/>" width="20%" height="20%"/>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="teacher.no.photo"/>
+	</jstl:otherwise>
+</jstl:choose>
+<br>
 <jstl:if test="${not empty teacher.surname}">
-<spring:message code="teacher.surname"/>
-<ul>
-<jstl:forEach items="${teacher.surname}" var="df">
-	<li><jstl:out value="${df}"/></li>
+<jstl:forEach items="${teacher.surname}" var="df" varStatus="loop">
+	<jstl:choose>
+		<jstl:when test="${teacher.getSurname().size() gt 1}">
+			<spring:message code="teacher.surname"/> <jstl:out value="${loop.index+1}"/>:
+			<jstl:out value="${df}"/><br>
+		</jstl:when>
+		<jstl:otherwise>
+			<spring:message code="teacher.surname"/>: <jstl:out value="${df}"/><br>
+		</jstl:otherwise>
+	</jstl:choose>
 </jstl:forEach>
-</ul>
 </jstl:if>
-<jstl:if test="${not empty teacher.photo}">
-<spring:message code="teacher.photo"/>:<br>
-<img src="${teacher.photo}" alt="<spring:message code="teacher.alt.image"/>" width="20%" height="20%"/>
-<br><br></jstl:if>
+
 <acme:display code="teacher.email" value="${teacher.email}"/><br>
 <jstl:if test="${not empty teacher.phone}">
 <acme:display code="teacher.phone" value="${teacher.phone}"/><br>
@@ -69,7 +80,6 @@ function deletePersonalData(){
 <acme:display code="teacher.address" value="${teacher.address}"/><br>
 </jstl:if>
 <acme:display code="teacher.vat" value="${teacher.vat}"/><br>
-<acme:display code="teacher.score" value="${teacher.score}"/>
 
 
 <jstl:if test="${displayButtons}">

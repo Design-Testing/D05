@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AssesmentService;
-import services.LessonService;
+import services.CommentService;
 import services.StudentService;
 import controllers.AbstractController;
+import controllers.LessonController;
 import domain.Assesment;
-import domain.Lesson;
+import domain.Comment;
 import domain.Student;
 import forms.AssesmentForm;
 
@@ -37,7 +38,10 @@ public class AssesmentStudentController extends AbstractController {
 	private StudentService		studentService;
 
 	@Autowired
-	private LessonService		lessonService;
+	private CommentService		commentService;
+
+	@Autowired
+	private LessonController	lessonController;
 
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
@@ -55,20 +59,14 @@ public class AssesmentStudentController extends AbstractController {
 	// LIST --------------------------------------------------------
 
 	@RequestMapping(value = "/myAssesments", method = RequestMethod.GET)
-	public ModelAndView myAssesments(@RequestParam final int lessonId) {
+	public ModelAndView myAssesments() {
 		final ModelAndView result;
 		final Collection<Assesment> assesments;
-		Lesson lesson;
 
 		assesments = this.assesmentService.findAllByStudentPrincipal();
-		lesson = this.lessonService.findOne(lessonId);
 
-		if (lesson != null) {
-			result = new ModelAndView("assesment/list");
-			result.addObject("assesments", assesments);
-		} else
-			result = new ModelAndView("redirect:/misc/403.jsp");
-
+		result = new ModelAndView("assesment/list");
+		result.addObject("assesments", assesments);
 		result.addObject("lang", this.lang);
 		result.addObject("rol", "student");
 		result.addObject("requetURI", "assesment/student/myAssesments.do");
@@ -83,17 +81,19 @@ public class AssesmentStudentController extends AbstractController {
 	public ModelAndView display(@RequestParam final int assesmentId) {
 		final ModelAndView result;
 		final Assesment assesment;
-		final Student student;
+		Collection<Comment> comments;
 
 		assesment = this.assesmentService.findOne(assesmentId);
-		student = this.studentService.findByPrincipal();
+		comments = this.commentService.findAllCommentsByAssesment(assesmentId);
 
-		result = new ModelAndView("assesment/display");
-		result.addObject("assesment", assesment);
-		result.addObject("student", student);
-		result.addObject("studentId", student.getId());
-		result.addObject("rol", "student");
-		result.addObject("lang", this.lang);
+		if (assesment != null) {
+			result = new ModelAndView("assesment/display");
+			result.addObject("assesment", assesment);
+			result.addObject("comments", comments);
+			result.addObject("rol", "student");
+			result.addObject("lang", this.lang);
+		} else
+			result = new ModelAndView("redirect:misc/403");
 
 		return result;
 	}
@@ -136,7 +136,7 @@ public class AssesmentStudentController extends AbstractController {
 		} else
 			try {
 				this.assesmentService.save(assesment, lessonId);
-				result = this.myAssesments(lessonId);
+				result = this.lessonController.display(lessonId);
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(assesment, lessonId, "commit.assesment.error");
 			} catch (final Throwable oops) {

@@ -27,19 +27,19 @@ import forms.ActorForm;
 public class TeacherService {
 
 	@Autowired
-	private TeacherRepository		teacherRepository;
+	private TeacherRepository	teacherRepository;
 
 	@Autowired
-	private ActorService			actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private UserAccountService		userAccountService;
+	private UserAccountService	userAccountService;
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private FolderService		folderService;
 
 	@Autowired
-	private Validator				validator;
+	private Validator			validator;
 
 
 	public Teacher create() {
@@ -62,28 +62,22 @@ public class TeacherService {
 		return teachers;
 	}
 
-	//	public Teacher save(final Teacher teacher) {
-	//		Assert.notNull(teacher);
-	//		Teacher result;
-	//
-	//		if (teacher.getId() == 0) {
-	//			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
-	//			result = this.teacherRepository.save(teacher);
-	//			//			this.folderService.setFoldersByDefault(result);
-	//
-	//			final Curriculum curriculum = this.curriculaService.createForNewTeacher();
-	//			curricula.setTeacher(result);
-	//			final Curriculum res = this.curriculumRepository.save(curriculum);
-	//			Assert.notNull(res);
-	//
-	//		} else {
-	//			this.actorService.checkForSpamWords(teacher);
-	//			final Actor principal = this.actorService.findByPrincipal();
-	//			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
-	//			result = (Teacher) this.actorService.save(teacher);
-	//		}
-	//		return result;
-	//	}
+	public Teacher save(final Teacher teacher) {
+		Assert.notNull(teacher);
+		Teacher result;
+
+		if (teacher.getId() == 0) {
+			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
+			result = this.teacherRepository.save(teacher);
+			this.folderService.setFoldersByDefault(result);
+		} else {
+			this.actorService.checkForSpamWords(teacher);
+			final Actor principal = this.actorService.findByPrincipal();
+			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
+			result = (Teacher) this.actorService.save(teacher);
+		}
+		return result;
+	}
 
 	public void delete(final Teacher teacher) {
 		Assert.notNull(teacher);
@@ -182,5 +176,44 @@ public class TeacherService {
 		ban.setAuthority(Authority.BANNED);
 		principal.getUserAccount().getAuthorities().add(ban);
 		this.teacherRepository.save(principal);
+	}
+
+	public Teacher findTeacherByCurriculum(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByCurriculum(id);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Teacher findTeacherByPersonalRecord(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByPersonalRecord(id);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Teacher findTeacherByEducationRecord(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByEducationRecord(id);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Teacher findTeacherByMiscellaneousRecord(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByMiscellaneousRecord(id);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public boolean hasEducationRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasEducationRecord(teacherId, recordId);
+		return res;
+	}
+
+	public boolean hasMiscellaneousRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasMiscellaneousRecord(teacherId, recordId);
+		return res;
+	}
+
+	public boolean hasPersonalRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
+		return res;
 	}
 }

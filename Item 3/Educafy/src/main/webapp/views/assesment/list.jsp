@@ -18,10 +18,16 @@
 <display:table name="assesments" id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
-
-	<display:column property="score" titleKey="assesment.score" />
+		
+	<display:column property="lesson.title" titleKey="assesment.lesson" />
 	
-	<display:column property="lesson" titleKey="assesment.lesson" />
+	<display:column property="score" titleKey="assesment.score" />
+
+	<security:authorize access="hasRole('TEACHER')">
+		<display:column>
+			<acme:button url="comment/teacher/create.do?assesmentId=${row.id}" name="create" code="assesment.comment.create"/>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 

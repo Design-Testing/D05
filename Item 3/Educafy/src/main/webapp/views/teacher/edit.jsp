@@ -8,7 +8,7 @@
 
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-	<script>
+<script>
 	function phoneFun() {
 		var x = document.getElementById("phone");
 		var telefono = x.value;
@@ -26,7 +26,7 @@
 			}
 		}
 	}
-	</script>
+</script>
 
 <jstl:if test="${not empty alert}">
 	<script>
@@ -43,7 +43,7 @@
 			<ul>
 				<jstl:forEach items="${errors}" var="error">
 					<jstl:if test="${error.field eq 'termsAndCondicions'}">
-						<li><spring:message code="company.edit.${error.field}"/> - <jstl:out value="${error.defaultMessage}" /></li>
+						<li><spring:message code="teacher.edit.${error.field}"/> - <jstl:out value="${error.defaultMessage}" /></li>
 					</jstl:if>
 				</jstl:forEach>
 			</ul>

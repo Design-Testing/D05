@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import domain.DomainEntity;
 
@@ -20,6 +21,7 @@ public class LessonForm extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return this.title;
 	}
@@ -29,6 +31,7 @@ public class LessonForm extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}

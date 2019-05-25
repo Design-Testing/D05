@@ -25,5 +25,27 @@ img.resize {
 
 <acme:display code="assesment.student" value="${assesment.student.name}"/>
 
+<h3><spring:message code="assesment.comments"/></h3>
+<jstl:choose>
+	<jstl:when test="${not empty comments}">
+		<display:table name="comments" id="row"
+				requestURI="${requestURI}" pagesize="5"
+				class="displaytag">
+			
+			<display:column property="text" titleKey="comment.text" />
+			
+			<display:column>
+				<acme:button url="comment/display.do?commentId=${row.id}" name="display" code="assesment.display"/>
+			</display:column>
+		</display:table>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="no.comment"/>
+	</jstl:otherwise>
+</jstl:choose>
+
 <br><br>
+
+
+<acme:button url="lesson/display.do?lessonId=${assesment.lesson.id}" name="back" code="lesson.back" />
 

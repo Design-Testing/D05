@@ -27,15 +27,23 @@
 		<value>/views/administrator/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/teacher/messages</value>
+		<value>/views/certifier/messages</value>
+		<value>/views/student/messages</value>
 		<value>/views/folder/messages</value>
 		<value>/views/message/messages</value>
 		<value>/views/configurationParameters/messages</value>
 		<value>/views/dashboard/messages</value>
 		<value>/views/lesson/messages</value>
 		<value>/views/assesment/messages</value>
+		<value>/views/comment/messages</value>
 		<value>/views/subject/messages</value>
 		<value>/views/socialProfile/messages</value>
-		
+		<value>/views/creditCard/messages</value>
+		<value>/views/schedule/messages</value>
+		<value>/views/curriculum/messages</value>
+		<value>/views/personalRecord/messages</value>
+		<value>/views/educationRecord/messages</value>
+		<value>/views/miscellaneousRecord/messages</value>
 		
 		
 

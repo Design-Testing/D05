@@ -893,7 +893,7 @@
 		======= CreditCard ========= =================================================================== -->
 
 	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716477920082572" />
 		<property name="expirationMonth" value="06" />
@@ -903,7 +903,7 @@
 	</bean>
 
 	<bean id="creditCard2" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="MASTER" />
 		<property name="number" value="5498128346540526" />
 		<property name="expirationMonth" value="10" />
@@ -913,7 +913,7 @@
 	</bean>
 
 	<bean id="creditCard3" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="AMEX" />
 		<property name="number" value="375278545368168" />
 		<property name="expirationMonth" value="06" />
@@ -923,7 +923,7 @@
 	</bean>
 
 	<bean id="creditCard4" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4532787155338743" />
 		<property name="expirationMonth" value="10" />
@@ -933,7 +933,7 @@
 	</bean>
 
 	<bean id="creditCard5" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 3" />
+		<property name="holderName" value="HolderName Student 1" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4716699361876929" />
 		<property name="expirationMonth" value="02" />
@@ -943,7 +943,7 @@
 	</bean>
 
 	<bean id="creditCard6" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4231348143458624" />
 		<property name="expirationMonth" value="11" />
@@ -953,7 +953,7 @@
 	</bean>
 
 	<bean id="creditCard7" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4294148159742547" />
 		<property name="expirationMonth" value="11" />
@@ -963,7 +963,7 @@
 	</bean>
 
 	<bean id="creditCard8" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5547165664775350" />
 		<property name="expirationMonth" value="11" />
@@ -973,7 +973,7 @@
 	</bean>
 
 	<bean id="creditCard9" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="VISA" />
 		<property name="number" value="4410435734979051" />
 		<property name="expirationMonth" value="03" />
@@ -983,7 +983,7 @@
 	</bean>
 
 	<bean id="creditCard10" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 1" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5316710759043864" />
 		<property name="expirationMonth" value="01" />
@@ -994,7 +994,7 @@
 
 
 	<bean id="creditCard13" class="domain.CreditCard">
-		<property name="holderName" value="HolderName 2" />
+		<property name="holderName" value="HolderName Student 2" />
 		<property name="make" value="MASTERCARD" />
 		<property name="number" value="5384948404521051" />
 		<property name="expirationMonth" value="01" />
@@ -1009,7 +1009,7 @@
 
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
 		<property name="sysName" value="Estudify" />
-		<property name="banner" value="https://i.ibb.co/HpCD1x8/logo1.png" />
+		<property name="banner" value="https://i.ibb.co/W3c4rmh/logo.png" />
 		<property name="welcomeMessageEn"
 			value="Welcome to Estudify! Where student find the individual lessons they are looking for!" />
 		<property name="welcomeMessageEsp"
@@ -1060,6 +1060,7 @@
 		<property name="teacherName" value="John" />
 		<property name="subjectName" value="IT" />
 		<property name="subjectLevel" value="4ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
 
 		<!-- Relations -->
 		<property name="lessons">
@@ -1073,6 +1074,7 @@
 		<property name="teacherName" value="Patrick" />
 		<property name="subjectName" value="MAT" />
 		<property name="subjectLevel" value="3ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
 
 		<!-- Relations -->
 		<property name="lessons">
@@ -1086,6 +1088,7 @@
 		<property name="teacherName" value="Robert" />
 		<property name="subjectName" value="LENG" />
 		<property name="subjectLevel" value="4ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
 
 		<!-- Relations -->
 		<property name="lessons">
@@ -1099,6 +1102,7 @@
 		======= CURRICULA ========= =================================================================== -->
 
 	<bean id="curriculum1" class="domain.Curriculum">
+		<property name="ticker" value="COMM-1234" />
 		<property name="personalRecord" ref="personalRecord1" />
 		<property name="educationRecords">
 			<list>
@@ -1114,6 +1118,7 @@
 	</bean>
 
 	<bean id="curriculum2" class="domain.Curriculum">
+		<property name="ticker" value="COMX-1231" />
 		<property name="personalRecord" ref="personalRecord2" />
 		<property name="educationRecords">
 			<list>
@@ -1242,6 +1247,7 @@
 	<bean id="exam1" class="domain.Exam">
 		<property name="title" value="Title Exam 1" />
 		<property name="score" value="10.0" />
+		<property name="status" value="EVALUATED"/>
 		<property name="questions">
 			<list>
 				<ref bean="question1" />
@@ -1252,7 +1258,7 @@
 
 	<bean id="exam2" class="domain.Exam">
 		<property name="title" value="Title Exam 2" />
-		<property name="score" value="10.0" />
+		<property name="status" value="SUBMITTED"/>
 		<property name="questions">
 			<list>
 				<ref bean="question3" />
@@ -1263,7 +1269,7 @@
 
 	<bean id="exam3" class="domain.Exam">
 		<property name="title" value="Title Exam 3" />
-		<property name="score" value="10.0" />
+		<property name="status" value="INPROGRESS"/>
 		<property name="questions">
 			<list>
 				<ref bean="question5" />
@@ -1274,7 +1280,7 @@
 
 	<bean id="exam4" class="domain.Exam">
 		<property name="title" value="Title Exam 4" />
-		<property name="score" value="10.0" />
+		<property name="status" value="PENDING" />
 		<property name="questions">
 			<list>
 				<ref bean="question7" />
@@ -1308,22 +1314,18 @@
 
 	<bean id="question5" class="domain.Question">
 		<property name="question" value="Question 5" />
-		<property name="answer" value="Answer 5" />
 	</bean>
 
 	<bean id="question6" class="domain.Question">
 		<property name="question" value="Question 6" />
-		<property name="answer" value="Answer 6" />
 	</bean>
 
 	<bean id="question7" class="domain.Question">
 		<property name="question" value="Question 7" />
-		<property name="answer" value="Answer 7" />
 	</bean>
 
 	<bean id="question8" class="domain.Question">
 		<property name="question" value="Question 8" />
-		<property name="answer" value="Answer 8" />
 	</bean>
 
 
@@ -1331,7 +1333,7 @@
 		======= Lesson ========= =================================================================== -->
 
 	<bean id="lesson1" class="domain.Lesson">
-		<property name="ticker" value="657945JEYTS" />
+		<property name="ticker" value="EYTS-6579" />
 		<property name="title" value="Lesson1" />
 		<property name="description" value="Description1" />
 		<property name="price" value="16.5" />
@@ -1341,7 +1343,7 @@
 	</bean>
 
 	<bean id="lesson2" class="domain.Lesson">
-		<property name="ticker" value="652945JKYTS" />
+		<property name="ticker" value="KYTS-6529" />
 		<property name="title" value="Lesson2" />
 		<property name="description" value="Description2" />
 		<property name="price" value="16.5" />
@@ -1351,7 +1353,7 @@
 	</bean>
 
 	<bean id="lesson3" class="domain.Lesson">
-		<property name="ticker" value="637955JUYTO" />
+		<property name="ticker" value="UYTO-6379" />
 		<property name="title" value="Lesson3" />
 		<property name="description" value="Description3" />
 		<property name="price" value="16.5" />
@@ -1361,7 +1363,7 @@
 	</bean>
 
 	<bean id="lesson4" class="domain.Lesson">
-		<property name="ticker" value="457945JEITS" />
+		<property name="ticker" value="EITS-4579" />
 		<property name="title" value="Lesson4" />
 		<property name="description" value="Description4" />
 		<property name="price" value="16.5" />
@@ -1378,7 +1380,7 @@
 		<property name="moment" value="2019/05/10 20:30" />
 		<property name="explanation" value="Explanation of Reservation 1" />
 		<property name="cost" value="20.5" />
-		<property name="hourWeek" value="5" />
+		<property name="hoursWeek" value="5" />
 		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson1" />
 		<property name="creditCard" ref="creditCard1" />
@@ -1394,7 +1396,7 @@
 		<property name="moment" value="2019/05/11 20:30" />
 		<property name="explanation" value="Explanation of Reservation 2" />
 		<property name="cost" value="15.5" />
-		<property name="hourWeek" value="3" />
+		<property name="hoursWeek" value="3" />
 		<property name="student" ref="student2" />
 		<property name="lesson" ref="lesson2" />
 		<property name="creditCard" ref="creditCard2" />
@@ -1526,6 +1528,210 @@
 		<property name="socialNetwork" value="socialnetworkteacher2" />
 		<property name="profileLink" value="http://www.linkteacher2.com" />
 		<property name="actor" ref="teacher2" />
+	</bean>
+	
+	<!-- =================================================================== 
+		======= COMMENTS ========= 
+		=================================================================== -->
+		
+		<bean id="comment1" class="domain.Comment">
+		<property name="text" value="Text of comment 1"/>
+		<property name="moment" value="2019/05/12 20:45"/>
+		<property name="assesment" ref="assesment1"/>
+		</bean>
+		
+		<bean id="comment2" class="domain.Comment">
+		<property name="text" value="Text of comment 2"/>
+		<property name="moment" value="2019/05/12 10:45"/>
+		<property name="assesment" ref="assesment1"/>
+		</bean>
+		
+		<bean id="comment3" class="domain.Comment">
+		<property name="text" value="Text of comment 3"/>
+		<property name="moment" value="2019/05/12 21:45"/>
+		<property name="assesment" ref="assesment2"/>
+		</bean>
+		
+		<bean id="comment4" class="domain.Comment">
+		<property name="text" value="Text of comment 4"/>
+		<property name="moment" value="2019/05/12 20:40"/>
+		<property name="assesment" ref="assesment2"/>
+		</bean>
+		
+		<bean id="comment5" class="domain.Comment">
+		<property name="text" value="Text of comment 5"/>
+		<property name="moment" value="2019/05/12 22:45"/>
+		<property name="assesment" ref="assesment3"/>
+		</bean>
+		
+		<bean id="comment6" class="domain.Comment">
+		<property name="text" value="Text of comment 6"/>
+		<property name="moment" value="2019/05/12 11:45"/>
+		<property name="assesment" ref="assesment3"/>
+		</bean>
+		
+		<bean id="comment7" class="domain.Comment">
+		<property name="text" value="Text of comment 7"/>
+		<property name="moment" value="2019/05/12 09:45"/>
+		<property name="assesment" ref="assesment4"/>
+		</bean>
+		
+		<bean id="comment8" class="domain.Comment">
+		<property name="text" value="Text of comment 8"/>
+		<property name="moment" value="2019/05/12 14:45"/>
+		<property name="assesment" ref="assesment4"/>
+		</bean>
+
+<!-- =================================================================== 
+		======= Schedule ========= =================================================================== -->
+
+	<bean id="schedule1" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher1" />
+
 	</bean>
 
 </beans>
