@@ -84,6 +84,15 @@
 		<security:intercept-url pattern="/teacher/deletePersonalData.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/teacher/listAll.do" access="permitAll" />
 		
+		<!-- CERTIFIER -->
+		<security:intercept-url pattern="/certifier/list.do" access="permitAll" />
+		<security:intercept-url pattern="/certifier/display.do" access="permitAll" />
+		<security:intercept-url pattern="/certifier/create.do" access="permitAll" />
+		<security:intercept-url pattern="/certifier/edit.do" access="permitAll" />
+		<security:intercept-url pattern="/certifier/display2.do" access="hasRole('CERTIFIER')" />
+		<security:intercept-url pattern="/certifier/deletePersonalData.do" access="hasRole('CERTIFIER')" />
+		<security:intercept-url pattern="/certifier/listAll.do" access="permitAll" />
+		
 		<!-- CURRICULUM -->
 		<security:intercept-url pattern="/curriculum/create.do" access="permitAll" />
 		<security:intercept-url pattern="/curriculum/display.do" access="permitAll" />
@@ -109,7 +118,7 @@
 		
 		<!-- STUDENT -->
 		<security:intercept-url pattern="/student/list.do" access="permitAll" />
-		<security:intercept-url pattern="/student/displayTabla.do" access="permitAll" />
+		<security:intercept-url pattern="/student/display2.do" access="permitAll" />
 		<security:intercept-url pattern="/student/create.do" access="permitAll" />
 		<security:intercept-url pattern="/student/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/student/display.do" access="hasRole('STUDENT')" />

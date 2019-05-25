@@ -43,7 +43,7 @@
 			<ul>
 				<jstl:forEach items="${errors}" var="error">
 					<jstl:if test="${error.field eq 'termsAndCondicions'}">
-						<li><spring:message code="company.edit.${error.field}"/> - <jstl:out value="${error.defaultMessage}" /></li>
+						<li><spring:message code="certifier.edit.${error.field}"/> - <jstl:out value="${error.defaultMessage}" /></li>
 					</jstl:if>
 				</jstl:forEach>
 			</ul>
@@ -51,27 +51,27 @@
 	</jstl:if>
 	<br>
 
-<form:form modelAttribute="actorForm" action="teacher/edit.do" method="POST">
+<form:form modelAttribute="actorForm" action="certifier/edit.do" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<acme:textbox code="teacher.edit.userAccountuser" path="userAccountuser" />
-	<acme:password code="teacher.edit.userAccountpassword" path="userAccountpassword" />
+	<acme:textbox code="certifier.edit.userAccountuser" path="userAccountuser" />
+	<acme:password code="certifier.edit.userAccountpassword" path="userAccountpassword" />
 
-	<acme:textbox code="teacher.edit.name" path="name" />
-	<acme:textarea code="teacher.edit.surname" path="surname" />
-	<acme:textbox code="teacher.edit.photo" path="photo" />
-	<acme:textbox code="teacher.edit.email" path="email"
+	<acme:textbox code="certifier.edit.name" path="name" />
+	<acme:textarea code="certifier.edit.surname" path="surname" />
+	<acme:textbox code="certifier.edit.photo" path="photo" />
+	<acme:textbox code="certifier.edit.email" path="email"
 		placeholder="id@domain / alias id@domain / id@ / alias id@" size="45" />
 	<div>
 		<form:label path="phone">
-			<spring:message code="teacher.edit.phone" />
+			<spring:message code="certifier.edit.phone" />
 		</form:label>
 		<form:input path="phone" onblur="phoneFun()" />
 		<form:errors path="phone" cssClass="error" />
 	</div>
 	
-	<acme:textbox code="teacher.edit.address" path="address" />
-	<acme:numberbox code="teacher.edit.vat" path="vat" min="0" max="1"/>
+	<acme:textbox code="certifier.edit.address" path="address" />
+	<acme:numberbox code="certifier.edit.vat" path="vat" min="0" max="1"/>
 	
 	<br/>
 
@@ -87,6 +87,6 @@
 	<br/>
 
 	<input type="submit" name="save"
-		value="<spring:message code="teacher.edit.submit" />" />
+		value="<spring:message code="certifier.edit.submit" />" />
 	
 </form:form>
