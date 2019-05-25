@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.LessonService;
 import services.ReservationService;
 import services.StudentService;
 import controllers.AbstractController;
+import domain.Lesson;
 import domain.Reservation;
 import domain.Student;
 
@@ -30,6 +32,9 @@ public class ReservationStudentController extends AbstractController {
 	private ReservationService	reservationService;
 
 	@Autowired
+	private LessonService		lessonService;
+
+	@Autowired
 	private StudentService		studentService;
 
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
@@ -38,10 +43,12 @@ public class ReservationStudentController extends AbstractController {
 	// CREATE  ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int lessonId) {
 		ModelAndView result;
+		final Lesson lesson = this.lessonService.findOne(lessonId);
 		final Reservation reservation = this.reservationService.create();
-		result = this.createEditModelAndView(reservation);
+		reservation.setLesson(lesson);
+		result = this.createEditModelAndView1(reservation);
 		return result;
 	}
 
@@ -76,7 +83,7 @@ public class ReservationStudentController extends AbstractController {
 		reservations = this.reservationService.findAllByStudent();
 
 		result = new ModelAndView("reservation/list");
-		result.addObject("reservatins", reservations);
+		result.addObject("reservations", reservations);
 		result.addObject("lang", this.lang);
 		result.addObject("rol", "student");
 		result.addObject("requestURI", "reservation/student/myReservations.do");
@@ -147,7 +154,7 @@ public class ReservationStudentController extends AbstractController {
 		final Student student = this.studentService.findByPrincipal();
 
 		if ((!reservation.getStatus().equals("FINAL") && reservation.getStudent().equals(student)))
-			result = this.createEditModelAndView(reservation);
+			result = this.createEditModelAndView2(reservation);
 		else
 			result = new ModelAndView("redirect:misc/403");
 
@@ -160,16 +167,16 @@ public class ReservationStudentController extends AbstractController {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(reservation);
+			result = this.createEditModelAndView1(reservation);
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
 				this.reservationService.save(reservation, binding);
 				result = this.myReservations();
 			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView(reservation, "commit.reservation.error");
+				result = this.createEditModelAndView2(reservation, "commit.reservation.error");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(reservation, "commit.reservation.error");
+				result = this.createEditModelAndView2(reservation, "commit.reservation.error");
 				result.addObject("errors", binding.getAllErrors());
 			}
 
@@ -188,17 +195,34 @@ public class ReservationStudentController extends AbstractController {
 
 	// ANCILLIARY METHODS --------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Reservation reservation) {
+	protected ModelAndView createEditModelAndView1(final Reservation reservation) {
 		ModelAndView result;
-		result = this.createEditModelAndView(reservation, null);
+		result = this.createEditModelAndView1(reservation, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Reservation reservation, final String messageCode) {
+	protected ModelAndView createEditModelAndView1(final Reservation reservation, final String messageCode) {
 		Assert.notNull(reservation);
 		final ModelAndView result;
 
-		result = new ModelAndView("reservation/edit");
+		result = new ModelAndView("reservation/edit1");
+		result.addObject("reservation", reservation);
+		result.addObject("message", messageCode);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView2(final Reservation reservation) {
+		ModelAndView result;
+		result = this.createEditModelAndView2(reservation, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView2(final Reservation reservation, final String messageCode) {
+		Assert.notNull(reservation);
+		final ModelAndView result;
+
+		result = new ModelAndView("reservation/edit2");
 		result.addObject("reservation", reservation);
 		result.addObject("message", messageCode);
 

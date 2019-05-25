@@ -13,30 +13,24 @@
 	<form:hidden path="version"/>
 	<form:hidden path="moment"/>
 	<form:hidden path="cost"/>
-	<form:hidden path="hoursWeek"/>
 	<form:hidden path="student"/>
 	<form:hidden path="lesson"/>
 	<form:hidden path="exams"/>
 	<form:hidden path="status"/>
 	
-	<security:authorize access="hasRole('STUDENT')">
-	<jstl:choose>
-		<jstl:when test="${reservation.status eq 'ACCEPTED' }">
-			<acme:textarea code="reservation.explanation" path="explanation"/>
-			<acme:button url="reservation/student/reviwing.do" name="reviewing" code="reservation.reviewing"/>
-			<acme:button url="reservation/student/final.do" name="final" code="reservation.final"/>
-		</jstl:when>
-		<jstl:when test="${rol eq 'student'}">
-			<acme:button url="reservation/student/myReservations.do" name="back" code="reservation.back"/>
-		</jstl:when>
-	</jstl:choose>
-	</security:authorize>
-
+	
+	<acme:textbox code="reservation.hoursWeek" path="hoursWeek"/>
+	
 <br>
 
 	<input type="submit" name="save"
-		value="<spring:message code="lesson.submit" />" />
+		value="<spring:message code="reservation.submit" />" />
 	
-	<acme:button url="lesson/teacher/myLessons.do" name="back" code="lesson.back"/>
+	<security:authorize access="hasRole('TEACHER')">
+		<acme:button url="reservation/teacher/myReservation.do" name="back" code="reservation.back"/>
+	</security:authorize>
+	<security:authorize access="hasRole('STUDENT')">
+		<acme:button url="reservation/student/myReservation.do" name="back" code="reservation.back"/>
+	</security:authorize>
 
 </form:form>

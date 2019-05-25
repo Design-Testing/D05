@@ -56,6 +56,8 @@
 			<li><a href="lesson/teacher/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
 			<li><a href="assesment/teacher/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
+			<!-- RESERVATION -->
+			<li><a href="reservation/teacher/myReservations.do"><spring:message code="master.page.reservation.myReservations" /></a></li>
 			
 		</security:authorize>
 		
@@ -68,6 +70,8 @@
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			
 			<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
+			<!-- RESERVATION -->
+			<li><a href="reservation/student/myReservations.do"><spring:message code="master.page.reservation.myReservations" /></a></li>
 			
 		</security:authorize>
 		

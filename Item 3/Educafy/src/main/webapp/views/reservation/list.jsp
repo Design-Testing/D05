@@ -15,7 +15,7 @@
 </jstl:if>
 
 
-<display:table name="reservation" id="row"
+<display:table name="reservations" id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
 
@@ -28,7 +28,12 @@
 	<display:column property="hoursWeek" titleKey="reservation.hoursWeek" />
 	
 	<display:column>
-		<acme:button url="reservation/student/display.do?reservationId=${row.id}" name="display" code="reservation.display"/>
+		<jstl:if test="${rol eq 'student'}">
+			<acme:button url="reservation/student/display.do?reservationId=${row.id}" name="display" code="reservation.display"/>
+		</jstl:if>
+		<jstl:if test="${rol eq 'teacher'}">
+			<acme:button url="reservation/teacher/display.do?reservationId=${row.id}" name="display" code="reservation.display"/>
+		</jstl:if>
 	</display:column>
 	<security:authorize access="hasRole('STUDENT')">
 	<display:column>

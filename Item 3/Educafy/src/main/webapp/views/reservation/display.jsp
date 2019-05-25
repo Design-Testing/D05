@@ -28,14 +28,11 @@ img.resize {
 <acme:display code="reservation.cost" value="${reservation.cost}"/>
 
 <acme:display code="reservation.student" value="${reservation.student.name}"/>
-<acme:button url="student/display.do?studentId=${reservation.student.id}" name="displayStudent" code="reservation.display"/>
-<br><br>
 
 <acme:display code="reservation.lesson" value="${reservation.lesson.title}"/>
 <acme:button url="lesson/display.do?lessonId=${reservation.lesson.id}" name="displayStudent" code="reservation.display"/>
-<br><br>
 
-<acme:display code="reservation.creditCard" value="${reservation.creditCard}"/>
+<acme:display code="reservation.creditCard" value="${reservation.creditCard.number}"/>
 
 
 <br><br>

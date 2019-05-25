@@ -71,6 +71,12 @@
  		<security:intercept-url pattern="/lesson/teacher/**" access="hasRole('TEACHER')" /> 
  		<security:intercept-url pattern="/lesson/student/**" access="hasRole('STUDENT')" /> 
  		
+ 		<!-- RESERVATION -->
+ 		<security:intercept-url pattern="/reservation/teacher/**" access="hasRole('TEACHER')" /> 
+ 		<security:intercept-url pattern="/reservation/student/**" access="hasRole('STUDENT')" /> 
+ 		<security:intercept-url pattern="/reservation/display.do" access="hasAnyRole('STUDENT','TEACHER')" /> 
+ 		
+ 		
 		<!-- TEACHER -->
 		<security:intercept-url pattern="/teacher/list.do" access="permitAll" />
 		<security:intercept-url pattern="/teacher/display.do" access="permitAll" />
@@ -78,6 +84,9 @@
 		<security:intercept-url pattern="/teacher/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/teacher/display2.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/teacher/deletePersonalData.do" access="hasRole('TEACHER')" />
+		
+		<!-- STUDENT -->
+		<security:intercept-url pattern="/student/display.do" access="TEACHER" />
 		
 		<!-- CREDIT CARD -->
 		<security:intercept-url pattern="/creditCard/student/**" access="hasRole('STUDENT')" />

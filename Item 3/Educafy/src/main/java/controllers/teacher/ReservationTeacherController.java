@@ -65,7 +65,7 @@ public class ReservationTeacherController extends AbstractController {
 		reservations = this.reservationService.findAllByTeacher();
 
 		result = new ModelAndView("reservation/list");
-		result.addObject("reservatins", reservations);
+		result.addObject("reservations", reservations);
 		result.addObject("lang", this.lang);
 		result.addObject("rol", "teacher");
 		result.addObject("requestURI", "reservation/teacher/myReservations.do");
@@ -187,7 +187,7 @@ public class ReservationTeacherController extends AbstractController {
 		Assert.notNull(reservation);
 		final ModelAndView result;
 
-		result = new ModelAndView("reservation/edit");
+		result = new ModelAndView("reservation/edit2");
 		result.addObject("reservation", reservation);
 		result.addObject("message", messageCode);
 
