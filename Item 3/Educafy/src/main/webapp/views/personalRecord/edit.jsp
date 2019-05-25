@@ -14,6 +14,8 @@
 
 	<form:hidden path="id"/>
     <form:hidden path="version"/>
+    <form:hidden path="isDraft"/>
+    <form:hidden path="isCertified"/>
 
     <acme:textbox path="fullName" code="record.fullName"/>
     <acme:textbox path="statement" code="record.statement"/>

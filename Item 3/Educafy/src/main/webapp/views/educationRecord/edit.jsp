@@ -12,6 +12,8 @@
 
 	<form:hidden path="id"/>
     <form:hidden path="version"/>
+    <form:hidden path="isDraft"/>
+    <form:hidden path="isCertified"/>
     
     
     <input type="hidden" name="curriculumId" value="${curriculumId}" />

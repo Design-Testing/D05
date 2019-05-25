@@ -12,6 +12,8 @@
 
 	<form:hidden path="id"/>
     <form:hidden path="version"/>
+    <form:hidden path="isDraft"/>
+    <form:hidden path="isCertified"/>
 
     <acme:textbox path="freeText" code="record.freeText"/>
     <acme:textarea path="attachments" code="record.attachments"/>

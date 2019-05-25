@@ -81,19 +81,19 @@ public class PersonalRecordController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final PersonalRecord personalRecord, final BindingResult bindingResult) {
 		ModelAndView result;
-		if (bindingResult.hasErrors())
-			result = this.createEditModelAndView(personalRecord);
-		else
+		if (bindingResult.hasErrors()) {
+			result = new ModelAndView("personalRecord/edit");
+			result.addObject("personalRecord", personalRecord);
+		} else
 			try {
 				this.personalRecordService.save(personalRecord);
-
 				final Curriculum curriculum = this.curriculumService.findCurriculumByPersonalRecord(personalRecord.getId());
 
 				result = new ModelAndView("curriculum/display");
 				result.addObject("curriculum", curriculum);
 				result.addObject("curriculumId", curriculum.getId());
 				result.addObject("messages", null);
-				result.addObject("buttons", false);
+				result.addObject("buttons", true);
 
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(personalRecord, "general.commit.error");
@@ -101,7 +101,6 @@ public class PersonalRecordController extends AbstractController {
 
 		return result;
 	}
-
 	@RequestMapping(value = "/certify", method = RequestMethod.GET)
 	public ModelAndView certify(@RequestParam final int personalRecordId) {
 		ModelAndView result;

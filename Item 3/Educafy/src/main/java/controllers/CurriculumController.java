@@ -74,9 +74,11 @@ public class CurriculumController extends AbstractController {
 
 			res = new ModelAndView("curriculum/display");
 
-			final UserAccount logged = LoginService.getPrincipal();
+			
 			res.addObject("curriculum", curriculum);
 			res.addObject("buttons", true);
+			
+			/*final UserAccount logged = LoginService.getPrincipal();
 
 			final Authority authTeacher = new Authority();
 			authTeacher.setAuthority(Authority.TEACHER);
@@ -92,7 +94,7 @@ public class CurriculumController extends AbstractController {
 			} else if (logged.getAuthorities().contains(authStudent))
 				res.addObject("buttonsAnonymous", true);
 			else if (logged.getAuthorities().contains(authCertifier))
-				res.addObject("buttonsCertifier", true);
+				res.addObject("buttonsCertifier", true);*/
 		} else {
 			res = new ModelAndView("curriculum/create");
 			res.addObject("curriculum", curriculum);

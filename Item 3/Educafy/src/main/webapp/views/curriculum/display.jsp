@@ -91,7 +91,7 @@
 	<display:column>
             <input type="button" name="edit"
                 value="<spring:message code="record.edit" />"
-                onclick="relativeRedir('educationRecord/edit.do?educationRecordId=${row.id}')" />
+                onclick="relativeRedir('educationRecord/edit.do?educationRecordId=${row.id}&curriculumId=${curriculum.id}')" />
 	</display:column>
 	<display:column>
 			<input type="button" name="delete"
@@ -135,7 +135,7 @@
 	<jstl:if test="${buttons}">
 	<input type="button" name="create"
     value="<spring:message code="record.create.educationRecord" />"
-    onclick="relativeRedir('educationRecord/create.do')" />
+    onclick="relativeRedir('educationRecord/create.do?curriculumId=${curriculum.id}')" />
     </jstl:if>
     <br />
     
@@ -160,7 +160,7 @@
 	<display:column>
             <input type="button" name="edit"
                 value="<spring:message code="record.edit" />"
-                onclick="relativeRedir('miscellaneousRecord/edit.do?miscellaneousRecordId=${row.id}')" />
+                onclick="relativeRedir('miscellaneousRecord/edit.do?miscellaneousRecordId=${row.id}&curriculumId=${curriculum.id}')" />
 	</display:column>
 	<display:column>
 			<input type="button" name="delete"
@@ -203,7 +203,7 @@
 	<jstl:if test="${buttons}">
 	<input type="button" name="create"
     value="<spring:message code="record.create.miscellaneousRecord" />"
-    onclick="relativeRedir('miscellaneousRecord/create.do')" />
+    onclick="relativeRedir('miscellaneousRecord/create.do?curriculumId=${curriculum.id}')" />
     </jstl:if>
     <br />
 	<br>
