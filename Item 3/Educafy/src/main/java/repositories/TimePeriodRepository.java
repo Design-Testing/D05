@@ -15,4 +15,7 @@ public interface TimePeriodRepository extends JpaRepository<TimePeriod, Integer>
 	@Query("select t from TimePeriod t where t.reservation.id=?1")
 	Collection<TimePeriod> findByReservation(Integer reservationId);
 
+	@Query("select t from TimePeriod t join t.reservation r join r.lesson l where l.teacher.userAccount.id=?1")
+	Collection<TimePeriod> findTimePeriodsByTeacher(int teacherUAId);
+
 }

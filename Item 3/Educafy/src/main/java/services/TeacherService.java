@@ -216,4 +216,10 @@ public class TeacherService {
 		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
 		return res;
 	}
+
+	public Teacher findTeacherByReservation(final int reservationId) {
+		Teacher res;
+		res = this.teacherRepository.findTeacherByReservation(reservationId);
+		return res;
+	}
 }

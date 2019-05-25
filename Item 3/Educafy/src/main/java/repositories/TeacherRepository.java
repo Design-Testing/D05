@@ -34,4 +34,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 	@Query("select case when (count(c) > 0) then true else false end from Curriculum c join c.miscellaneousRecords e where e.id=?2 and c.teacher.id=?1")
 	boolean hasMiscellaneousRecord(int teacherId, int recordId);
 
+	@Query("select l.teacher from Reservation r join r.lesson l where r.id=?1")
+	Teacher findTeacherByReservation(int reservationId);
+
 }
