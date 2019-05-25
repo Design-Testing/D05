@@ -20,5 +20,5 @@
 		<put-attribute name="title" value="Horario: Mostrar" />
 		<put-attribute name="body" value="/views/schedule/display.jsp" />
 	</definition>
-
+	
 </tiles-definitions>

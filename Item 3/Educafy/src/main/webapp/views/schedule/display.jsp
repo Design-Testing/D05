@@ -29,9 +29,9 @@
 		requestURI="${requestURI}"
 		class="displaytag">
 
-<jstl:forEach items="${schedule.monday}" var="m">
+<jstl:forEach items="${schedule.monday}" var="m" varStatus="loop">
 <jstl:set value="${m}" var="colorStyle" />
-	<display:column titleKey="schedule.monday" class="${colorStyle}">
+	<display:column titleKey="hora.${loop.index}" class="${colorStyle}">
 	<jstl:choose>
 		<jstl:when test="${m}">
 			<spring:message code="ocupado" />
@@ -51,9 +51,9 @@
 		requestURI="${requestURI}"
 		class="displaytag">
 
-<jstl:forEach items="${schedule.tuesday}" var="t">
+<jstl:forEach items="${schedule.tuesday}" var="t" varStatus="loop">
 	<jstl:set value="${t}" var="colorStyle" />
-	<display:column titleKey="schedule.tuesday" class="${colorStyle}">
+	<display:column titleKey="hora.${loop.index}" class="${colorStyle}">
 	<jstl:choose>
 		<jstl:when test="${t}">
 			<spring:message code="ocupado" />
@@ -72,9 +72,9 @@
 		requestURI="${requestURI}"
 		class="displaytag">
 
-<jstl:forEach items="${schedule.wednesday}" var="w">
+<jstl:forEach items="${schedule.wednesday}" var="w" varStatus="loop">
 	<jstl:set value="${w}" var="colorStyle" />
-	<display:column titleKey="schedule.wednesday" class="${colorStyle}">
+	<display:column titleKey="hora.${loop.index}" class="${colorStyle}">
 	<jstl:choose>
 		<jstl:when test="${w}">
 			<spring:message code="ocupado" />
@@ -93,9 +93,9 @@
 		requestURI="${requestURI}"
 		class="displaytag">
 
-<jstl:forEach items="${schedule.thursday}" var="th">
+<jstl:forEach items="${schedule.thursday}" var="th" varStatus="loop">
 	<jstl:set value="${th}" var="colorStyle" />
-	<display:column titleKey="schedule.thursday" class="${colorStyle}">
+	<display:column titleKey="hora.${loop.index}" class="${colorStyle}">
 	<jstl:choose>
 		<jstl:when test="${th}">
 			<spring:message code="ocupado" />
@@ -114,9 +114,9 @@
 		requestURI="${requestURI}"
 		class="displaytag">
 
-<jstl:forEach items="${schedule.friday}" var="f">
+<jstl:forEach items="${schedule.friday}" var="f" varStatus="loop">
 	<jstl:set value="${f}" var="colorStyle" />
-	<display:column titleKey="schedule.friday" class="${colorStyle}">
+	<display:column titleKey="hora.${loop.index}" class="${colorStyle}">
 	<jstl:choose>
 		<jstl:when test="${f}">
 			<spring:message code="ocupado" />

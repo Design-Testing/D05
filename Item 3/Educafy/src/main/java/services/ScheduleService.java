@@ -203,4 +203,15 @@ public class ScheduleService {
 		return res;
 	}
 
+	public Schedule createForNewTeacher(final Teacher teacher) {
+		Schedule result;
+
+		result = this.create();
+		result.setTeacher(teacher);
+
+		final Schedule saved = this.scheduleRepository.save(result);
+
+		return saved;
+	}
+
 }
