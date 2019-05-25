@@ -228,4 +228,23 @@ public class LessonService {
 		Assert.notNull(res);
 		return res;
 	}
+
+	public Double[] getStatisticsOfLessonsPerTeacher() {
+		final Double[] res = this.lessonRepository.getStatisticsOfLessonsPerTeacher();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfLessonPrice() {
+		final Double[] res = this.lessonRepository.getStatisticsOfLessonPrice();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfReservationPerLesson() {
+		final Double[] res = this.lessonRepository.getStatisticsOfReservationPerLesson();
+		Assert.notNull(res);
+		return res;
+	}
+
 }
