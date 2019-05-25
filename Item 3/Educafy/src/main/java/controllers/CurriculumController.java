@@ -56,10 +56,8 @@ public class CurriculumController extends AbstractController {
 				res.addObject("buttonsAnonymous", true);
 			else if (logged.getAuthorities().contains(authCertifier))
 				res.addObject("buttonsCertifier", true);
-		} else {
-			res = new ModelAndView("curriculum/create");
-			res.addObject("curriculum", curriculum);
-		}
+		} else
+			res = new ModelAndView("curriculum/display");
 
 		return res;
 	}
@@ -93,10 +91,8 @@ public class CurriculumController extends AbstractController {
 			else if (logged.getAuthorities().contains(authCertifier))
 				res.addObject("buttonsCertifier", true);
 
-		} else {
-			res = new ModelAndView("curriculum/create");
-			res.addObject("curriculum", curriculum);
-		}
+		} else
+			res = new ModelAndView("curriculum/display");
 
 		return res;
 	}
@@ -172,10 +168,8 @@ public class CurriculumController extends AbstractController {
 				res.addObject("buttonsAnonymous", true);
 			else if (logged.getAuthorities().contains(authCertifier))
 				res.addObject("buttonsCertifier", true);
-		} else {
-			res = new ModelAndView("curriculum/create");
-			res.addObject("curriculum", curriculum);
-		}
+		} else
+			res = new ModelAndView("curriculum/display");
 
 		return res;
 	}
