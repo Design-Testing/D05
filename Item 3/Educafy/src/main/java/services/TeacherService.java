@@ -220,6 +220,9 @@ public class TeacherService {
 	public Teacher findTeacherByReservation(final int reservationId) {
 		Teacher res;
 		res = this.teacherRepository.findTeacherByReservation(reservationId);
+		return res;
+	}
+
 	public List<Teacher> getTeacherOrderByScore() {
 		List<Teacher> ls = this.teacherRepository.getTeacherOrderByScore();
 		if (ls.size() > 2)
