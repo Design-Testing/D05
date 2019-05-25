@@ -27,25 +27,19 @@ import forms.ActorForm;
 public class TeacherService {
 
 	@Autowired
-	private TeacherRepository		teacherRepository;
+	private TeacherRepository	teacherRepository;
 
 	@Autowired
-	private ActorService			actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private UserAccountService		userAccountService;
+	private UserAccountService	userAccountService;
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private FolderService		folderService;
 
 	@Autowired
-	private FolderService			folderService;
-
-	@Autowired
-	private CurriculumService		curriculumService;
-
-	@Autowired
-	private Validator				validator;
+	private Validator			validator;
 
 
 	public Teacher create() {
@@ -210,11 +204,11 @@ public class TeacherService {
 
 	public boolean hasEducationRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasEducationRecord(teacherId, recordId);
-		return false;
+		return res;
 	}
 
 	public boolean hasMiscellaneousRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasMiscellaneousRecord(teacherId, recordId);
-		return false;
+		return res;
 	}
 }

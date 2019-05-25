@@ -51,27 +51,27 @@
 	</jstl:if>
 	<br>
 
-<form:form modelAttribute="actorForm" action="teacher/edit.do" method="POST">
+<form:form modelAttribute="actorForm" action="student/edit.do" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<acme:textbox code="teacher.edit.userAccountuser" path="userAccountuser" />
-	<acme:password code="teacher.edit.userAccountpassword" path="userAccountpassword" />
+	<acme:textbox code="student.edit.userAccountuser" path="userAccountuser" />
+	<acme:password code="student.edit.userAccountpassword" path="userAccountpassword" />
 
-	<acme:textbox code="teacher.edit.name" path="name" />
-	<acme:textarea code="teacher.edit.surname" path="surname" />
-	<acme:textbox code="teacher.edit.photo" path="photo" />
-	<acme:textbox code="teacher.edit.email" path="email"
+	<acme:textbox code="student.edit.name" path="name" />
+	<acme:textarea code="student.edit.surname" path="surname" />
+	<acme:textbox code="student.edit.photo" path="photo" />
+	<acme:textbox code="student.edit.email" path="email"
 		placeholder="id@domain / alias id@domain / id@ / alias id@" size="45" />
 	<div>
 		<form:label path="phone">
-			<spring:message code="teacher.edit.phone" />
+			<spring:message code="student.edit.phone" />
 		</form:label>
 		<form:input path="phone" onblur="phoneFun()" />
 		<form:errors path="phone" cssClass="error" />
 	</div>
 	
-	<acme:textbox code="teacher.edit.address" path="address" />
-	<acme:numberbox code="teacher.edit.vat" path="vat" min="0" max="1"/>
+	<acme:textbox code="student.edit.address" path="address" />
+	<acme:numberbox code="student.edit.vat" path="vat" min="0" max="1"/>
 	
 	<br/>
 
@@ -87,6 +87,6 @@
 	<br/>
 
 	<input type="submit" name="save"
-		value="<spring:message code="teacher.edit.submit" />" />
+		value="<spring:message code="student.edit.submit" />" />
 	
 </form:form>

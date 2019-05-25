@@ -18,32 +18,25 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<acme:display code="teacher.name" value="${teacher.name}"/>
-<spring:message code="teacher.photo"/>:<br>
-<img src="${teacher.photo}" alt="<spring:message code="teacher.alt.image"/>" width="20%" height="20%"/>
+<acme:display code="student.name" value="${student.name}"/>
+<spring:message code="student.photo"/>:<br>
+<img src="${student.photo}" alt="<spring:message code="student.alt.image"/>" width="20%" height="20%"/>
 <br>
-<jstl:if test="${not empty teacher.surname}">
-<jstl:forEach items="${teacher.surname}" var="df">
-	<acme:display code="teacher.surname" value="${df}"/>
+<jstl:if test="${not empty student.surname}">
+<jstl:forEach items="${student.surname}" var="df">
+	<acme:display code="student.surname" value="${df}"/>
 </jstl:forEach>
 </jstl:if>
-<acme:display code="teacher.email" value="${teacher.email}"/>
-<acme:display code="teacher.phone" value="${teacher.phone}"/>
-<acme:display code="teacher.address" value="${teacher.address}"/>
-<acme:display code="teacher.vat" value="${teacher.vat}"/>
-<acme:display code="teacher.score" value="${teacher.score}"/>
+<acme:display code="student.email" value="${student.email}"/>
+<acme:display code="student.phone" value="${student.phone}"/>
+<acme:display code="student.address" value="${student.address}"/>
+<acme:display code="student.vat" value="${student.vat}"/>
+<acme:display code="student.score" value="${student.score}"/>
 
 <br>
 
-<acme:button url="curriculum/display.do?teacherId=${row.id}" name="display" code="teacher.curriculum"/>
-<acme:button url="lesson/myLessons.do?teacherId=${row.id}" name="display" code="teacher.lessons"/>
-<acme:button url="assesment/myAssesments.do?teacherId=${row.id}" name="display" code="teacher.assesments"/>
-<acme:button url="comment/myComments.do?teacherId=${row.id}" name="display" code="teacher.comment"/>
+<acme:button url="curriculum/display.do?studentId=${row.id}" name="display" code="student.curriculum"/>
+<acme:button url="lesson/myLessons.do?studentId=${row.id}" name="display" code="student.lessons"/>
+<acme:button url="assesment/myAssesments.do?studentId=${row.id}" name="display" code="student.assesments"/>
+<acme:button url="comment/myComments.do?studentId=${row.id}" name="display" code="student.comment"/>
 
-<jstl:choose>
-	<jstl:when test="${rol eq teacher}">
-	</jstl:when>
-	<jstl:otherwise>
-	<acme:button url="teacher/list.do" name="back" code="teacher.back"/>
-	</jstl:otherwise>
-</jstl:choose>
