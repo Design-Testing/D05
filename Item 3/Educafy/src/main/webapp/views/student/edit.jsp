@@ -43,7 +43,7 @@
 			<ul>
 				<jstl:forEach items="${errors}" var="error">
 					<jstl:if test="${error.field eq 'termsAndCondicions'}">
-						<li><spring:message code="company.edit.${error.field}"/> - <jstl:out value="${error.defaultMessage}" /></li>
+						<li><spring:message code="student.edit.${error.field}"/> - <jstl:out value="${error.defaultMessage}" /></li>
 					</jstl:if>
 				</jstl:forEach>
 			</ul>

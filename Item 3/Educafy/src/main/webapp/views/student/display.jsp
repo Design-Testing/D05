@@ -19,24 +19,36 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <acme:display code="student.name" value="${student.name}"/>
-<spring:message code="student.photo"/>:<br>
-<img src="${student.photo}" alt="<spring:message code="student.alt.image"/>" width="20%" height="20%"/>
+<jstl:choose>
+	<jstl:when test="${not empty student.photo}">
+		<spring:message code="student.photo"/>:<br>
+		<img src="${student.photo}" alt="<spring:message code="student.alt.image"/>" width="20%" height="20%"/>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="student.no.photo"/>
+	</jstl:otherwise>
+</jstl:choose>
 <br>
 <jstl:if test="${not empty student.surname}">
-<jstl:forEach items="${student.surname}" var="df">
-	<acme:display code="student.surname" value="${df}"/>
+<jstl:forEach items="${student.surname}" var="df" varStatus="loop">
+	<jstl:choose>
+		<jstl:when test="${student.getSurname().size() gt 1}">
+			<spring:message code="student.surname"/> <jstl:out value="${loop.index+1}"/>:
+			<jstl:out value="${df}"/><br>
+		</jstl:when>
+		<jstl:otherwise>
+			<spring:message code="student.surname"/>: <jstl:out value="${df}"/><br>
+		</jstl:otherwise>
+	</jstl:choose>
 </jstl:forEach>
 </jstl:if>
 <acme:display code="student.email" value="${student.email}"/>
 <acme:display code="student.phone" value="${student.phone}"/>
 <acme:display code="student.address" value="${student.address}"/>
 <acme:display code="student.vat" value="${student.vat}"/>
-<acme:display code="student.score" value="${student.score}"/>
 
 <br>
 
-<acme:button url="curriculum/display.do?studentId=${row.id}" name="display" code="student.curriculum"/>
-<acme:button url="lesson/myLessons.do?studentId=${row.id}" name="display" code="student.lessons"/>
 <acme:button url="assesment/myAssesments.do?studentId=${row.id}" name="display" code="student.assesments"/>
 <acme:button url="comment/myComments.do?studentId=${row.id}" name="display" code="student.comment"/>
 
