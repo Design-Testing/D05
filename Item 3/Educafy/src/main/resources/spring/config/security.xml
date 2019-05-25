@@ -60,6 +60,14 @@
 		<security:intercept-url pattern="/subject/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/subject/display.do" access="permitAll" /> 
 		
+		<!-- SCHEDULE -->
+		
+		<security:intercept-url pattern="/schedule/teacher/display.do" access="permitAll" />
+		<security:intercept-url pattern="/schedule/teacher/create.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/schedule/teacher/mySchedule.do" access="hasRole('TEACHER')" />
+		
+		 
+	
 		<!-- LESSON -->
  		<security:intercept-url pattern="/lesson/list.do" access="permitAll" />
  		<security:intercept-url pattern="/lesson/myLessons.do" access="permitAll" />
@@ -74,6 +82,30 @@
 		<security:intercept-url pattern="/teacher/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/teacher/display2.do" access="hasRole('TEACHER')" />
 		<security:intercept-url pattern="/teacher/deletePersonalData.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/teacher/listAll.do" access="permitAll" />
+		
+		<!-- CURRICULUM -->
+		<security:intercept-url pattern="/curriculum/create.do" access="permitAll" />
+		<security:intercept-url pattern="/curriculum/display.do" access="permitAll" />
+		<security:intercept-url pattern="/curriculum/delete.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/curriculum/displayById.do" access="permitAll" />
+		<security:intercept-url pattern="/curriculum/displayByTeacherId.do" access="permitAll" />
+		<security:intercept-url pattern="/personalRecord/edit.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/personalRecord/toFinal.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/personalRecord/certify.do" access="hasRole('CERTIFIER')" />
+		<security:intercept-url pattern="/personalRecord/display.do" access="permitAll" />
+		<security:intercept-url pattern="/educationRecord/delete.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/educationRecord/create.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/educationRecord/edit.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/educationRecord/toFinal.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/educationRecord/certify.do" access="hasRole('CERTIFIER')" />
+		<security:intercept-url pattern="/educationRecord/display.do" access="permitAll" />
+		<security:intercept-url pattern="/miscellaneousRecord/delete.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/miscellaneousRecord/create.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/miscellaneousRecord/edit.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/miscellaneousRecord/toFinal.do" access="hasRole('TEACHER')" />
+		<security:intercept-url pattern="/miscellaneousRecord/certify.do" access="hasRole('CERTIFIER')" />
+		<security:intercept-url pattern="/miscellaneousRecord/display.do" access="permitAll" />
 		
 		<!-- STUDENT -->
 		<security:intercept-url pattern="/student/list.do" access="permitAll" />

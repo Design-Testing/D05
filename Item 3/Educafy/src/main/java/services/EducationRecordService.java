@@ -107,11 +107,10 @@ public class EducationRecordService {
 
 	}
 
-	public EducationRecord certify(final EducationRecord educationRecord) {
-		final Certifier me = this.certifierService.findByPrincipal();
+	public EducationRecord toFinal(final EducationRecord educationRecord) {
+		final Teacher me = this.teacherService.findByPrincipal();
 		Assert.notNull(me);
-		Assert.isTrue(educationRecord.getIsCertified() == false, "the education is already certified");
-		Assert.isTrue(educationRecord.getIsDraft() == true, "the education record is not in draft mode");
+		Assert.isTrue(this.teacherService.hasEducationRecord(me.getId(), educationRecord.getId()), "This education record is not of your property");
 		final EducationRecord retrieved = this.findOne(educationRecord.getId());
 		Assert.isTrue(retrieved.getAttachment().equals(educationRecord.getAttachment()));
 		Assert.isTrue(retrieved.getDegree().equals(educationRecord.getDegree()));
@@ -119,6 +118,24 @@ public class EducationRecordService {
 		Assert.isTrue(retrieved.getStartDate().equals(educationRecord.getStartDate()));
 		Assert.isTrue(retrieved.getInstitution().equals(educationRecord.getInstitution()));
 		Assert.isTrue(retrieved.getMark().equals(educationRecord.getMark()));
+		Assert.isTrue(retrieved.getIsDraft() == true, "the educatin record is already in final mode");
+		educationRecord.setIsDraft(false);
+		final EducationRecord res = this.educationRecordRepository.save(educationRecord);
+		return res;
+	}
+
+	public EducationRecord certify(final EducationRecord educationRecord) {
+		final Certifier me = this.certifierService.findByPrincipal();
+		Assert.notNull(me);
+		final EducationRecord retrieved = this.findOne(educationRecord.getId());
+		Assert.isTrue(retrieved.getAttachment().equals(educationRecord.getAttachment()));
+		Assert.isTrue(retrieved.getDegree().equals(educationRecord.getDegree()));
+		Assert.isTrue(retrieved.getEndDate().equals(educationRecord.getEndDate()));
+		Assert.isTrue(retrieved.getStartDate().equals(educationRecord.getStartDate()));
+		Assert.isTrue(retrieved.getInstitution().equals(educationRecord.getInstitution()));
+		Assert.isTrue(retrieved.getMark().equals(educationRecord.getMark()));
+		Assert.isTrue(retrieved.getIsDraft() == false, "the education record is not in final mode");
+		educationRecord.setIsCertified(true);
 		final EducationRecord res = this.educationRecordRepository.save(educationRecord);
 		return res;
 	}

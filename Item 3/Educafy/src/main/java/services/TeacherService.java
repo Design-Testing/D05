@@ -181,25 +181,25 @@ public class TeacherService {
 	public Teacher findTeacherByCurriculum(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByCurriculum(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByPersonalRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByPersonalRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByEducationRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByEducationRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public Teacher findTeacherByMiscellaneousRecord(final int id) {
 		final Teacher res = this.teacherRepository.findTeacherByMiscellaneousRecord(id);
 		Assert.notNull(res);
-		return null;
+		return res;
 	}
 
 	public boolean hasEducationRecord(final int teacherId, final int recordId) {
@@ -209,6 +209,11 @@ public class TeacherService {
 
 	public boolean hasMiscellaneousRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasMiscellaneousRecord(teacherId, recordId);
+		return res;
+	}
+
+	public boolean hasPersonalRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
 		return res;
 	}
 }

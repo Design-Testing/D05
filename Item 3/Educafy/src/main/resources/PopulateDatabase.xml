@@ -1582,4 +1582,156 @@
 		<property name="assesment" ref="assesment4"/>
 		</bean>
 
+<!-- =================================================================== 
+		======= Schedule ========= =================================================================== -->
+
+	<bean id="schedule1" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher1" />
+
+	</bean>
+
 </beans>
