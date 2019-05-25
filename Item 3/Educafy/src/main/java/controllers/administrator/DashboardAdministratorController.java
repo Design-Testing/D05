@@ -59,10 +59,10 @@ public class DashboardAdministratorController extends AbstractController {
 
 		// Lesson per teacher
 		final Double[] lessonTeacherStatistics = this.lessonService.getStatisticsOfLessonsPerTeacher();
-		result.addObject("averageResults", lessonTeacherStatistics[0]);
-		result.addObject("minResults", lessonTeacherStatistics[1]);
-		result.addObject("maxResults", lessonTeacherStatistics[2]);
-		result.addObject("desviationResults", lessonTeacherStatistics[3]);
+		result.addObject("averageLessonPerTeacher", lessonTeacherStatistics[0]);
+		result.addObject("minLessonPerTeacher", lessonTeacherStatistics[1]);
+		result.addObject("maxLessonPerTeacher", lessonTeacherStatistics[2]);
+		result.addObject("desviationLessonPerTeacher", lessonTeacherStatistics[3]);
 
 		// Reservation per lesson
 		final Double[] reservationPerLessonStatistics = this.lessonService.getStatisticsOfReservationPerLesson();
@@ -90,10 +90,10 @@ public class DashboardAdministratorController extends AbstractController {
 
 		// Pass exams per student
 		final Double[] passExams = this.reservationService.getStatisticsOfPassExams();
-		result.addObject("averagePositionScore", passExams[0]);
-		result.addObject("minPositionScore", passExams[1]);
-		result.addObject("maxPositionScore", passExams[2]);
-		result.addObject("desviationPositionScore", passExams[3]);
+		result.addObject("averagePassExams", passExams[0]);
+		result.addObject("minPassExams", passExams[1]);
+		result.addObject("maxPassExams", passExams[2]);
+		result.addObject("desviationPassExams", passExams[3]);
 
 		// Students Ten percent
 		final Collection<Student> students = this.studentService.findStudentTenPerCentMoreReservationThanAverage();

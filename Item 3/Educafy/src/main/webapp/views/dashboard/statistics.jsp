@@ -147,181 +147,63 @@
 	</table>
 
 	<table>
-		<spring:message code="dashboard.position.score" />
+		<spring:message code="dashboard.lesson.teacher" />
 		<tr>
-			<td><spring:message code="average.position.score" /></td>
-			<td>${averagePositionScore}</td>
+			<td><spring:message code="average.lesson.teacher" /></td>
+			<td>${averageLessonPerTeacher}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="min.position.score" /></td>
-			<td>${minPositionScore}</td>
+			<td><spring:message code="min.lesson.teacher" /></td>
+			<td>${minLessonPerTeacher}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="max.position.score" /></td>
-			<td>${maxPositionScore}</td>
+			<td><spring:message code="max.lesson.teacher" /></td>
+			<td>${maxLessonPerTeacher}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="desviation.position.score" /></td>
-			<td>${desviationPositionScore}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="avg.salary.position.score" /></td>
-			<td>${avgSalary}</td>
+			<td><spring:message code="desviation.lesson.teacher" /></td>
+			<td>${desviationLessonPerTeacher}</td>
 		</tr>
 	</table>
 
 
 	<table>
-		<spring:message code="dashboard.applications.rooky" />
+		<spring:message code="dashboard.exam.pass" />
 		<tr>
-			<td><spring:message code="average.applications.rooky" /></td>
-			<td>${averageRooky}</td>
+			<td><spring:message code="average.exam.pass" /></td>
+			<td>${averagePassExams}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="min.applications.rooky" /></td>
-			<td>${minRooky}</td>
+			<td><spring:message code="min.exam.pass" /></td>
+			<td>${minPassExams}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="max.applications.rooky" /></td>
-			<td>${maxRooky}</td>
+			<td><spring:message code="max.exam.pass" /></td>
+			<td>${maxPassExams}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="desviation.applications.rooky" /></td>
-			<td>${desviationRooky}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="largest.rooky" /></td>
-			<td>${rookyMoreApplications}</td>
-		</tr>
-	</table>
-	<jstl:if test="${rookysMoreApplications.size() gt 1}">
-		<p>
-			<spring:message code="largest.rooky.two" />
-		<p />
-	</jstl:if>
-
-	<table>
-		<spring:message code="dashboard.positions" />
-		<tr>
-			<td><spring:message code="largest.position" /></td>
-			<td><strong><spring:message code="position" />: <spring:message
-						code="position.title" /></strong> ${best.title}, <strong><spring:message
-						code="position.ticker" /></strong> ${best.ticker}, <strong><spring:message
-						code="position.salary" /></strong> ${best.salary}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="smallest.position" /></td>
-			<td><strong><spring:message code="position" />: <spring:message
-						code="position.title" /></strong> ${worst.title}, <strong><spring:message
-						code="position.ticker" /></strong> ${worst.ticker}, <strong><spring:message
-						code="position.salary" /></strong> ${worst.salary}</td>
+			<td><spring:message code="desviation.exam.pass" /></td>
+			<td>${desviationPassExams}</td>
 		</tr>
 	</table>
 
 	<table>
-		<spring:message code="dashboard.curricula" />
+		<spring:message code="dashboard.ratios" />
 		<tr>
-			<td><spring:message code="average.curricula" /></td>
-			<td>${averageCurricula}</td>
+			<td><spring:message code="ratio.pending" /></td>
+			<td>${pending}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="min.curricula" /></td>
-			<td>${minCurricula}</td>
+			<td><spring:message code="ratio.accepted" /></td>
+			<td>${accepted}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="max.curricula" /></td>
-			<td>${maxCurricula}</td>
+			<td><spring:message code="ratio.rejected" /></td>
+			<td>${rejected}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="desviation.curricula" /></td>
-			<td>${desviationCurricula}</td>
-		</tr>
-	</table>
-
-	<table>
-		<spring:message code="dashboard.finders" />
-		<tr>
-			<td><spring:message code="average.results" /></td>
-			<td>${averageResults}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="min.results" /></td>
-			<td>${minResults}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="max.results" /></td>
-			<td>${maxResults}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="desviation.results" /></td>
-			<td>${desviationResults}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="ratio.finders" /></td>
-			<td>${ratioFinders}</td>
-		</tr>
-	</table>
-
-	<table>
-		<spring:message code="dashboard.sponsorship.provider" />
-		<tr>
-			<td><spring:message code="average.sponsorship.provider" /></td>
-			<td>${averageSponsorshipPerProvider}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="min.sponsorship.provider" /></td>
-			<td>${minSponsorshipPerProvider}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="max.sponsorship.provider" /></td>
-			<td>${maxSponsorshipPerProvider}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="desviation.sponsorship.provider" /></td>
-			<td>${desviationSponsorshipPerProvider}</td>
-		</tr>
-		<jstl:choose>
-			<jstl:when test="${providersTenPercent.size() eq 1}">
-				<tr>
-					<td><spring:message code="provider.ten.percent" /></td>
-					<td>${providersTenPercent}</td>
-				</tr>
-			</jstl:when>
-			<jstl:otherwise>
-				<jstl:forEach items="${providersTenPercent}" var="ptp"
-					varStatus="in">
-					<tr>
-						<td><spring:message code="provider.ten.percent" />
-							${in.index + 1}</td>
-						<td>${ptp}</td>
-					</tr>
-				</jstl:forEach>
-			</jstl:otherwise>
-		</jstl:choose>
-	</table>
-	<jstl:if test="${providersTenPercent.size() gt 1}">
-		<p>
-			<spring:message code="provider.ten.percent.two" />
-		<p />
-	</jstl:if>
-
-	<table>
-		<spring:message code="dashboard.sponsorship.position" />
-		<tr>
-			<td><spring:message code="average.sponsorship.position" /></td>
-			<td>${averageSponsorshipPerPosition}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="min.sponsorship.position" /></td>
-			<td>${minSponsorshipPerPosition}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="max.sponsorship.position" /></td>
-			<td>${maxSponsorshipPerPosition}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="desviation.sponsorship.position" /></td>
-			<td>${desviationSponsorshipPerPosition}</td>
+			<td><spring:message code="ratios.final.over.rejected" /></td>
+			<td>${finalOverRejected}</td>
 		</tr>
 	</table>
 
