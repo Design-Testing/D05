@@ -158,9 +158,10 @@ public class PersonalRecordController extends AbstractController {
 				Assert.isTrue(personalRecord.getIsDraft() == false, "You can not see a record in draft mode");
 				Assert.isTrue(personalRecord.getIsCertified() == true, "You can not see a record that is not certified");
 				res.addObject("buttonsAnonymous", true);
-			} else if (logged.getAuthorities().contains(authCertifier))
+			} else if (logged.getAuthorities().contains(authCertifier)) {
 				res.addObject("buttonsCertifier", true);
-
+				Assert.isTrue(personalRecord.getIsDraft() == false, "You can not see a record in draft mode");
+			}
 		} else
 			res = new ModelAndView("redirect:misc/403");
 

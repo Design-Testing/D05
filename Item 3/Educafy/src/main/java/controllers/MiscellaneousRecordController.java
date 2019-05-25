@@ -132,9 +132,10 @@ public class MiscellaneousRecordController extends AbstractController {
 				Assert.isTrue(miscellaneousRecord.getIsDraft() == false, "You can not see a record in draft mode");
 				Assert.isTrue(miscellaneousRecord.getIsCertified() == true, "You can not see a record that is not certified");
 				res.addObject("buttonsAnonymous", true);
-			} else if (logged.getAuthorities().contains(authCertifier))
+			} else if (logged.getAuthorities().contains(authCertifier)) {
 				res.addObject("buttonsCertifier", true);
-
+				Assert.isTrue(miscellaneousRecord.getIsDraft() == false, "You can not see a record in draft mode");
+			}
 		} else
 			res = new ModelAndView("redirect:misc/403");
 
