@@ -183,4 +183,18 @@ public class StudentService {
 		return student;
 	}
 
+	public Collection<Student> findStudentTenPerCentMoreReservationThanAverage() {
+		final Collection<Student> res = this.studentRepository.findTenPerCentMoreReservationThanAverage();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public List<Student> getStudentsOrderByExamScore() {
+		List<Student> ls = this.studentRepository.getStudentsOrderByExamScore();
+		if (ls.size() > 2)
+			ls = ls.subList(0, 3);
+		Assert.notNull(ls);
+		return ls;
+	}
+
 }

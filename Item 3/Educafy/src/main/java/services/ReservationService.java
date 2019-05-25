@@ -189,20 +189,8 @@ public class ReservationService {
 		return res;
 	}
 
-	public Collection<Student> findStudentTenPerCentMoreReservationThanAverage() {
-		final Collection<Student> res = this.reservationRepository.findTenPerCentMoreReservationThanAverage();
-		Assert.notNull(res);
-		return res;
-	}
-
-	public Collection<Teacher> findTeacherTenPerCentMoreFinalReservationThanAverage() {
-		final Collection<Teacher> res = this.reservationRepository.findTenPerCentMoreFinalReservationThanAverage();
-		Assert.notNull(res);
-		return res;
-	}
-
-	public Double[] getStatisticsOfPassExams(final int studentId) {
-		final Double[] res = this.reservationRepository.getStatisticsOfPassExams(studentId);
+	public Double[] getStatisticsOfPassExams() {
+		final Double[] res = this.reservationRepository.getStatisticsOfPassExams();
 		Assert.notNull(res);
 		return res;
 	}

@@ -13,89 +13,138 @@
 
 	<!-- TABLE -->
 	<table>
-		<spring:message code="dashboard.positions.company" />
+		<spring:message code="dashboard.lesson.price" />
 		<tr>
-			<td><spring:message code="average.positions.company" /></td>
-			<td>${averagePositions}</td>
+			<td><spring:message code="average.lesson.price" /></td>
+			<td>${averagePrice}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="min.positions.company" /></td>
-			<td>${minPositions}</td>
+			<td><spring:message code="min.lesson.price" /></td>
+			<td>${minPrice}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="max.positions.company" /></td>
-			<td>${maxPositions}</td>
+			<td><spring:message code="max.lesson.price" /></td>
+			<td>${maxPrice}</td>
 		</tr>
 		<tr>
-			<td><spring:message code="desviation.positions.company" /></td>
-			<td>${desviationPositions}</td>
+			<td><spring:message code="desviation.lesson.price" /></td>
+			<td>${desviationPrice}</td>
 		</tr>
-		<jstl:choose>
-			<jstl:when test="${companiesMorePositions.size() eq 1}">
-				<tr>
-					<td><spring:message code="largest.company" /></td>
-					<td>${companyMorePositions}</td>
-				</tr>
-			</jstl:when>
-			<jstl:otherwise>
-				<jstl:forEach items="${companiesMorePositions}" var="c"
-					varStatus="in">
-					<tr>
-						<td><spring:message code="largest.company" /></td>
-						<td>${companyMorePositions}</td>
-					</tr>
-				</jstl:forEach>
-			</jstl:otherwise>
-		</jstl:choose>
 	</table>
-	<jstl:if test="${companiesMorePositions.size() gt 1}">
-		<p>
-			<spring:message code="largest.company.two" />
-		<p />
-	</jstl:if>
-
+	
 	<table>
-		<spring:message code="dashboard.company.score" />
-		<tr>
-			<td><spring:message code="average.company.score" /></td>
-			<td>${averageCompanyScore}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="min.company.score" /></td>
-			<td>${minCompanyScore}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="max.company.score" /></td>
-			<td>${maxCompanyScore}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="desviation.company.score" /></td>
-			<td>${desviationCompanyScore}</td>
-		</tr>
-		<jstl:choose>
-			<jstl:when test="${companiesHighestScore.size() eq 1}">
+		<spring:message code="dashboard.students.ten.percent" />
+	<jstl:choose>
+			<jstl:when test="${studentsTenPercent.size() eq 1}">
 				<tr>
-					<td><spring:message code="largest.company.score" /></td>
-					<td>${companiesHighestScore}</td>
+					<td><spring:message code="students.ten.percent" /></td>
+					<td>${studentsTenPercent}</td>
 				</tr>
 			</jstl:when>
 			<jstl:otherwise>
-				<jstl:forEach items="${companiesHighestScore}" var="cscore"
+				<jstl:forEach items="${studentsTenPercent}" var="c"
 					varStatus="in">
 					<tr>
-						<td><spring:message code="largest.company.score" />
-							${in.index + 1}</td>
-						<td>${cscore}</td>
+						<td><spring:message code="students.ten.percent" /></td>
+						<td>${c}</td>
 					</tr>
 				</jstl:forEach>
 			</jstl:otherwise>
 		</jstl:choose>
 	</table>
-	<jstl:if test="${companiesHighestScore.size() gt 1}">
+	
+	<table>
+		<spring:message code="dashboard.teachers.ten.percent" />
+	<jstl:choose>
+			<jstl:when test="${teachersTenPercent.size() eq 1}">
+				<tr>
+					<td><spring:message code="teachers.ten.percent" /></td>
+					<td>${teachersTenPercent}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<jstl:forEach items="${teachersTenPercent}" var="c"
+					varStatus="in">
+					<tr>
+						<td><spring:message code="teachers.ten.percent" /></td>
+						<td>${c}</td>
+					</tr>
+				</jstl:forEach>
+			</jstl:otherwise>
+		</jstl:choose>
+	</table>
+	
+	<table>
+		<spring:message code="dashboard.students.top" />
+	<jstl:choose>
+			<jstl:when test="${studentsTenPercent.size() eq 1}">
+				<tr>
+					<td><spring:message code="students.top" /></td>
+					<td>${studentsTenPercent}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<jstl:forEach items="${studentsTenPercent}" var="c"
+					varStatus="in">
+					<tr>
+						<td><spring:message code="students.top" /> <jstl:out value="${in.index + 1}"/></td>
+						<td>${c}</td>
+					</tr>
+				</jstl:forEach>
+			</jstl:otherwise>
+		</jstl:choose>
+	</table>
+	<jstl:if test="${studentsTenPercent.size() lt 3}">
 		<p>
-			<spring:message code="largest.company.score.two" />
+			<spring:message code="students.top.less" />
 		<p />
 	</jstl:if>
+	
+	<table>
+		<spring:message code="dashboard.teachers.top" />
+	<jstl:choose>
+			<jstl:when test="${teachersTenPercent.size() eq 1}">
+				<tr>
+					<td><spring:message code="teachers.top" /></td>
+					<td>${teachersTenPercent}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<jstl:forEach items="${teachersTenPercent}" var="c"
+					varStatus="in">
+					<tr>
+						<td><spring:message code="teachers.top" /> <jstl:out value="${in.index + 1}"/></td>
+						<td>${c}</td>
+					</tr>
+				</jstl:forEach>
+			</jstl:otherwise>
+		</jstl:choose>
+	</table>
+	<jstl:if test="${teachersTenPercent.size() lt 3}">
+		<p>
+			<spring:message code="teachers.top.less" />
+		<p />
+	</jstl:if>
+	
+	<table>
+		<spring:message code="dashboard.reservation.lesson" />
+		<tr>
+			<td><spring:message code="average.reservation.lesson" /></td>
+			<td>${averageReservation}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="min.reservation.lesson" /></td>
+			<td>${minReservation}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="max.reservation.lesson" /></td>
+			<td>${maxReservation}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="desviation.reservation.lesson" /></td>
+			<td>${desviationReservation}</td>
+		</tr>
+	</table>
 
 	<table>
 		<spring:message code="dashboard.position.score" />

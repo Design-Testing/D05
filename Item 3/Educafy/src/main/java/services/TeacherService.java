@@ -216,4 +216,18 @@ public class TeacherService {
 		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
 		return res;
 	}
+
+	public List<Teacher> getTeacherOrderByScore() {
+		List<Teacher> ls = this.teacherRepository.getTeacherOrderByScore();
+		if (ls.size() > 2)
+			ls = ls.subList(0, 3);
+		Assert.notNull(ls);
+		return ls;
+	}
+
+	public Collection<Teacher> findTeacherTenPerCentMoreFinalReservationThanAverage() {
+		final Collection<Teacher> res = this.teacherRepository.findTenPerCentMoreFinalReservationThanAverage();
+		Assert.notNull(res);
+		return res;
+	}
 }
