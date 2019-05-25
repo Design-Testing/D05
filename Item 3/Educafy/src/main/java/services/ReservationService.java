@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.ValidationException;
 
@@ -49,6 +50,8 @@ public class ReservationService {
 		reservation.setStudent(principal);
 		reservation.setExams(new ArrayList<Exam>());
 		reservation.setStatus("PENDING");
+		final Date moment = new Date(System.currentTimeMillis() - 1);
+		reservation.setMoment(moment);
 		return reservation;
 	}
 
@@ -170,12 +173,12 @@ public class ReservationService {
 		final Reservation reservation = this.findOne(reservationId);
 		Assert.notNull(reservation);
 		final Teacher teacher = this.teacherService.findByPrincipal();
-		final Reservation result;
+		//final Reservation result;
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(teacher.getUserAccount().getId()).contains(reservation.getLesson()), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("ACCEPTED") || reservation.getStatus().equals("REVIEWING"), "Para poner una Reserva en Rechaza debe de estar anteriormente Aceptada o Pendiente.");
 		reservation.setStatus("REJECTED");
-		result = this.reservationRepository.save(reservation);
-		return result;
+		//result = this.reservationRepository.save(reservation);
+		return reservation;
 	}
 
 	public Reservation toFinalMode(final int reservationId) {

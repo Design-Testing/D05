@@ -20,8 +20,20 @@
 	
 	
 	<acme:textbox code="reservation.hoursWeek" path="hoursWeek"/>
-	
-<br>
+	<br>
+	<form:label path="creditCard">
+                    <spring:message code="reservation.creditCard" />:
+            </form:label>
+                <form:select id="cards" path="creditCard">
+                    <jstl:forEach var="card" items="${myCards}">
+                        <form:option value="${card.id}">
+                            <jstl:out value="${card.make } - number: ${card.number}" />
+                        </form:option>
+                    </jstl:forEach>
+                </form:select>
+                <form:errors cssClass="error" path="creditCard" />
+                <br />
+                <br />
 
 	<input type="submit" name="save"
 		value="<spring:message code="reservation.submit" />" />

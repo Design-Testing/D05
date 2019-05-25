@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import repositories.CreditCardRepository;
 import services.LessonService;
 import services.ReservationService;
 import services.StudentService;
 import controllers.AbstractController;
+import domain.CreditCard;
 import domain.Lesson;
 import domain.Reservation;
 import domain.Student;
@@ -29,15 +31,18 @@ import domain.Student;
 public class ReservationStudentController extends AbstractController {
 
 	@Autowired
-	private ReservationService	reservationService;
+	private ReservationService		reservationService;
 
 	@Autowired
-	private LessonService		lessonService;
+	private LessonService			lessonService;
 
 	@Autowired
-	private StudentService		studentService;
+	private StudentService			studentService;
 
-	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
+	@Autowired
+	private CreditCardRepository	creditCardRepository;
+
+	final String					lang	= LocaleContextHolder.getLocale().getLanguage();
 
 
 	// CREATE  ---------------------------------------------------------------
@@ -45,10 +50,13 @@ public class ReservationStudentController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int lessonId) {
 		ModelAndView result;
+		final Student principal = this.studentService.findByPrincipal();
 		final Lesson lesson = this.lessonService.findOne(lessonId);
 		final Reservation reservation = this.reservationService.create();
+		final Collection<CreditCard> myCards = this.creditCardRepository.findAllByActorUserId(principal.getUserAccount().getId());
 		reservation.setLesson(lesson);
 		result = this.createEditModelAndView1(reservation);
+		result.addObject("myCards", myCards);
 		return result;
 	}
 

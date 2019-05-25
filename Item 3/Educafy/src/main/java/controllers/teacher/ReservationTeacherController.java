@@ -104,15 +104,15 @@ public class ReservationTeacherController extends AbstractController {
 	@RequestMapping(value = "/rejected", method = RequestMethod.GET)
 	public ModelAndView rejectedMode(@RequestParam final int reservationId) {
 		ModelAndView result;
-		final Reservation reservation = this.reservationService.findOne(reservationId);
+		Reservation reservation = this.reservationService.findOne(reservationId);
 
 		if (reservation == null) {
 			result = this.myReservations();
 			result.addObject("msg", "reservations.rejected.error");
 		} else
 			try {
-				this.reservationService.toRejectedMode(reservationId);
-				result = this.myReservations();
+				reservation = this.reservationService.toRejectedMode(reservationId);
+				result = this.createEditModelAndView(reservation);
 			} catch (final Throwable oops) {
 				String errormsg = "reservation.rejected.error";
 				result = this.myReservations();
