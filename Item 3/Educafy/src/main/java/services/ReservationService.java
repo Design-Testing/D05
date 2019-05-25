@@ -195,4 +195,10 @@ public class ReservationService {
 		return res;
 	}
 
+	public Double[] getStatisticsOfWeeklyCost() {
+		final Double[] res = this.reservationRepository.getStatisticsOfWeeklyCost();
+		Assert.notNull(res);
+		return res;
+	}
+
 }

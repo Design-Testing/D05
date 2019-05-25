@@ -36,4 +36,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	@Query("select avg(ex.score), min(ex.score), max(ex.score), stddev(ex.score) from Reservation r join r.exams ex")
 	Double[] getStatisticsOfPassExams();
 
+	@Query("select avg(r.cost), min(r.cost), max(r.cost), stddev(r.cost) from Reservation r")
+	Double[] getStatisticsOfWeeklyCost();
+
 }

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import services.ConfigurationParametersService;
+import services.CurriculumService;
 import services.LessonService;
 import services.MessageService;
 import services.ReservationService;
@@ -39,6 +40,9 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private TeacherService					teacherService;
+
+	@Autowired
+	private CurriculumService				curriculumService;
 
 	@Autowired
 	private ReservationService				reservationService;
@@ -110,6 +114,17 @@ public class DashboardAdministratorController extends AbstractController {
 		// Top-3 teachers
 		final List<Teacher> topTeachers = this.teacherService.getTeacherOrderByScore();
 		result.addObject("topTeachers", topTeachers);
+
+		// Curriculum ratio
+		final Double curriculumRatio = this.curriculumService.findCurriculumRatio();
+		result.addObject("curriculumRatio", curriculumRatio);
+
+		// Weekly cost statistics
+		final Double[] cost = this.reservationService.getStatisticsOfWeeklyCost();
+		result.addObject("averageCost", cost[0]);
+		result.addObject("minCost", cost[1]);
+		result.addObject("maxCost", cost[2]);
+		result.addObject("desviationCost", cost[3]);
 
 		return result;
 	}

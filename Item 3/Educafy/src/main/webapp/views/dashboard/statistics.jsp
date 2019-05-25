@@ -31,10 +31,12 @@
 			<td>${desviationPrice}</td>
 		</tr>
 	</table>
-	
+	<br>
+	<br>
+
 	<table>
 		<spring:message code="dashboard.students.ten.percent" />
-	<jstl:choose>
+		<jstl:choose>
 			<jstl:when test="${studentsTenPercent.size() eq 1}">
 				<tr>
 					<td><spring:message code="students.ten.percent" /></td>
@@ -42,8 +44,7 @@
 				</tr>
 			</jstl:when>
 			<jstl:otherwise>
-				<jstl:forEach items="${studentsTenPercent}" var="c"
-					varStatus="in">
+				<jstl:forEach items="${studentsTenPercent}" var="c" varStatus="in">
 					<tr>
 						<td><spring:message code="students.ten.percent" /></td>
 						<td>${c}</td>
@@ -52,19 +53,30 @@
 			</jstl:otherwise>
 		</jstl:choose>
 	</table>
-	
+	<jstl:if test="${empty studentsTenPercent}">
+		<p>
+			<spring:message code="students.ten.percent.empty" />
+		<p />
+	</jstl:if>
+	<br>
+	<br>
+
 	<table>
 		<spring:message code="dashboard.teachers.ten.percent" />
-	<jstl:choose>
+		<jstl:choose>
 			<jstl:when test="${teachersTenPercent.size() eq 1}">
 				<tr>
 					<td><spring:message code="teachers.ten.percent" /></td>
 					<td>${teachersTenPercent}</td>
 				</tr>
 			</jstl:when>
+			<jstl:when test="${empty teachersTenPercent}">
+				<tr>
+					<td><spring:message code="teachers.ten.percent.empty" /></td>
+				</tr>
+			</jstl:when>
 			<jstl:otherwise>
-				<jstl:forEach items="${teachersTenPercent}" var="c"
-					varStatus="in">
+				<jstl:forEach items="${teachersTenPercent}" var="c" varStatus="in">
 					<tr>
 						<td><spring:message code="teachers.ten.percent" /></td>
 						<td>${c}</td>
@@ -73,59 +85,65 @@
 			</jstl:otherwise>
 		</jstl:choose>
 	</table>
-	
+	<br>
+	<br>
+
 	<table>
 		<spring:message code="dashboard.students.top" />
-	<jstl:choose>
-			<jstl:when test="${studentsTenPercent.size() eq 1}">
+		<jstl:choose>
+			<jstl:when test="${topStudents.size() eq 1}">
 				<tr>
 					<td><spring:message code="students.top" /></td>
-					<td>${studentsTenPercent}</td>
+					<td>${topStudents}</td>
+				</tr>
+			</jstl:when>
+			<jstl:when test="${topStudents.size() lt 3}">
+				<tr>
+					<td><spring:message code="students.top.less" /></td>
 				</tr>
 			</jstl:when>
 			<jstl:otherwise>
-				<jstl:forEach items="${studentsTenPercent}" var="c"
-					varStatus="in">
+				<jstl:forEach items="${topStudents}" var="c" varStatus="in">
 					<tr>
-						<td><spring:message code="students.top" /> <jstl:out value="${in.index + 1}"/></td>
+						<td><spring:message code="students.top" /> <jstl:out
+								value="${in.index + 1}" /></td>
 						<td>${c}</td>
 					</tr>
 				</jstl:forEach>
 			</jstl:otherwise>
 		</jstl:choose>
 	</table>
-	<jstl:if test="${studentsTenPercent.size() lt 3}">
-		<p>
-			<spring:message code="students.top.less" />
-		<p />
-	</jstl:if>
-	
+	<br>
+	<br>
+
 	<table>
 		<spring:message code="dashboard.teachers.top" />
-	<jstl:choose>
-			<jstl:when test="${teachersTenPercent.size() eq 1}">
+		<jstl:choose>
+			<jstl:when test="${topTeachers.size() eq 1}">
 				<tr>
 					<td><spring:message code="teachers.top" /></td>
-					<td>${teachersTenPercent}</td>
+					<td>${topTeachers}</td>
 				</tr>
 			</jstl:when>
 			<jstl:otherwise>
-				<jstl:forEach items="${teachersTenPercent}" var="c"
-					varStatus="in">
+				<jstl:forEach items="${topTeachers}" var="c" varStatus="in">
 					<tr>
-						<td><spring:message code="teachers.top" /> <jstl:out value="${in.index + 1}"/></td>
+						<td><spring:message code="teachers.top" /> <jstl:out
+								value="${in.index + 1}" /></td>
 						<td>${c}</td>
 					</tr>
 				</jstl:forEach>
 			</jstl:otherwise>
 		</jstl:choose>
 	</table>
-	<jstl:if test="${teachersTenPercent.size() lt 3}">
+	<jstl:if test="${topTeachers.size() lt 3}">
 		<p>
 			<spring:message code="teachers.top.less" />
 		<p />
 	</jstl:if>
-	
+	<br>
+	<br>
+
 	<table>
 		<spring:message code="dashboard.reservation.lesson" />
 		<tr>
@@ -145,6 +163,8 @@
 			<td>${desviationReservation}</td>
 		</tr>
 	</table>
+	<br>
+	<br>
 
 	<table>
 		<spring:message code="dashboard.lesson.teacher" />
@@ -165,7 +185,8 @@
 			<td>${desviationLessonPerTeacher}</td>
 		</tr>
 	</table>
-
+	<br>
+	<br>
 
 	<table>
 		<spring:message code="dashboard.exam.pass" />
@@ -186,6 +207,30 @@
 			<td>${desviationPassExams}</td>
 		</tr>
 	</table>
+	<br>
+	<br>
+	
+	<table>
+		<spring:message code="dashboard.cost" />
+		<tr>
+			<td><spring:message code="average.cost" /></td>
+			<td>${averageCost}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="min.cost" /></td>
+			<td>${minCost}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="max.cost" /></td>
+			<td>${maxCost}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="desviation.cost" /></td>
+			<td>${desviationCost}</td>
+		</tr>
+	</table>
+	<br>
+	<br>
 
 	<table>
 		<spring:message code="dashboard.ratios" />
@@ -204,6 +249,10 @@
 		<tr>
 			<td><spring:message code="ratios.final.over.rejected" /></td>
 			<td>${finalOverRejected}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="ratio.curriculum" /></td>
+			<td>${curriculumRatio}</td>
 		</tr>
 	</table>
 
