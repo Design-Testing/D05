@@ -71,7 +71,6 @@
 	</div>
 	
 	<acme:textbox code="certifier.edit.address" path="address" />
-	<acme:numberbox code="certifier.edit.vat" path="vat" min="0" max="1"/>
 	
 	<br/>
 

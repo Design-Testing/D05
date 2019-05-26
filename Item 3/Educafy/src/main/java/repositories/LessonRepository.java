@@ -33,6 +33,12 @@ public interface LessonRepository extends JpaRepository<Lesson, Integer> {
 
 	/** The average, minimum, maximum and standard deviation of lessons per teacher */
 	@Query("select avg(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0), min(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0), max(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0), stddev(1.0+ (select count(p) from Lesson p where p.teacher.id=c.id) -1.0) from Teacher c")
-	Double[] getStatisticsOfSalary();
+	Double[] getStatisticsOfLessonsPerTeacher();
+
+	@Query("select avg(c.price), min(c.price), max(c.price), stddev(c.price) from Lesson c")
+	Double[] getStatisticsOfLessonPrice();
+
+	@Query("select avg(1.0+ (select count(p) from Reservation p where p.lesson.id=c.id) -1.0), min(1.0+ (select count(p) from Reservation p where p.lesson.id=c.id) -1.0), max(1.0+ (select count(p) from Reservation p where p.lesson.id=c.id) -1.0), stddev(1.0+ (select count(p) from Reservation p where p.lesson.id=c.id) -1.0) from Lesson c")
+	Double[] getStatisticsOfReservationPerLesson();
 
 }

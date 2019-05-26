@@ -21,5 +21,4 @@
 		<put-attribute name="body" value="/views/schedule/display.jsp" />
 	</definition>
 	
-	
 </tiles-definitions>

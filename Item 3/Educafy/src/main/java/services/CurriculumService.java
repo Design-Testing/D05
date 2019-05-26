@@ -21,19 +21,13 @@ import domain.Teacher;
 public class CurriculumService {
 
 	@Autowired
-	private CurriculumRepository		curriculumRepository;
+	private CurriculumRepository	curriculumRepository;
 
 	@Autowired
-	private TeacherService				teacherService;
+	private TeacherService			teacherService;
 
 	@Autowired
-	private PersonalRecordService		personalRecordService;
-
-	@Autowired
-	private EducationRecordService		educationRecordService;
-
-	@Autowired
-	private MiscellaneousRecordService	miscellaneousRecordService;
+	private PersonalRecordService	personalRecordService;
 
 
 	public Curriculum create() {
@@ -116,9 +110,6 @@ public class CurriculumService {
 		Assert.isTrue(curriculum.getId() != 0);
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Curriculum retrieved = this.findOne(curriculum.getId());
-		System.out.println(teacher.getId());
-		System.out.println(retrieved.getId());
-		System.out.println("AQUI:" + this.teacherService.findTeacherByCurriculum(retrieved.getId()));
 		Assert.isTrue(this.teacherService.findTeacherByCurriculum(retrieved.getId()).getId() == teacher.getId(), "Not possible to delete the curriculum of other teacher.");
 		this.curriculumRepository.delete(retrieved.getId());
 	}
@@ -163,6 +154,12 @@ public class CurriculumService {
 		final Collection<Curriculum> cs = this.curriculumRepository.getCurriculumWithTicker(ticker);
 		if (!cs.isEmpty())
 			this.generateTicker(teacherName);
+		return res;
+	}
+
+	public Double findCurriculumRatio() {
+		final Double res = this.curriculumRepository.findCurriculumRatio();
+		Assert.notNull(res);
 		return res;
 	}
 

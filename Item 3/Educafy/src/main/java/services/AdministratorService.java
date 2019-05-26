@@ -118,7 +118,6 @@ public class AdministratorService {
 		principal.setPhone(null);
 		principal.setPhoto(null);
 		principal.setSpammer(false);
-		principal.setVat(0.0);
 		final Authority ban = new Authority();
 		ban.setAuthority(Authority.BANNED);
 		principal.getUserAccount().getAuthorities().add(ban);
@@ -136,7 +135,6 @@ public class AdministratorService {
 			admin.setPhone(actorForm.getPhone());
 			admin.setEmail(actorForm.getEmail());
 			admin.setAddress(actorForm.getAddress());
-			admin.setVat(actorForm.getVat());
 			admin.setVersion(actorForm.getVersion());
 			admin.setSpammer(false);
 			final UserAccount account = this.userAccountService.create();
@@ -156,7 +154,6 @@ public class AdministratorService {
 			admin.setPhone(actorForm.getPhone());
 			admin.setEmail(actorForm.getEmail());
 			admin.setAddress(actorForm.getAddress());
-			admin.setVat(actorForm.getVat());
 			admin.setVersion(actorForm.getVersion());
 			final UserAccount account = this.userAccountService.findOne(admin.getUserAccount().getId());
 			account.setUsername(actorForm.getUserAccountuser());

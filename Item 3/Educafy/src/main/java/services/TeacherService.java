@@ -36,6 +36,9 @@ public class TeacherService {
 	private UserAccountService	userAccountService;
 
 	@Autowired
+	private ScheduleService		scheduleService;
+
+	@Autowired
 	private FolderService		folderService;
 
 	@Autowired
@@ -69,6 +72,7 @@ public class TeacherService {
 		if (teacher.getId() == 0) {
 			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
 			result = this.teacherRepository.save(teacher);
+			this.scheduleService.createForNewTeacher(result);
 			this.folderService.setFoldersByDefault(result);
 		} else {
 			this.actorService.checkForSpamWords(teacher);
@@ -78,7 +82,6 @@ public class TeacherService {
 		}
 		return result;
 	}
-
 	public void delete(final Teacher teacher) {
 		Assert.notNull(teacher);
 		Assert.isTrue(this.findByPrincipal().equals(teacher));
@@ -124,7 +127,6 @@ public class TeacherService {
 			teacher.setPhone(actorForm.getPhone());
 			teacher.setEmail(actorForm.getEmail());
 			teacher.setAddress(actorForm.getAddress());
-			teacher.setVat(actorForm.getVat());
 			teacher.setVersion(actorForm.getVersion());
 			//			student.setScore(0.0);
 			//			student.setSpammer(false);
@@ -145,7 +147,6 @@ public class TeacherService {
 			teacher.setPhone(actorForm.getPhone());
 			teacher.setEmail(actorForm.getEmail());
 			teacher.setAddress(actorForm.getAddress());
-			teacher.setVat(actorForm.getVat());
 			teacher.setVersion(actorForm.getVersion());
 			final UserAccount account = this.userAccountService.findOne(teacher.getUserAccount().getId());
 			account.setUsername(actorForm.getUserAccountuser());
@@ -171,7 +172,6 @@ public class TeacherService {
 		principal.setPhone(null);
 		principal.setPhoto(null);
 		principal.setSpammer(false);
-		principal.setVat(0.0);
 		final Authority ban = new Authority();
 		ban.setAuthority(Authority.BANNED);
 		principal.getUserAccount().getAuthorities().add(ban);
@@ -214,6 +214,26 @@ public class TeacherService {
 
 	public boolean hasPersonalRecord(final int teacherId, final int recordId) {
 		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
+		return res;
+	}
+
+	public Teacher findTeacherByReservation(final int reservationId) {
+		Teacher res;
+		res = this.teacherRepository.findTeacherByReservation(reservationId);
+		return res;
+	}
+
+	public List<Teacher> getTeacherOrderByScore() {
+		List<Teacher> ls = this.teacherRepository.getTeacherOrderByScore();
+		if (ls.size() > 2)
+			ls = ls.subList(0, 3);
+		Assert.notNull(ls);
+		return ls;
+	}
+
+	public Collection<Teacher> findTeacherTenPerCentMoreFinalReservationThanAverage() {
+		final Collection<Teacher> res = this.teacherRepository.findTenPerCentMoreFinalReservationThanAverage();
+		Assert.notNull(res);
 		return res;
 	}
 }

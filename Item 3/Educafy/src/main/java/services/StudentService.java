@@ -103,7 +103,6 @@ public class StudentService {
 		principal.setPhone(null);
 		principal.setPhoto(null);
 		principal.setSpammer(false);
-		principal.setVat(0.0);
 		final Authority ban = new Authority();
 		ban.setAuthority(Authority.BANNED);
 		principal.getUserAccount().getAuthorities().add(ban);
@@ -145,7 +144,6 @@ public class StudentService {
 			student.setPhone(actorForm.getPhone());
 			student.setEmail(actorForm.getEmail());
 			student.setAddress(actorForm.getAddress());
-			student.setVat(actorForm.getVat());
 			student.setVersion(actorForm.getVersion());
 			student.setFinder(this.finderService.create());
 			//			student.setScore(0.0);
@@ -167,7 +165,6 @@ public class StudentService {
 			student.setPhone(actorForm.getPhone());
 			student.setEmail(actorForm.getEmail());
 			student.setAddress(actorForm.getAddress());
-			student.setVat(actorForm.getVat());
 			student.setVersion(actorForm.getVersion());
 			student.setFinder(this.finderService.findStudentFinder());
 			final UserAccount account = this.userAccountService.findOne(student.getUserAccount().getId());
@@ -181,6 +178,20 @@ public class StudentService {
 			throw new ValidationException();
 
 		return student;
+	}
+
+	public Collection<Student> findStudentTenPerCentMoreReservationThanAverage() {
+		final Collection<Student> res = this.studentRepository.findTenPerCentMoreReservationThanAverage();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public List<Student> getStudentsOrderByExamScore() {
+		List<Student> ls = this.studentRepository.getStudentsOrderByExamScore();
+		if (ls.size() > 2)
+			ls = ls.subList(0, 3);
+		Assert.notNull(ls);
+		return ls;
 	}
 
 }
