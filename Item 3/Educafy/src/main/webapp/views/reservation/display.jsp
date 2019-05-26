@@ -34,7 +34,31 @@ img.resize {
 
 <acme:display code="reservation.creditCard" value="${reservation.creditCard.number}"/>
 
+<display:table name="periods" id="row"
+		requestURI="${requestURI}" pagesize="5"
+		class="displaytag">
+		
+		<display:column property="startHour" titleKey="timePeriod.startHour" />
+		<display:column property="endHour" titleKey="timePeriod.endHour" />
+		<display:column property="dayNumber" titleKey="timePeriod.day">
+			 <jstl:choose>
+				<jstl:when test="${row.dayNumber eq 1}"><jstl:out value="Monday"></jstl:out></jstl:when>
+				<jstl:when test="${row.dayNumber eq 2}"><jstl:out value="Tuesday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 3}"><jstl:out value="Wednesday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 4}"><jstl:out value="Thursday"/></jstl:when>
+				<jstl:otherwise><jstl:out value="Friday"/></jstl:otherwise>				
+			</jstl:choose> 
+		</display:column>
+		<jstl:if test="${rol eq 'teacher' }">
+			<display:column>
+				<acme:button url="timePeriod/teacher/edit.do?timePeriodId=${row.id}" name="edit" code="reservation.edit"/>
+			</display:column>
+		</jstl:if>
+</display:table>
 
+<jstl:if test="${rol eq 'teacher' }">
+	<acme:button url="timePeriod/teacher/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
+</jstl:if>
 <br><br>
 
 

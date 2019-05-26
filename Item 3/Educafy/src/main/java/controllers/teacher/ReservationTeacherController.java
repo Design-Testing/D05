@@ -18,9 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ReservationService;
 import services.TeacherService;
+import services.TimePeriodService;
 import controllers.AbstractController;
 import domain.Reservation;
 import domain.Teacher;
+import domain.TimePeriod;
 
 @Controller
 @RequestMapping("/reservation/teacher")
@@ -31,6 +33,9 @@ public class ReservationTeacherController extends AbstractController {
 
 	@Autowired
 	private TeacherService		teacherService;
+
+	@Autowired
+	private TimePeriodService	timePeriodService;
 
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
@@ -45,9 +50,12 @@ public class ReservationTeacherController extends AbstractController {
 
 		reservation = this.reservationService.findOne(reservationId);
 		teacher = this.teacherService.findByPrincipal();
+		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
 
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);
+		result.addObject("periods", periods);
+		result.addObject("requestURI", "reservation/teacher/display.do");
 		result.addObject("studentId", reservation.getStudent().getId());
 		result.addObject("rol", "teacher");
 		result.addObject("lang", this.lang);
@@ -101,24 +109,20 @@ public class ReservationTeacherController extends AbstractController {
 
 	// TO REJECTED --------------------------------------------------------
 
-	@RequestMapping(value = "/rejected", method = RequestMethod.GET)
-	public ModelAndView rejectedMode(@RequestParam final int reservationId) {
+	@RequestMapping(value = "/rejected", method = RequestMethod.POST, params = "reject")
+	public ModelAndView rejectedMode(@Valid Reservation reservation, final BindingResult binding) {
 		ModelAndView result;
-		Reservation reservation = this.reservationService.findOne(reservationId);
 
-		if (reservation == null) {
-			result = this.myReservations();
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView(reservation);
 			result.addObject("msg", "reservations.rejected.error");
 		} else
 			try {
-				reservation = this.reservationService.toRejectedMode(reservationId);
-				result = this.createEditModelAndView(reservation);
+				reservation = this.reservationService.toRejectedMode(reservation.getId());
+				result = new ModelAndView("redirect:myReservations.do");
 			} catch (final Throwable oops) {
-				String errormsg = "reservation.rejected.error";
-				result = this.myReservations();
-				if (reservation.getStatus().equals("FINAL") || reservation.getStatus().equals("REJECTED"))
-					errormsg = "reservation.rejected.error";
-				result.addObject("msg", errormsg);
+				final String errormsg = "reservation.rejected.error";
+				result = this.createEditModelAndView(reservation, errormsg);
 			}
 
 		return result;
@@ -190,7 +194,7 @@ public class ReservationTeacherController extends AbstractController {
 		result = new ModelAndView("reservation/edit2");
 		result.addObject("reservation", reservation);
 		result.addObject("message", messageCode);
-
+		result.addObject("requestURI", "reservation/teacher/rejected.do");
 		return result;
 	}
 

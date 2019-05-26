@@ -154,11 +154,11 @@ public class ReservationService {
 		final Reservation reservation = this.findOne(reservationId);
 		Assert.notNull(reservation);
 		final Student student = this.studentService.findByPrincipal();
-		//final Reservation result;
+		final Reservation result;
 		Assert.isTrue(reservation.getStudent().equals(student), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Pendiente debe de estar anteriormente Aceptada.");
 		reservation.setStatus("REVIEWING");
-		//result = this.reservationRepository.save(reservation);
+		result = this.reservationRepository.save(reservation);
 		return reservation;
 	}
 

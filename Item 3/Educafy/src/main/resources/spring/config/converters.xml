@@ -23,6 +23,10 @@
 	<bean class="converters.TeacherToStringConverter"/>
 	<bean class="converters.StringToTeacherConverter"/>
 	
+	<!-- STUDENT -->
+	<bean class="converters.StudentToStringConverter"/>
+	<bean class="converters.StringToStudentConverter"/>
+	
 	<!-- LESSON -->
 	<bean class="converters.LessonToStringConverter"/>
 	<bean class="converters.StringToLessonConverter"/>

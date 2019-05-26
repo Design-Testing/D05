@@ -10,7 +10,7 @@
 
 <security:authorize access="hasRole('TEACHER')">
 	
-<form:form action="reservation/teacher/edit.do" modelAttribute="reservation" method="POST">
+<form:form action="reservation/teacher/rejected.do" modelAttribute="reservation" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="moment"/>
@@ -25,8 +25,8 @@
 	
 <br>
 
-	<input type="submit" name="save"
-		value="<spring:message code="reservation.submit" />" />
+	<input type="submit" name="reject"
+		value="<spring:message code="reservation.rejected" />" />
 	
 		<acme:button url="reservation/teacher/myReservation.do" name="back" code="reservation.back"/>
 	
@@ -35,7 +35,7 @@
 
 <security:authorize access="hasRole('STUDENT')">
 	
-<form:form action="reservation/student/edit.do" modelAttribute="reservation" method="POST">
+<form:form action="reservation/student/reviewing.do" modelAttribute="reservation" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="moment"/>
@@ -49,9 +49,8 @@
 	<acme:textarea code="reservation.explanation" path="explanation"/>
 	
 <br>
-
-	<input type="submit" name="save"
-		value="<spring:message code="reservation.submit" />" />
+	<input type="submit" name="review"
+		value="<spring:message code="reservation.reviewing" />" />
 	
 		<acme:button url="reservation/student/myReservation.do" name="back" code="reservation.back"/>
 	

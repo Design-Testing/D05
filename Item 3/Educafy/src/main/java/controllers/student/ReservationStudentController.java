@@ -20,11 +20,13 @@ import repositories.CreditCardRepository;
 import services.LessonService;
 import services.ReservationService;
 import services.StudentService;
+import services.TimePeriodService;
 import controllers.AbstractController;
 import domain.CreditCard;
 import domain.Lesson;
 import domain.Reservation;
 import domain.Student;
+import domain.TimePeriod;
 
 @Controller
 @RequestMapping("/reservation/student")
@@ -41,6 +43,9 @@ public class ReservationStudentController extends AbstractController {
 
 	@Autowired
 	private CreditCardRepository	creditCardRepository;
+
+	@Autowired
+	private TimePeriodService		timePeriodService;
 
 	final String					lang	= LocaleContextHolder.getLocale().getLanguage();
 
@@ -70,9 +75,12 @@ public class ReservationStudentController extends AbstractController {
 
 		reservation = this.reservationService.findOne(reservationId);
 		student = this.studentService.findByPrincipal();
+		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
 
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);
+		result.addObject("periods", periods);
+		result.addObject("requestURI", "reservation/student/display.do");
 		result.addObject("student", student);
 		result.addObject("studentId", reservation.getStudent().getId());
 		result.addObject("rol", "student");
@@ -127,24 +135,20 @@ public class ReservationStudentController extends AbstractController {
 
 	// TO REVIEWING --------------------------------------------------------
 
-	@RequestMapping(value = "/reviewing", method = RequestMethod.GET)
-	public ModelAndView reviewingMode(@RequestParam final int reservationId) {
+	@RequestMapping(value = "/reviewing", method = RequestMethod.POST, params = "review")
+	public ModelAndView reviewingMode(@Valid Reservation reservation, final BindingResult binding) {
 		ModelAndView result;
-		Reservation reservation = this.reservationService.findOne(reservationId);
 
-		if (reservation == null) {
-			result = this.myReservations();
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView2(reservation);
 			result.addObject("msg", "reservations.reviewing.error");
 		} else
 			try {
-				reservation = this.reservationService.toReviewingMode(reservationId);
-				result = this.createEditModelAndView2(reservation);
+				reservation = this.reservationService.toReviewingMode(reservation.getId());
+				result = new ModelAndView("redirect:myReservations.do");
 			} catch (final Throwable oops) {
-				String errormsg = "reservation.reviewing.error";
-				result = this.myReservations();
-				if (!reservation.getStatus().equals("ACCEPTED"))
-					errormsg = "reservation.reviewing.no.accepted";
-				result.addObject("msg", errormsg);
+				final String errormsg = "reservation.reviewing.error";
+				result = this.createEditModelAndView2(reservation, errormsg);
 			}
 
 		return result;
@@ -244,6 +248,7 @@ public class ReservationStudentController extends AbstractController {
 		result = new ModelAndView("reservation/edit2");
 		result.addObject("reservation", reservation);
 		result.addObject("message", messageCode);
+		result.addObject("requestURI", "reservation/student/reviewing.do");
 
 		return result;
 	}
