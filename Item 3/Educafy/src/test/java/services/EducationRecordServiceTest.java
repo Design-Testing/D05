@@ -181,7 +181,7 @@ public class EducationRecordServiceTest extends AbstractTest {
 				//			B: Test Positivo: Teacher borra EducationRecord 
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
-				"teacher2", "educationRecord3", null
+				"teacher1", "educationRecord1", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Positivo: Teacher intenar borrar EducationRecord que no esta en drft mode
@@ -257,7 +257,7 @@ public class EducationRecordServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void driverCerfiy() {
+	public void driverCertify() {
 
 		final Object testingRecord[][] = {
 			{
@@ -296,7 +296,7 @@ public class EducationRecordServiceTest extends AbstractTest {
 		try {
 			this.authenticate(actor);
 			final EducationRecord lRec = this.educationRecordService.findOne(this.getEntityId(educationRecord));
-			this.educationRecordService.toFinal(lRec);
+			this.educationRecordService.certify(lRec);
 			this.educationRecordService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
