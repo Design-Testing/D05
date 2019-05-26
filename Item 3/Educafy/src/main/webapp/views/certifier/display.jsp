@@ -66,8 +66,6 @@ function deletePersonalData(){
 <jstl:if test="${not empty certifier.address}">
 <acme:display code="certifier.address" value="${certifier.address}"/><br>
 </jstl:if>
-<acme:display code="certifier.vat" value="${certifier.vat}"/><br>
-
 
 <jstl:if test="${displayButtons}">
 <br>

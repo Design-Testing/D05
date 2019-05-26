@@ -51,7 +51,6 @@ function deletePersonalData(){
 <acme:display code="administrator.edit.phone" value="${administrator.phone}"/>
 <acme:display code="administrator.edit.email" value="${administrator.email}"/>
 <acme:display code="administrator.edit.address" value="${administrator.address}"/>
-<acme:display code="administrator.edit.vat" value="${administrator.vat}"/>
 
 
 <br>
