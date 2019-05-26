@@ -146,4 +146,88 @@ public class PersonalRecordServiceTest extends AbstractTest {
 
 	}
 
+	@Test
+	public void driverToFinal() {
+
+		final Object testingRecord[][] = {
+			{
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher pasa a final PersonalRecord en draft mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher1", "personalRecord1", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher intenar pasar a final PersonalRecord que ya etsá en final mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher2", "personalRecord2", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingRecord.length; i++)
+			this.templateToFinal((String) testingRecord[i][0], (String) testingRecord[i][1], (Class<?>) testingRecord[i][2]);
+	}
+
+	private void templateToFinal(final String actor, final String personalRecord, final Class<?> expected) {
+		Class<?> caught = null;
+		try {
+			this.authenticate(actor);
+			final PersonalRecord lRec = this.personalRecordService.findOne(this.getEntityId(personalRecord));
+			this.personalRecordService.toFinal(lRec);
+			this.personalRecordService.flush();
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+	}
+
+	@Test
+	public void driverCertify() {
+
+		final Object testingRecord[][] = {
+			{
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher no puede certificar un registro
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher1", "personalRecord2", IllegalArgumentException.class
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Un certificador certifica un registro en modo final
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"certifier1", "personalRecord2", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Un certificador intenta certificar un registro en modo draft
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"certifier1", "personalRecord1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingRecord.length; i++)
+			this.templateCertify((String) testingRecord[i][0], (String) testingRecord[i][1], (Class<?>) testingRecord[i][2]);
+	}
+
+	private void templateCertify(final String actor, final String personalRecord, final Class<?> expected) {
+		Class<?> caught = null;
+		try {
+			this.authenticate(actor);
+			final PersonalRecord lRec = this.personalRecordService.findOne(this.getEntityId(personalRecord));
+			this.personalRecordService.certify(lRec);
+			this.personalRecordService.flush();
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+	}
+
 }
