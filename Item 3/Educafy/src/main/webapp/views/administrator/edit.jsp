@@ -80,8 +80,6 @@
 	</div>
 
 	<acme:textbox code="administrator.edit.address" path="address" />
-	<acme:numberbox code="administrator.edit.vat" path="vat" min="0"
-		max="1" />
 	<br>
 
 	<jstl:choose>
