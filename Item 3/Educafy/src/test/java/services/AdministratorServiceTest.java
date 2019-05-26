@@ -137,7 +137,7 @@ public class AdministratorServiceTest extends AbstractTest {
 			admin.setSurname(surname);
 			admin.setEmail(email);
 			admin.setPhone(phone);
-			admin.setVat(new Double(vat));
+			//			admin.setVat(new Double(vat));
 			admin = this.adminService.save(admin);
 			this.adminService.flush();
 			this.userAccountService.flush();
@@ -198,7 +198,7 @@ public class AdministratorServiceTest extends AbstractTest {
 			admin.setSurname(surname);
 			admin.setEmail(email);
 			admin.setPhone(phone);
-			admin.setVat(new Double(vat));
+			//			admin.setVat(new Double(vat));
 			admin = this.adminService.save(admin);
 			this.adminService.flush();
 			super.unauthenticate();

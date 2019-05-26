@@ -84,7 +84,13 @@
 	<bean class="converters.CreditCardToStringConverter"/>
 	<bean class="converters.StringToCreditCardConverter"/>
 	
+	<!-- SOCIAL PROFILE -->
+	<bean class="converters.SocialProfileToStringConverter"/>
+	<bean class="converters.StringToSocialProfileConverter"/>
 	
+	<!-- TIME PERIOD -->
+	<bean class="converters.TimePeriodToStringConverter"/>
+	<bean class="converters.StringToTimePeriodConverter"/>
 		
 	</util:list>
 	

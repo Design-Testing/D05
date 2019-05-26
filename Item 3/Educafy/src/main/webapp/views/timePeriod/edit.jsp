@@ -11,15 +11,16 @@
 <form:form action="timePeriod/edit.do" modelAttribute="timePeriod" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	<form:hidden path="reservation" />
 	
-	<acme:textarea code="timePeriod.startHour" path="startHour"/>
-	<acme:textarea code="timePeriod.endHour" path="endHour"/>
-	<acme:textarea code="timePeriod.dayNumber" path="dayNumber"/>
+	<acme:textbox code="timePeriod.startHour" path="startHour"/>
+	<acme:textbox code="timePeriod.endHour" path="endHour"/>
+	<acme:textbox code="timePeriod.dayNumber" path="dayNumber"/>
 <br>
 
 	<input type="submit" name="save"
 		value="<spring:message code="timePeriod.submit" />" />
 	
-	<acme:button url="URL del display de reservation" name="back" code="timePeriod.back"/>
+	<acme:button url="reservation/teacher/display.do?reservationId=${timePeriod.reservation.id}" name="back" code="timePeriod.back"/>
 
 </form:form>

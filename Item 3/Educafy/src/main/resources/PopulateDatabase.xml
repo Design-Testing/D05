@@ -814,7 +814,6 @@
 		<property name="email" value="teacher3@gmail.es" />
 		<property name="phone" value="+34647807400" />
 		<property name="address" value="Reina Mercedes" />
-		<property name="vat" value="0.21" />
 		<property name="userAccount" ref="userAccountTeacher3" />
 	</bean>
 

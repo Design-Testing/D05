@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ConfigurationParametersService;
+import services.ReservationService;
 import services.TimePeriodService;
+import controllers.teacher.ReservationTeacherController;
+import domain.Reservation;
 import domain.TimePeriod;
 
 @Controller
@@ -23,18 +26,26 @@ public class TimePeriodController extends AbstractController {
 	private TimePeriodService				timePeriodService;
 
 	@Autowired
+	private ReservationService				reservationService;
+
+	@Autowired
+	private ReservationTeacherController	reservationTeacherController;
+
+	@Autowired
 	private ConfigurationParametersService	configurationParametersService;
 
 
 	// CREATE --------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int reservationId) {
 
 		ModelAndView res;
 		TimePeriod timePeriod;
+		final Reservation reservation = this.reservationService.findOne(reservationId);
 
 		timePeriod = this.timePeriodService.create();
+		timePeriod.setReservation(reservation);
 		res = this.createEditModelAndView(timePeriod);
 		res.addObject("new", false);
 
@@ -57,7 +68,6 @@ public class TimePeriodController extends AbstractController {
 			result = new ModelAndView("redirect:misc/403");
 		return result;
 	}
-
 	// SAVE --------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
@@ -73,7 +83,7 @@ public class TimePeriodController extends AbstractController {
 
 			try {
 				this.timePeriodService.save(timePeriod);
-				res = new ModelAndView("redirect:list.do");
+				res = this.reservationTeacherController.display(timePeriod.getReservation().getId());
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(timePeriod, "general.commit.error");
 			}
@@ -90,7 +100,7 @@ public class TimePeriodController extends AbstractController {
 
 		try {
 			this.timePeriodService.delete(timePeriod);
-			result = new ModelAndView("redirect:list.do");
+			result = this.reservationTeacherController.display(timePeriod.getReservation().getId());
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(timePeriod, "general.commit.error");
 			result.addObject("id", timePeriod.getId());
