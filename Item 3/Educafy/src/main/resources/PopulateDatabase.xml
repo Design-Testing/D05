@@ -1104,11 +1104,13 @@
 		<property name="educationRecords">
 			<list>
 				<ref bean="educationRecord1" />
+				<ref bean="educationRecord2" />
 			</list>
 		</property>
 		<property name="miscellaneousRecords">
 			<list>
 				<ref bean="miscellaneousRecord1" />
+				<ref bean="miscellaneousRecord2" />
 			</list>
 		</property>
 		<property name="teacher" ref="teacher1" />
@@ -1119,12 +1121,12 @@
 		<property name="personalRecord" ref="personalRecord2" />
 		<property name="educationRecords">
 			<list>
-				<ref bean="educationRecord2" />
+				<ref bean="educationRecord3" />
 			</list>
 		</property>
 		<property name="miscellaneousRecords">
 			<list>
-				<ref bean="miscellaneousRecord2" />
+				<ref bean="miscellaneousRecord3" />
 			</list>
 		</property>
 		<property name="teacher" ref="teacher2" />
@@ -1149,7 +1151,7 @@
 		<property name="github" value="http://www.githubTeacher2.com" />
 		<property name="photo" value="http://photoTeacher2.com" />
 		<property name="linkedin" value="http://www.linkedInTeacher2.com" />
-		<property name="isDraft" value="true" />
+		<property name="isDraft" value="false" />
 		<property name="isCertified" value="false" />
 	</bean>
 
@@ -1184,7 +1186,7 @@
 		<property name="attachment" value="http://attachment2.com" />
 		<property name="startDate" value="2018/04/11 13:00" />
 		<property name="endDate" value="2019/04/11 13:00" />
-		<property name="isDraft" value="true" />
+		<property name="isDraft" value="false" />
 		<property name="isCertified" value="false" />
 	</bean>
 
@@ -1195,8 +1197,8 @@
 		<property name="attachment" value="http://attachment3.com" />
 		<property name="startDate" value="2018/04/11 13:00" />
 		<property name="endDate" value="2019/04/11 13:00" />
-		<property name="isDraft" value="true" />
-		<property name="isCertified" value="false" />
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="true" />
 	</bean>
 
 	<!-- =================================================================== 
@@ -1222,7 +1224,7 @@
 				<value>http://attachment22.com</value>
 			</list>
 		</property>
-		<property name="isDraft" value="true" />
+		<property name="isDraft" value="false" />
 		<property name="isCertified" value="false" />
 	</bean>
 
@@ -1234,8 +1236,8 @@
 				<value>http://attachment32.com</value>
 			</list>
 		</property>
-		<property name="isDraft" value="true" />
-		<property name="isCertified" value="false" />
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="true" />
 	</bean>
 
 	<!-- =================================================================== 
