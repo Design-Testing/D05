@@ -51,13 +51,16 @@ img.resize {
 		</display:column>
 		<jstl:if test="${rol eq 'teacher' }">
 			<display:column>
-				<acme:button url="timePeriod/teacher/edit.do?timePeriodId=${row.id}" name="edit" code="reservation.edit"/>
+				<acme:button url="timePeriod/edit.do?timePeriodId=${row.id}" name="edit" code="reservation.edit"/>
+			</display:column>
+			<display:column>
+				<acme:button url="timePeriod/delete.do?timePeriodId=${row.id}" name="delete" code="reservation.delete"/>
 			</display:column>
 		</jstl:if>
 </display:table>
 
 <jstl:if test="${rol eq 'teacher' }">
-	<acme:button url="timePeriod/teacher/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
+	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
 </jstl:if>
 <br><br>
 

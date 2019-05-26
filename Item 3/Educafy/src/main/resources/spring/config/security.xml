@@ -80,7 +80,9 @@
  		<security:intercept-url pattern="/reservation/student/**" access="hasRole('STUDENT')" /> 
  		<security:intercept-url pattern="/reservation/display.do" access="hasAnyRole('STUDENT','TEACHER')" /> 
  		
- 		
+ 		<!-- RESERVATION -->
+ 		<security:intercept-url pattern="/timePeriod/**" access="hasRole('TEACHER')" /> 
+
 		<!-- TEACHER -->
 		<security:intercept-url pattern="/teacher/list.do" access="permitAll" />
 		<security:intercept-url pattern="/teacher/display.do" access="permitAll" />

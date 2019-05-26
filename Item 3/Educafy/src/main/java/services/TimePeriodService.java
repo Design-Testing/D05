@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TimePeriodRepository;
+import security.Authority;
+import domain.Actor;
 import domain.Reservation;
 import domain.Teacher;
 import domain.TimePeriod;
@@ -23,6 +25,9 @@ public class TimePeriodService {
 
 	@Autowired
 	private TeacherService			teacherService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	public TimePeriod create() {
@@ -48,6 +53,8 @@ public class TimePeriodService {
 
 	public TimePeriod save(final TimePeriod timePeriod) {
 		Assert.notNull(timePeriod);
+		final Actor principal = this.actorService.findByPrincipal();
+		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.TEACHER));
 		final TimePeriod tPeriod = this.timePeriodRepository.save(timePeriod);
 		Assert.notNull(tPeriod);
 		return tPeriod;
@@ -56,6 +63,8 @@ public class TimePeriodService {
 	public void delete(final TimePeriod timePeriod) {
 		Assert.notNull(timePeriod);
 		Assert.isTrue(timePeriod.getId() != 0);
+		final Actor principal = this.actorService.findByPrincipal();
+		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.TEACHER));
 		final TimePeriod result = this.findOne(timePeriod.getId());
 		this.timePeriodRepository.delete(result);
 	}
@@ -66,13 +75,12 @@ public class TimePeriodService {
 		return res;
 	}
 
-
 	public Collection<TimePeriod> findTimePeriodsByTeacher(final int teacherId) {
 		Collection<TimePeriod> res;
 		final Teacher teacher = this.teacherService.findOne(teacherId);
 		res = this.timePeriodRepository.findTimePeriodsByTeacher(teacher.getUserAccount().getId());
 		return res;
-  }
+	}
 	public void deleteInBatch(final Collection<TimePeriod> timePeriods) {
 		this.timePeriodRepository.deleteInBatch(timePeriods);
 
