@@ -120,4 +120,9 @@ public class CommentService {
 	public void deleteInBatch(final Collection<Comment> comments) {
 		this.commentRepository.deleteInBatch(comments);
 	}
+
+	public void flush() {
+		this.commentRepository.flush();
+	}
+
 }
