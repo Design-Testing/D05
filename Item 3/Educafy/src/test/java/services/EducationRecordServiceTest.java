@@ -15,7 +15,6 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 import domain.Curriculum;
 import domain.EducationRecord;
-import domain.Teacher;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -29,13 +28,7 @@ public class EducationRecordServiceTest extends AbstractTest {
 	private EducationRecordService	educationRecordService;
 
 	@Autowired
-	private TeacherService			teacherService;
-
-	@Autowired
 	private CurriculumService		curriculumService;
-
-	@Autowired
-	private PersonalRecordService	personalRecordService;
 
 
 	@Test
@@ -148,7 +141,6 @@ public class EducationRecordServiceTest extends AbstractTest {
 		Class<?> caught = null;
 		try {
 			this.authenticate(user);
-			final Teacher principal = this.teacherService.findByPrincipal();
 			final EducationRecord lR = this.educationRecordService.findOne(this.getEntityId(educationRecord));
 			final Curriculum curriculum = this.curriculumService.findCurriculumByEducationRecord(lR.getId());
 			lR.setInstitution(institution);
