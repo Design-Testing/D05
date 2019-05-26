@@ -47,6 +47,9 @@ public class ReservationService {
 	@Autowired
 	private Validator				validator;
 
+	@Autowired
+	private MessageService			messageService;
+
 
 	public Reservation create() {
 		final Reservation reservation = new Reservation();
@@ -143,6 +146,7 @@ public class ReservationService {
 		final Reservation retrieved = this.findOne(reservation.getId());
 		this.timePeriodService.deleteInBatch(periods);
 		this.reservationRepository.delete(retrieved);
+		this.messageService.notifyReservationDeleted(retrieved);
 	}
 	/* ========================= OTHER METHODS =========================== */
 
@@ -167,8 +171,10 @@ public class ReservationService {
 		Assert.notNull(reservation);
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Reservation result;
+		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservation.getId());
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(teacher.getUserAccount().getId()).contains(reservation.getLesson()), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("REVIEWING"), "Esta Reserva no puede ser aceptada.");
+		Assert.isTrue(periods.size() == reservation.getHoursWeek(), "Una reserva no puede ser aceptada si no tiene los mismo timePeriods que hoursWeek solicitadas. ");
 		reservation.setStatus("ACCEPTED");
 		result = this.reservationRepository.save(reservation);
 		return result;
@@ -178,11 +184,11 @@ public class ReservationService {
 		final Reservation reservation = this.findOne(reservationId);
 		Assert.notNull(reservation);
 		final Teacher teacher = this.teacherService.findByPrincipal();
-		//final Reservation result;
+		final Reservation result;
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(teacher.getUserAccount().getId()).contains(reservation.getLesson()), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("ACCEPTED") || reservation.getStatus().equals("REVIEWING"), "Para poner una Reserva en Rechaza debe de estar anteriormente Aceptada o Pendiente.");
 		reservation.setStatus("REJECTED");
-		//result = this.reservationRepository.save(reservation);
+		result = this.reservationRepository.save(reservation);
 		return reservation;
 	}
 
