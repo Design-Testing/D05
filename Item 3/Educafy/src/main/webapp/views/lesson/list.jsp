@@ -24,6 +24,14 @@
 	
 	<display:column property="teacher.name" titleKey="lesson.teacher" />
 	
+	<jstl:choose>
+		<jstl:when test="${not empty backURL}">
+			<display:column>
+				<acme:button url="lesson/displayR=lessonId=${row.id}&url=${lesson/teacher/myLessons.do}" name="" code=""/>
+			</display:column>
+		</jstl:when>
+	</jstl:choose>
+	
 	<security:authorize access="hasRole('TEACHER')">
 		<display:column>
 			<jstl:if test="${row.isDraft}">

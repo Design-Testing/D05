@@ -59,6 +59,32 @@ public class LessonController extends AbstractController {
 		return result;
 	}
 
+	// DISPLAY --------------------------------------------------------
+
+	@RequestMapping(value = "/displayR", method = RequestMethod.GET)
+	public ModelAndView displayR(@RequestParam final int lessonId, @RequestParam final String url) {
+		final ModelAndView result;
+		final Lesson lesson;
+		Collection<Assesment> assesments;
+		Collection<Reservation> reservations;
+
+		lesson = this.lessonService.findOne(lessonId);
+		assesments = this.assesmentService.findAllAssesmentByLesson(lessonId);
+		reservations = this.reservationService.findAllReservationByLesson(lessonId);
+
+		if (lesson != null) {
+			result = new ModelAndView("lesson/display");
+			result.addObject("lesson", lesson);
+			result.addObject("assesments", assesments);
+			result.addObject("reservations", reservations);
+			result.addObject("backURL", url);
+			result.addObject("lang", this.lang);
+		} else
+			result = new ModelAndView("redirect:misc/403");
+
+		return result;
+	}
+
 	// LIST --------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
