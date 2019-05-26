@@ -74,4 +74,4 @@ img.resize {
 
 
 
-<acme:button url="subject/list.do" name="back" code="subject.back"/>
+<acme:button url="subject/list.do" name="back" code="subject.listing"/>

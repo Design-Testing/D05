@@ -47,11 +47,9 @@
 		
 		<security:authorize access="hasRole('TEACHER')">
 			<li><a href="lesson/teacher/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
-			
 			<li><a href="assesment/teacher/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
-			
 			<li><a href="schedule/teacher/mySchedule.do"><spring:message code="master.page.assesment.mySchedule" /></a></li>
-			
+			<li><a href="curriculum/display.do"><spring:message code="master.page.my.curriculum" /></a></li>
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
@@ -62,24 +60,7 @@
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			<li><a href="finder/student/edit.do"><spring:message code="master.page.finder.student.edit" /></a></li>
 			<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
-		</security:authorize>
-		
-		<!-- ========================================================================================================= -->
-		<!-- ========================================  STUDENT  ================================================ -->
-		<!-- ========================================================================================================= -->
-		
-		<security:authorize access="hasRole('STUDENT')">
-			<li><a href="creditCard/student/list.do"><spring:message
-								code="master.page.student.creditCard.list" /></a></li>
-		</security:authorize>
-		
-		<!-- ========================================================================================================= -->
-		<!-- ========================================  TEACHER  ================================================ -->
-		<!-- ========================================================================================================= -->
-		
-		<security:authorize access="hasRole('TEACHER')">
-			<li><a href="curriculum/display.do"><spring:message
-								code="master.page.my.curriculum" /></a></li>
+			<li><a href="creditCard/student/list.do"><spring:message code="master.page.student.creditCard.list" /></a></li>
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
@@ -109,7 +90,7 @@
 					<li class="arrow"></li>
 						<security:authorize access="hasRole('TEACHER')">
 							<li><a href="teacher/edit.do"><spring:message code="master.page.teacher.edit" /></a></li>
-							<li><a href="teacher/display2.do"><spring:message code="master.page.teacher.display" /></a></li>
+							<li><a href="teacher/display.do"><spring:message code="master.page.teacher.display" /></a></li>
 						</security:authorize>
 						<security:authorize access="hasRole('ADMIN')">
 							<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.edit" /></a></li>
@@ -121,7 +102,7 @@
 						</security:authorize>
 						<security:authorize access="hasRole('CERTIFIER')">
 							<li><a href="certifier/edit.do"><spring:message code="master.page.certifier.edit" /></a></li>
-							<li><a href="certifier/display2.do"><spring:message code="master.page.certifier.display" /></a></li>
+							<li><a href="certifier/display.do"><spring:message code="master.page.certifier.display" /></a></li>
 						</security:authorize>
 					<li><a href="folder/list.do"><spring:message code="master.page.folder.list" /></a></li>
 					<li><a href="socialProfile/list.do"><spring:message code="master.page.socialProfile" /></a></li>

@@ -15,6 +15,9 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Folder;
 import domain.Message;
+import domain.Reservation;
+import domain.Student;
+import domain.Teacher;
 
 @Service
 @Transactional
@@ -364,6 +367,41 @@ public class MessageService {
 			inboxMessages.add(sent);
 			notificationBox.setMessages(inboxMessages);
 			this.folderService.save(notificationBox, r);
+		}
+	}
+
+	public void notifyReservationDeleted(final Reservation reservation) {
+		final Message m = new Message();
+		final Collection<String> tags = new ArrayList<>();
+		m.setTags(tags);
+		final Administrator sender = this.administratorService.findSystem();
+		final Student st = reservation.getStudent();
+		final Teacher teacher = reservation.getLesson().getTeacher();
+		final Double price = reservation.getLesson().getPrice();
+		final double vat = this.configurationParametersService.find().getVat();
+		m.setSubject("Reservation of lesson " + st.getName() + " - " + teacher.getName() + " has ended.");
+		final String body = "Reservation of lesson " + reservation.getLesson().getTitle() + " with price " + price + " (+" + price * vat + " VAT), between student " + st.getName() + " and teacher " + teacher.getName() + " has finished.\n";
+		m.setBody(body);
+		m.setPriority("HIGH");
+		m.setSender(sender);
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(st);
+		recipients.add(teacher);
+		m.setRecipients(recipients);
+		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
+		final Collection<Message> outboxMessages = outbox.getMessages();
+		final Date moment = new Date(System.currentTimeMillis() - 1000);
+		m.setMoment(moment);
+		Folder inbox;
+		final Message sent = this.save(m);
+		outboxMessages.add(sent);
+		outbox.setMessages(outboxMessages);
+		for (final Actor r : recipients) {
+			inbox = this.folderService.findInboxByUserId(r.getUserAccount().getId());
+			final Collection<Message> inboxMessages = inbox.getMessages();
+			inboxMessages.add(sent);
+			inbox.setMessages(inboxMessages);
+			this.folderService.save(inbox, r);
 		}
 	}
 

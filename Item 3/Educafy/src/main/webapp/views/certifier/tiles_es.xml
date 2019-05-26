@@ -26,11 +26,6 @@
 		<put-attribute name="body" value="/views/certifier/display.jsp" />
 	</definition>
 	
-	<definition name="certifier/display2" extends="master.page">	
-		<put-attribute name="title" value="Certificador: Mostrar" />
-		<put-attribute name="body" value="/views/certifier/display2.jsp" />
-	</definition>
-	
 	<definition name="certifier/list" extends="master.page">	
 		<put-attribute name="title" value="Certificador: Listar" />
 		<put-attribute name="body" value="/views/certifier/list.jsp" />

@@ -18,33 +18,6 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-
-<script>
-function generatePDF(){
-	alert('<spring:message code="display.teacher.document.alert"/>')
-	var doc = new jsPDF()
-	doc.text('<spring:message code="display.document.title"/>', 20, 10)
-	doc.text('', 10, 20)
-	doc.text('<spring:message code="teacher.name"/> : <jstl:out value="${teacher.name}"/>', 10, 30)
-	doc.text('<spring:message code="teacher.surname"/> : <jstl:out value="${teacher.surname}"/>', 10, 40)
-	doc.text('<spring:message code="teacher.photo"/> : <jstl:out value="${teacher.photo}"/>', 10, 50)
-	doc.text('<spring:message code="teacher.phone"/> : <jstl:out value="${teacher.phone}"/>', 10, 60)
-	doc.text('<spring:message code="teacher.email"/> : <jstl:out value="${teacher.email}"/>', 10, 70)
-	doc.text('<spring:message code="teacher.address"/> : <jstl:out value="${teacher.address}"/>', 10, 80)
-	doc.text('', 10, 90)
-	doc.save('<spring:message code="display.document.fileName"/>.pdf')
-}
-function deletePersonalData(){
-	var r = confirm('<spring:message code="display.deletePersonalData"/>');
-	if (r == true) {
-		location.href = "teacher/deletePersonalData.do";
-	}
-}
-</script>
-
-
 <acme:display code="teacher.name" value="${teacher.name}"/>
 <jstl:choose>
 	<jstl:when test="${not empty teacher.photo}">
@@ -78,10 +51,18 @@ function deletePersonalData(){
 <acme:display code="teacher.address" value="${teacher.address}"/>
 </jstl:if>
 
-<jstl:if test="${displayButtons}">
+
 <br>
-	<button onClick="generatePDF()"><spring:message code="display.getData"/></button>
-	<button onClick="deletePersonalData()"><spring:message code="display.button.deletePersonalData"/></button>
-	
-<br>
-</jstl:if>
+
+<acme:button url="curriculum/display.do?teacherId=${row.id}" name="display" code="teacher.curriculum"/>
+<acme:button url="lesson/myLessons.do?teacherId=${row.id}" name="display" code="teacher.lessons"/>
+<acme:button url="assesment/myAssesments.do?teacherId=${row.id}" name="display" code="teacher.assesments"/>
+<acme:button url="comment/myComments.do?teacherId=${row.id}" name="display" code="teacher.comment"/>
+
+<jstl:choose>
+	<jstl:when test="${rol eq teacher}">
+	</jstl:when>
+	<jstl:otherwise>
+	<acme:button url="teacher/list.do" name="back" code="teacher.back"/>
+	</jstl:otherwise>
+</jstl:choose>

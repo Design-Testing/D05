@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
@@ -63,22 +62,6 @@ public class CertifierController extends AbstractController {
 		return result;
 	}
 
-	// DISPLAY TABLA -----------------------------------------------------------
-
-	@RequestMapping(value = "/displayTabla", method = RequestMethod.GET)
-	public ModelAndView displayTabla(@RequestParam final int certifierId) {
-		final ModelAndView result;
-		final Certifier certifier = this.certifierService.findOne(certifierId);
-		if (certifier != null) {
-			result = new ModelAndView("certifier/display");
-			result.addObject("certifier", certifier);
-			result.addObject("displayButtons", true);
-		} else
-			result = new ModelAndView("redirect:misc/403");
-
-		return result;
-
-	}
 	// DISPLAY PRINCIPAL -----------------------------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)

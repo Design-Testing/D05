@@ -209,7 +209,7 @@
 	</table>
 	<br>
 	<br>
-	
+
 	<table>
 		<spring:message code="dashboard.cost" />
 		<tr>
@@ -238,22 +238,80 @@
 			<td><spring:message code="ratio.pending" /></td>
 			<td>${pending}</td>
 		</tr>
-		<tr>
-			<td><spring:message code="ratio.accepted" /></td>
-			<td>${accepted}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="ratio.rejected" /></td>
-			<td>${rejected}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="ratios.final.over.rejected" /></td>
-			<td>${finalOverRejected}</td>
-		</tr>
-		<tr>
-			<td><spring:message code="ratio.curriculum" /></td>
-			<td>${curriculumRatio}</td>
-		</tr>
+		<jstl:choose>
+			<jstl:when test="${(not empty pending) and (pending ne 0)}">
+				<tr>
+					<td><spring:message code="ratio.pending" /></td>
+					<td>${pending}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<tr>
+					<td><spring:message code="ratio.pending" /></td>
+					<td><jstl:out value="N/A" /></td>
+				</tr>
+			</jstl:otherwise>
+		</jstl:choose>
+		<jstl:choose>
+			<jstl:when test="${(not empty accepted) and (accepted ne 0)}">
+				<tr>
+					<td><spring:message code="ratio.accepted" /></td>
+					<td>${accepted}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<tr>
+					<td><spring:message code="ratio.accepted" /></td>
+					<td><jstl:out value="N/A" /></td>
+				</tr>
+			</jstl:otherwise>
+		</jstl:choose>
+		<jstl:choose>
+			<jstl:when test="${(not empty rejected) and (rejected ne 0)}">
+				<tr>
+					<td><spring:message code="ratio.rejected" /></td>
+					<td>${rejected}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<tr>
+					<td><spring:message code="ratio.rejected" /></td>
+					<td><jstl:out value="N/A" /></td>
+				</tr>
+			</jstl:otherwise>
+		</jstl:choose>
+		<jstl:choose>
+			<jstl:when
+				test="${(not empty finalOverRejected) and (finalOverRejected ne 0)}">
+				<tr>
+					<td><spring:message code="ratios.final.over.rejected" /></td>
+					<td>${finalOverRejected}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<tr>
+					<td><spring:message code="ratios.final.over.rejected" /></td>
+					<td><jstl:out value="N/A" /></td>
+				</tr>
+			</jstl:otherwise>
+		</jstl:choose>
+		<jstl:choose>
+			<jstl:when
+				test="${(not empty curriculumRatio) and (curriculumRatio ne 0)}">
+				<tr>
+					<td><spring:message code="ratio.curriculum" /></td>
+					<td>${curriculumRatio}</td>
+				</tr>
+			</jstl:when>
+			<jstl:otherwise>
+				<tr>
+					<td><spring:message code="ratio.curriculum" /></td>
+					<td><jstl:out value="N/A" /></td>
+				</tr>
+			</jstl:otherwise>
+		</jstl:choose>
 	</table>
 
 </security:authorize>
+
+
