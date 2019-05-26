@@ -111,12 +111,8 @@ public class EducationRecordService {
 		final Teacher me = this.teacherService.findByPrincipal();
 		Assert.notNull(me);
 		Assert.isTrue(this.teacherService.hasEducationRecord(me.getId(), educationRecord.getId()), "This education record is not of your property");
-		System.out.println("holis");
-		System.out.println("edu" + educationRecord);
-		System.out.println("edu" + educationRecord);
 		final EducationRecord retrieved = this.findOne(educationRecord.getId());
 		Assert.isTrue(retrieved.getIsDraft() == true, "the educatin record is already in final mode");
-		System.out.println("retrieved" + retrieved);
 		educationRecord.setIsDraft(false);
 		final EducationRecord res = this.educationRecordRepository.save(educationRecord);
 		return res;
