@@ -82,24 +82,7 @@
 	<acme:textbox code="administrator.edit.address" path="address" />
 	<acme:numberbox code="administrator.edit.vat" path="vat" min="0"
 		max="1" />
-
-	<h3>
-		<spring:message code="company.edit.creditCard" />
-	</h3>
-	<acme:textbox code="company.edit.holder" path="holderName" />
-	<form:label path="make">
-		<spring:message code="company.edit.make" />
-	</form:label>
-	<form:select path="make">
-		<form:options items="${cardmakes}" />
-	</form:select>
-	<form:errors path="make" cssClass="error" />
-	<acme:textbox code="company.edit.number" path="number" />
-	<acme:textbox code="company.edit.expirationMonth"
-		path="expirationMonth" />
-	<acme:textbox code="company.edit.expirationYear" path="expirationYear" />
-	<acme:numberbox code="company.edit.cvv" path="cvv" min="100" max="999" />
-	<br />
+	<br>
 
 	<jstl:choose>
 		<jstl:when test="${actorForm.termsAndCondicions == true}">

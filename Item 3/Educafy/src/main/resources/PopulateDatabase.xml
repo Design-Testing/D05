@@ -1008,12 +1008,12 @@
 		======= Configuration Parameters ========= =================================================================== -->
 
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
-		<property name="sysName" value="Estudify" />
+		<property name="sysName" value="Educafy" />
 		<property name="banner" value="https://i.ibb.co/W3c4rmh/logo.png" />
 		<property name="welcomeMessageEn"
-			value="Welcome to Estudify! Where student find the individual lessons they are looking for!" />
+			value="Welcome to Educafy! Where student find the individual lessons they are looking for!" />
 		<property name="welcomeMessageEsp"
-			value="¡Bienvenidos a Estudify! ¡El lugar donde los estudiantes encuentran las clases particulares que estaban buscando!" />
+			value="¡Bienvenidos a Educafy! ¡El lugar donde los estudiantes encuentran las clases particulares que estaban buscando!" />
 		<property name="countryPhoneCode" value="+34" />
 		<property name="spamWords">
 			<list>
@@ -1030,6 +1030,7 @@
 		</property>
 		<property name="maxFinderResults" value="10" />
 		<property name="finderTime" value="1" />
+		<property name="rebranding" value="false" />
 		<property name="vat" value="0.21" />
 		<property name="creditCardMake">
 			<list>

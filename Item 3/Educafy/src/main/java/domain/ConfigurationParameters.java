@@ -27,6 +27,7 @@ public class ConfigurationParameters extends DomainEntity {
 	private String				welcomeMessageEn;
 	private String				countryPhoneCode;
 	private Collection<String>	spamWords;
+	private boolean				rebranding;
 	private int					maxFinderResults;
 	private int					finderTime;
 	private double				vat;
@@ -75,7 +76,6 @@ public class ConfigurationParameters extends DomainEntity {
 		this.welcomeMessageEn = welcomeMessageEn;
 	}
 
-	//TODO
 	@Pattern(regexp = "^[+][1-9]{0,2}")
 	public String getCountryPhoneCode() {
 		return this.countryPhoneCode;
@@ -102,6 +102,14 @@ public class ConfigurationParameters extends DomainEntity {
 
 	public void setMaxFinderResults(final int maxFinderResults) {
 		this.maxFinderResults = maxFinderResults;
+	}
+
+	public boolean isRebranding() {
+		return this.rebranding;
+	}
+
+	public void setRebranding(final boolean rebranding) {
+		this.rebranding = rebranding;
 	}
 
 	@Range(min = 1, max = 24)
