@@ -32,9 +32,15 @@
 			<acme:button url="reservation/student/display.do?reservationId=${row.id}" name="display" code="reservation.display"/>
 		</display:column>
 		<display:column>
-			<acme:button url="reservation/student/edit.do?reservationId=${row.id}" name="edit" code="reservation.reviewing"/>
+		<jstl:if test="${row.status eq 'ACCEPTED' }">
+			<acme:button url="reservation/student/edit.do?reservationId=${row.id}" name="edit" code="reservation.reviewing"/>		
+		</jstl:if>
+		<jstl:if test="${row.status eq 'ACCEPTED' }">
 			<acme:button url="reservation/student/final.do?reservationId=${row.id}" name="final" code="reservation.final"/>
-			<acme:button url="reservation/student/delete.do?reservationId=${row.id}" name="delete" code="reservation.delete"/>		
+		</jstl:if>
+		<jstl:if test="${row.status eq 'FINAL' }">
+			<acme:button url="reservation/student/delete.do?reservationId=${row.id}" name="delete" code="reservation.delete"/>				
+		</jstl:if>
 		</display:column>
 	</security:authorize>
 	
@@ -43,9 +49,18 @@
 			<acme:button url="reservation/teacher/display.do?reservationId=${row.id}" name="display" code="reservation.display"/>
 		</display:column>
 		<display:column>
+		<jstl:if test="${row.status eq 'PENDING' }">
 			<acme:button url="reservation/teacher/accepted.do?reservationId=${row.id}" name="accepted" code="reservation.accepted"/>
 			<acme:button url="reservation/teacher/edit.do?reservationId=${row.id}" name="edit" code="reservation.rejected"/>			
-		</display:column>
+		</jstl:if>
+		<jstl:if test="${row.status eq 'ACCEPTED' }">
+			<acme:button url="reservation/teacher/edit.do?reservationId=${row.id}" name="edit" code="reservation.rejected"/>			
+		</jstl:if>
+		<jstl:if test="${row.status eq 'REVIEWING' }">
+			<acme:button url="reservation/teacher/accepted.do?reservationId=${row.id}" name="accepted" code="reservation.accepted"/>
+			<acme:button url="reservation/teacher/edit.do?reservationId=${row.id}" name="edit" code="reservation.rejected"/>			
+		</jstl:if>
+	</display:column>
 	</security:authorize>
 
 </display:table>
