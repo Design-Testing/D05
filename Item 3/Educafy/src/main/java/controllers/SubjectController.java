@@ -89,7 +89,7 @@ public class SubjectController extends AbstractController {
 				this.subjectService.save(subject);
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(subject, "folder.commit.error");
+				res = this.createEditModelAndView(subject, "general.commit.error");
 			}
 
 		return res;
