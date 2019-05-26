@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.TimePeriodRepository;
 import domain.Reservation;
+import domain.Teacher;
 import domain.TimePeriod;
 
 @Service
@@ -19,6 +20,9 @@ public class TimePeriodService {
 
 	@Autowired
 	private TimePeriodRepository	timePeriodRepository;
+
+	@Autowired
+	private TeacherService			teacherService;
 
 
 	public TimePeriod create() {
@@ -62,8 +66,16 @@ public class TimePeriodService {
 		return res;
 	}
 
+
+	public Collection<TimePeriod> findTimePeriodsByTeacher(final int teacherId) {
+		Collection<TimePeriod> res;
+		final Teacher teacher = this.teacherService.findOne(teacherId);
+		res = this.timePeriodRepository.findTimePeriodsByTeacher(teacher.getUserAccount().getId());
+		return res;
+  }
 	public void deleteInBatch(final Collection<TimePeriod> timePeriods) {
 		this.timePeriodRepository.deleteInBatch(timePeriods);
+
 	}
 
 }

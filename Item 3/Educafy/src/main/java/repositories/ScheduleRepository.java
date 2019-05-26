@@ -16,4 +16,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
 	@Query("select r from Reservation r join r.lesson l where l.id=?1")
 	public Collection<Reservation> findAllReservationByLesson(int lessonId);
 
+	@Query("select s from Schedule s where s.teacher.userAccount.id=?1")
+	public Schedule findeScheduleByTeacher(int teacherUAId);
+
 }

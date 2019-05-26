@@ -9,27 +9,29 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="finder/rooky/edit.do" modelAttribute="finder" method="POST">
-
-    
+<form:form action="finder/student/edit.do" modelAttribute="finder" method="POST">
     <form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<form:hidden path="positions"/>
+	<form:hidden path="lessons"/>
 	<form:hidden path="creationDate"/>
 	
-	<acme:textbox code="finder.keyword" path="keyword"/>
-	<acme:numberbox code="finder.min.salary" path="minSalary" min="0"/>
-	<acme:numberbox code="finder.max.salary" path="maxSalary" min="0"/>
-	<acme:textbox code="finder.minDate" path="minDeadline" placeholder="yyyy-MM-dd HH:mm"/>
-	<acme:textbox code="finder.maxDate" path="maxDeadline" placeholder="yyyy-MM-dd HH:mm"/>
-	<br>
-	<jstl:if test="${salnul}">
-		<spring:message code="finder.n.salary" />
-	</jstl:if>
-	<jstl:if test="${deadnul}">
-		<spring:message code="finder.n.deadline" />
-	</jstl:if>
+	<acme:textbox code="finder.keyword" path="keyword"/><br>
+	<form:label path="subjectLevel">
+		<spring:message code="finder.subjectLevel" />: </form:label>
+	<form:select path="subjectLevel">
+		<form:options path="make" items="${subjectLevels}" />
+	</form:select>
+	<form:errors cssClass="error" path="subjectLevel" />
 	<br><br>
+	<form:label path="subjectName">
+		<spring:message code="finder.subjectName" />: </form:label>
+	<form:select path="subjectName">
+		<form:options path="subjectName" items="${subjectNames}" />
+	</form:select>
+	<form:errors cssClass="error" path="subjectName" />
+	<br><br>
+	<acme:textbox code="finder.teacherName" path="teacherName"/><br>
+	
 	<input type="submit" name="save" value="<spring:message code="finder.search" />" />
 	<input type="submit" name="clear" value="<spring:message code="finder.clear" />" />
 	<br>
@@ -38,24 +40,13 @@
 	<br>
 	
 	
-<display:table name="${finder.positions}" id="row" requestURI="/finder/rooky/edit.do" pagesize="15" class="displaytag">
-	<display:column property="title" titleKey="position.title" />
-	
-	<display:column property="ticker" titleKey="position.ticker" />
-
-	<acme:dataTableColumn code="position.deadline" property="deadline" />
-	
-	<display:column titleKey="position.company">
-		<jstl:out value="${row.company.commercialName}" />
-		
-	</display:column>
+<display:table name="${finder.lessons}" id="row" requestURI="/finder/student/edit.do" pagesize="15" class="displaytag">
+	<display:column property="title" titleKey="lesson.title" />
+	<display:column property="ticker" titleKey="lesson.ticker" />
 	
 	<display:column>
-		<acme:link url="position${rolURL}/display.do?positionId=${row.id}"
-			code="position.display" />
+		<acme:link url="lesson${rolURL}/display.do?lessonId=${row.id}"
+			code="lesson.display" />
 	</display:column>
-	
-	
 </display:table>
-		
 </form:form>

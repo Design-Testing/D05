@@ -223,4 +223,28 @@ public class LessonService {
 		return res;
 	}
 
+	public Collection<Lesson> findLessons(final String keyword, final String subjectLevel, final String subjectName, final String teacherName) {
+		final Collection<Lesson> res = this.lessonRepository.findLessons(keyword, subjectLevel, subjectName, teacherName);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfLessonsPerTeacher() {
+		final Double[] res = this.lessonRepository.getStatisticsOfLessonsPerTeacher();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfLessonPrice() {
+		final Double[] res = this.lessonRepository.getStatisticsOfLessonPrice();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfReservationPerLesson() {
+		final Double[] res = this.lessonRepository.getStatisticsOfReservationPerLesson();
+		Assert.notNull(res);
+		return res;
+	}
+
 }

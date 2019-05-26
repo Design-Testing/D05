@@ -26,9 +26,9 @@
 		<put-attribute name="body" value="/views/teacher/display.jsp" />
 	</definition>
 	
-	<definition name="teacher/display2" extends="master.page">	
+	<definition name="teacher/displayTabla" extends="master.page">	
 		<put-attribute name="title" value="Profesor: Mostrar" />
-		<put-attribute name="body" value="/views/teacher/display2.jsp" />
+		<put-attribute name="body" value="/views/teacher/displayTabla.jsp" />
 	</definition>
 	
 	<definition name="teacher/list" extends="master.page">	

@@ -92,7 +92,6 @@ public class TeacherController extends AbstractController {
 			//			result.addObject("curriculum", curriculum);
 			result.addObject("assesments", assesments);
 			//			result.addObject("comments", comments);
-			result.addObject("displayButtons", true);
 		} else
 			result = new ModelAndView("redirect:misc/403");
 
@@ -175,6 +174,16 @@ public class TeacherController extends AbstractController {
 				result.addObject("actorForm", actorForm);
 			}
 		result.addObject("countryPhoneCode", this.configurationParametersService.find().getCountryPhoneCode());
+		return result;
+	}
+
+	//list all teachers
+	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public ModelAndView listAll() {
+		ModelAndView result;
+		result = new ModelAndView("curriculum/listByTeachers");
+		final Collection<Teacher> teachers = this.teacherService.findAll();
+		result.addObject("teachers", teachers);
 		return result;
 	}
 

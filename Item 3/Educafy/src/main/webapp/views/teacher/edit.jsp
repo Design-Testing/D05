@@ -71,7 +71,6 @@
 	</div>
 	
 	<acme:textbox code="teacher.edit.address" path="address" />
-	<acme:numberbox code="teacher.edit.vat" path="vat" min="0" max="1"/>
 	
 	<br/>
 
