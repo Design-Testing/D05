@@ -23,9 +23,25 @@
 	<bean class="converters.TeacherToStringConverter"/>
 	<bean class="converters.StringToTeacherConverter"/>
 	
+	<!-- STUDENT -->
+	<bean class="converters.StudentToStringConverter"/>
+	<bean class="converters.StringToStudentConverter"/>
+	
 	<!-- LESSON -->
 	<bean class="converters.LessonToStringConverter"/>
 	<bean class="converters.StringToLessonConverter"/>
+	
+	<!-- RESERVATION -->
+	<bean class="converters.ReservationToStringConverter"/>
+	<bean class="converters.StringToReservationConverter"/>
+	
+	<!-- EXAM -->
+	<bean class="converters.ExamToStringConverter"/>
+	<bean class="converters.StringToExamConverter"/>
+	
+	<!-- QUESTION -->
+	<bean class="converters.QuestionToStringConverter"/>
+	<bean class="converters.StringToQuestionConverter"/>
 	
 	<!-- ASSESMENT -->
 	<bean class="converters.AssesmentToStringConverter"/>
@@ -63,6 +79,10 @@
 	<!-- SUBJECT -->
 	<bean class="converters.SubjectToStringConverter"/>
 	<bean class="converters.StringToSubjectConverter"/>
+	
+	<!-- CREDIT CARD -->
+	<bean class="converters.CreditCardToStringConverter"/>
+	<bean class="converters.StringToCreditCardConverter"/>
 	
 	
 		

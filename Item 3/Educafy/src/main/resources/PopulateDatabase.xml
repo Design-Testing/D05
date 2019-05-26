@@ -1413,12 +1413,12 @@
 	</bean>
 
 	<bean id="reservation2" class="domain.Reservation">
-		<property name="status" value="PENDING" />
+		<property name="status" value="ACCEPTED" />
 		<property name="moment" value="2019/05/11 20:30" />
-		<property name="explanation" value="Explanation of Reservation 2" />
+		<property name="explanation" value="" />
 		<property name="cost" value="15.5" />
 		<property name="hoursWeek" value="3" />
-		<property name="student" ref="student2" />
+		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson2" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="exams">

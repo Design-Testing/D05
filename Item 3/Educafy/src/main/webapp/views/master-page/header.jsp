@@ -48,8 +48,14 @@
 		<security:authorize access="hasRole('TEACHER')">
 			<li><a href="lesson/teacher/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			<li><a href="assesment/teacher/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
+
 			<li><a href="schedule/teacher/mySchedule.do"><spring:message code="master.page.assesment.mySchedule" /></a></li>
 			<li><a href="curriculum/display.do"><spring:message code="master.page.my.curriculum" /></a></li>
+
+			<!-- RESERVATION -->
+			<li><a href="reservation/teacher/myReservations.do"><spring:message code="master.page.reservation.myReservations" /></a></li>
+			
+
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
@@ -60,7 +66,22 @@
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			<li><a href="finder/student/edit.do"><spring:message code="master.page.finder.student.edit" /></a></li>
 			<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
+
 			<li><a href="creditCard/student/list.do"><spring:message code="master.page.student.creditCard.list" /></a></li>
+
+			<!-- RESERVATION -->
+			<li><a href="reservation/student/myReservations.do"><spring:message code="master.page.reservation.myReservations" /></a></li>
+			
+		</security:authorize>
+		
+		<!-- ========================================================================================================= -->
+		<!-- ========================================  STUDENT  ================================================ -->
+		<!-- ========================================================================================================= -->
+		
+		<security:authorize access="hasRole('STUDENT')">
+			<li><a href="creditCard/student/list.do"><spring:message
+								code="master.page.student.creditCard.list" /></a></li>
+
 		</security:authorize>
 		
 		<!-- ========================================================================================================= -->
