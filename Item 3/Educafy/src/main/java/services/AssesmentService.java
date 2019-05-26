@@ -145,4 +145,8 @@ public class AssesmentService {
 
 		return result;
 	}
+
+	public void flush() {
+		this.assesmentRepository.flush();
+	}
 }
