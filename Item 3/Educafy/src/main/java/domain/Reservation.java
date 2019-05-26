@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -16,7 +17,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,7 +37,7 @@ public class Reservation extends DomainEntity {
 	private Collection<Exam>	exams;
 
 
-	@Pattern(regexp = "^(PENDING|APPROVED|REVIEWING|REJECTED|FINAL)$")
+	@Pattern(regexp = "^(PENDING|ACCEPTED|REVIEWING|REJECTED|FINAL)$")
 	public String getStatus() {
 		return this.status;
 	}
@@ -57,7 +57,6 @@ public class Reservation extends DomainEntity {
 		this.moment = moment;
 	}
 
-	@NotBlank
 	public String getExplanation() {
 		return this.explanation;
 	}
@@ -112,7 +111,7 @@ public class Reservation extends DomainEntity {
 		this.creditCard = creditCard;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Exam> getExams() {
 		return this.exams;
 	}

@@ -92,7 +92,6 @@ public class TeacherController extends AbstractController {
 			//			result.addObject("curriculum", curriculum);
 			result.addObject("assesments", assesments);
 			//			result.addObject("comments", comments);
-			result.addObject("displayButtons", true);
 		} else
 			result = new ModelAndView("redirect:misc/403");
 

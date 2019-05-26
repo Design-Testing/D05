@@ -282,11 +282,6 @@ public class ActorService {
 				return false;
 		} else if (!a1.getEmail().equals(a2.getEmail()))
 			return false;
-		if (a1.getVat() == null) {
-			if (a2.getVat() != null)
-				return false;
-		} else if (!a1.getVat().equals(a2.getVat()))
-			return false;
 		if (a1.getName() == null) {
 			if (a2.getName() != null)
 				return false;

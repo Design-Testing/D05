@@ -31,7 +31,6 @@ function generatePDF(){
 	doc.text('<spring:message code="administrator.edit.phone"/> : <jstl:out value="${administrator.phone}"/>', 10, 60)
 	doc.text('<spring:message code="administrator.edit.email"/> : <jstl:out value="${administrator.email}"/>', 10, 70)
 	doc.text('<spring:message code="administrator.edit.address"/> : <jstl:out value="${administrator.address}"/>', 10, 80)
-	doc.text('<spring:message code="administrator.edit.vat"/> : <jstl:out value="${administrator.vat}"/>', 10, 90)
 	doc.save('<spring:message code="display.document.fileName"/>.pdf')
 }
 function deletePersonalData(){
@@ -52,7 +51,6 @@ function deletePersonalData(){
 <acme:display code="administrator.edit.phone" value="${administrator.phone}"/>
 <acme:display code="administrator.edit.email" value="${administrator.email}"/>
 <acme:display code="administrator.edit.address" value="${administrator.address}"/>
-<acme:display code="administrator.edit.vat" value="${administrator.vat}"/>
 
 
 <br>

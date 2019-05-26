@@ -66,11 +66,16 @@ public class TimePeriodService {
 		return res;
 	}
 
+
 	public Collection<TimePeriod> findTimePeriodsByTeacher(final int teacherId) {
 		Collection<TimePeriod> res;
 		final Teacher teacher = this.teacherService.findOne(teacherId);
 		res = this.timePeriodRepository.findTimePeriodsByTeacher(teacher.getUserAccount().getId());
 		return res;
+  }
+	public void deleteInBatch(final Collection<TimePeriod> timePeriods) {
+		this.timePeriodRepository.deleteInBatch(timePeriods);
+
 	}
 
 }

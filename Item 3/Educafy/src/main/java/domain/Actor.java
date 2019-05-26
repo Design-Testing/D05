@@ -11,13 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
@@ -34,7 +32,6 @@ public class Actor extends DomainEntity {
 	private String				email;
 	private String				phone;
 	private String				address;
-	private Double				vat;
 	private Boolean				spammer;
 
 	//Relational attributes
@@ -124,17 +121,6 @@ public class Actor extends DomainEntity {
 
 	public void setSpammer(final Boolean spammer) {
 		this.spammer = spammer;
-	}
-
-	@NotNull
-	@Range(min = 0, max = 0)
-	@Digits(integer = 1, fraction = 2)
-	public Double getVat() {
-		return this.vat;
-	}
-
-	public void setVat(final Double vat) {
-		this.vat = vat;
 	}
 
 	@Override

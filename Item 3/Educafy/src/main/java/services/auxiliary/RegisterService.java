@@ -175,7 +175,6 @@ public class RegisterService {
 		result.setPhone(actor.getPhone());
 		result.setPhoto(actor.getPhoto());
 		result.setSurname(actor.getSurname());
-		result.setVat(actor.getVat());
 		result.setVersion(actor.getVersion());
 		// CreditCard
 

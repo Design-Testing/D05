@@ -113,7 +113,6 @@ public class CertifierService {
 		principal.setPhone(null);
 		principal.setPhoto(null);
 		principal.setSpammer(false);
-		principal.setVat(0.0);
 		final Authority ban = new Authority();
 		ban.setAuthority(Authority.BANNED);
 		principal.getUserAccount().getAuthorities().add(ban);
@@ -137,7 +136,6 @@ public class CertifierService {
 			certifier.setPhone(actorForm.getPhone());
 			certifier.setEmail(actorForm.getEmail());
 			certifier.setAddress(actorForm.getAddress());
-			certifier.setVat(actorForm.getVat());
 			certifier.setVersion(actorForm.getVersion());
 			//			certifier.setScore(0.0);
 			//			certifier.setSpammer(false);
@@ -158,7 +156,6 @@ public class CertifierService {
 			certifier.setPhone(actorForm.getPhone());
 			certifier.setEmail(actorForm.getEmail());
 			certifier.setAddress(actorForm.getAddress());
-			certifier.setVat(actorForm.getVat());
 			certifier.setVersion(actorForm.getVersion());
 			final UserAccount account = this.userAccountService.findOne(certifier.getUserAccount().getId());
 			account.setUsername(actorForm.getUserAccountuser());
