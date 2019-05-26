@@ -814,7 +814,6 @@
 		<property name="email" value="teacher3@gmail.es" />
 		<property name="phone" value="+34647807400" />
 		<property name="address" value="Reina Mercedes" />
-		<property name="vat" value="0.21" />
 		<property name="userAccount" ref="userAccountTeacher3" />
 	</bean>
 
@@ -1399,7 +1398,7 @@
 	<bean id="reservation1" class="domain.Reservation">
 		<property name="status" value="PENDING" />
 		<property name="moment" value="2019/05/10 20:30" />
-		<property name="explanation" value="Explanation of Reservation 1" />
+		<property name="explanation" value="" />
 		<property name="cost" value="20.5" />
 		<property name="hoursWeek" value="5" />
 		<property name="student" ref="student1" />
@@ -1427,6 +1426,22 @@
 		</list>
 		</property>
 	</bean>
+	
+	<!-- <bean id="reservation3" class="domain.Reservation">
+		<property name="status" value="REVIEWING" />
+		<property name="moment" value="2019/05/11 20:30" />
+		<property name="explanation" value="No puedo dar clases los jueves" />
+		<property name="cost" value="15.5" />
+		<property name="hoursWeek" value="3" />
+		<property name="student" ref="student1" />
+		<property name="lesson" ref="lesson3" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="exams">
+		<list>
+		<ref bean="exam2" />
+		</list>
+		</property>
+	</bean> -->
 	
 		<!-- =================================================================== 
 		======= TimePeriod ========= =================================================================== -->
