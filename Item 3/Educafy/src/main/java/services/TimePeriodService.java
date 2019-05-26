@@ -62,4 +62,8 @@ public class TimePeriodService {
 		return res;
 	}
 
+	public void deleteInBatch(final Collection<TimePeriod> timePeriods) {
+		this.timePeriodRepository.deleteInBatch(timePeriods);
+	}
+
 }

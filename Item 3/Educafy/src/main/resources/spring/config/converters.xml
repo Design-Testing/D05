@@ -76,6 +76,10 @@
 	<bean class="converters.SubjectToStringConverter"/>
 	<bean class="converters.StringToSubjectConverter"/>
 	
+	<!-- CREDIT CARD -->
+	<bean class="converters.CreditCardToStringConverter"/>
+	<bean class="converters.StringToCreditCardConverter"/>
+	
 	
 		
 	</util:list>

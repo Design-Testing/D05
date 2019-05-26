@@ -20,6 +20,7 @@ import domain.Exam;
 import domain.Reservation;
 import domain.Student;
 import domain.Teacher;
+import domain.TimePeriod;
 
 @Service
 @Transactional
@@ -39,6 +40,9 @@ public class ReservationService {
 
 	@Autowired
 	private LessonService			lessonService;
+
+	@Autowired
+	private TimePeriodService		timePeriodService;
 
 	@Autowired
 	private Validator				validator;
@@ -135,10 +139,11 @@ public class ReservationService {
 		Assert.isTrue(reservation.getStatus().equals("FINAL"));
 		final Actor principal = this.actorService.findByPrincipal();
 		Assert.isTrue(this.belongsToTeacher(principal, reservation) || reservation.getStudent().equals(principal), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
+		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservation.getId());
 		final Reservation retrieved = this.findOne(reservation.getId());
+		this.timePeriodService.deleteInBatch(periods);
 		this.reservationRepository.delete(retrieved);
 	}
-
 	/* ========================= OTHER METHODS =========================== */
 
 	public Boolean belongsToTeacher(final Actor principal, final Reservation reservation) {
@@ -149,12 +154,12 @@ public class ReservationService {
 		final Reservation reservation = this.findOne(reservationId);
 		Assert.notNull(reservation);
 		final Student student = this.studentService.findByPrincipal();
-		final Reservation result;
+		//final Reservation result;
 		Assert.isTrue(reservation.getStudent().equals(student), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Pendiente debe de estar anteriormente Aceptada.");
 		reservation.setStatus("REVIEWING");
-		result = this.reservationRepository.save(reservation);
-		return result;
+		//result = this.reservationRepository.save(reservation);
+		return reservation;
 	}
 
 	public Reservation toAcceptedMode(final int reservationId) {

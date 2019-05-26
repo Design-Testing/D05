@@ -31,40 +31,21 @@
 		<display:column>
 			<acme:button url="reservation/student/display.do?reservationId=${row.id}" name="display" code="reservation.display"/>
 		</display:column>
-		<jstl:if test="${row.status eq 'ACCEPTED'}">
-			<display:column>
-				<acme:button url="reservation/student/reviewing.do?reservationId=${row.id}" name="reviewing" code="reservation.reviewing"/>
-				<acme:button url="reservation/student/final.do?reservationId=${row.id}" name="final" code="reservation.final"/>
-			</display:column>
-		</jstl:if>
-		<jstl:if test="${row.status eq 'FINAL'}">
-			<display:column>
-				<acme:button url="reservation/student/delete.do?reservationId=${row.id}" name="delete" code="reservation.delete"/>
-			</display:column>
-		</jstl:if>
+		<display:column>
+			<acme:button url="reservation/student/reviewing.do?reservationId=${row.id}" name="reviewing" code="reservation.reviewing"/>
+			<acme:button url="reservation/student/final.do?reservationId=${row.id}" name="final" code="reservation.final"/>
+			<acme:button url="reservation/student/delete.do?reservationId=${row.id}" name="delete" code="reservation.delete"/>		
+		</display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('TEACHER')">
 		<display:column>
 			<acme:button url="reservation/teacher/display.do?reservationId=${row.id}" name="display" code="reservation.display"/>
 		</display:column>
-		<jstl:if test="${row.status eq 'PENDING'}">
-			<display:column>
-				<acme:button url="reservation/teacher/accepted.do?reservationId=${row.id}" name="accepted" code="reservation.accepted"/>
-				<acme:button url="reservation/teacher/rejected.do?reservationId=${row.id}" name="rejected" code="reservation.rejected"/>			
-			</display:column>
-		</jstl:if>
-		<jstl:if test="${row.status eq 'ACCEPTED'}">
-			<display:column>
-				<acme:button url="reservation/teacher/rejected.do?reservationId=${row.id}" name="rejected" code="reservation.rejected"/>
-			</display:column>
-		</jstl:if>
-		<jstl:if test="${row.status eq 'REVIEWING'}">
-			<display:column>
-				<acme:button url="reservation/teacher/accepted.do?reservationId=${row.id}" name="accepted" code="reservation.accepted"/>
-				<acme:button url="reservation/teacher/rejected.do?reservationId=${row.id}" name="rejected" code="reservation.rejected"/>			
-			</display:column>
-		</jstl:if>
+		<display:column>
+			<acme:button url="reservation/teacher/accepted.do?reservationId=${row.id}" name="accepted" code="reservation.accepted"/>
+			<acme:button url="reservation/teacher/rejected.do?reservationId=${row.id}" name="rejected" code="reservation.rejected"/>			
+		</display:column>
 	</security:authorize>
 
 </display:table>

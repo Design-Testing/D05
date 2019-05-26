@@ -130,15 +130,15 @@ public class ReservationStudentController extends AbstractController {
 	@RequestMapping(value = "/reviewing", method = RequestMethod.GET)
 	public ModelAndView reviewingMode(@RequestParam final int reservationId) {
 		ModelAndView result;
-		final Reservation reservation = this.reservationService.findOne(reservationId);
+		Reservation reservation = this.reservationService.findOne(reservationId);
 
 		if (reservation == null) {
 			result = this.myReservations();
 			result.addObject("msg", "reservations.reviewing.error");
 		} else
 			try {
-				this.reservationService.toReviewingMode(reservationId);
-				result = this.myReservations();
+				reservation = this.reservationService.toReviewingMode(reservationId);
+				result = this.createEditModelAndView2(reservation);
 			} catch (final Throwable oops) {
 				String errormsg = "reservation.reviewing.error";
 				result = this.myReservations();
@@ -195,9 +195,20 @@ public class ReservationStudentController extends AbstractController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(final int reservationId) {
+		ModelAndView result;
 		final Reservation reservation = this.reservationService.findOne(reservationId);
-		this.reservationService.delete(reservation);
-		return this.myReservations();
+		try {
+			this.reservationService.delete(reservation);
+			result = this.myReservations();
+		} catch (final Throwable oops) {
+			String errormsg = "reservation.delete.error";
+			result = this.myReservations();
+			if (!reservation.getStatus().equals("FINAL"))
+				errormsg = "reservation.delete.no.final";
+			result.addObject("msg", errormsg);
+		}
+
+		return result;
 
 	}
 
