@@ -10,12 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ExamRepository;
-import security.Authority;
-import domain.Actor;
 import domain.Exam;
+import domain.Question;
 import domain.Reservation;
 import domain.Student;
-import domain.Teacher;
 
 @Service
 @Transactional
@@ -36,9 +34,14 @@ public class ExamService {
 	@Autowired
 	private ReservationService	reservationService;
 
+	@Autowired
+	private QuestionService		questionService;
+
 
 	public Exam create() {
 		final Exam exam = new Exam();
+		exam.setQuestions(new ArrayList<Question>());
+		exam.setStatus("PENDING");
 		return exam;
 	}
 
@@ -56,33 +59,33 @@ public class ExamService {
 		return res;
 	}
 
-	public Exam save(final Exam exam, final int reservationId) {
+	public Collection<Exam> findAllExamsByStudent(final int studentId) {
+		Collection<Exam> res = new ArrayList<>();
+		res = this.examRepository.findAllExamsByStudent(studentId);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Exam createSave(final Exam exam, final Reservation reservation) {
+		this.actorService.findByPrincipal();
 		Assert.notNull(exam);
-		Assert.isTrue(reservationId != 0);
-
-		final Actor ppal = this.actorService.findByPrincipal();
-		final Boolean isStudent = this.actorService.checkAuthority(ppal, Authority.STUDENT);
-		final Boolean isTeacher = this.actorService.checkAuthority(ppal, Authority.TEACHER);
-
-		final Reservation reservation = this.reservationService.findOne(reservationId);
 		final Exam result;
+		Assert.isTrue(exam.getId() == 0);
+		result = this.examRepository.save(exam);
+		final Collection<Exam> exams = reservation.getExams();
+		exams.add(result);
+		reservation.setExams(exams);
+		this.reservationService.save(reservation);
+		return result;
 
-		if (exam.getId() == 0) {
-			if (isTeacher) {
-				Assert.isTrue(this.teacherService.findTeacherByReservation(reservationId).equals(ppal), "No puede crear un examen en una reserva que no es suya.");
-				exam.setReservation(reservation);
-				exam.setStatus("PENDING");
-			}
-		} else {
-			Assert.isTrue(exam.getReservation().equals(reservation), "El examen que quiere actualizar no se corresponde con la reserva indicada.");
-			if (isStudent)
-				Assert.isTrue(reservation.getStudent().equals(ppal), "No puede actualizar un exam que no pertenece a una de sus reservas.");
-			else
-				Assert.isTrue(this.teacherService.findTeacherByReservation(reservationId).equals(ppal), "No puede actualizar un examen que no pertenece a una reserva suya.");
-		}
-
+	}
+	public Exam save(final Exam exam) {
+		Assert.notNull(exam);
+		final Exam result;
+		Assert.isTrue(exam.getId() != 0);
 		result = this.examRepository.save(exam);
 		return result;
+
 	}
 
 	public void delete(final Exam exam) {
@@ -97,13 +100,12 @@ public class ExamService {
 	public Exam toInprogressMode(final int examId) {
 		final Exam exam = this.findOne(examId);
 		Assert.notNull(exam);
-		final Teacher teacher = this.teacherService.findByPrincipal();
+		final Student student = this.studentService.findByPrincipal();
 		final Exam result;
-		final Reservation reservation = exam.getReservation();
-		Assert.isTrue(this.teacherService.findTeacherByReservation(reservation.getId()).equals(teacher), "No puede ejecutar ninguna acción sobre un examen que no le pertenece.");
-		Assert.isTrue(exam.getStatus().equals("PENDING"), "Para poner el estado de un examen en INPROGRESS debe de estar anteriormente en estado PENDING.");
+		Assert.isTrue(this.findAllExamsByStudent(student.getUserAccount().getId()).contains(exam), "No puede ejecutar ninguna acción sobre una exam que no le pertenece.");
+		Assert.isTrue(exam.getStatus().equals("PENDING"), "Para poner una position en FINAL MODE debe de estar anteriormente en DRAFT MODE.");
 		exam.setStatus("INPROGRESS");
-		result = this.save(exam, exam.getReservation().getId());
+		result = this.save(exam);
 		return result;
 	}
 
@@ -114,8 +116,10 @@ public class ExamService {
 		final Exam result;
 		Assert.isTrue(exam.getReservation().getStudent().equals(student), "No puede ejecutar ninguna acción sobre una exam que no le pertenece.");
 		Assert.isTrue(exam.getStatus().equals("INPROGRESS"), "Para poner el estado de un examen en SUBMITTED debe de estar anteriormente en estado INPROGRESS.");
+		Assert.isTrue(this.findAllExamsByStudent(student.getUserAccount().getId()).contains(exam), "No puede ejecutar ninguna acción sobre una exam que no le pertenece.");
+		Assert.isTrue(exam.getStatus().equals("INPROGRESS"), "Para poner una position en FINAL MODE debe de estar anteriormente en DRAFT MODE.");
 		exam.setStatus("SUBMITTED");
-		result = this.save(exam, exam.getReservation().getId());
+		result = this.save(exam);
 		return result;
 	}
 
@@ -125,9 +129,9 @@ public class ExamService {
 		Assert.notNull(exam.getScore());
 		this.teacherService.findByPrincipal();
 		final Exam result;
-		Assert.isTrue(exam.getStatus().equals("SUBMITTED"), "Para poner el estado de un examen en EVALUATED debe de estar anteriormente en estado SUBMITTED.");
+		Assert.isTrue(exam.getStatus().equals("SUBMITTED"), "Para poner una position en FINAL MODE debe de estar anteriormente en DRAFT MODE.");
 		exam.setStatus("EVALUATED");
-		result = this.save(exam, exam.getReservation().getId());
+		result = this.save(exam);
 		return result;
 	}
 

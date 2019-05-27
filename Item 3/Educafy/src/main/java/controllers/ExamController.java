@@ -1,9 +1,6 @@
 
 package controllers;
 
-import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 
@@ -19,13 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ExamService;
-import services.QuestionService;
 import services.ReservationService;
 import controllers.student.ReservationStudentController;
 import controllers.teacher.ReservationTeacherController;
 import domain.Actor;
 import domain.Exam;
-import domain.Question;
 import domain.Reservation;
 
 @Controller
@@ -47,9 +42,6 @@ public class ExamController extends AbstractController {
 	@Autowired
 	private ReservationTeacherController	reservationTeacherController;
 
-	@Autowired
-	private QuestionService					questionService;
-
 	final String							lang	= LocaleContextHolder.getLocale().getLanguage();
 
 
@@ -65,40 +57,18 @@ public class ExamController extends AbstractController {
 		return result;
 	}
 
-	// EDIT --------------------------------------------------------
+	// CREATESAVE --------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int examId) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "create")
+	public ModelAndView createSave(@Valid final Exam exam, @RequestParam final int reservationId, final BindingResult binding) {
 		ModelAndView result;
-		Exam exam;
-		exam = this.examService.findOne(examId);
-		if (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED"))
-			result = this.createEditModelAndView(exam);
-		else
-			result = new ModelAndView("redirect:misc/403");
-		return result;
-	}
-
-	// SAVE --------------------------------------------------------
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView createSave(@Valid final Exam exam, final BindingResult binding, final HttpServletRequest request) {
-		ModelAndView result;
-
-		String paramReservationId;
-		Integer reservationId;
-
-		paramReservationId = request.getParameter("reservationId");
-		reservationId = paramReservationId.isEmpty() ? null : Integer.parseInt(paramReservationId);
-
 		final Reservation reservation = this.reservationService.findOne(reservationId);
-
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(exam);
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
-				this.examService.save(exam, reservation.getId());
+				this.examService.createSave(exam, reservation);
 				result = this.display(exam.getId());
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(exam, "commit.exam.create.error");
@@ -117,23 +87,19 @@ public class ExamController extends AbstractController {
 		final ModelAndView result;
 		Exam exam;
 		final Actor principal;
-		final Collection<Question> questions;
-
 		exam = this.examService.findOne(examId);
 		principal = this.actorService.findByPrincipal();
-		questions = this.questionService.findQuestionsByExam(examId);
-
 		if (this.actorService.checkAuthority(principal, "STUDENT"))
 			exam = this.examService.toInprogressMode(examId);
-
 		result = new ModelAndView("exam/display");
 		result.addObject("exam", exam);
-		result.addObject("questions", questions);
+		result.addObject("questions", exam.getQuestions());
 		result.addObject("requestURI", "exam/display.do");
 		result.addObject("lang", this.lang);
 
 		return result;
 	}
+
 	// TO SUBMITTED --------------------------------------------------------
 
 	@RequestMapping(value = "/submitted", method = RequestMethod.GET)
@@ -175,6 +141,42 @@ public class ExamController extends AbstractController {
 			} catch (final Throwable oops) {
 				final String errormsg = "exam.evaluated.error";
 				result = this.createEditModelAndView(exam, errormsg);
+			}
+
+		return result;
+	}
+
+	// EDIT --------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int examId) {
+		ModelAndView result;
+		Exam exam;
+		exam = this.examService.findOne(examId);
+		if (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED"))
+			result = this.createEditModelAndView(exam);
+		else
+			result = new ModelAndView("redirect:misc/403");
+		return result;
+	}
+	// SAVE --------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Exam exam, final BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView(exam);
+			result.addObject("errors", binding.getAllErrors());
+		} else
+			try {
+				this.examService.save(exam);
+				result = this.display(exam.getId());
+			} catch (final ValidationException oops) {
+				result = this.createEditModelAndView(exam, "commit.exam.save.error");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(exam, "commit.exam.save.error");
+				result.addObject("errors", binding.getAllErrors());
 			}
 
 		return result;
