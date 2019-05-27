@@ -1,13 +1,10 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -17,10 +14,11 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class Exam extends DomainEntity {
 
-	private String					title;
-	private Double					score;
-	private Collection<Question>	questions;
-	private String					status;
+	private String		title;
+	private Double		score;
+	private String		status;
+
+	private Reservation	reservation;
 
 
 	@NotBlank
@@ -41,13 +39,13 @@ public class Exam extends DomainEntity {
 		this.score = score;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<Question> getQuestions() {
-		return this.questions;
+	@ManyToOne(optional = false)
+	public Reservation getReservation() {
+		return this.reservation;
 	}
 
-	public void setQuestions(final Collection<Question> questions) {
-		this.questions = questions;
+	public void setReservation(final Reservation reservation) {
+		this.reservation = reservation;
 	}
 
 	@NotBlank

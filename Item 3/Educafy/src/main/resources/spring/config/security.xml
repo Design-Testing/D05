@@ -82,19 +82,12 @@
  		
 
  		<!-- EXAM -->
- 		<security:intercept-url pattern="/exam/display.do" access="hasAnyRole('STUDENT','TEACHER')" /> 
- 		<security:intercept-url pattern="/exam/submitted.do" access="hasRole('STUDENT')" /> 
- 		<security:intercept-url pattern="/exam/edit.do" access="hasAnyRole('TEACHER','STUDENT')" /> 
- 		<security:intercept-url pattern="/exam/create.do" access="hasRole('TEACHER')" /> 
-		<security:intercept-url pattern="/exam/delete.do" access="hasRole('TEACHER')" />  		
- 		<security:intercept-url pattern="/exam/evaluated.do" access="hasRole('TEACHER')" /> 
+ 		<security:intercept-url pattern="/exam/student/**" access="hasRole('STUDENT')" /> 
+ 		<security:intercept-url pattern="/exam/teacher/**" access="hasRole('TEACHER')" /> 
  		
  		<!-- QUESTION -->
- 		<security:intercept-url pattern="/question/create.do" access="hasRole('TEACHER')" /> 
- 		<security:intercept-url pattern="/question/delete.do" access="hasRole('TEACHER')" /> 
- 		<security:intercept-url pattern="/question/edit.do" access="hasAnyRole('TEACHER','STUDENT')" /> 
-  		<security:intercept-url pattern="/question/display.do" access="hasAnyRole('STUDENT','TEACHER')" /> 
- 		<security:intercept-url pattern="/question/resolve.do" access="hasRole('STUDENT')" /> 
+ 		<security:intercept-url pattern="/question/teache/**" access="hasRole('TEACHER')" /> 
+ 		<security:intercept-url pattern="/question/student/**" access="hasRole('STUDENT')" /> 
  		
 
  		<!-- RESERVATION -->

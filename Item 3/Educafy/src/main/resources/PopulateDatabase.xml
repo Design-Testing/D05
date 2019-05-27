@@ -1268,45 +1268,25 @@
 		<property name="title" value="Title Exam 1" />
 		<property name="score" value="10.0" />
 		<property name="status" value="EVALUATED"/>
-		<property name="questions">
-			<list>
-				<ref bean="question1" />
-				<ref bean="question2" />
-			</list>
-		</property>
+		<property name="reservation" ref="reservation1"/>
 	</bean>
 
 	<bean id="exam2" class="domain.Exam">
 		<property name="title" value="Title Exam 2" />
 		<property name="status" value="SUBMITTED"/>
-		<property name="questions">
-			<list>
-				<ref bean="question3" />
-				<ref bean="question4" />
-			</list>
-		</property>
+		<property name="reservation" ref="reservation1"/>
 	</bean>
 
 	<bean id="exam3" class="domain.Exam">
 		<property name="title" value="Title Exam 3" />
 		<property name="status" value="PENDING"/>
-		<property name="questions">
-			<list>
-				<ref bean="question5" />
-				<ref bean="question6" />
-			</list>
-		</property>
+		<property name="reservation" ref="reservation2"/>
 	</bean>
 
 	<bean id="exam4" class="domain.Exam">
 		<property name="title" value="Title Exam 4" />
 		<property name="status" value="PENDING" />
-		<property name="questions">
-			<list>
-				<ref bean="question7" />
-				<ref bean="question8" />
-			</list>
-		</property>
+		<property name="reservation" ref="reservation2"/>
 	</bean>
 
 	<!-- =================================================================== 
@@ -1315,37 +1295,50 @@
 	<bean id="question1" class="domain.Question">
 		<property name="title" value="Question 1" />
 		<property name="answer" value="Answer 1" />
+		<property name="exam" ref="exam1"/>
 	</bean>
 
 	<bean id="question2" class="domain.Question">
 		<property name="title" value="Question 2" />
 		<property name="answer" value="Answer 2" />
+		<property name="exam" ref="exam1"/>
 	</bean>
 
 	<bean id="question3" class="domain.Question">
 		<property name="title" value="Question 3" />
 		<property name="answer" value="Answer 3" />
+		<property name="exam" ref="exam1"/>
 	</bean>
 
 	<bean id="question4" class="domain.Question">
 		<property name="title" value="Question 4" />
 		<property name="answer" value="Answer 4" />
+		<property name="exam" ref="exam1"/>
 	</bean>
 
 	<bean id="question5" class="domain.Question">
 		<property name="title" value="Question 5" />
+		<property name="answer" value="Answer 5" />
+		<property name="exam" ref="exam2"/>
+		
 	</bean>
 
 	<bean id="question6" class="domain.Question">
 		<property name="title" value="Question 6" />
+		<property name="answer" value="Answer 6" />
+		<property name="exam" ref="exam2"/>
 	</bean>
 
 	<bean id="question7" class="domain.Question">
 		<property name="title" value="Question 7" />
+		<property name="answer" value="Answer 7" />
+		<property name="exam" ref="exam2"/>
 	</bean>
 
 	<bean id="question8" class="domain.Question">
 		<property name="title" value="Question 8" />
+		<property name="answer" value="Answer 8" />
+		<property name="exam" ref="exam2"/>
 	</bean>
 
 
@@ -1404,13 +1397,6 @@
 		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson1" />
 		<property name="creditCard" ref="creditCard1" />
-		<property name="exams">
-		<list>
-			<ref bean="exam1" />
-			<ref bean="exam3" />
-			<ref bean="exam4" />
-		</list>
-		</property>
 	</bean>
 
 	<bean id="reservation2" class="domain.Reservation">
@@ -1422,28 +1408,7 @@
 		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson2" />
 		<property name="creditCard" ref="creditCard2" />
-		<property name="exams">
-		<list>
-		<ref bean="exam2" />
-		</list>
-		</property>
 	</bean>
-	
-	<!-- <bean id="reservation3" class="domain.Reservation">
-		<property name="status" value="REVIEWING" />
-		<property name="moment" value="2019/05/11 20:30" />
-		<property name="explanation" value="No puedo dar clases los jueves" />
-		<property name="cost" value="15.5" />
-		<property name="hoursWeek" value="3" />
-		<property name="student" ref="student1" />
-		<property name="lesson" ref="lesson3" />
-		<property name="creditCard" ref="creditCard2" />
-		<property name="exams">
-		<list>
-		<ref bean="exam2" />
-		</list>
-		</property>
-	</bean> -->
 	
 		<!-- =================================================================== 
 		======= TimePeriod ========= =================================================================== -->
