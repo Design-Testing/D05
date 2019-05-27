@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ExamService;
 import services.ReservationService;
+import services.ScheduleService;
 import services.TeacherService;
 import services.TimePeriodService;
 import controllers.AbstractController;
@@ -41,6 +42,9 @@ public class ReservationTeacherController extends AbstractController {
 
 	@Autowired
 	private TimePeriodService	timePeriodService;
+
+	@Autowired
+	private ScheduleService		scheduleService;
 
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
@@ -86,6 +90,29 @@ public class ReservationTeacherController extends AbstractController {
 		result.addObject("rol", "teacher");
 		result.addObject("requestURI", "reservation/teacher/myReservations.do");
 		result.addObject("principalID", this.teacherService.findByPrincipal().getId());
+
+		return result;
+	}
+
+	// SUGGEST --------------------------------------------------------
+
+	@RequestMapping(value = "/suggest", method = RequestMethod.GET)
+	public ModelAndView suggest(@RequestParam final int reservationId) {
+		ModelAndView result;
+		final Reservation reservation = this.reservationService.findOne(reservationId);
+
+		if (reservation == null) {
+			result = this.createEditModelAndView(reservation);
+			result.addObject("msg", "lesson.final.mode.error");
+		} else
+			try {
+				this.scheduleService.suggestTimePeriod(reservationId);
+				result = this.display(reservationId);
+			} catch (final Throwable oops) {
+				final String errormsg = "lesson.final.mode.error";
+				result = this.createEditModelAndView(reservation);
+				result.addObject(errormsg);
+			}
 
 		return result;
 	}

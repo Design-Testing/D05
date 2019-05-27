@@ -36,6 +36,10 @@ img.resize {
 
 <h3><spring:message code="reservation.timePeriod"/></h3>
 
+<security:authorize access="hasRole('TEACHER')">
+	<acme:button url="reservation/teacher/suggest.do?reservationId=${reservation.id}" name="suggest" code="reservation.suggest.timePeriods"/>
+</security:authorize>
+
 <display:table name="periods"  id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
