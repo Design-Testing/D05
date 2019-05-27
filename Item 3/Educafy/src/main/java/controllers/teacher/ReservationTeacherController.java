@@ -65,10 +65,8 @@ public class ReservationTeacherController extends AbstractController {
 		result.addObject("reservation", reservation);
 		result.addObject("hoursWeek", reservation.getHoursWeek());
 		result.addObject("periods", periods);
-
 		result.addObject("exams", exams);
 		result.addObject("sizeTimePeriod", sizeTimePeriod);
-
 		result.addObject("requestURI", "reservation/teacher/display.do");
 		result.addObject("studentId", reservation.getStudent().getId());
 		result.addObject("rol", "teacher");
