@@ -13,8 +13,9 @@
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="score"/>
-	<form:hidden path="questions"/>
 	<form:hidden path="status"/>
+	<form:hidden path="reservation"/>
+	<form:hidden path="questions"/>
 	<acme:textbox code="exam.title" path="title"/>
 	<br>
 	<input type="submit" name="create"
@@ -28,8 +29,10 @@
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="score"/>
-	<form:hidden path="questions"/>
+	<form:hidden path="reservation"/>
 	<form:hidden path="status"/>
+		<form:hidden path="questions"/>
+	
 	<acme:textbox code="exam.title" path="title"/>
 	<br>
 	<input type="submit" name="save"
@@ -43,8 +46,10 @@
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="title"/>
-	<form:hidden path="questions"/>
+	<form:hidden path="reservation"/>
 	<form:hidden path="status"/>
+		<form:hidden path="questions"/>
+	
 	<acme:display code="exam.title" value="${exam.title}"/>
 	<br>
 	<acme:textbox code="exam.score" path="score"/>

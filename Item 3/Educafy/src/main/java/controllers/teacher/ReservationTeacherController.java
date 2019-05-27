@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ExamService;
 import services.ReservationService;
 import services.TeacherService;
 import services.TimePeriodService;
 import controllers.AbstractController;
+import domain.Exam;
 import domain.Reservation;
 import domain.Teacher;
 import domain.TimePeriod;
@@ -35,6 +37,9 @@ public class ReservationTeacherController extends AbstractController {
 	private TeacherService		teacherService;
 
 	@Autowired
+	private ExamService			examService;
+
+	@Autowired
 	private TimePeriodService	timePeriodService;
 
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
@@ -46,19 +51,22 @@ public class ReservationTeacherController extends AbstractController {
 	public ModelAndView display(@RequestParam final int reservationId) {
 		final ModelAndView result;
 		final Reservation reservation;
-		final Teacher teacher;
 
 		reservation = this.reservationService.findOne(reservationId);
+
 		teacher = this.teacherService.findByPrincipal();
 		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
 		final Integer sizeTimePeriod = periods.size();
 
+
+		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
+		final Collection<Exam> exams = this.examService.findAllExamsByReservation(reservationId);
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);
 		result.addObject("hoursWeek", reservation.getHoursWeek());
 		result.addObject("periods", periods);
+		result.addObject("exams", exams);
 		result.addObject("sizeTimePeriod", sizeTimePeriod);
-		result.addObject("exams", reservation.getExams());
 		result.addObject("requestURI", "reservation/teacher/display.do");
 		result.addObject("studentId", reservation.getStudent().getId());
 		result.addObject("rol", "teacher");
@@ -66,7 +74,6 @@ public class ReservationTeacherController extends AbstractController {
 
 		return result;
 	}
-
 	// LIST --------------------------------------------------------
 
 	@RequestMapping(value = "/myReservations", method = RequestMethod.GET)
@@ -98,7 +105,7 @@ public class ReservationTeacherController extends AbstractController {
 			result.addObject("msg", "reservations.accepted.error");
 		} else
 			try {
-				this.reservationService.toAcceptedMode(reservationId);
+				this.reservationService.toAcceptedMode(reservation);
 				result = this.myReservations();
 			} catch (final Throwable oops) {
 				String errormsg = "reservation.accepted.error";
@@ -122,7 +129,7 @@ public class ReservationTeacherController extends AbstractController {
 			result.addObject("msg", "reservations.rejected.error");
 		} else
 			try {
-				reservation = this.reservationService.toRejectedMode(reservation.getId());
+				reservation = this.reservationService.toRejectedMode(reservation);
 				result = new ModelAndView("redirect:myReservations.do");
 			} catch (final Throwable oops) {
 				final String errormsg = "reservation.rejected.error";

@@ -14,7 +14,6 @@ import org.springframework.validation.Validator;
 import repositories.ReservationRepository;
 import security.Authority;
 import domain.Actor;
-import domain.Exam;
 import domain.Reservation;
 import domain.Student;
 import domain.Teacher;
@@ -40,6 +39,9 @@ public class ReservationService {
 	private LessonService			lessonService;
 
 	@Autowired
+	private ExamService				examService;
+
+	@Autowired
 	private TimePeriodService		timePeriodService;
 
 	@Autowired
@@ -53,7 +55,6 @@ public class ReservationService {
 		final Reservation reservation = new Reservation();
 		final Student principal = this.studentService.findByPrincipal();
 		reservation.setStudent(principal);
-		reservation.setExams(new ArrayList<Exam>());
 		reservation.setStatus("PENDING");
 		final Date moment = new Date(System.currentTimeMillis() - 1);
 		reservation.setMoment(moment);
@@ -139,6 +140,7 @@ public class ReservationService {
 		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservation.getId());
 		final Reservation retrieved = this.findOne(reservation.getId());
 		this.timePeriodService.deleteInBatch(periods);
+		this.examService.deleteInBatch(this.examService.findAllExamsByReservation(reservation.getId()));
 		this.reservationRepository.delete(retrieved);
 		this.messageService.notifyReservationDeleted(retrieved);
 	}
@@ -148,20 +150,18 @@ public class ReservationService {
 		return this.lessonService.findAllLessonsByTeacher(principal.getUserAccount().getId()).contains(reservation.getLesson());
 	}
 
-	public Reservation toReviewingMode(final int reservationId) {
-		final Reservation reservation = this.findOne(reservationId);
+	public Reservation toReviewingMode(final Reservation reservation) {
 		Assert.notNull(reservation);
 		final Student student = this.studentService.findByPrincipal();
 		final Reservation result;
 		Assert.isTrue(reservation.getStudent().equals(student), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Pendiente debe de estar anteriormente Aceptada.");
 		reservation.setStatus("REVIEWING");
-		result = this.reservationRepository.save(reservation);
+		result = this.save(reservation);
 		return reservation;
 	}
 
-	public Reservation toAcceptedMode(final int reservationId) {
-		final Reservation reservation = this.findOne(reservationId);
+	public Reservation toAcceptedMode(final Reservation reservation) {
 		Assert.notNull(reservation);
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Reservation result;
@@ -170,19 +170,18 @@ public class ReservationService {
 		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("REVIEWING"), "Esta Reserva no puede ser aceptada.");
 		Assert.isTrue(periods.size() == reservation.getHoursWeek(), "Una reserva no puede ser aceptada si no tiene los mismo timePeriods que hoursWeek solicitadas. ");
 		reservation.setStatus("ACCEPTED");
-		result = this.reservationRepository.save(reservation);
+		result = this.save(reservation);
 		return result;
 	}
 
-	public Reservation toRejectedMode(final int reservationId) {
-		final Reservation reservation = this.findOne(reservationId);
+	public Reservation toRejectedMode(final Reservation reservation) {
 		Assert.notNull(reservation);
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Reservation result;
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(teacher.getUserAccount().getId()).contains(reservation.getLesson()), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("ACCEPTED") || reservation.getStatus().equals("REVIEWING"), "Para poner una Reserva en Rechaza debe de estar anteriormente Aceptada o Pendiente.");
 		reservation.setStatus("REJECTED");
-		result = this.reservationRepository.save(reservation);
+		result = this.save(reservation);
 		return reservation;
 	}
 
@@ -194,7 +193,7 @@ public class ReservationService {
 		Assert.isTrue(reservation.getStudent().equals(student), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Final debe de estar anteriormente Aceptada.");
 		reservation.setStatus("FINAL");
-		result = this.reservationRepository.save(reservation);
+		result = this.save(reservation);
 		return result;
 	}
 

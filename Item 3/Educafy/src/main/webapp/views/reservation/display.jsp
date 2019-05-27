@@ -64,38 +64,45 @@ img.resize {
 	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
 </jstl:if>
 <br><br>
-
+<h3><spring:message code="reservation.exams"/></h3>
 	<display:table name="exams" id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
 		
 		<display:column property="title" titleKey="exam.title" />
 		<display:column property="status" titleKey="exam.status" />
-		<jstl:if test="${row.status eq 'EVALUATED' }">
-			<display:column property="score" titleKey="exam.score" />		
-		</jstl:if>
+		
+		<display:column titleKey="exam.score">
+			<jstl:if test="${row.status eq 'EVALUATED' }">
+				<jstl:out value="${row.score}"/>
+			</jstl:if>
+		</display:column>		
+		
 		<security:authorize access="hasRole('TEACHER')">
 			<display:column>
 				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.display"/>
 			</display:column>
-			<jstl:if test="${row.status eq 'SUBMITTED' }">
-				<display:column>
+			<display:column>
+				<jstl:if test="${row.status eq 'SUBMITTED' }">
 					<acme:button url="exam/edit.do?examId=${row.id}" name="evaluate" code="exam.evaluate"/>
-				</display:column>
-			</jstl:if>
-			<jstl:if test="${row.status eq 'PENDING' }">
-				<display:column>
+				</jstl:if>
+				<jstl:if test="${row.status eq 'PENDING' }">
+					<acme:button url="exam/inprogress.do?examId=${row.id}" name="inprogress" code="exam.inprogress"/>
+				</jstl:if>
+			</display:column>
+			<display:column>
+				<jstl:if test="${row.status eq 'PENDING' }">
 					<acme:button url="exam/delete.do?examId=${row.id}" name="delete" code="exam.delete"/>
-				</display:column>
-			</jstl:if>
+				</jstl:if>
+			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('STUDENT')">
 		<jstl:if test="${reservation.status eq 'FINAL' }">
-			<jstl:if test="${row.status eq 'PENDING' }">
-				<display:column>
-					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inProgress"/>
-				</display:column>
-			</jstl:if>
+			<display:column>
+				<jstl:if test="${row.status eq 'INPROGRESS' }">
+					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
+				</jstl:if>
+			</display:column>
 		</jstl:if>
 		</security:authorize>
 	</display:table>

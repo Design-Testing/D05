@@ -18,7 +18,7 @@
 	<acme:textarea code="question.title" path="title"/>
 	
 	<br>
-	<input type="submit" name="create"
+	<input type="submit" name="save"
 		value="<spring:message code="question.create" />" />
 	<acme:button url="exam/display.do?examId=${exam.id}" name="back" code="question.back"/>
 </form:form>
@@ -41,7 +41,7 @@
 </security:authorize>
 
 <security:authorize access="hasRole('STUDENT')">
-<form:form action="question/resolve.do?examId=${exam.id }" modelAttribute="question" method="POST">
+<form:form action="question/edit.do?examId=${exam.id }" modelAttribute="question" method="POST">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="title"/>
@@ -50,7 +50,7 @@
 	<acme:textarea code="question.answer" path="answer"/>
 	
 	<br>
-	<input type="submit" name="resolve"
+	<input type="submit" name="save"
 		value="<spring:message code="question.save" />" />
 	<acme:button url="exam/display.do?examId=${exam.id}" name="back" code="question.back"/>
 </form:form>

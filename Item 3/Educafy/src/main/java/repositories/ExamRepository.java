@@ -12,7 +12,10 @@ import domain.Exam;
 @Repository
 public interface ExamRepository extends JpaRepository<Exam, Integer> {
 
-	@Query("select r.exams from Reservation r where r.student.userAccount.id=?1")
-	public Collection<Exam> findAllExamsByStudent(int studentId);
+	@Query("select e from Exam e join e.reservation r where r.student.userAccount.id=?1")
+	Collection<Exam> findAllExamsByStudent(int studentUAId);
+
+	@Query("select e from Exam e join e.reservation r where r.id=?1")
+	Collection<Exam> findAllExamsByReservation(int reservationId);
 
 }
