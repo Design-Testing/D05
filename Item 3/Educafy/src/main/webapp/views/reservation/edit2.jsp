@@ -19,6 +19,7 @@
 	<form:hidden path="student"/>
 	<form:hidden path="lesson"/>
 	<form:hidden path="status"/>
+	<form:hidden path="creditCard"/>
 	
 	<acme:textarea code="reservation.explanation" path="explanation"/>
 	
@@ -43,6 +44,8 @@
 	<form:hidden path="student"/>
 	<form:hidden path="lesson"/>
 	<form:hidden path="status"/>
+	<form:hidden path="creditCard"/>
+	
 	
 	<acme:textarea code="reservation.explanation" path="explanation"/>
 	

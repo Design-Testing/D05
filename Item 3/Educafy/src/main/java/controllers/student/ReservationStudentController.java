@@ -60,13 +60,10 @@ public class ReservationStudentController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int lessonId) {
 		ModelAndView result;
-		final Student principal = this.studentService.findByPrincipal();
 		final Lesson lesson = this.lessonService.findOne(lessonId);
 		final Reservation reservation = this.reservationService.create();
-		final Collection<CreditCard> myCards = this.creditCardRepository.findAllByActorUserId(principal.getUserAccount().getId());
 		reservation.setLesson(lesson);
 		result = this.createEditModelAndView1(reservation);
-		result.addObject("myCards", myCards);
 		return result;
 	}
 
@@ -150,7 +147,7 @@ public class ReservationStudentController extends AbstractController {
 			result.addObject("msg", "reservations.reviewing.error");
 		} else
 			try {
-				reservation = this.reservationService.toReviewingMode(reservation.getId());
+				reservation = this.reservationService.toReviewingMode(reservation);
 				result = new ModelAndView("redirect:myReservations.do");
 			} catch (final Throwable oops) {
 				final String errormsg = "reservation.reviewing.error";
@@ -233,11 +230,12 @@ public class ReservationStudentController extends AbstractController {
 	protected ModelAndView createEditModelAndView1(final Reservation reservation, final String messageCode) {
 		Assert.notNull(reservation);
 		final ModelAndView result;
-
+		final Student principal = this.studentService.findByPrincipal();
+		final Collection<CreditCard> myCards = this.creditCardRepository.findAllByActorUserId(principal.getUserAccount().getId());
 		result = new ModelAndView("reservation/edit1");
 		result.addObject("reservation", reservation);
 		result.addObject("message", messageCode);
-
+		result.addObject("myCards", myCards);
 		return result;
 	}
 

@@ -22,7 +22,10 @@ img.resize {
 	<jstl:if test="${exam.status eq 'PENDING' }">
 		<acme:button url="exam/edit.do?examId=${exam.id}" name="edit" code="exam.edit"/>
 	</jstl:if>
+<br><br>
 </security:authorize>
+<jstl:choose>
+<jstl:when test="${not empty questions }">
 <display:table name="questions" id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
@@ -49,6 +52,12 @@ img.resize {
 			</jstl:if>
 		</security:authorize>
 </display:table>
+</jstl:when>
+<jstl:otherwise>
+<spring:message code="no.questions"/>
+</jstl:otherwise>
+</jstl:choose>
+<br><br>
 <security:authorize access="hasRole('TEACHER')">
 	<acme:button url="question/create.do?examId=${exam.id}" name="create" code="question.create"/>
 	<acme:button url="reservation/teacher/display.do?reservationId=${exam.reservation.id}" name="back" code="exam.back"/>

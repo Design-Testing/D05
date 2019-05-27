@@ -98,7 +98,7 @@ public class ReservationTeacherController extends AbstractController {
 			result.addObject("msg", "reservations.accepted.error");
 		} else
 			try {
-				this.reservationService.toAcceptedMode(reservationId);
+				this.reservationService.toAcceptedMode(reservation);
 				result = this.myReservations();
 			} catch (final Throwable oops) {
 				String errormsg = "reservation.accepted.error";
@@ -122,7 +122,7 @@ public class ReservationTeacherController extends AbstractController {
 			result.addObject("msg", "reservations.rejected.error");
 		} else
 			try {
-				reservation = this.reservationService.toRejectedMode(reservation.getId());
+				reservation = this.reservationService.toRejectedMode(reservation);
 				result = new ModelAndView("redirect:myReservations.do");
 			} catch (final Throwable oops) {
 				final String errormsg = "reservation.rejected.error";
