@@ -34,7 +34,7 @@
 	<br>
 	<input type="submit" name="save"
 		value="<spring:message code="exam.save" />" />
-	<acme:button url="exam/display.do?examId=${exam.id}" name="back" code="exam.back"/>
+	<acme:button url="reservation/teacher/display.do?reservationId=${exam.reservation}" name="back" code="exam.back"/>
 </form:form>
 </jstl:if>
 
@@ -51,6 +51,6 @@
 	<br>
 	<input type="submit" name="evaluate"
 		value="<spring:message code="exam.evaluate" />" />
-	<acme:button url="exam/display.do?examId=${exam.id}" name="back" code="exam.back"/>
+	<acme:button url="reservation/teacher/display.do?reservationId=${exam.reservation}" name="back" code="exam.back"/>
 </form:form>
 </jstl:if>

@@ -34,7 +34,9 @@ img.resize {
 <br>
 <acme:display code="reservation.creditCard" value="${reservation.creditCard.number}"/>
 
-<display:table name="periods" id="row"
+<h3><spring:message code="reservation.timePeriod"/></h3>
+
+<display:table name="periods"  id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
 		
@@ -62,6 +64,8 @@ img.resize {
 	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
 </jstl:if>
 <br><br>
+
+<h3><spring:message code="reservation.exams"/></h3>
 
 	<display:table name="exams" id="row"
 		requestURI="${requestURI}" pagesize="5"
