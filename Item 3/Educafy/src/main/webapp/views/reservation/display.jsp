@@ -34,7 +34,9 @@ img.resize {
 <br>
 <acme:display code="reservation.creditCard" value="${reservation.creditCard.number}"/>
 
-<display:table name="periods" id="row"
+<h3><spring:message code="reservation.timePeriod"/></h3>
+
+<display:table name="periods"  id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
 		

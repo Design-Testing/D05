@@ -58,6 +58,8 @@ public class TimePeriodService {
 		Assert.notNull(timePeriod);
 		final Actor principal = this.actorService.findByPrincipal();
 		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.TEACHER), "Esta Acción solo la pueden hacer los profesores.");
+		final Integer tramoHorario = timePeriod.getEndHour() - timePeriod.getStartHour();
+		Assert.isTrue(tramoHorario == 1, "Los tramos horarios deben ser de 1 hora.");
 		final Collection<Reservation> reservations = this.reservationService.findAllReservationByTeacher(principal.getUserAccount().getId());
 		if (timePeriod.getId() != 0)
 			Assert.isTrue(reservations.contains(timePeriod.getReservation()), "No puedes modificar un periodo de tiempo que no sea de su reserva.");

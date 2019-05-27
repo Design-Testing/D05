@@ -85,7 +85,8 @@ public class TimePeriodController extends AbstractController {
 				this.timePeriodService.save(timePeriod);
 				res = this.reservationTeacherController.display(timePeriod.getReservation().getId());
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(timePeriod, "general.commit.error");
+				res = this.createEditModelAndView(timePeriod);
+				res.addObject("error", oops);
 			}
 
 		return res;

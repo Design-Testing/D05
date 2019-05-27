@@ -58,7 +58,10 @@
 		</jstl:if>
 		<jstl:if test="${row.status eq 'REVIEWING' }">
 			<acme:button url="reservation/teacher/accepted.do?reservationId=${row.id}" name="accepted" code="reservation.accepted"/>
-			<acme:button url="reservation/teacher/edit.do?reservationId=${row.id}" name="edit" code="reservation.rejected"/>			
+			<acme:button url="reservation/teacher/edit.do?reservationId=${row.id}" name="edit" code="reservation.rejected"/>
+		</jstl:if>
+		<jstl:if test="${row.status eq 'FINAL' }">
+			<acme:button url="reservation/teacher/delete.do?reservationId=${row.id}" name="delete" code="reservation.delete"/>				
 		</jstl:if>
 	</display:column>
 	</security:authorize>

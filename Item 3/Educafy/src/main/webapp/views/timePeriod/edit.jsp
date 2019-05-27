@@ -16,11 +16,14 @@
 	<acme:textbox code="timePeriod.startHour" path="startHour"/>
 	<acme:textbox code="timePeriod.endHour" path="endHour"/>
 	<acme:textbox code="timePeriod.dayNumber" path="dayNumber"/>
-<br>
+	<br>
 
 	<input type="submit" name="save"
 		value="<spring:message code="timePeriod.submit" />" />
 	
 	<acme:button url="reservation/teacher/display.do?reservationId=${timePeriod.reservation.id}" name="back" code="timePeriod.back"/>
+	<jstl:if test="${not empty error}">
+			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
+	</jstl:if>
 
 </form:form>
