@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.validation.ValidationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ReservationRepository;
@@ -107,7 +104,7 @@ public class ReservationService {
 		return res;
 	}
 
-	public Reservation save(final Reservation reservation, final BindingResult binding) {
+	public Reservation save(final Reservation reservation) {
 		Assert.notNull(reservation);
 		final Reservation result;
 		final Actor principal = this.actorService.findByPrincipal();
@@ -127,10 +124,6 @@ public class ReservationService {
 			reservation.setExplanation("");
 		else if (reservation.getStatus().equals("REJECTED"))
 			Assert.notNull(reservation.getExplanation(), "Debe indicar una explicacion.");
-
-		this.validator.validate(reservation, binding);
-		if (binding.hasErrors())
-			throw new ValidationException();
 		result = this.reservationRepository.save(reservation);
 		return result;
 
