@@ -1289,7 +1289,7 @@
 
 	<bean id="exam3" class="domain.Exam">
 		<property name="title" value="Title Exam 3" />
-		<property name="status" value="INPROGRESS"/>
+		<property name="status" value="PENDING"/>
 		<property name="questions">
 			<list>
 				<ref bean="question5" />
@@ -1313,39 +1313,39 @@
 		======= Question ========= =================================================================== -->
 
 	<bean id="question1" class="domain.Question">
-		<property name="question" value="Question 1" />
+		<property name="title" value="Question 1" />
 		<property name="answer" value="Answer 1" />
 	</bean>
 
 	<bean id="question2" class="domain.Question">
-		<property name="question" value="Question 2" />
+		<property name="title" value="Question 2" />
 		<property name="answer" value="Answer 2" />
 	</bean>
 
 	<bean id="question3" class="domain.Question">
-		<property name="question" value="Question 3" />
+		<property name="title" value="Question 3" />
 		<property name="answer" value="Answer 3" />
 	</bean>
 
 	<bean id="question4" class="domain.Question">
-		<property name="question" value="Question 4" />
+		<property name="title" value="Question 4" />
 		<property name="answer" value="Answer 4" />
 	</bean>
 
 	<bean id="question5" class="domain.Question">
-		<property name="question" value="Question 5" />
+		<property name="title" value="Question 5" />
 	</bean>
 
 	<bean id="question6" class="domain.Question">
-		<property name="question" value="Question 6" />
+		<property name="title" value="Question 6" />
 	</bean>
 
 	<bean id="question7" class="domain.Question">
-		<property name="question" value="Question 7" />
+		<property name="title" value="Question 7" />
 	</bean>
 
 	<bean id="question8" class="domain.Question">
-		<property name="question" value="Question 8" />
+		<property name="title" value="Question 8" />
 	</bean>
 
 
@@ -1396,9 +1396,9 @@
 		======= Reservation ========= =================================================================== -->
 
 	<bean id="reservation1" class="domain.Reservation">
-		<property name="status" value="PENDING" />
+		<property name="status" value="FINAL" />
 		<property name="moment" value="2019/05/10 20:30" />
-		<property name="explanation" value="Explanation of Reservation 1" />
+		<property name="explanation" value="" />
 		<property name="cost" value="20.5" />
 		<property name="hoursWeek" value="5" />
 		<property name="student" ref="student1" />
@@ -1406,7 +1406,9 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="exams">
 		<list>
-		<ref bean="exam1" />
+			<ref bean="exam1" />
+			<ref bean="exam3" />
+			<ref bean="exam4" />
 		</list>
 		</property>
 	</bean>
@@ -1426,6 +1428,22 @@
 		</list>
 		</property>
 	</bean>
+	
+	<!-- <bean id="reservation3" class="domain.Reservation">
+		<property name="status" value="REVIEWING" />
+		<property name="moment" value="2019/05/11 20:30" />
+		<property name="explanation" value="No puedo dar clases los jueves" />
+		<property name="cost" value="15.5" />
+		<property name="hoursWeek" value="3" />
+		<property name="student" ref="student1" />
+		<property name="lesson" ref="lesson3" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="exams">
+		<list>
+		<ref bean="exam2" />
+		</list>
+		</property>
+	</bean> -->
 	
 		<!-- =================================================================== 
 		======= TimePeriod ========= =================================================================== -->

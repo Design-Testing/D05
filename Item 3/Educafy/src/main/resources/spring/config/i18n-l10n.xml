@@ -46,7 +46,13 @@
 		<value>/views/educationRecord/messages</value>
 		<value>/views/miscellaneousRecord/messages</value>
 		<value>/views/reservation/messages</value>
+
+		<value>/views/exam/messages</value>
+		<value>/views/question/messages</value>
+		
+
 		<value>/views/timePeriod/messages</value>
+
 
 		
 		

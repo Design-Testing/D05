@@ -31,7 +31,7 @@ img.resize {
 
 <acme:display code="reservation.lesson" value="${reservation.lesson.title}"/>
 <acme:button url="lesson/display.do?lessonId=${reservation.lesson.id}" name="displayStudent" code="reservation.display"/>
-
+<br>
 <acme:display code="reservation.creditCard" value="${reservation.creditCard.number}"/>
 
 <display:table name="periods" id="row"
@@ -58,9 +58,48 @@ img.resize {
 			</display:column>
 		</jstl:if>
 </display:table>
-
 <jstl:if test="${rol eq 'teacher' }">
 	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
+</jstl:if>
+<br><br>
+
+	<display:table name="exams" id="row"
+		requestURI="${requestURI}" pagesize="5"
+		class="displaytag">
+		
+		<display:column property="title" titleKey="exam.title" />
+		<display:column property="status" titleKey="exam.status" />
+		<jstl:if test="${row.status eq 'EVALUATED' }">
+			<display:column property="score" titleKey="exam.score" />		
+		</jstl:if>
+		<security:authorize access="hasRole('TEACHER')">
+			<display:column>
+				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.display"/>
+			</display:column>
+			<jstl:if test="${row.status eq 'SUBMITTED' }">
+				<display:column>
+					<acme:button url="exam/edit.do?examId=${row.id}" name="evaluate" code="exam.evaluate"/>
+				</display:column>
+			</jstl:if>
+			<jstl:if test="${row.status eq 'PENDING' }">
+				<display:column>
+					<acme:button url="exam/delete.do?examId=${row.id}" name="delete" code="exam.delete"/>
+				</display:column>
+			</jstl:if>
+		</security:authorize>
+		<security:authorize access="hasRole('STUDENT')">
+		<jstl:if test="${reservation.status eq 'FINAL' }">
+			<jstl:if test="${row.status eq 'PENDING' }">
+				<display:column>
+					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inProgress"/>
+				</display:column>
+			</jstl:if>
+		</jstl:if>
+		</security:authorize>
+	</display:table>
+
+<jstl:if test="${rol eq 'teacher' }">
+	<acme:button url="exam/create.do?reservationId=${reservation.id}" name="create" code="exam.create"/>
 </jstl:if>
 <br><br>
 

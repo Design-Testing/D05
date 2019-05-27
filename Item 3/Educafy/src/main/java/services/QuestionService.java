@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.QuestionRepository;
+import domain.Exam;
 import domain.Question;
 
 @Service
@@ -20,7 +21,13 @@ public class QuestionService {
 	private QuestionRepository	questionRepository;
 
 	@Autowired
+	private ExamService			examService;
+
+	@Autowired
 	private TeacherService		teacherService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	public Question create() {
@@ -42,9 +49,24 @@ public class QuestionService {
 		return res;
 	}
 
+	public Question createSave(final Question question, final Exam exam) {
+		Assert.notNull(question);
+		Assert.notNull(exam);
+		Assert.isTrue(question.getId() == 0);
+		this.teacherService.findByPrincipal();
+		final Question result;
+		result = this.questionRepository.save(question);
+		final Collection<Question> questions = exam.getQuestions();
+		questions.add(result);
+		exam.setQuestions(questions);
+		this.examService.save(exam);
+		return result;
+
+	}
+
 	public Question save(final Question question) {
 		Assert.notNull(question);
-		this.teacherService.findByPrincipal();
+		this.actorService.findByPrincipal();
 		final Question result;
 		result = this.questionRepository.save(question);
 		return result;
