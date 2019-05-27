@@ -11,17 +11,17 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Question extends DomainEntity {
 
-	private String	question;
+	private String	title;
 	private String	answer;
 
 
 	@NotBlank
-	public String getQuestion() {
-		return this.question;
+	public String getTitle() {
+		return this.title;
 	}
 
-	public void setQuestion(final String question) {
-		this.question = question;
+	public void setTitle(final String title) {
+		this.title = title;
 	}
 
 	public String getAnswer() {

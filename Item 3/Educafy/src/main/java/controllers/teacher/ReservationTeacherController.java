@@ -55,6 +55,7 @@ public class ReservationTeacherController extends AbstractController {
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);
 		result.addObject("periods", periods);
+		result.addObject("exams", reservation.getExams());
 		result.addObject("requestURI", "reservation/teacher/display.do");
 		result.addObject("studentId", reservation.getStudent().getId());
 		result.addObject("rol", "teacher");
@@ -157,7 +158,7 @@ public class ReservationTeacherController extends AbstractController {
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
-				this.reservationService.save(reservation, binding);
+				this.reservationService.save(reservation);
 				result = this.myReservations();
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(reservation, "commit.reservation.error");
