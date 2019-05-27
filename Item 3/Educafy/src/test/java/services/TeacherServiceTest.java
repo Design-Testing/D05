@@ -117,7 +117,7 @@ public class TeacherServiceTest extends AbstractTest {
 			teacher.setSurname(surname);
 			teacher.setEmail(email);
 			teacher.setPhone(phone);
-			teacher.setVat(new Double(vat));
+			//			teacher.setVat(new Double(vat));
 			userAccount = teacher.getUserAccount();
 			userAccount.setUsername(username);
 			userAccount.setPassword(password);
@@ -178,7 +178,7 @@ public class TeacherServiceTest extends AbstractTest {
 			teacher.setSurname(surname);
 			teacher.setEmail(email);
 			teacher.setPhone(phone);
-			teacher.setVat(new Double(vat));
+			//			teacher.setVat(new Double(vat));
 			teacher = this.teacherService.save(teacher);
 			this.teacherService.flush();
 			super.unauthenticate();

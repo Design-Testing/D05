@@ -47,9 +47,12 @@
 		<value>/views/miscellaneousRecord/tiles.xml</value>
 
 		<value>/views/reservation/tiles.xml</value>
+
 		<value>/views/exam/tiles.xml</value>
 		<value>/views/question/tiles.xml</value>
 		
+
+		<value>/views/timePeriod/tiles.xml</value>
 
 		
 		

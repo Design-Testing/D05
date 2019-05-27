@@ -21,7 +21,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	@Query("select a from Reservation a where a.creditCard.id=?1")
 	Collection<Reservation> findAllByCreditCard(int creditCardId);
 
-
 	@Query("select sum(case when a.status='PENDING' then 1.0 else 0.0 end) / count(a) from Reservation a")
 	Double findPendingReservationRatio();
 
@@ -39,7 +38,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
 	@Query("select avg(r.cost), min(r.cost), max(r.cost), stddev(r.cost) from Reservation r")
 	Double[] getStatisticsOfWeeklyCost();
-
 
 	@Query("select r from Reservation r join r.lesson l where l.teacher.userAccount.id=?1")
 	public Collection<Reservation> findAllReservationByTeacher(int teacherId);
