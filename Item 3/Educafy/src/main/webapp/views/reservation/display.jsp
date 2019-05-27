@@ -34,7 +34,9 @@ img.resize {
 <br>
 <acme:display code="reservation.creditCard" value="${reservation.creditCard.number}"/>
 
-<display:table name="periods" id="row"
+<h3><spring:message code="reservation.timePeriod"/></h3>
+
+<display:table name="periods"  id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
 		
@@ -58,7 +60,7 @@ img.resize {
 			</display:column>
 		</jstl:if>
 </display:table>
-<jstl:if test="${rol eq 'teacher' }">
+<jstl:if test="${rol eq 'teacher' && !(tamañoTimePeriod eq hoursWeek)}">
 	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
 </jstl:if>
 <br><br>

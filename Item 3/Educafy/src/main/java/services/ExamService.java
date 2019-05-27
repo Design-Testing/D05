@@ -114,7 +114,7 @@ public class ExamService {
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Exam result;
 		final Reservation reservation = exam.getReservation();
-		Assert.isTrue(this.teacherService.findTeacherByReservation(reservation.getId()).equals(teacher), "No puede ejecutar ninguna acción sobre un examen que no le pertenece.");
+		Assert.isTrue(this.teacherService.findTeacherByReservation(reservation.getId()).equals(teacher), "No puede ejecutar ninguna acciÃ³n sobre un examen que no le pertenece.");
 		Assert.isTrue(exam.getStatus().equals("PENDING"), "Para poner el estado de un examen en INPROGRESS debe de estar anteriormente en estado PENDING.");
 		exam.setStatus("INPROGRESS");
 		result = this.save(exam, exam.getReservation().getId());
@@ -126,7 +126,7 @@ public class ExamService {
 		Assert.notNull(exam);
 		final Student student = this.studentService.findByPrincipal();
 		final Exam result;
-		Assert.isTrue(exam.getReservation().getStudent().equals(student), "No puede ejecutar ninguna acción sobre una exam que no le pertenece.");
+		Assert.isTrue(exam.getReservation().getStudent().equals(student), "No puede ejecutar ninguna acciÃ³n sobre una exam que no le pertenece.");
 		Assert.isTrue(exam.getStatus().equals("INPROGRESS"), "Para poner el estado de un examen en SUBMITTED debe de estar anteriormente en estado INPROGRESS.");
 		exam.setStatus("SUBMITTED");
 		result = this.save(exam, exam.getReservation().getId());
