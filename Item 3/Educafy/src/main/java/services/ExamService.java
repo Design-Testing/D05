@@ -56,13 +56,6 @@ public class ExamService {
 		return res;
 	}
 
-	public Collection<Exam> findAllExamsByStudent(final int studentId) {
-		Collection<Exam> res = new ArrayList<>();
-		res = this.examRepository.findAllExamsByStudent(studentId);
-		Assert.notNull(res);
-		return res;
-	}
-
 	public Exam save(final Exam exam, final int reservationId) {
 		Assert.notNull(exam);
 		Assert.isTrue(reservationId != 0);
@@ -119,7 +112,7 @@ public class ExamService {
 		Assert.notNull(exam);
 		final Student student = this.studentService.findByPrincipal();
 		final Exam result;
-		Assert.isTrue(this.findAllExamsByStudent(student.getUserAccount().getId()).contains(exam), "No puede ejecutar ninguna acción sobre una exam que no le pertenece.");
+		Assert.isTrue(exam.getReservation().getStudent().equals(student), "No puede ejecutar ninguna acción sobre una exam que no le pertenece.");
 		Assert.isTrue(exam.getStatus().equals("INPROGRESS"), "Para poner el estado de un examen en SUBMITTED debe de estar anteriormente en estado INPROGRESS.");
 		exam.setStatus("SUBMITTED");
 		result = this.save(exam, exam.getReservation().getId());
