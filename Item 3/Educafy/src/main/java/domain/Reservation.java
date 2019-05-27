@@ -1,12 +1,15 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
@@ -21,16 +24,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Reservation extends DomainEntity {
 
-	private String		status;
-	private Date		moment;
-	private String		explanation;
-	private Double		cost;
-	private Integer		hoursWeek;
+	private String				status;
+	private Date				moment;
+	private String				explanation;
+	private Double				cost;
+	private Integer				hoursWeek;
 
 	//Relaciones
-	private Student		student;
-	private Lesson		lesson;
-	private CreditCard	creditCard;
+	private Student				student;
+	private Lesson				lesson;
+	private CreditCard			creditCard;
+	private Collection<Exam>	exams;
 
 
 	@Pattern(regexp = "^(PENDING|ACCEPTED|REVIEWING|REJECTED|FINAL)$")
@@ -105,6 +109,15 @@ public class Reservation extends DomainEntity {
 
 	public void setCreditCard(final CreditCard creditCard) {
 		this.creditCard = creditCard;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<Exam> getExams() {
+		return this.exams;
+	}
+
+	public void setExams(final Collection<Exam> exams) {
+		this.exams = exams;
 	}
 
 }

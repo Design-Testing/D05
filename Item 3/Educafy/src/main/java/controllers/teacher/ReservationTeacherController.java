@@ -55,6 +55,7 @@ public class ReservationTeacherController extends AbstractController {
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);
 		result.addObject("periods", periods);
+		result.addObject("exams", reservation.getExams());
 		result.addObject("requestURI", "reservation/teacher/display.do");
 		result.addObject("studentId", reservation.getStudent().getId());
 		result.addObject("rol", "teacher");

@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.QuestionRepository;
-import security.Authority;
-import domain.Actor;
 import domain.Exam;
 import domain.Question;
 
@@ -51,29 +49,28 @@ public class QuestionService {
 		return res;
 	}
 
-	public Question save(final Question question, final int examId) {
+	public Question createSave(final Question question, final Exam exam) {
 		Assert.notNull(question);
-		Assert.isTrue(examId != 0);
-
-		final Actor ppal = this.actorService.findByPrincipal();
-		final Boolean isStudent = this.actorService.checkAuthority(ppal, Authority.STUDENT);
-		final Boolean isTeacher = this.actorService.checkAuthority(ppal, Authority.TEACHER);
-
-		final Exam exam = this.examService.findOne(examId);
+		Assert.notNull(exam);
+		Assert.isTrue(question.getId() == 0);
+		this.teacherService.findByPrincipal();
 		final Question result;
+		result = this.questionRepository.save(question);
+		final Collection<Question> questions = exam.getQuestions();
+		questions.add(result);
+		exam.setQuestions(questions);
+		this.examService.save(exam);
+		return result;
 
-		if (question.getId() == 0) {
-			if (isTeacher)
-				Assert.isTrue(this.teacherService.findTeacherByReservation(exam.getReservation().getId()).equals(ppal), "No puede crear una pregunta en un examen de una reserva que no es suya.");
-		} else {
-			Assert.isTrue(question.getExam().equals(exam), "La pregunta que quiere actualizar no se corresponde con el examen indicado.");
-			if (isStudent)
-				Assert.isTrue(exam.getReservation().getStudent().equals(ppal), "No puede responder una pregunta que no pertenece a un examen de sus reservas.");
-			else
-				Assert.isTrue(this.teacherService.findTeacherByReservation(exam.getReservation().getId()).equals(ppal), "No puede actualizar una pregunta que no pertenece a un examen de sus reservas.");
-		}
+	}
+
+	public Question save(final Question question) {
+		Assert.notNull(question);
+		this.actorService.findByPrincipal();
+		final Question result;
 		result = this.questionRepository.save(question);
 		return result;
+
 	}
 
 	public void delete(final Question question) {
@@ -85,11 +82,5 @@ public class QuestionService {
 	}
 
 	/* ========================= OTHER METHODS =========================== */
-
-	public Collection<Question> findQuestionsByExam(final int examId) {
-		Collection<Question> res;
-		res = this.questionRepository.findQuestionsByExam(examId);
-		return res;
-	}
 
 }
