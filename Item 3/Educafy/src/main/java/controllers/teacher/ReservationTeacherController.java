@@ -51,10 +51,13 @@ public class ReservationTeacherController extends AbstractController {
 		reservation = this.reservationService.findOne(reservationId);
 		teacher = this.teacherService.findByPrincipal();
 		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
+		final Integer tama�oTimePeriod = periods.size();
 
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);
+		result.addObject("hoursWeek", reservation.getHoursWeek());
 		result.addObject("periods", periods);
+		result.addObject("tama�oTimePeriod", tama�oTimePeriod);
 		result.addObject("exams", reservation.getExams());
 		result.addObject("requestURI", "reservation/teacher/display.do");
 		result.addObject("studentId", reservation.getStudent().getId());

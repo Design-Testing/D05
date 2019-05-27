@@ -15,7 +15,6 @@
 	<form:hidden path="cost"/>
 	<form:hidden path="student"/>
 	<form:hidden path="lesson"/>
-	<form:hidden path="exams"/>
 	<form:hidden path="status"/>
 	
 	

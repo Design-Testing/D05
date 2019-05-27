@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.Validator;
 
 import repositories.ReservationRepository;
+import security.Authority;
 import domain.Actor;
 import domain.Exam;
 import domain.Reservation;
@@ -111,7 +112,7 @@ public class ReservationService {
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(principal.getUserAccount().getId()).contains(reservation.getLesson()) || reservation.getStudent().equals(principal),
 			"No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		if (reservation.getId() == 0) {
-			Assert.isTrue(principal.getUserAccount().getAuthorities().contains("STUDENT"), "Las reservas solo pueden ser creadas por estudiantes");
+			Assert.isTrue(this.actorService.checkAuthority(principal, Authority.STUDENT), "Las reservas solo pueden ser creadas por estudiantes");
 			Assert.notNull(reservation.getHoursWeek(), "Debe indicar las horas semanales que desea.");
 			Assert.isTrue(reservation.getStatus().equals("PENDING"));
 			reservation.setCost(reservation.getHoursWeek() * reservation.getLesson().getPrice());
