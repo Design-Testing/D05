@@ -29,6 +29,9 @@ public class TimePeriodService {
 	@Autowired
 	private ActorService			actorService;
 
+	@Autowired
+	private ReservationService		reservationService;
+
 
 	public TimePeriod create() {
 		final TimePeriod tPeriod = new TimePeriod();
@@ -54,12 +57,14 @@ public class TimePeriodService {
 	public TimePeriod save(final TimePeriod timePeriod) {
 		Assert.notNull(timePeriod);
 		final Actor principal = this.actorService.findByPrincipal();
-		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.TEACHER));
+		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.TEACHER), "Esta Acción solo la pueden hacer los profesores.");
+		final Collection<Reservation> reservations = this.reservationService.findAllReservationByTeacher(principal.getUserAccount().getId());
+		if (timePeriod.getId() != 0)
+			Assert.isTrue(reservations.contains(timePeriod.getReservation()), "No puedes modificar un periodo de tiempo que no sea de su reserva.");
 		final TimePeriod tPeriod = this.timePeriodRepository.save(timePeriod);
 		Assert.notNull(tPeriod);
 		return tPeriod;
 	}
-
 	public void delete(final TimePeriod timePeriod) {
 		Assert.notNull(timePeriod);
 		Assert.isTrue(timePeriod.getId() != 0);
