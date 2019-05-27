@@ -12,8 +12,8 @@ import org.springframework.util.Assert;
 import org.springframework.validation.Validator;
 
 import repositories.ReservationRepository;
+import security.Authority;
 import domain.Actor;
-import domain.Exam;
 import domain.Reservation;
 import domain.Student;
 import domain.Teacher;
@@ -39,6 +39,9 @@ public class ReservationService {
 	private LessonService			lessonService;
 
 	@Autowired
+	private ExamService				examService;
+
+	@Autowired
 	private TimePeriodService		timePeriodService;
 
 	@Autowired
@@ -52,7 +55,6 @@ public class ReservationService {
 		final Reservation reservation = new Reservation();
 		final Student principal = this.studentService.findByPrincipal();
 		reservation.setStudent(principal);
-		reservation.setExams(new ArrayList<Exam>());
 		reservation.setStatus("PENDING");
 		final Date moment = new Date(System.currentTimeMillis() - 1);
 		reservation.setMoment(moment);
@@ -111,7 +113,7 @@ public class ReservationService {
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(principal.getUserAccount().getId()).contains(reservation.getLesson()) || reservation.getStudent().equals(principal),
 			"No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		if (reservation.getId() == 0) {
-			Assert.isTrue(principal.getUserAccount().getAuthorities().contains("STUDENT"), "Las reservas solo pueden ser creadas por estudiantes");
+			Assert.isTrue(this.actorService.checkAuthority(principal, Authority.STUDENT), "Las reservas solo pueden ser creadas por estudiantes");
 			Assert.notNull(reservation.getHoursWeek(), "Debe indicar las horas semanales que desea.");
 			Assert.isTrue(reservation.getStatus().equals("PENDING"));
 			reservation.setCost(reservation.getHoursWeek() * reservation.getLesson().getPrice());
@@ -138,6 +140,7 @@ public class ReservationService {
 		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservation.getId());
 		final Reservation retrieved = this.findOne(reservation.getId());
 		this.timePeriodService.deleteInBatch(periods);
+		this.examService.deleteInBatch(this.examService.findAllExamsByReservation(reservation.getId()));
 		this.reservationRepository.delete(retrieved);
 		this.messageService.notifyReservationDeleted(retrieved);
 	}
@@ -231,11 +234,11 @@ public class ReservationService {
 		return res;
 	}
 
-	public Double[] getStatisticsOfPassExams() {
-		final Double[] res = this.reservationRepository.getStatisticsOfPassExams();
-		Assert.notNull(res);
-		return res;
-	}
+	//	public Double[] getStatisticsOfPassExams() {
+	//		final Double[] res = this.reservationRepository.getStatisticsOfPassExams();
+	//		Assert.notNull(res);
+	//		return res;
+	//	}
 
 	public Double[] getStatisticsOfWeeklyCost() {
 		final Double[] res = this.reservationRepository.getStatisticsOfWeeklyCost();

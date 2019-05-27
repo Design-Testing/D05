@@ -16,10 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ExamService;
+import services.QuestionService;
 import services.ReservationService;
 import controllers.student.ReservationStudentController;
 import controllers.teacher.ReservationTeacherController;
-import domain.Actor;
 import domain.Exam;
 import domain.Reservation;
 
@@ -35,6 +35,9 @@ public class ExamController extends AbstractController {
 
 	@Autowired
 	private ExamService						examService;
+
+	@Autowired
+	private QuestionService					questionService;
 
 	@Autowired
 	private ReservationStudentController	reservationStudentController;
@@ -60,16 +63,15 @@ public class ExamController extends AbstractController {
 	// CREATESAVE --------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "create")
-	public ModelAndView createSave(@Valid final Exam exam, @RequestParam final int reservationId, final BindingResult binding) {
+	public ModelAndView createSave(@Valid final Exam exam, final BindingResult binding, @RequestParam final int reservationId) {
 		ModelAndView result;
-		final Reservation reservation = this.reservationService.findOne(reservationId);
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(exam);
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
-				this.examService.createSave(exam, reservation);
-				result = this.display(exam.getId());
+				this.examService.save(exam, reservationId);
+				result = this.reservationTeacherController.display(reservationId);
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(exam, "commit.exam.create.error");
 			} catch (final Throwable oops) {
@@ -86,11 +88,7 @@ public class ExamController extends AbstractController {
 	public ModelAndView display(@RequestParam final int examId) {
 		final ModelAndView result;
 		Exam exam;
-		final Actor principal;
 		exam = this.examService.findOne(examId);
-		principal = this.actorService.findByPrincipal();
-		if (this.actorService.checkAuthority(principal, "STUDENT"))
-			exam = this.examService.toInprogressMode(examId);
 		result = new ModelAndView("exam/display");
 		result.addObject("exam", exam);
 		result.addObject("questions", exam.getQuestions());
@@ -113,11 +111,36 @@ public class ExamController extends AbstractController {
 		} else
 			try {
 				this.examService.toSubmittedMode(examId);
-				result = this.reservationStudentController.myReservations();
+				result = this.reservationStudentController.display(exam.getReservation().getId());
 			} catch (final Throwable oops) {
 				String errormsg = "exam.submitted.error";
 				result = this.reservationStudentController.myReservations();
 				if (!(exam.getStatus().equals("INPROGRESS")))
+					errormsg = "exam.submitted.error";
+				result.addObject("msg", errormsg);
+			}
+
+		return result;
+	}
+
+	// TO INPROGRESS --------------------------------------------------------
+
+	@RequestMapping(value = "/inprogress", method = RequestMethod.GET)
+	public ModelAndView inProgress(@RequestParam final int examId) {
+		ModelAndView result;
+		final Exam exam = this.examService.findOne(examId);
+
+		if (exam == null) {
+			result = this.reservationTeacherController.myReservations();
+			result.addObject("msg", "exam.submitted.error");
+		} else
+			try {
+				this.examService.toInprogressMode(examId);
+				result = this.reservationTeacherController.display(exam.getReservation().getId());
+			} catch (final Throwable oops) {
+				String errormsg = "exam.submitted.error";
+				result = this.reservationTeacherController.myReservations();
+				if (!(exam.getStatus().equals("PENDING")))
 					errormsg = "exam.submitted.error";
 				result.addObject("msg", errormsg);
 			}
@@ -136,8 +159,8 @@ public class ExamController extends AbstractController {
 			result.addObject("msg", "exam.evaluated.error");
 		} else
 			try {
-				this.examService.toEvaluatedMode(exam.getId());
-				result = this.reservationTeacherController.myReservations();
+				this.examService.toEvaluatedMode(exam);
+				result = this.reservationTeacherController.display(exam.getReservation().getId());
 			} catch (final Throwable oops) {
 				final String errormsg = "exam.evaluated.error";
 				result = this.createEditModelAndView(exam, errormsg);
@@ -170,7 +193,7 @@ public class ExamController extends AbstractController {
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
-				this.examService.save(exam);
+				this.examService.save(exam, exam.getReservation().getId());
 				result = this.display(exam.getId());
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(exam, "commit.exam.save.error");
@@ -188,9 +211,10 @@ public class ExamController extends AbstractController {
 	public ModelAndView delete(final int examId) {
 		ModelAndView result;
 		final Exam exam = this.examService.findOne(examId);
+		final Reservation reservation = exam.getReservation();
 		try {
 			this.examService.delete(exam);
-			result = this.reservationTeacherController.myReservations();
+			result = this.reservationTeacherController.display(reservation.getId());
 		} catch (final Throwable oops) {
 			String errormsg = "exam.delete.error";
 			result = this.reservationTeacherController.myReservations();

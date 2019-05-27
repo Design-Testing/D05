@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import repositories.CreditCardRepository;
+import services.ExamService;
 import services.LessonService;
 import services.ReservationService;
 import services.StudentService;
 import services.TimePeriodService;
 import controllers.AbstractController;
 import domain.CreditCard;
+import domain.Exam;
 import domain.Lesson;
 import domain.Reservation;
 import domain.Student;
@@ -37,6 +39,9 @@ public class ReservationStudentController extends AbstractController {
 
 	@Autowired
 	private LessonService			lessonService;
+
+	@Autowired
+	private ExamService				examService;
 
 	@Autowired
 	private StudentService			studentService;
@@ -76,11 +81,11 @@ public class ReservationStudentController extends AbstractController {
 		reservation = this.reservationService.findOne(reservationId);
 		student = this.studentService.findByPrincipal();
 		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
-
+		final Collection<Exam> exams = this.examService.findAllExamsByReservation(reservationId);
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);
 		result.addObject("periods", periods);
-		result.addObject("exams", reservation.getExams());
+		result.addObject("exams", exams);
 		result.addObject("requestURI", "reservation/student/display.do");
 		result.addObject("student", student);
 		result.addObject("studentId", reservation.getStudent().getId());
@@ -187,9 +192,9 @@ public class ReservationStudentController extends AbstractController {
 				this.reservationService.save(reservation);
 				result = this.myReservations();
 			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView2(reservation, "commit.reservation.error");
+				result = this.createEditModelAndView1(reservation, "commit.reservation.error");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView2(reservation, "commit.reservation.error");
+				result = this.createEditModelAndView1(reservation, "commit.reservation.error");
 				result.addObject("errors", binding.getAllErrors());
 			}
 

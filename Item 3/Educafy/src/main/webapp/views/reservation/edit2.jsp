@@ -18,7 +18,6 @@
 	<form:hidden path="hoursWeek"/>
 	<form:hidden path="student"/>
 	<form:hidden path="lesson"/>
-	<form:hidden path="exams"/>
 	<form:hidden path="status"/>
 	
 	<acme:textarea code="reservation.explanation" path="explanation"/>
@@ -43,7 +42,6 @@
 	<form:hidden path="hoursWeek"/>
 	<form:hidden path="student"/>
 	<form:hidden path="lesson"/>
-	<form:hidden path="exams"/>
 	<form:hidden path="status"/>
 	
 	<acme:textarea code="reservation.explanation" path="explanation"/>

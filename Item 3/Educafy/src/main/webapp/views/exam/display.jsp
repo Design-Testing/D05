@@ -51,7 +51,7 @@ img.resize {
 </display:table>
 <security:authorize access="hasRole('TEACHER')">
 	<acme:button url="question/create.do?examId=${exam.id}" name="create" code="question.create"/>
-	<acme:button url="reservation/teacher/myReservations.do" name="back" code="exam.back"/>
+	<acme:button url="reservation/teacher/display.do?reservationId=${exam.reservation.id}" name="back" code="exam.back"/>
 	<acme:button url="exam/delete.do?examId=${exam.id}" name="delete" code="exam.delete"/>
 <br><br>
 </security:authorize>
