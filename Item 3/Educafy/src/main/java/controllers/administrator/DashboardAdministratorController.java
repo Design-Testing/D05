@@ -93,11 +93,11 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("finalOverRejected", finalOverRejected);
 
 		// Pass exams per student
-		final Double[] passExams = this.reservationService.getStatisticsOfPassExams();
-		result.addObject("averagePassExams", passExams[0]);
-		result.addObject("minPassExams", passExams[1]);
-		result.addObject("maxPassExams", passExams[2]);
-		result.addObject("desviationPassExams", passExams[3]);
+		//		final Double[] passExams = this.reservationService.getStatisticsOfPassExams();
+		//		result.addObject("averagePassExams", passExams[0]);
+		//		result.addObject("minPassExams", passExams[1]);
+		//		result.addObject("maxPassExams", passExams[2]);
+		//		result.addObject("desviationPassExams", passExams[3]);
 
 		// Students Ten percent
 		final Collection<Student> students = this.studentService.findStudentTenPerCentMoreReservationThanAverage();
@@ -108,8 +108,8 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("teachersTenPercent", teachers);
 
 		// Top-3 students
-		final List<Student> topStudents = this.studentService.getStudentsOrderByExamScore();
-		result.addObject("topStudents", topStudents);
+		//		final List<Student> topStudents = this.studentService.getStudentsOrderByExamScore();
+		//		result.addObject("topStudents", topStudents);
 
 		// Top-3 teachers
 		final List<Teacher> topTeachers = this.teacherService.getTeacherOrderByScore();
