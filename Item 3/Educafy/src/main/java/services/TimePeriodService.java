@@ -67,6 +67,8 @@ public class TimePeriodService {
 		Assert.isTrue(tramoHorario == 1, "Los tramos horarios deben ser de 1 hora.");
 		final Collection<Reservation> reservations = this.reservationService.findAllReservationByTeacher(principal.getUserAccount().getId());
 		Assert.isTrue(!this.setTimePeriod(timePeriod) == true, "Este tramo horario ya ha sido escogido.");
+		final Collection<TimePeriod> timePeriods = this.findByReservation(timePeriod.getReservation().getId());
+		Assert.isTrue(timePeriod.getReservation().getHoursWeek() > timePeriods.size(), "El número de tramos horarios debe ser menor o igual a las horas semanales solicitadas.");
 		Schedule schedule = this.scheduleService.findScheduleByTeacher(this.teacherService.findByPrincipal());
 		schedule = this.setScheduleTrue(timePeriod);
 		if (timePeriod.getId() != 0)

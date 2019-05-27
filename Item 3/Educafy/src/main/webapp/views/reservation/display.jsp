@@ -60,7 +60,7 @@ img.resize {
 			</display:column>
 		</jstl:if>
 </display:table>
-<jstl:if test="${rol eq 'teacher' }">
+<jstl:if test="${rol eq 'teacher' && !(tamañoTimePeriod eq hoursWeek)}">
 	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
 </jstl:if>
 <br><br>
