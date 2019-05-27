@@ -15,6 +15,8 @@
 	<form:hidden path="score"/>
 	<form:hidden path="questions"/>
 	<form:hidden path="status"/>
+	<input type="hidden" name="reservationId" value="${reservationId}" />
+	
 	<acme:textbox code="exam.title" path="title"/>
 	<br>
 	<input type="submit" name="create"
@@ -30,6 +32,8 @@
 	<form:hidden path="score"/>
 	<form:hidden path="questions"/>
 	<form:hidden path="status"/>
+	<input type="hidden" name="reservationId" value="${reservationId}" />
+	
 	<acme:textbox code="exam.title" path="title"/>
 	<br>
 	<input type="submit" name="save"
@@ -45,6 +49,8 @@
 	<form:hidden path="title"/>
 	<form:hidden path="questions"/>
 	<form:hidden path="status"/>
+	<input type="hidden" name="reservationId" value="${reservationId}" />
+	
 	<acme:display code="exam.title" value="${exam.title}"/>
 	<br>
 	<acme:textbox code="exam.score" path="score"/>

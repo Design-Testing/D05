@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.teacher;
 
 import java.util.Collection;
 
@@ -21,16 +21,16 @@ import services.ActorService;
 import services.ExamService;
 import services.QuestionService;
 import services.ReservationService;
+import controllers.AbstractController;
 import controllers.student.ReservationStudentController;
-import controllers.teacher.ReservationTeacherController;
 import domain.Actor;
 import domain.Exam;
 import domain.Question;
 import domain.Reservation;
 
 @Controller
-@RequestMapping("/exam")
-public class ExamController extends AbstractController {
+@RequestMapping("/exam/teacher")
+public class ExamTeacherController extends AbstractController {
 
 	@Autowired
 	private ReservationService				reservationService;
@@ -60,7 +60,7 @@ public class ExamController extends AbstractController {
 		ModelAndView result;
 		final Reservation reservation = this.reservationService.findOne(reservationId);
 		final Exam exam = this.examService.create();
-		result = this.createEditModelAndView(exam);
+		result = this.createEditModelAndView(exam, reservationId);
 		result.addObject("reservation", reservation);
 		return result;
 	}
@@ -68,12 +68,16 @@ public class ExamController extends AbstractController {
 	// EDIT --------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int examId) {
+	public ModelAndView edit(@RequestParam final int examId, @RequestParam final int reservationId) {
 		ModelAndView result;
 		Exam exam;
+		Reservation reservation;
+
 		exam = this.examService.findOne(examId);
-		if (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED"))
-			result = this.createEditModelAndView(exam);
+		reservation = this.reservationService.findOne(reservationId);
+
+		if (reservation.getStatus().equals("FINAL") && (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED")))
+			result = this.createEditModelAndView(exam, reservationId);
 		else
 			result = new ModelAndView("redirect:misc/403");
 		return result;
@@ -94,16 +98,16 @@ public class ExamController extends AbstractController {
 		final Reservation reservation = this.reservationService.findOne(reservationId);
 
 		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(exam);
+			result = this.createEditModelAndView(exam, reservationId);
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
 				this.examService.save(exam, reservation.getId());
 				result = this.display(exam.getId());
 			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView(exam, "commit.exam.create.error");
+				result = this.createEditModelAndView(exam, reservationId, "commit.exam.create.error");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(exam, "commit.exam.create.error");
+				result = this.createEditModelAndView(exam, reservationId, "commit.exam.create.error");
 				result.addObject("errors", binding.getAllErrors());
 			}
 
@@ -162,11 +166,11 @@ public class ExamController extends AbstractController {
 	// TO EVALUATED --------------------------------------------------------
 
 	@RequestMapping(value = "/evaluated", method = RequestMethod.POST, params = "evaluate")
-	public ModelAndView evaluatedMode(@Valid final Exam exam, final BindingResult binding) {
+	public ModelAndView evaluatedMode(@Valid final Exam exam, final BindingResult binding, final int reservationId) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(exam);
+			result = this.createEditModelAndView(exam, reservationId);
 			result.addObject("msg", "exam.evaluated.error");
 		} else
 			try {
@@ -174,7 +178,7 @@ public class ExamController extends AbstractController {
 				result = this.reservationTeacherController.myReservations();
 			} catch (final Throwable oops) {
 				final String errormsg = "exam.evaluated.error";
-				result = this.createEditModelAndView(exam, errormsg);
+				result = this.createEditModelAndView(exam, reservationId, errormsg);
 			}
 
 		return result;
@@ -203,18 +207,21 @@ public class ExamController extends AbstractController {
 
 	// ANCILLIARY METHODS --------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Exam exam) {
+	protected ModelAndView createEditModelAndView(final Exam exam, final int reservationId) {
 		ModelAndView result;
-		result = this.createEditModelAndView(exam, null);
+		result = this.createEditModelAndView(exam, reservationId, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Exam exam, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Exam exam, final int reservationId, final String messageCode) {
 		Assert.notNull(exam);
 		final ModelAndView result;
 
+		final Reservation reservation = this.reservationService.findOne(reservationId);
+
 		result = new ModelAndView("exam/edit1");
 		result.addObject("exam", exam);
+		result.addObject("reservation", reservation);
 		result.addObject("message", messageCode);
 		return result;
 	}

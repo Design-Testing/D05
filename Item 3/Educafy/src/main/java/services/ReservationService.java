@@ -13,7 +13,6 @@ import org.springframework.validation.Validator;
 
 import repositories.ReservationRepository;
 import domain.Actor;
-import domain.Exam;
 import domain.Reservation;
 import domain.Student;
 import domain.Teacher;
@@ -52,7 +51,6 @@ public class ReservationService {
 		final Reservation reservation = new Reservation();
 		final Student principal = this.studentService.findByPrincipal();
 		reservation.setStudent(principal);
-		reservation.setExams(new ArrayList<Exam>());
 		reservation.setStatus("PENDING");
 		final Date moment = new Date(System.currentTimeMillis() - 1);
 		reservation.setMoment(moment);
