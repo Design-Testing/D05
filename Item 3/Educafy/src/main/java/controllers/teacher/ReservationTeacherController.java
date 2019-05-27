@@ -54,12 +54,9 @@ public class ReservationTeacherController extends AbstractController {
 
 		reservation = this.reservationService.findOne(reservationId);
 
-		teacher = this.teacherService.findByPrincipal();
 		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
 		final Integer sizeTimePeriod = periods.size();
 
-
-		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservationId);
 		final Collection<Exam> exams = this.examService.findAllExamsByReservation(reservationId);
 		result = new ModelAndView("reservation/display");
 		result.addObject("reservation", reservation);

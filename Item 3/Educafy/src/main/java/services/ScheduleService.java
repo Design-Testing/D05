@@ -268,14 +268,15 @@ public class ScheduleService {
 					suggest.setDayNumber(1);
 					suggest.setStartHour(i);
 					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodService.save(suggest);
+					suggests.add(saved);
 
 					if (reservation.getHoursWeek() == suggests.size())
 						break;
 				}
 			}
-		else if (schedule.getTuesday().contains(false))
+		else if (schedule.getTuesday().contains(false) && reservation.getHoursWeek() == suggests.size())
 			for (int i = 0; i < schedule.getTuesday().size(); i++) {
 				final List<Boolean> newTuesday = (List<Boolean>) schedule.getTuesday();
 				if (!newTuesday.get(i)) {
@@ -283,14 +284,15 @@ public class ScheduleService {
 					suggest.setDayNumber(2);
 					suggest.setStartHour(i);
 					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodService.save(suggest);
+					suggests.add(saved);
 
 					if (reservation.getHoursWeek() == suggests.size())
 						break;
 				}
 			}
-		else if (schedule.getWednesday().contains(false))
+		else if (schedule.getWednesday().contains(false) && reservation.getHoursWeek() == suggests.size())
 			for (int i = 0; i < schedule.getWednesday().size(); i++) {
 				final List<Boolean> newWednesday = (List<Boolean>) schedule.getWednesday();
 				if (!newWednesday.get(i)) {
@@ -298,14 +300,15 @@ public class ScheduleService {
 					suggest.setDayNumber(3);
 					suggest.setStartHour(i);
 					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodService.save(suggest);
+					suggests.add(saved);
 
 					if (reservation.getHoursWeek() == suggests.size())
 						break;
 				}
 			}
-		else if (schedule.getThursday().contains(false))
+		else if (schedule.getThursday().contains(false) && reservation.getHoursWeek() == suggests.size())
 			for (int i = 0; i < schedule.getThursday().size(); i++) {
 				final List<Boolean> newThursday = (List<Boolean>) schedule.getThursday();
 				if (!newThursday.get(i)) {
@@ -313,14 +316,15 @@ public class ScheduleService {
 					suggest.setDayNumber(4);
 					suggest.setStartHour(i);
 					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodService.save(suggest);
+					suggests.add(saved);
 
 					if (reservation.getHoursWeek() == suggests.size())
 						break;
 				}
 			}
-		else if (schedule.getFriday().contains(false))
+		else if (schedule.getFriday().contains(false) && reservation.getHoursWeek() == suggests.size())
 			for (int i = 0; i < schedule.getFriday().size(); i++) {
 				final List<Boolean> newFriday = (List<Boolean>) schedule.getFriday();
 				if (!newFriday.get(i)) {
@@ -328,8 +332,9 @@ public class ScheduleService {
 					suggest.setDayNumber(5);
 					suggest.setStartHour(i);
 					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodService.save(suggest);
+					suggests.add(saved);
 
 					if (reservation.getHoursWeek() == suggests.size())
 						break;

@@ -91,6 +91,8 @@ public class ScheduleTeacherController extends AbstractController {
 		return result;
 	}
 
+	// SUGGEST --------------------------------------------------------
+
 	//	// EDIT --------------------------------------------------------
 	//
 	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)

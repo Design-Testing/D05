@@ -42,13 +42,13 @@ img.resize {
 		
 		<display:column property="startHour" titleKey="timePeriod.startHour" />
 		<display:column property="endHour" titleKey="timePeriod.endHour" />
-		<display:column property="dayNumber" titleKey="timePeriod.day">
+		<display:column titleKey="timePeriod.day">
 			 <jstl:choose>
-				<jstl:when test="${row.dayNumber eq 1}"><jstl:out value="Monday"></jstl:out></jstl:when>
-				<jstl:when test="${row.dayNumber eq 2}"><jstl:out value="Tuesday"/></jstl:when>
-				<jstl:when test="${row.dayNumber eq 3}"><jstl:out value="Wednesday"/></jstl:when>
-				<jstl:when test="${row.dayNumber eq 4}"><jstl:out value="Thursday"/></jstl:when>
-				<jstl:otherwise><jstl:out value="Friday"/></jstl:otherwise>				
+				<jstl:when test="${row.dayNumber eq 1}"><spring:message code="monday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 2}"><spring:message code="tuesday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 3}"><spring:message code="wednesday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 4}"><spring:message code="thursday"/></jstl:when>
+				<jstl:otherwise><spring:message code="friday"/></jstl:otherwise>				
 			</jstl:choose> 
 		</display:column>
 		<jstl:if test="${rol eq 'teacher' }">
