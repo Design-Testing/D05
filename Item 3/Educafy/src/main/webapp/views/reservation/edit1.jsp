@@ -41,7 +41,7 @@
 		<acme:button url="reservation/teacher/myReservation.do" name="back" code="reservation.back"/>
 	</security:authorize>
 	<security:authorize access="hasRole('STUDENT')">
-		<acme:button url="reservation/student/myReservation.do" name="back" code="reservation.back"/>
+		<acme:button url="subject/display.do?subjectId=${subjectId}" name="back" code="reservation.back"/>
 	</security:authorize>
 
 </form:form>
