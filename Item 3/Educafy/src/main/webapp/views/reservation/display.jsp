@@ -37,7 +37,9 @@ img.resize {
 <h3><spring:message code="reservation.timePeriod"/></h3>
 
 <security:authorize access="hasRole('TEACHER')">
+	<jstl:if test="${reservation.status eq 'PENDING'}">
 	<acme:button url="reservation/teacher/suggest.do?reservationId=${reservation.id}" name="suggest" code="reservation.suggest.timePeriods"/>
+	</jstl:if>
 </security:authorize>
 
 <display:table name="periods"  id="row"
@@ -55,18 +57,13 @@ img.resize {
 				<jstl:otherwise><spring:message code="friday"/></jstl:otherwise>				
 			</jstl:choose> 
 		</display:column>
-		<jstl:if test="${rol eq 'teacher' }">
+		<jstl:if test="${rol eq 'teacher' && reservation.status eq 'PENDING'}">
 			<display:column>
 				<acme:button url="timePeriod/edit.do?timePeriodId=${row.id}" name="edit" code="reservation.edit"/>
 			</display:column>
-			<display:column>
-				<acme:button url="timePeriod/delete.do?timePeriodId=${row.id}" name="delete" code="reservation.delete"/>
-			</display:column>
 		</jstl:if>
 </display:table>
-<jstl:if test="${rol eq 'teacher' && !(sizeTimePeriod eq hoursWeek)}">
-	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
-</jstl:if>
+
 <br><br>
 <h3><spring:message code="reservation.exams"/></h3>
 	<display:table name="exams" id="row"
@@ -101,11 +98,11 @@ img.resize {
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('STUDENT')">
-		<jstl:if test="${reservation.status eq 'FINAL' }">
+		<jstl:if test="${reservation.status eq 'FINAL' && row.status eq 'INPROGRESS' }">
 			<display:column>
-				<jstl:if test="${row.status eq 'INPROGRESS' }">
+				
 					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
-				</jstl:if>
+				
 			</display:column>
 		</jstl:if>
 		</security:authorize>
