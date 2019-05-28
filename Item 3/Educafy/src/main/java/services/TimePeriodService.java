@@ -38,12 +38,12 @@ public class TimePeriodService {
 	private ScheduleService			scheduleService;
 
 
-	public TimePeriod create() {
-		final TimePeriod tPeriod = new TimePeriod();
-		final Reservation reservation = new Reservation();
-		tPeriod.setReservation(reservation);
-		return tPeriod;
-	}
+	//	public TimePeriod create() {
+	//		final TimePeriod tPeriod = new TimePeriod();
+	//		final Reservation reservation = new Reservation();
+	//		tPeriod.setReservation(reservation);
+	//		return tPeriod;
+	//	}
 
 	public TimePeriod findOne(final int tPeriodId) {
 		Assert.isTrue(tPeriodId != 0);
@@ -70,6 +70,7 @@ public class TimePeriodService {
 		final Collection<TimePeriod> timePeriods = this.findByReservation(timePeriod.getReservation().getId());
 		Assert.isTrue(timePeriod.getReservation().getHoursWeek() > timePeriods.size(), "El número de tramos horarios debe ser menor o igual a las horas semanales solicitadas.");
 		Schedule schedule = this.scheduleService.findScheduleByTeacher(this.teacherService.findByPrincipal());
+		Assert.isTrue(timePeriod.getReservation().getStatus().equals("PENDING"), "No puede añadir un timePeriod si la reserva está en Final");
 		schedule = this.setScheduleTrue(timePeriod);
 		if (timePeriod.getId() != 0)
 			Assert.isTrue(reservations.contains(timePeriod.getReservation()), "No puedes modificar un periodo de tiempo que no sea de su reserva.");
@@ -77,16 +78,17 @@ public class TimePeriodService {
 		Assert.notNull(tPeriod);
 		return tPeriod;
 	}
-	public void delete(final TimePeriod timePeriod) {
-		Assert.notNull(timePeriod);
-		Assert.isTrue(timePeriod.getId() != 0);
-		final Actor principal = this.actorService.findByPrincipal();
-		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.TEACHER));
-		Schedule schedule = this.scheduleService.findScheduleByTeacher(this.teacherService.findByPrincipal());
-		schedule = this.setScheduleFalse(timePeriod);
-		final TimePeriod result = this.findOne(timePeriod.getId());
-		this.timePeriodRepository.delete(result);
-	}
+
+	//	public void delete(final TimePeriod timePeriod) {
+	//		Assert.notNull(timePeriod);
+	//		Assert.isTrue(timePeriod.getId() != 0);
+	//		final Actor principal = this.actorService.findByPrincipal();
+	//		Assert.isTrue(this.actorService.checkAuthority(principal, Authority.TEACHER));
+	//		Schedule schedule = this.scheduleService.findScheduleByTeacher(this.teacherService.findByPrincipal());
+	//		schedule = this.setScheduleFalse(timePeriod);
+	//		final TimePeriod result = this.findOne(timePeriod.getId());
+	//		this.timePeriodRepository.delete(result);
+	//	}
 
 	public Collection<TimePeriod> findByReservation(final Integer reservationId) {
 		final Collection<TimePeriod> res = this.timePeriodRepository.findByReservation(reservationId);
@@ -211,6 +213,118 @@ public class TimePeriodService {
 					result = res.get(i - 1);
 				}
 		return result;
+	}
+
+	public Collection<TimePeriod> suggestTimePeriod(final int reservationId) {
+		final Collection<TimePeriod> suggests = new ArrayList<>();
+		final Reservation reservation = this.reservationService.findOne(reservationId);
+		final Teacher teacher = this.teacherService.findTeacherByReservation(reservationId);
+		final Schedule schedule = this.scheduleService.findScheduleByTeacher(teacher);
+
+		final List<Boolean> newMonday = (List<Boolean>) schedule.getMonday();
+		final List<Boolean> mond = newMonday.subList(8, 21);
+		final List<Boolean> newTuesday = (List<Boolean>) schedule.getTuesday();
+		final List<Boolean> tues = newTuesday.subList(8, 21);
+		final List<Boolean> newWednesday = (List<Boolean>) schedule.getWednesday();
+		final List<Boolean> wedn = newWednesday.subList(8, 21);
+		final List<Boolean> newThursday = (List<Boolean>) schedule.getThursday();
+		final List<Boolean> thurs = newThursday.subList(8, 21);
+		final List<Boolean> newFriday = (List<Boolean>) schedule.getFriday();
+		final List<Boolean> frid = newFriday.subList(8, 21);
+
+		if (mond.contains(false))
+			for (int i = 8; i < mond.size(); i++) {
+				if (!mond.get(i)) {
+					final TimePeriod suggest = new TimePeriod();
+					suggest.setDayNumber(1);
+					suggest.setStartHour(i);
+					suggest.setEndHour(i + 1);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodRepository.save(suggest);
+					suggests.add(saved);
+
+					newMonday.set(i, true);
+
+					if (reservation.getHoursWeek() == suggests.size())
+						break;
+				}
+			}
+		else if (tues.contains(false) && reservation.getHoursWeek() > suggests.size())
+			for (int i = 8; i < tues.size(); i++) {
+				if (!tues.get(i)) {
+					final TimePeriod suggest = new TimePeriod();
+					suggest.setDayNumber(2);
+					suggest.setStartHour(i);
+					suggest.setEndHour(i + 1);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodRepository.save(suggest);
+					suggests.add(saved);
+
+					newTuesday.set(i, true);
+
+					if (reservation.getHoursWeek() == suggests.size())
+						break;
+				}
+			}
+		else if (wedn.contains(false) && reservation.getHoursWeek() > suggests.size())
+			for (int i = 8; i < wedn.size(); i++) {
+				if (!wedn.get(i)) {
+					final TimePeriod suggest = new TimePeriod();
+					suggest.setDayNumber(3);
+					suggest.setStartHour(i);
+					suggest.setEndHour(i + 1);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodRepository.save(suggest);
+					suggests.add(saved);
+
+					newWednesday.set(i, true);
+
+					if (reservation.getHoursWeek() == suggests.size())
+						break;
+				}
+			}
+		else if (thurs.contains(false) && reservation.getHoursWeek() > suggests.size())
+			for (int i = 8; i < thurs.size(); i++) {
+				if (!thurs.get(i)) {
+					final TimePeriod suggest = new TimePeriod();
+					suggest.setDayNumber(4);
+					suggest.setStartHour(i);
+					suggest.setEndHour(i + 1);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodRepository.save(suggest);
+					suggests.add(saved);
+
+					newThursday.set(i, true);
+
+					if (reservation.getHoursWeek() == suggests.size())
+						break;
+				}
+			}
+		else if (frid.contains(false) && reservation.getHoursWeek() > suggests.size())
+			for (int i = 8; i < frid.size(); i++)
+				if (!frid.get(i)) {
+					final TimePeriod suggest = new TimePeriod();
+					suggest.setDayNumber(5);
+					suggest.setStartHour(i);
+					suggest.setEndHour(i + 1);
+					suggest.setReservation(reservation);
+					final TimePeriod saved = this.timePeriodRepository.save(suggest);
+					suggests.add(saved);
+
+					newFriday.set(i, true);
+
+					if (reservation.getHoursWeek() == suggests.size())
+						break;
+				}
+
+		schedule.setMonday(newMonday);
+		schedule.setTuesday(newTuesday);
+		schedule.setWednesday(newWednesday);
+		schedule.setThursday(newThursday);
+		schedule.setFriday(newFriday);
+		this.scheduleService.save(schedule);
+
+		return suggests;
 	}
 
 }

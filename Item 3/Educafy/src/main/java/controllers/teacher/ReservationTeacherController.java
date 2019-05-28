@@ -106,10 +106,11 @@ public class ReservationTeacherController extends AbstractController {
 			result.addObject("msg", "lesson.final.mode.error");
 		} else
 			try {
-				this.scheduleService.suggestTimePeriod(reservationId);
+				this.timePeriodService.suggestTimePeriod(reservationId);
 				result = this.display(reservationId);
 			} catch (final Throwable oops) {
 				final String errormsg = "lesson.final.mode.error";
+				//TODO: Cambiar la redirección del createEditModelAndView
 				result = this.createEditModelAndView(reservation);
 				result.addObject(errormsg);
 			}
