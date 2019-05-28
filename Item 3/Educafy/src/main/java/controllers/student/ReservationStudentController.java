@@ -64,6 +64,7 @@ public class ReservationStudentController extends AbstractController {
 		final Reservation reservation = this.reservationService.create();
 		reservation.setLesson(lesson);
 		result = this.createEditModelAndView1(reservation);
+		result.addObject("subjectId", lesson.getSubject().getId());
 		return result;
 	}
 

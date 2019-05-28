@@ -49,18 +49,6 @@ public class ScheduleService {
 		monday.add(10, false);
 		monday.add(11, false);
 		monday.add(12, false);
-		monday.add(13, false);
-		monday.add(14, false);
-		monday.add(15, false);
-		monday.add(16, false);
-		monday.add(17, false);
-		monday.add(18, false);
-		monday.add(19, false);
-		monday.add(20, false);
-		monday.add(21, false);
-		monday.add(22, false);
-		monday.add(23, false);
-
 		schedule.setMonday(monday);
 
 		final List<Boolean> tuesday = new ArrayList<>();
@@ -77,17 +65,6 @@ public class ScheduleService {
 		tuesday.add(10, false);
 		tuesday.add(11, false);
 		tuesday.add(12, false);
-		tuesday.add(13, false);
-		tuesday.add(14, false);
-		tuesday.add(15, false);
-		tuesday.add(16, false);
-		tuesday.add(17, false);
-		tuesday.add(18, false);
-		tuesday.add(19, false);
-		tuesday.add(20, false);
-		tuesday.add(21, false);
-		tuesday.add(22, false);
-		tuesday.add(23, false);
 		schedule.setTuesday(tuesday);
 
 		final List<Boolean> wednesday = new ArrayList<>();
@@ -104,17 +81,6 @@ public class ScheduleService {
 		wednesday.add(10, false);
 		wednesday.add(11, false);
 		wednesday.add(12, false);
-		wednesday.add(13, false);
-		wednesday.add(14, false);
-		wednesday.add(15, false);
-		wednesday.add(16, false);
-		wednesday.add(17, false);
-		wednesday.add(18, false);
-		wednesday.add(19, false);
-		wednesday.add(20, false);
-		wednesday.add(21, false);
-		wednesday.add(22, false);
-		wednesday.add(23, false);
 		schedule.setWednesday(wednesday);
 
 		final List<Boolean> thursday = new ArrayList<>();
@@ -131,17 +97,6 @@ public class ScheduleService {
 		thursday.add(10, false);
 		thursday.add(11, false);
 		thursday.add(12, false);
-		thursday.add(13, false);
-		thursday.add(14, false);
-		thursday.add(15, false);
-		thursday.add(16, false);
-		thursday.add(17, false);
-		thursday.add(18, false);
-		thursday.add(19, false);
-		thursday.add(20, false);
-		thursday.add(21, false);
-		thursday.add(22, false);
-		thursday.add(23, false);
 		schedule.setThursday(thursday);
 
 		final List<Boolean> friday = new ArrayList<>();
@@ -158,17 +113,6 @@ public class ScheduleService {
 		friday.add(10, false);
 		friday.add(11, false);
 		friday.add(12, false);
-		friday.add(13, false);
-		friday.add(14, false);
-		friday.add(15, false);
-		friday.add(16, false);
-		friday.add(17, false);
-		friday.add(18, false);
-		friday.add(19, false);
-		friday.add(20, false);
-		friday.add(21, false);
-		friday.add(22, false);
-		friday.add(23, false);
 		schedule.setFriday(friday);
 
 		return schedule;
@@ -197,6 +141,15 @@ public class ScheduleService {
 			schedule.setTeacher(principal);
 		else
 			Assert.isTrue(schedule.getTeacher().equals(principal), "No puede actualizar un horario que no es suyo.");
+		result = this.scheduleRepository.save(schedule);
+		return result;
+
+	}
+
+	public Schedule save2(final Schedule schedule, final Teacher teacher) {
+		Assert.notNull(schedule);
+		final Schedule result;
+		Assert.isTrue(schedule.getTeacher().equals(teacher), "No puede actualizar un horario que no es de la asignatura del profesor.");
 		result = this.scheduleRepository.save(schedule);
 		return result;
 

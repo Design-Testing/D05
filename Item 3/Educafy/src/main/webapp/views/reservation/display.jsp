@@ -73,6 +73,10 @@ img.resize {
 		</jstl:if>
 </display:table>
 
+<jstl:if test="${not empty error}">
+			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
+</jstl:if>
+
 <br><br>
 <h3><spring:message code="reservation.exams"/></h3>
 	<display:table name="exams" id="row"
