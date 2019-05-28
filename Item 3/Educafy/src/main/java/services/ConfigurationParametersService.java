@@ -85,18 +85,6 @@ public class ConfigurationParametersService {
 	//======================================================================================================
 	//======================================================================================================
 
-	public Collection<String> findNegativeWords() {
-		final Collection<String> res = this.configurationParametersRepository.findNegativeWords();
-		Assert.notNull(res);
-		return res;
-	}
-
-	public Collection<String> findPositiveWords() {
-		final Collection<String> res = this.configurationParametersRepository.findPositiveWords();
-		Assert.notNull(res);
-		return res;
-	}
-
 	public Collection<String> findSpamWords() {
 		final Collection<String> res = this.configurationParametersRepository.findSpamWords();
 		Assert.notNull(res);
@@ -119,24 +107,28 @@ public class ConfigurationParametersService {
 		return this.configurationParametersRepository.findSysName();
 	}
 
-	//	public void rebranding(final String newSysName) {
-	//		this.administratorService.findByPrincipal();
-	//		Assert.notNull(newSysName);
-	//		Assert.isTrue(!newSysName.isEmpty());
-	//		final ConfigurationParameters cfg = this.find();
-	//		Assert.isTrue(!cfg.isRebranding());
-	//		final String sysName = this.findSysName();
-	//		String welEn = cfg.getWelcomeMessageEn();
-	//		String welEs = cfg.getWelcomeMessageEsp();
-	//		welEn = welEn.replace(sysName, newSysName);
-	//		welEs = welEs.replace(sysName, newSysName);
-	//		cfg.setWelcomeMessageEn(welEn);
-	//		cfg.setWelcomeMessageEsp(welEs);
-	//		cfg.setSysName(newSysName);
-	//		cfg.setRebranding(true);
-	//		this.save(cfg);
-	//		this.messageService.rebrandNotification(sysName);
-	//	}
+	public Collection<String> findSubjectLevels() {
+		return this.configurationParametersRepository.findSubjectLevels();
+	}
+
+	public void rebranding(final String newSysName) {
+		this.administratorService.findByPrincipal();
+		Assert.notNull(newSysName);
+		Assert.isTrue(!newSysName.isEmpty());
+		final ConfigurationParameters cfg = this.find();
+		Assert.isTrue(!cfg.isRebranding());
+		final String sysName = this.findSysName();
+		String welEn = cfg.getWelcomeMessageEn();
+		String welEs = cfg.getWelcomeMessageEsp();
+		welEn = welEn.replace(sysName, newSysName);
+		welEs = welEs.replace(sysName, newSysName);
+		cfg.setWelcomeMessageEn(welEn);
+		cfg.setWelcomeMessageEsp(welEs);
+		cfg.setSysName(newSysName);
+		cfg.setRebranding(true);
+		this.save(cfg);
+		this.messageService.rebrandNotification(sysName);
+	}
 
 	public ConfigurationParameters find() {
 		final ConfigurationParameters res = (ConfigurationParameters) this.configurationParametersRepository.findAll().toArray()[0];
@@ -164,26 +156,6 @@ public class ConfigurationParametersService {
 		return df.format(cal.getTime()) + "-" + RandomStringUtils.randomAlphanumeric(5).toUpperCase();
 	}
 
-	public Collection<String> addNegativeWord(final String nword) {
-		final Actor principal = this.administratorService.findByPrincipal();
-		final Boolean isAdmin = this.actorService.checkAuthority(principal, Authority.ADMIN);
-		Assert.isTrue(isAdmin);
-		Assert.notNull(nword);
-		final Collection<String> nwords = this.findNegativeWords();
-
-		return this.addWord(nword, nwords);
-	}
-
-	public Collection<String> addPositiveWord(final String pword) {
-		final Actor principal = this.administratorService.findByPrincipal();
-		final Boolean isAdmin = this.actorService.checkAuthority(principal, Authority.ADMIN);
-		Assert.isTrue(isAdmin);
-		Assert.notNull(pword);
-		final Collection<String> pwords = this.findPositiveWords();
-
-		return this.addWord(pword, pwords);
-	}
-
 	public Collection<String> addSpamWord(final String sword) {
 		final Actor principal = this.administratorService.findByPrincipal();
 		final Boolean isAdmin = this.actorService.checkAuthority(principal, Authority.ADMIN);
@@ -192,26 +164,6 @@ public class ConfigurationParametersService {
 		final Collection<String> swords = this.findSpamWords();
 
 		return this.addWord(sword, swords);
-	}
-
-	public Collection<String> deleteNegativeWord(final String nword) {
-		final Actor principal = this.administratorService.findByPrincipal();
-		final Boolean isAdmin = this.actorService.checkAuthority(principal, Authority.ADMIN);
-		Assert.isTrue(isAdmin);
-		Assert.notNull(nword);
-		final Collection<String> nwords = this.findNegativeWords();
-
-		return this.deleteWord(nword, nwords);
-	}
-
-	public Collection<String> deletePositiveWord(final String pword) {
-		final Actor principal = this.administratorService.findByPrincipal();
-		final Boolean isAdmin = this.actorService.checkAuthority(principal, Authority.ADMIN);
-		Assert.isTrue(isAdmin);
-		Assert.notNull(pword);
-		final Collection<String> pwords = this.findPositiveWords();
-
-		return this.deleteWord(pword, pwords);
 	}
 
 	public Collection<String> deleteSpamWord(final String sword) {

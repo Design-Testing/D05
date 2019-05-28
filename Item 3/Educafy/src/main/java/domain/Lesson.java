@@ -16,11 +16,11 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Lesson extends DomainEntity {
 
-	private String		ticker;
-	private String		title;
-	private String		description;
-	private Double		price;
-	private Boolean		isDraft;
+	private String	ticker;
+	private String	title;
+	private String	description;
+	private Double	price;
+	private Boolean	isDraft;
 
 	private Teacher	teacher;
 	private Subject	subject;
@@ -28,7 +28,7 @@ public class Lesson extends DomainEntity {
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "^[0-9]{6}[A-Z]{5}$")
+	@Pattern(regexp = "^[A-Z]{4}-[0-9]{4}$")
 	public String getTicker() {
 		return this.ticker;
 	}

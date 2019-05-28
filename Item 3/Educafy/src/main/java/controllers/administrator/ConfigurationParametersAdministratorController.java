@@ -13,11 +13,14 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
 import services.ActorService;
 import services.ConfigurationParametersService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.ConfigurationParameters;
 
 @Controller
@@ -67,40 +70,40 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 
 	}
 
-	//	@RequestMapping(value = "/rebrand", method = RequestMethod.GET)
-	//	public ModelAndView rebrand() {
-	//		final ModelAndView result;
-	//		final Actor principal = this.actorService.findByPrincipal();
-	//		final boolean rebrand = this.configurationParametersService.find().isRebranding();
-	//		final Boolean isAdmin = this.actorService.checkAuthority(principal, Authority.ADMIN);
-	//		Assert.isTrue(isAdmin);
-	//
-	//		if (isAdmin && !rebrand)
-	//			result = new ModelAndView("configurationParameters/rebranding");
-	//		else if (rebrand) {
-	//			result = new ModelAndView("configurationParameters/rebranding");
-	//			result.addObject("errortrace", "rebrand.only.once");
-	//		} else {
-	//			result = new ModelAndView("configurationParameters/rebranding");
-	//			result.addObject("errortrace", "rebrand.commit.error");
-	//		}
-	//
-	//		return result;
-	//
-	//	}
+	@RequestMapping(value = "/rebrand", method = RequestMethod.GET)
+	public ModelAndView rebrand() {
+		final ModelAndView result;
+		final Actor principal = this.actorService.findByPrincipal();
+		final boolean rebrand = this.configurationParametersService.find().isRebranding();
+		final Boolean isAdmin = this.actorService.checkAuthority(principal, Authority.ADMIN);
+		Assert.isTrue(isAdmin);
 
-	//	@RequestMapping(value = "/rebranding", method = RequestMethod.GET)
-	//	public ModelAndView rebranding(@RequestParam final String newSysName) {
-	//		ModelAndView result;
-	//		try {
-	//			this.configurationParametersService.rebranding(newSysName);
-	//			result = this.toWelcome("rebranding.process.finished");
-	//		} catch (final Throwable e) {
-	//			result = new ModelAndView("configurationParameters/rebranding");
-	//			result.addObject("errortrace", "rebrand.commit.error");
-	//		}
-	//		return result;
-	//	}
+		if (isAdmin && !rebrand)
+			result = new ModelAndView("configurationParameters/rebranding");
+		else if (rebrand) {
+			result = new ModelAndView("configurationParameters/rebranding");
+			result.addObject("errortrace", "rebrand.only.once");
+		} else {
+			result = new ModelAndView("configurationParameters/rebranding");
+			result.addObject("errortrace", "rebrand.commit.error");
+		}
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/rebranding", method = RequestMethod.GET)
+	public ModelAndView rebranding(@RequestParam final String newSysName) {
+		ModelAndView result;
+		try {
+			this.configurationParametersService.rebranding(newSysName);
+			result = this.toWelcome("rebranding.process.finished");
+		} catch (final Throwable e) {
+			result = new ModelAndView("configurationParameters/rebranding");
+			result.addObject("errortrace", "rebrand.commit.error");
+		}
+		return result;
+	}
 
 	private ModelAndView toWelcome(final String alert) {
 		ModelAndView result;

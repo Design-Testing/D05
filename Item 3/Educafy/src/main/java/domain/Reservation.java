@@ -1,21 +1,19 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,20 +21,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Reservation extends DomainEntity {
 
-	private String				status;
-	private Date				moment;
-	private String				explanation;
-	private Double				cost;
-	private Integer				hourWeek;
+	private String		status;
+	private Date		moment;
+	private String		explanation;
+	private Double		cost;
+	private Integer		hoursWeek;
 
 	//Relaciones
-	private Student				student;
-	private Lesson				lesson;
-	private CreditCard			creditCard;
-	private Collection<Exam>	exams;
+	private Student		student;
+	private Lesson		lesson;
+	private CreditCard	creditCard;
 
 
-	@Pattern(regexp = "^(APPROVED|PENDING|REJECTED|FINAL)$")
+	@Pattern(regexp = "^(PENDING|ACCEPTED|REVIEWING|REJECTED|FINAL)$")
 	public String getStatus() {
 		return this.status;
 	}
@@ -56,7 +53,6 @@ public class Reservation extends DomainEntity {
 		this.moment = moment;
 	}
 
-	@NotBlank
 	public String getExplanation() {
 		return this.explanation;
 	}
@@ -74,13 +70,14 @@ public class Reservation extends DomainEntity {
 		this.cost = cost;
 	}
 
+	@NotNull
 	@Range(min = 1, max = 10)
-	public Integer getHourWeek() {
-		return this.hourWeek;
+	public Integer getHoursWeek() {
+		return this.hoursWeek;
 	}
 
-	public void setHourWeek(final Integer hourWeek) {
-		this.hourWeek = hourWeek;
+	public void setHoursWeek(final Integer hoursWeek) {
+		this.hoursWeek = hoursWeek;
 	}
 
 	@ManyToOne(optional = false)
@@ -108,15 +105,6 @@ public class Reservation extends DomainEntity {
 
 	public void setCreditCard(final CreditCard creditCard) {
 		this.creditCard = creditCard;
-	}
-
-	@OneToMany
-	public Collection<Exam> getExams() {
-		return this.exams;
-	}
-
-	public void setExams(final Collection<Exam> exams) {
-		this.exams = exams;
 	}
 
 }

@@ -6,12 +6,15 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,6 +24,7 @@ public class Curriculum extends DomainEntity {
 	private Collection<EducationRecord>		educationRecords;
 	private Collection<MiscellaneousRecord>	miscellaneousRecords;
 	private Teacher							teacher;
+	private String							ticker;
 
 
 	@Valid
@@ -53,13 +57,24 @@ public class Curriculum extends DomainEntity {
 		this.miscellaneousRecords = miscellaneousRecords;
 	}
 
-	@ManyToOne(optional = false)
+	@OneToOne(optional = false)
 	public Teacher getTeacher() {
 		return this.teacher;
 	}
 
 	public void setTeacher(final Teacher teacher) {
 		this.teacher = teacher;
+	}
+
+	@NotBlank
+	@Column(unique = true)
+	@Pattern(regexp = "^[A-Z]{4}-[0-9]{4}$")
+	public String getTicker() {
+		return this.ticker;
+	}
+
+	public void setTicker(final String ticker) {
+		this.ticker = ticker;
 	}
 
 }

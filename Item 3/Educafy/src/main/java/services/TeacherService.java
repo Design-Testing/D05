@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.ValidationException;
 
@@ -13,7 +14,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.CurriculaRepository;
 import repositories.TeacherRepository;
 import security.Authority;
 import security.LoginService;
@@ -34,12 +34,12 @@ public class TeacherService {
 
 	@Autowired
 	private UserAccountService	userAccountService;
-	//
-	//	@Autowired
-	//	private CurriculaService	curriculaService;
 
 	@Autowired
-	private CurriculaRepository	curriculaRepository;
+	private ScheduleService		scheduleService;
+
+	@Autowired
+	private FolderService		folderService;
 
 	@Autowired
 	private Validator			validator;
@@ -59,29 +59,29 @@ public class TeacherService {
 		return result;
 	}
 
-	//	public Teacher save(final Teacher teacher) {
-	//		Assert.notNull(teacher);
-	//		Teacher result;
-	//
-	//		if (teacher.getId() == 0) {
-	//			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
-	//			result = this.teacherRepository.save(teacher);
-	//			//			this.folderService.setFoldersByDefault(result);
-	//
-	//			final Curriculum curricula = this.curriculaService.createForNewTeacher();
-	//			curricula.setTeacher(result);
-	//			final Curriculum res = this.curriculaRepository.save(curricula);
-	//			Assert.notNull(res);
-	//
-	//		} else {
-	//			this.actorService.checkForSpamWords(teacher);
-	//			final Actor principal = this.actorService.findByPrincipal();
-	//			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
-	//			result = (Teacher) this.actorService.save(teacher);
-	//		}
-	//		return result;
-	//	}
+	public Collection<Teacher> findAll() {
+		final Collection<Teacher> teachers = this.teacherRepository.findAll();
+		Assert.notNull(teachers);
+		return teachers;
+	}
 
+	public Teacher save(final Teacher teacher) {
+		Assert.notNull(teacher);
+		Teacher result;
+
+		if (teacher.getId() == 0) {
+			this.actorService.setAuthorityUserAccount(Authority.TEACHER, teacher);
+			result = this.teacherRepository.save(teacher);
+			this.scheduleService.createForNewTeacher(result);
+			this.folderService.setFoldersByDefault(result);
+		} else {
+			this.actorService.checkForSpamWords(teacher);
+			final Actor principal = this.actorService.findByPrincipal();
+			Assert.isTrue(principal.getId() == teacher.getId(), "You only can edit your info");
+			result = (Teacher) this.actorService.save(teacher);
+		}
+		return result;
+	}
 	public void delete(final Teacher teacher) {
 		Assert.notNull(teacher);
 		Assert.isTrue(this.findByPrincipal().equals(teacher));
@@ -127,7 +127,6 @@ public class TeacherService {
 			teacher.setPhone(actorForm.getPhone());
 			teacher.setEmail(actorForm.getEmail());
 			teacher.setAddress(actorForm.getAddress());
-			teacher.setVat(actorForm.getVat());
 			teacher.setVersion(actorForm.getVersion());
 			//			student.setScore(0.0);
 			//			student.setSpammer(false);
@@ -148,7 +147,6 @@ public class TeacherService {
 			teacher.setPhone(actorForm.getPhone());
 			teacher.setEmail(actorForm.getEmail());
 			teacher.setAddress(actorForm.getAddress());
-			teacher.setVat(actorForm.getVat());
 			teacher.setVersion(actorForm.getVersion());
 			final UserAccount account = this.userAccountService.findOne(teacher.getUserAccount().getId());
 			account.setUsername(actorForm.getUserAccountuser());
@@ -163,54 +161,79 @@ public class TeacherService {
 		return teacher;
 	}
 
-	public Teacher findTeacherByCurricula(final int curriculaId) {
-		final Teacher result = this.teacherRepository.findTeacherByCurricula(curriculaId);
-		return result;
+	public void deletePersonalData() {
+		final Teacher principal = this.findByPrincipal();
+		final List<String> s = new ArrayList<>();
+		s.add("DELETED");
+		principal.setAddress(null);
+		principal.setEmail("DELETED@mail.de");
+		principal.setSurname(s);
+		//principal.setName("");
+		principal.setPhone(null);
+		principal.setPhoto(null);
+		principal.setSpammer(false);
+		final Authority ban = new Authority();
+		ban.setAuthority(Authority.BANNED);
+		principal.getUserAccount().getAuthorities().add(ban);
+		this.teacherRepository.save(principal);
 	}
 
-	public Teacher findTeacherByPersonalRecord(final int personalRecorId) {
-		final Teacher result = this.teacherRepository.findTeacherByPersonalRecord(personalRecorId);
-		return result;
+	public Teacher findTeacherByCurriculum(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByCurriculum(id);
+		Assert.notNull(res);
+		return res;
 	}
 
-	public Teacher findTeacherByMiscellaneous(final int miscellaneousRecordId) {
-		final Teacher result = this.teacherRepository.findTeacherByMiscellaneous(miscellaneousRecordId);
-		return result;
+	public Teacher findTeacherByPersonalRecord(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByPersonalRecord(id);
+		Assert.notNull(res);
+		return res;
 	}
 
-	public Teacher findTeacherByEducationRecords(final int educationRecordId) {
-		final Teacher result = this.teacherRepository.findTeacherByEducationRecords(educationRecordId);
-		return result;
+	public Teacher findTeacherByEducationRecord(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByEducationRecord(id);
+		Assert.notNull(res);
+		return res;
 	}
 
-	public Boolean hasPersonalRecord(final int teacherId, final int personalRecordId) {
-		final Boolean result = this.teacherRepository.hasPersonalRecord(teacherId, personalRecordId);
-		Assert.notNull(result, "hasPersonalData returns null");
-		return result;
+	public Teacher findTeacherByMiscellaneousRecord(final int id) {
+		final Teacher res = this.teacherRepository.findTeacherByMiscellaneousRecord(id);
+		Assert.notNull(res);
+		return res;
 	}
 
-	public Boolean hasEducationRecord(final int teacherId, final int educationRecordId) {
-		final Boolean result = this.teacherRepository.hasEducationRecord(teacherId, educationRecordId);
-		Assert.notNull(result, "hasEducationData returns null");
-		return result;
+	public boolean hasEducationRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasEducationRecord(teacherId, recordId);
+		return res;
 	}
 
-	public Boolean hasMiscellaneousRecord(final int teacherId, final int dataId) {
-		final Boolean result = this.teacherRepository.hasMiscellaneousRecord(teacherId, dataId);
-		Assert.notNull(result, "hasMiscellanousData returns null");
-		return result;
+	public boolean hasMiscellaneousRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasMiscellaneousRecord(teacherId, recordId);
+		return res;
 	}
 
-	public Boolean hasCurricula(final int teacherId, final int miscellaneousRecordId) {
-		final Boolean result = this.teacherRepository.hasCurricula(teacherId, miscellaneousRecordId);
-		Assert.notNull(result, "hasCurricula returns null");
-		return result;
+	public boolean hasPersonalRecord(final int teacherId, final int recordId) {
+		final boolean res = this.teacherRepository.hasPersonalRecord(teacherId, recordId);
+		return res;
 	}
 
-	//	public Teacher findTeacherByCopyCurricula(final int curriculaId) {
-	//		final Teacher result = this.teacherRepository.findTeacherByCopyCurricula(curriculaId);
-	//		Assert.notNull(result, "teacher found by copy of curricula is null");
-	//		return result;
-	//	}
+	public Teacher findTeacherByReservation(final int reservationId) {
+		Teacher res;
+		res = this.teacherRepository.findTeacherByReservation(reservationId);
+		return res;
+	}
 
+	public List<Teacher> getTeacherOrderByScore() {
+		List<Teacher> ls = this.teacherRepository.getTeacherOrderByScore();
+		if (ls.size() > 2)
+			ls = ls.subList(0, 3);
+		Assert.notNull(ls);
+		return ls;
+	}
+
+	public Collection<Teacher> findTeacherTenPerCentMoreFinalReservationThanAverage() {
+		final Collection<Teacher> res = this.teacherRepository.findTenPerCentMoreFinalReservationThanAverage();
+		Assert.notNull(res);
+		return res;
+	}
 }

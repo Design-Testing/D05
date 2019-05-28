@@ -2,13 +2,18 @@
 package domain;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.SafeHtml;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,6 +23,7 @@ public class Finder extends DomainEntity {
 	private String				teacherName;
 	private String				subjectName;
 	private String				subjectLevel;
+	private Date				creationDate;
 
 	private Collection<Lesson>	lessons;
 
@@ -56,6 +62,17 @@ public class Finder extends DomainEntity {
 
 	public void setSubjectLevel(final String subjectLevel) {
 		this.subjectLevel = subjectLevel;
+	}
+
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	public Date getCreationDate() {
+		return this.creationDate;
+	}
+
+	public void setCreationDate(final Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	@ManyToMany

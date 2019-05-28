@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="assesment/display" extends="master.page">	
+		<put-attribute name="title" value="Assesment: Display" />
+		<put-attribute name="body" value="/views/assesment/display.jsp" />
+	</definition>
+	
+	<definition name="assesment/list" extends="master.page">	
+		<put-attribute name="title" value="Assesment: List" />
+		<put-attribute name="body" value="/views/assesment/list.jsp" />
+	</definition>
+	
+	<definition name="assesment/edit" extends="master.page">	
+		<put-attribute name="title" value="Assesment: Edit" />
+		<put-attribute name="body" value="/views/assesment/edit.jsp" />
+	</definition>
+	
+	<definition name="assesment/error" extends="master.page">	
+		<put-attribute name="title" value="Assesment: Error" />
+		<put-attribute name="body" value="/views/assesment/error.jsp" />
+	</definition>
+
+	
+</tiles-definitions>
