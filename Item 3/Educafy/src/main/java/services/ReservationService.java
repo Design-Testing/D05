@@ -231,11 +231,11 @@ public class ReservationService {
 		return res;
 	}
 
-	//	public Double[] getStatisticsOfPassExams() {
-	//		final Double[] res = this.reservationRepository.getStatisticsOfPassExams();
-	//		Assert.notNull(res);
-	//		return res;
-	//	}
+	public Double[] getStatisticsOfPassExams() {
+		final Double[] res = this.reservationRepository.getStatisticsOfPassExams();
+		Assert.notNull(res);
+		return res;
+	}
 
 	public Double[] getStatisticsOfWeeklyCost() {
 		final Double[] res = this.reservationRepository.getStatisticsOfWeeklyCost();

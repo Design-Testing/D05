@@ -151,9 +151,6 @@
 		<security:intercept-url pattern="/student/display.do" access="hasRole('STUDENT')" />
 		<security:intercept-url pattern="/student/deletePersonalData.do" access="hasRole('STUDENT')" />
 		
-		<!-- STUDENT -->
-		<security:intercept-url pattern="/student/display.do" access="TEACHER" />
-		
 		<!-- CREDIT CARD -->
 		<security:intercept-url pattern="/creditCard/student/**" access="hasRole('STUDENT')" />
 		

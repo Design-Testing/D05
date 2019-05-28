@@ -37,6 +37,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	Double[] getStatisticsOfWeeklyCost();
 
 	@Query("select r from Reservation r join r.lesson l where l.teacher.userAccount.id=?1")
-	public Collection<Reservation> findAllReservationByTeacher(int teacherId);
+	Collection<Reservation> findAllReservationByTeacher(int teacherId);
+
+	// 	@Query("select avg(ex.score), min(ex.score), max(ex.score), stddev(ex.score) from Exam ex join ex.reservation r where (ex.score>4) group by r.student.id")
+	@Query("select avg(1.0+(select count(ex) from Exam ex where (ex.score>4) AND ex.reservation.id=r.id)-1.0), min(1.0+(select count(ex) from Exam ex where (ex.score>4) AND ex.reservation.id=r.id)-1.0), max(1.0+(select count(ex) from Exam ex where (ex.score>4) AND ex.reservation.id=r.id)-1.0), stddev(1.0+(select count(ex) from Exam ex where (ex.score>4) AND ex.reservation.id=r.id)-1.0)  from Reservation r")
+	Double[] getStatisticsOfPassExams();
 
 }
