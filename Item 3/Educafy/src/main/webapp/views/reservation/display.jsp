@@ -19,7 +19,16 @@ img.resize {
 
 <acme:display code="reservation.status" value="${reservation.status}"/>
 
-<acme:display code="reservation.moment" value="${reservation.moment}"/>
+
+<jstl:choose>
+	<jstl:when test="${lang eq 'en' }">
+		<spring:message code="reservation.moment"/>: <fmt:formatDate value="${reservation.moment}" type="both" pattern="yyyy-MM-dd HH:mm"/>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="reservation.moment"/>: <fmt:formatDate value="${reservation.moment}" type="both" pattern="dd-MM-yyyy HH:mm"/>
+	</jstl:otherwise>
+</jstl:choose>
+<br>
 
 <acme:display code="reservation.explanation" value="${reservation.explanation}"/>
 
