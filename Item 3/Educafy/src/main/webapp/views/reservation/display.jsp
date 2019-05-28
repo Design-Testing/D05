@@ -46,7 +46,7 @@ img.resize {
 <h3><spring:message code="reservation.timePeriod"/></h3>
 
 <security:authorize access="hasRole('TEACHER')">
-	<jstl:if test="${reservation.status eq 'PENDING'}">
+	<jstl:if test="${reservation.status eq 'PENDING' && empty periods}">
 	<acme:button url="reservation/teacher/suggest.do?reservationId=${reservation.id}" name="suggest" code="reservation.suggest.timePeriods"/>
 	</jstl:if>
 </security:authorize>
@@ -72,6 +72,10 @@ img.resize {
 			</display:column>
 		</jstl:if>
 </display:table>
+
+<jstl:if test="${not empty error}">
+			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
+</jstl:if>
 
 <br><br>
 <h3><spring:message code="reservation.exams"/></h3>

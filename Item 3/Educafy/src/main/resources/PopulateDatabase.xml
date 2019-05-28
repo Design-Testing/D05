@@ -1385,7 +1385,7 @@
 		<property name="moment" value="2019/05/10 20:30" />
 		<property name="explanation" value="" />
 		<property name="cost" value="20.5" />
-		<property name="hoursWeek" value="5" />
+		<property name="hoursWeek" value="1" />
 		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson1" />
 		<property name="creditCard" ref="creditCard1" />
@@ -1396,7 +1396,7 @@
 		<property name="moment" value="2019/05/11 20:30" />
 		<property name="explanation" value="" />
 		<property name="cost" value="15.5" />
-		<property name="hoursWeek" value="3" />
+		<property name="hoursWeek" value="1" />
 		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson2" />
 		<property name="creditCard" ref="creditCard2" />
@@ -1414,7 +1414,7 @@
 
 	<bean id="timePeriod2" class="domain.TimePeriod">
 		<property name="startHour" value="16" />
-		<property name="endHour" value="18" />
+		<property name="endHour" value="17" />
 		<property name="dayNumber" value="1" />
 		<property name="reservation" ref="reservation2" />
 	</bean>
@@ -1596,33 +1596,11 @@
 				<value>false</value>
 				<value>false</value>
 				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
 			</list>
 		</property>
 
 		<property name="tuesday">
 			<list>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
 				<value>false</value>
 				<value>false</value>
 				<value>false</value>
@@ -1654,6 +1632,89 @@
 				<value>false</value>
 				<value>false</value>
 				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>true</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher1" />
+
+	</bean>
+
+	<bean id="schedule2" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
 				<value>false</value>
 				<value>false</value>
 				<value>false</value>
@@ -1672,17 +1733,6 @@
 			<list>
 				<value>false</value>
 				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>true</value>
 				<value>false</value>
 				<value>false</value>
 				<value>false</value>
@@ -1712,21 +1762,11 @@
 				<value>false</value>
 				<value>false</value>
 				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
-				<value>false</value>
 			</list>
 		</property>
-		<property name="teacher" ref="teacher1" />
+		<property name="teacher" ref="teacher2" />
 
 	</bean>
+	
 
 </beans>

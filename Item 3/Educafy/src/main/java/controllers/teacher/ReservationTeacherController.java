@@ -110,9 +110,9 @@ public class ReservationTeacherController extends AbstractController {
 				result = this.display(reservationId);
 			} catch (final Throwable oops) {
 				final String errormsg = "lesson.final.mode.error";
-				//TODO: Cambiar la redirección del createEditModelAndView
-				result = this.createEditModelAndView(reservation);
+				result = this.display(reservationId);
 				result.addObject(errormsg);
+				result.addObject("error", oops);
 			}
 
 		return result;
