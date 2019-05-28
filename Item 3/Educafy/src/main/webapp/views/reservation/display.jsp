@@ -50,7 +50,8 @@ img.resize {
 	<acme:button url="reservation/teacher/suggest.do?reservationId=${reservation.id}" name="suggest" code="reservation.suggest.timePeriods"/>
 	</jstl:if>
 </security:authorize>
-
+<jstl:choose>
+<jstl:when test="${not empty periods }">
 <display:table name="periods"  id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
@@ -72,13 +73,20 @@ img.resize {
 			</display:column>
 		</jstl:if>
 </display:table>
-
+</jstl:when>
+<jstl:otherwise>
+<br><br>
+<spring:message code="no.periods"/>
+</jstl:otherwise>
+</jstl:choose>
 <jstl:if test="${not empty error}">
 			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
 </jstl:if>
 
 <br><br>
 <h3><spring:message code="reservation.exams"/></h3>
+<jstl:choose>
+	<jstl:when test="${not empty exams }">
 	<display:table name="exams" id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
@@ -120,7 +128,12 @@ img.resize {
 		</jstl:if>
 		</security:authorize>
 	</display:table>
-
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="no.exams"/>
+		<br><br>
+	</jstl:otherwise>
+</jstl:choose>
 <jstl:if test="${rol eq 'teacher' }">
 	<acme:button url="exam/create.do?reservationId=${reservation.id}" name="create" code="exam.create"/>
 </jstl:if>
