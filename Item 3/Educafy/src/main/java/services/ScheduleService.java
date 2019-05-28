@@ -146,6 +146,15 @@ public class ScheduleService {
 
 	}
 
+	public Schedule save2(final Schedule schedule, final Teacher teacher) {
+		Assert.notNull(schedule);
+		final Schedule result;
+		Assert.isTrue(schedule.getTeacher().equals(teacher), "No puede actualizar un horario que no es de la asignatura del profesor.");
+		result = this.scheduleRepository.save(schedule);
+		return result;
+
+	}
+
 	/* ========================= OTHER METHODS =========================== */
 
 	public Schedule findScheduleByTeacher(final Teacher teacher) {

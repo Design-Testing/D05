@@ -138,6 +138,8 @@ public class ReservationService {
 		Assert.isTrue(this.belongsToTeacher(principal, reservation) || reservation.getStudent().equals(principal), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		final Collection<TimePeriod> periods = this.timePeriodService.findByReservation(reservation.getId());
 		final Reservation retrieved = this.findOne(reservation.getId());
+		final Teacher teacher = retrieved.getLesson().getTeacher();
+		this.timePeriodService.setScheduleFalse(periods, teacher);
 		this.timePeriodService.deleteInBatch(periods);
 		this.examService.deleteInBatch(this.examService.findAllExamsByReservation(reservation.getId()));
 		this.reservationRepository.delete(retrieved);
