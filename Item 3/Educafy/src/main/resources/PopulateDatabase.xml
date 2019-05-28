@@ -1266,8 +1266,7 @@
 
 	<bean id="exam1" class="domain.Exam">
 		<property name="title" value="Title Exam 1" />
-		<property name="score" value="10.0" />
-		<property name="status" value="EVALUATED"/>
+		<property name="status" value="PENDING"/>
 		<property name="reservation" ref="reservation1"/>
 	</bean>
 
