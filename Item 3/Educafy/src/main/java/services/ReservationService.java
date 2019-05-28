@@ -117,10 +117,9 @@ public class ReservationService {
 			Assert.notNull(reservation.getHoursWeek(), "Debe indicar las horas semanales que desea.");
 			Assert.isTrue(reservation.getStatus().equals("PENDING"));
 			reservation.setCost(reservation.getHoursWeek() * reservation.getLesson().getPrice());
-		} else if (reservation.getStatus().equals("FINAL")) {
-			Assert.isTrue(!this.findOne(reservation.getId()).getStatus().equals("FINAL"), "No se puede modificar una reserva que se encuentre en modo FINAL");
+		} else if (reservation.getStatus().equals("FINAL"))
 			Assert.notNull(reservation.getCreditCard());
-		} else if (reservation.getStatus().equals("REVIEWING"))
+		else if (reservation.getStatus().equals("REVIEWING"))
 			Assert.notNull(reservation.getExplanation(), "Debe indicar una explicacion.");
 		else if (reservation.getStatus().equals("ACCEPTED"))
 			reservation.setExplanation("");
