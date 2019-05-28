@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AssesmentService;
+import services.ReservationService;
 import services.ScheduleService;
 import services.TeacherService;
 import controllers.AbstractController;
-import controllers.SubjectController;
 import domain.Lesson;
 import domain.Schedule;
 import domain.Teacher;
@@ -25,29 +24,19 @@ import forms.LessonForm;
 public class ScheduleTeacherController extends AbstractController {
 
 	@Autowired
-	private ScheduleService		scheduleService;
+	private ScheduleService					scheduleService;
 
 	@Autowired
-	private TeacherService		teacherService;
+	private TeacherService					teacherService;
 
 	@Autowired
-	private AssesmentService	assesmentService;
+	private ReservationService				reservationService;
 
 	@Autowired
-	private SubjectController	subjectController;
+	private ReservationTeacherController	reservationTeacherController;
 
-	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
+	final String							lang	= LocaleContextHolder.getLocale().getLanguage();
 
-
-	// CREATE  ---------------------------------------------------------------
-
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		final Schedule schedule = this.scheduleService.create();
-		result = this.display(schedule.getId());
-		return result;
-	}
 
 	// DISPLAY --------------------------------------------------------
 

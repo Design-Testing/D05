@@ -19,7 +19,16 @@ img.resize {
 
 <acme:display code="reservation.status" value="${reservation.status}"/>
 
-<acme:display code="reservation.moment" value="${reservation.moment}"/>
+
+<jstl:choose>
+	<jstl:when test="${lang eq 'en' }">
+		<spring:message code="reservation.moment"/>: <fmt:formatDate value="${reservation.moment}" type="both" pattern="yyyy-MM-dd HH:mm"/>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="reservation.moment"/>: <fmt:formatDate value="${reservation.moment}" type="both" pattern="dd-MM-yyyy HH:mm"/>
+	</jstl:otherwise>
+</jstl:choose>
+<br>
 
 <acme:display code="reservation.explanation" value="${reservation.explanation}"/>
 
@@ -36,66 +45,78 @@ img.resize {
 
 <h3><spring:message code="reservation.timePeriod"/></h3>
 
+<security:authorize access="hasRole('TEACHER')">
+	<jstl:if test="${reservation.status eq 'PENDING' && empty periods}">
+	<acme:button url="reservation/teacher/suggest.do?reservationId=${reservation.id}" name="suggest" code="reservation.suggest.timePeriods"/>
+	</jstl:if>
+</security:authorize>
+
 <display:table name="periods"  id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
 		
 		<display:column property="startHour" titleKey="timePeriod.startHour" />
 		<display:column property="endHour" titleKey="timePeriod.endHour" />
-		<display:column property="dayNumber" titleKey="timePeriod.day">
+		<display:column titleKey="timePeriod.day">
 			 <jstl:choose>
-				<jstl:when test="${row.dayNumber eq 1}"><jstl:out value="Monday"></jstl:out></jstl:when>
-				<jstl:when test="${row.dayNumber eq 2}"><jstl:out value="Tuesday"/></jstl:when>
-				<jstl:when test="${row.dayNumber eq 3}"><jstl:out value="Wednesday"/></jstl:when>
-				<jstl:when test="${row.dayNumber eq 4}"><jstl:out value="Thursday"/></jstl:when>
-				<jstl:otherwise><jstl:out value="Friday"/></jstl:otherwise>				
+				<jstl:when test="${row.dayNumber eq 1}"><spring:message code="monday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 2}"><spring:message code="tuesday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 3}"><spring:message code="wednesday"/></jstl:when>
+				<jstl:when test="${row.dayNumber eq 4}"><spring:message code="thursday"/></jstl:when>
+				<jstl:otherwise><spring:message code="friday"/></jstl:otherwise>				
 			</jstl:choose> 
 		</display:column>
-		<jstl:if test="${rol eq 'teacher' }">
+		<jstl:if test="${rol eq 'teacher' && reservation.status eq 'PENDING'}">
 			<display:column>
 				<acme:button url="timePeriod/edit.do?timePeriodId=${row.id}" name="edit" code="reservation.edit"/>
 			</display:column>
-			<display:column>
-				<acme:button url="timePeriod/delete.do?timePeriodId=${row.id}" name="delete" code="reservation.delete"/>
-			</display:column>
 		</jstl:if>
 </display:table>
-<jstl:if test="${rol eq 'teacher' && !(tamañoTimePeriod eq hoursWeek)}">
-	<acme:button url="timePeriod/create.do?reservationId=${reservation.id}" name="create" code="timePeriod.create"/>
-</jstl:if>
-<br><br>
 
+<jstl:if test="${not empty error}">
+			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
+</jstl:if>
+
+<br><br>
+<h3><spring:message code="reservation.exams"/></h3>
 	<display:table name="exams" id="row"
 		requestURI="${requestURI}" pagesize="5"
 		class="displaytag">
 		
 		<display:column property="title" titleKey="exam.title" />
 		<display:column property="status" titleKey="exam.status" />
-		<jstl:if test="${row.status eq 'EVALUATED' }">
-			<display:column property="score" titleKey="exam.score" />		
-		</jstl:if>
+		
+		<display:column titleKey="exam.score">
+			<jstl:if test="${row.status eq 'EVALUATED' }">
+				<jstl:out value="${row.score}"/>
+			</jstl:if>
+		</display:column>		
+		
 		<security:authorize access="hasRole('TEACHER')">
 			<display:column>
 				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.display"/>
 			</display:column>
-			<jstl:if test="${row.status eq 'SUBMITTED' }">
-				<display:column>
+			<display:column>
+				<jstl:if test="${row.status eq 'SUBMITTED' }">
 					<acme:button url="exam/edit.do?examId=${row.id}" name="evaluate" code="exam.evaluate"/>
-				</display:column>
-			</jstl:if>
-			<jstl:if test="${row.status eq 'PENDING' }">
-				<display:column>
+				</jstl:if>
+				<jstl:if test="${row.status eq 'PENDING' }">
+					<acme:button url="exam/inprogress.do?examId=${row.id}" name="inprogress" code="exam.inprogress"/>
+				</jstl:if>
+			</display:column>
+			<display:column>
+				<jstl:if test="${row.status eq 'PENDING' }">
 					<acme:button url="exam/delete.do?examId=${row.id}" name="delete" code="exam.delete"/>
-				</display:column>
-			</jstl:if>
+				</jstl:if>
+			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('STUDENT')">
-		<jstl:if test="${reservation.status eq 'FINAL' }">
-			<jstl:if test="${row.status eq 'PENDING' }">
-				<display:column>
-					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inProgress"/>
-				</display:column>
-			</jstl:if>
+		<jstl:if test="${reservation.status eq 'FINAL' && row.status eq 'INPROGRESS' }">
+			<display:column>
+				
+					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
+				
+			</display:column>
 		</jstl:if>
 		</security:authorize>
 	</display:table>

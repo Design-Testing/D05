@@ -57,8 +57,8 @@ public class QuestionController extends AbstractController {
 
 	// CREATESAVE --------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "create")
-	public ModelAndView createSave(@Valid final Question question, @RequestParam final int examId, final BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView createSave(@Valid final Question question, final BindingResult binding, @RequestParam final int examId) {
 		ModelAndView result;
 		final Exam exam = this.examService.findOne(examId);
 		if (binding.hasErrors()) {
@@ -67,7 +67,7 @@ public class QuestionController extends AbstractController {
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
-				this.questionService.createSave(question, exam);
+				this.questionService.save(question, examId);
 				result = this.examController.display(exam.getId());
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView(question, "commit.question.create.error");
@@ -112,59 +112,6 @@ public class QuestionController extends AbstractController {
 			result = new ModelAndView("redirect:misc/403");
 		return result;
 	}
-	// SAVE --------------------------------------------------------
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Question question, @RequestParam final int examId, final BindingResult binding) {
-		ModelAndView result;
-		final Exam exam;
-		exam = this.examService.findOne(examId);
-		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(question);
-			result.addObject("exam", exam);
-			result.addObject("errors", binding.getAllErrors());
-		} else
-			try {
-				this.questionService.save(question);
-				result = this.examController.display(exam.getId());
-			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView(question, "commit.exam.save.error");
-				result.addObject("exam", exam);
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(question, "commit.exam.save.error");
-				result.addObject("exam", exam);
-				result.addObject("errors", binding.getAllErrors());
-			}
-
-		return result;
-	}
-
-	// SAVE --------------------------------------------------------
-
-	@RequestMapping(value = "/resolve", method = RequestMethod.POST, params = "resolve")
-	public ModelAndView resolve(@Valid final Question question, @RequestParam final int examId, final BindingResult binding) {
-		ModelAndView result;
-		final Exam exam;
-		exam = this.examService.findOne(examId);
-		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(question);
-			result.addObject("exam", exam);
-			result.addObject("errors", binding.getAllErrors());
-		} else
-			try {
-				this.questionService.save(question);
-				result = this.examController.display(exam.getId());
-			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView(question, "commit.exam.save.error");
-				result.addObject("exam", exam);
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(question, "commit.exam.save.error");
-				result.addObject("exam", exam);
-				result.addObject("errors", binding.getAllErrors());
-			}
-
-		return result;
-	}
 
 	// DELETE --------------------------------------------------------
 
@@ -174,7 +121,7 @@ public class QuestionController extends AbstractController {
 		final Question question = this.questionService.findOne(questionId);
 		final Exam exam = this.examService.findOne(examId);
 		try {
-			this.questionService.delete(question);
+			this.questionService.delete(question, exam);
 			result = this.examController.display(examId);
 		} catch (final Throwable oops) {
 			String errormsg = "question.delete.error";

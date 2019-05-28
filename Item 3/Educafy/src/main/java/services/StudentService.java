@@ -186,12 +186,12 @@ public class StudentService {
 		return res;
 	}
 
-	//	public List<Student> getStudentsOrderByExamScore() {
-	//		List<Student> ls = this.studentRepository.getStudentsOrderByExamScore();
-	//		if (ls.size() > 2)
-	//			ls = ls.subList(0, 3);
-	//		Assert.notNull(ls);
-	//		return ls;
-	//	}
+	public List<Student> getStudentsOrderByExamScore() {
+		List<Student> ls = this.studentRepository.getStudentsOrderByExamScore();
+		if (ls.size() > 2)
+			ls = ls.subList(0, 3);
+		Assert.notNull(ls);
+		return ls;
+	}
 
 }

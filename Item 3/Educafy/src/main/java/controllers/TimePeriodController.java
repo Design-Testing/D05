@@ -15,7 +15,6 @@ import services.ConfigurationParametersService;
 import services.ReservationService;
 import services.TimePeriodService;
 import controllers.teacher.ReservationTeacherController;
-import domain.Reservation;
 import domain.TimePeriod;
 
 @Controller
@@ -34,24 +33,6 @@ public class TimePeriodController extends AbstractController {
 	@Autowired
 	private ConfigurationParametersService	configurationParametersService;
 
-
-	// CREATE --------------------------------------------------------
-
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int reservationId) {
-
-		ModelAndView res;
-		TimePeriod timePeriod;
-		final Reservation reservation = this.reservationService.findOne(reservationId);
-
-		timePeriod = this.timePeriodService.create();
-		timePeriod.setReservation(reservation);
-		res = this.createEditModelAndView(timePeriod);
-		res.addObject("new", false);
-
-		return res;
-
-	}
 
 	// EDIT --------------------------------------------------------
 
@@ -90,24 +71,6 @@ public class TimePeriodController extends AbstractController {
 			}
 
 		return res;
-	}
-
-	// DELETE --------------------------------------------------------
-
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final int timePeriodId) {
-		ModelAndView result;
-		final TimePeriod timePeriod = this.timePeriodService.findOne(timePeriodId);
-
-		try {
-			this.timePeriodService.delete(timePeriod);
-			result = this.reservationTeacherController.display(timePeriod.getReservation().getId());
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(timePeriod, "general.commit.error");
-			result.addObject("id", timePeriod.getId());
-		}
-
-		return result;
 	}
 
 	protected ModelAndView createEditModelAndView(final TimePeriod timePeriod) {

@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ScheduleRepository;
-import domain.Reservation;
 import domain.Schedule;
 import domain.Teacher;
 import domain.TimePeriod;
@@ -50,18 +49,6 @@ public class ScheduleService {
 		monday.add(10, false);
 		monday.add(11, false);
 		monday.add(12, false);
-		monday.add(13, false);
-		monday.add(14, false);
-		monday.add(15, false);
-		monday.add(16, false);
-		monday.add(17, false);
-		monday.add(18, false);
-		monday.add(19, false);
-		monday.add(20, false);
-		monday.add(21, false);
-		monday.add(22, false);
-		monday.add(23, false);
-
 		schedule.setMonday(monday);
 
 		final List<Boolean> tuesday = new ArrayList<>();
@@ -78,17 +65,6 @@ public class ScheduleService {
 		tuesday.add(10, false);
 		tuesday.add(11, false);
 		tuesday.add(12, false);
-		tuesday.add(13, false);
-		tuesday.add(14, false);
-		tuesday.add(15, false);
-		tuesday.add(16, false);
-		tuesday.add(17, false);
-		tuesday.add(18, false);
-		tuesday.add(19, false);
-		tuesday.add(20, false);
-		tuesday.add(21, false);
-		tuesday.add(22, false);
-		tuesday.add(23, false);
 		schedule.setTuesday(tuesday);
 
 		final List<Boolean> wednesday = new ArrayList<>();
@@ -105,17 +81,6 @@ public class ScheduleService {
 		wednesday.add(10, false);
 		wednesday.add(11, false);
 		wednesday.add(12, false);
-		wednesday.add(13, false);
-		wednesday.add(14, false);
-		wednesday.add(15, false);
-		wednesday.add(16, false);
-		wednesday.add(17, false);
-		wednesday.add(18, false);
-		wednesday.add(19, false);
-		wednesday.add(20, false);
-		wednesday.add(21, false);
-		wednesday.add(22, false);
-		wednesday.add(23, false);
 		schedule.setWednesday(wednesday);
 
 		final List<Boolean> thursday = new ArrayList<>();
@@ -132,17 +97,6 @@ public class ScheduleService {
 		thursday.add(10, false);
 		thursday.add(11, false);
 		thursday.add(12, false);
-		thursday.add(13, false);
-		thursday.add(14, false);
-		thursday.add(15, false);
-		thursday.add(16, false);
-		thursday.add(17, false);
-		thursday.add(18, false);
-		thursday.add(19, false);
-		thursday.add(20, false);
-		thursday.add(21, false);
-		thursday.add(22, false);
-		thursday.add(23, false);
 		schedule.setThursday(thursday);
 
 		final List<Boolean> friday = new ArrayList<>();
@@ -159,17 +113,6 @@ public class ScheduleService {
 		friday.add(10, false);
 		friday.add(11, false);
 		friday.add(12, false);
-		friday.add(13, false);
-		friday.add(14, false);
-		friday.add(15, false);
-		friday.add(16, false);
-		friday.add(17, false);
-		friday.add(18, false);
-		friday.add(19, false);
-		friday.add(20, false);
-		friday.add(21, false);
-		friday.add(22, false);
-		friday.add(23, false);
 		schedule.setFriday(friday);
 
 		return schedule;
@@ -254,88 +197,4 @@ public class ScheduleService {
 		return saved;
 	}
 
-	public Collection<TimePeriod> suggestTimePeriod(final int reservationId) {
-		final Collection<TimePeriod> suggests = new ArrayList<>();
-		final Reservation reservation = this.reservationService.findOne(reservationId);
-		final Teacher teacher = this.teacherService.findTeacherByReservation(reservationId);
-		final Schedule schedule = this.findScheduleByTeacher(teacher);
-
-		if (schedule.getMonday().contains(false))
-			for (int i = 0; i < schedule.getMonday().size(); i++) {
-				final List<Boolean> newMonday = (List<Boolean>) schedule.getMonday();
-				if (!newMonday.get(i)) {
-					final TimePeriod suggest = new TimePeriod();
-					suggest.setDayNumber(1);
-					suggest.setStartHour(i);
-					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
-
-					if (reservation.getHoursWeek() == suggests.size())
-						break;
-				}
-			}
-		else if (schedule.getTuesday().contains(false))
-			for (int i = 0; i < schedule.getTuesday().size(); i++) {
-				final List<Boolean> newTuesday = (List<Boolean>) schedule.getTuesday();
-				if (!newTuesday.get(i)) {
-					final TimePeriod suggest = new TimePeriod();
-					suggest.setDayNumber(2);
-					suggest.setStartHour(i);
-					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
-
-					if (reservation.getHoursWeek() == suggests.size())
-						break;
-				}
-			}
-		else if (schedule.getWednesday().contains(false))
-			for (int i = 0; i < schedule.getWednesday().size(); i++) {
-				final List<Boolean> newWednesday = (List<Boolean>) schedule.getWednesday();
-				if (!newWednesday.get(i)) {
-					final TimePeriod suggest = new TimePeriod();
-					suggest.setDayNumber(3);
-					suggest.setStartHour(i);
-					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
-
-					if (reservation.getHoursWeek() == suggests.size())
-						break;
-				}
-			}
-		else if (schedule.getThursday().contains(false))
-			for (int i = 0; i < schedule.getThursday().size(); i++) {
-				final List<Boolean> newThursday = (List<Boolean>) schedule.getThursday();
-				if (!newThursday.get(i)) {
-					final TimePeriod suggest = new TimePeriod();
-					suggest.setDayNumber(4);
-					suggest.setStartHour(i);
-					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
-
-					if (reservation.getHoursWeek() == suggests.size())
-						break;
-				}
-			}
-		else if (schedule.getFriday().contains(false))
-			for (int i = 0; i < schedule.getFriday().size(); i++) {
-				final List<Boolean> newFriday = (List<Boolean>) schedule.getFriday();
-				if (!newFriday.get(i)) {
-					final TimePeriod suggest = new TimePeriod();
-					suggest.setDayNumber(5);
-					suggest.setStartHour(i);
-					suggest.setEndHour(i + 1);
-
-					suggests.add(suggest);
-
-					if (reservation.getHoursWeek() == suggests.size())
-						break;
-				}
-			}
-
-		return suggests;
-	}
 }
