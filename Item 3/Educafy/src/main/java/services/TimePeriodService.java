@@ -72,8 +72,11 @@ public class TimePeriodService {
 		Schedule schedule = this.scheduleService.findScheduleByTeacher(this.teacherService.findByPrincipal());
 		Assert.isTrue(timePeriod.getReservation().getStatus().equals("PENDING"), "No puede añadir un timePeriod si la reserva está en Final");
 		schedule = this.setScheduleTrue(timePeriod);
-		if (timePeriod.getId() != 0)
+		if (timePeriod.getId() != 0) {
+			final TimePeriod tPeriod = this.findOne(timePeriod.getId());
+			this.setScheduleFalse(tPeriod);
 			Assert.isTrue(reservations.contains(timePeriod.getReservation()), "No puedes modificar un periodo de tiempo que no sea de su reserva.");
+		}
 		final TimePeriod tPeriod = this.timePeriodRepository.save(timePeriod);
 		Assert.notNull(tPeriod);
 		return tPeriod;
