@@ -103,4 +103,8 @@ public class QuestionService {
 	public void deleteInBatch(final Collection<Question> questions) {
 		this.questionRepository.deleteInBatch(questions);
 	}
+
+	public void flush() {
+		this.questionRepository.flush();
+	}
 }
