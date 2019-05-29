@@ -159,7 +159,7 @@ public class ReservationService {
 		Assert.isTrue(reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Pendiente debe de estar anteriormente Aceptada.");
 		reservation.setStatus("REVIEWING");
 		result = this.save(reservation);
-		return reservation;
+		return result;
 	}
 
 	public Reservation toAcceptedMode(final Reservation reservation) {
@@ -183,7 +183,7 @@ public class ReservationService {
 		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("ACCEPTED") || reservation.getStatus().equals("REVIEWING"), "Para poner una Reserva en Rechaza debe de estar anteriormente Aceptada o Pendiente.");
 		reservation.setStatus("REJECTED");
 		result = this.save(reservation);
-		return reservation;
+		return result;
 	}
 
 	public Reservation toFinalMode(final int reservationId) {
