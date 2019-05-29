@@ -17,22 +17,22 @@
 <tiles-definitions>
 
 	<definition name="lesson/display" extends="master.page">	
-		<put-attribute name="title" value="Lección: Mostrar" />
+		<put-attribute name="title" value="Clase: Mostrar" />
 		<put-attribute name="body" value="/views/lesson/display.jsp" />
 	</definition>
 	
 	<definition name="lesson/list" extends="master.page">	
-		<put-attribute name="title" value="Lección: Listar" />
+		<put-attribute name="title" value="Clase: Listar" />
 		<put-attribute name="body" value="/views/lesson/list.jsp" />
 	</definition>
 	
 	<definition name="lesson/edit" extends="master.page">	
-		<put-attribute name="title" value="Lección: Editar" />
+		<put-attribute name="title" value="Clase: Editar" />
 		<put-attribute name="body" value="/views/lesson/edit.jsp" />
 	</definition>
 	
 	<definition name="lesson/error" extends="master.page">	
-		<put-attribute name="title" value="Lección: Error" />
+		<put-attribute name="title" value="Clase: Error" />
 		<put-attribute name="body" value="/views/lesson/error.jsp" />
 	</definition>
 	
