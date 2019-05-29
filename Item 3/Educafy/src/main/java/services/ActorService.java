@@ -175,8 +175,7 @@ public class ActorService {
 		auths.add(auth);
 		user.setAuthorities(auths);
 
-		// TODO
-		Assert.isTrue(a.getSpammer() /* || (a.getScore() < -0.5) */, "Para banear un actor este debe ser spammer o tener una puntuación menor que -0.5");
+		Assert.isTrue(a.getSpammer(), "Para banear un actor este debe ser spammer");
 		this.userAccountService.save(user);
 
 		this.update(a);
