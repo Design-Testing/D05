@@ -47,5 +47,5 @@ img.resize {
 <br><br>
 
 
-<acme:button url="lesson/display.do?lessonId=${assesment.lesson.id}" name="back" code="lesson.back" />
+<acme:button url="lesson/display.do?lessonId=${assesment.lesson.id}" name="back" code="lesson" />
 

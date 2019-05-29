@@ -75,6 +75,7 @@
  		<security:intercept-url pattern="/lesson/teacher/**" access="hasRole('TEACHER')" /> 
  		<security:intercept-url pattern="/lesson/student/**" access="hasRole('STUDENT')" /> 
  		
+ 		
  		<!-- RESERVATION -->
  		<security:intercept-url pattern="/reservation/teacher/**" access="hasRole('TEACHER')" /> 
  		<security:intercept-url pattern="/reservation/student/**" access="hasRole('STUDENT')" /> 
