@@ -397,7 +397,7 @@ public class MessageService {
 		outboxMessages.add(sent);
 		outbox.setMessages(outboxMessages);
 		for (final Actor r : recipients) {
-			inbox = this.folderService.findInboxByUserId(r.getUserAccount().getId());
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
 			final Collection<Message> inboxMessages = inbox.getMessages();
 			inboxMessages.add(sent);
 			inbox.setMessages(inboxMessages);
