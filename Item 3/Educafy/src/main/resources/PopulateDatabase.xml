@@ -338,7 +338,7 @@
 		<property name="actor" ref="student1" />
 		<property name="messages">
 			<list>
-				<!-- <ref bean="message1"/> -->
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -349,7 +349,11 @@
 		<property name="actor" ref="student1" />
 		<property name="messages">
 			<list>
-				<!-- <ref bean="message1"/> -->
+				<ref bean="message2"/>
+				<ref bean="message3"/>
+				<ref bean="message4"/>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
 			</list>
 		</property>
 	</bean>
@@ -454,7 +458,11 @@
 		<property name="actor" ref="student3" />
 		<property name="messages">
 			<list>
-				<!-- <ref bean="message1"/> -->
+				<ref bean="message2"/>
+				<ref bean="message3"/>
+				<ref bean="message4"/>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
 			</list>
 		</property>
 	</bean>
@@ -503,6 +511,121 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- ========================================= -->
+		<bean id="message1" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="Clases particulares" />
+		<property name="body" value="Clases de matematicas sevilla" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Mates</value>
+				<value>Sevilla</value>
+			</list>
+		</property>
+		<property name="sender" ref="student1" />
+		<property name="recipients">
+			<list>
+				<ref bean="teacher1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message3" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message4" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message5" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message6" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
 
 	<!-- ========================================= -->
 
@@ -523,7 +646,7 @@
 		<property name="actor" ref="teacher1" />
 		<property name="messages">
 			<list>
-				<!-- <ref bean="message1"/> -->
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -613,6 +736,65 @@
 		<property name="name" value="Spam box" />
 		<property name="isSystemFolder" value="true" />
 		<property name="actor" ref="teacher2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	
+	<!-- ========================================= -->
+
+	<bean id="outBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxTeacher3" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
 		<property name="messages">
 			<list>
 				<!-- <ref bean="message1"/> -->
@@ -875,7 +1057,7 @@
 		<property name="email" value="cejas@gmail.es" />
 		<property name="phone" value="+34424424424" />
 		<property name="address" value="Avd de la Paz" />
-		<property name="spammer" value="false" />
+		<property name="spammer" value="true" />
 		<property name="userAccount" ref="userAccountStudent3" />
 		<property name="finder" ref="finder3" />
 	</bean>

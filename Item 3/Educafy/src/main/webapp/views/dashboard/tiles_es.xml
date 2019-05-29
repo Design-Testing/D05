@@ -8,7 +8,7 @@
 
 
 	<definition name="dashboard/statistics" extends="master.page">	
-		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="title" value="Cuadro de mando" />
 		<put-attribute name="body" value="/views/dashboard/statistics.jsp" />
 	</definition>
 	
