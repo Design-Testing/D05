@@ -23,16 +23,13 @@ public class LessonServiceTest extends AbstractTest {
 	// Services
 
 	@Autowired
-	private LessonService		lessonService;
-
-	@Autowired
-	private ReservationService	reservationService;
+	private LessonService	lessonService;
 
 
-	/* ========================= Test Create and Save Comment =========================== */
+	/* ========================= Test Create and Save =========================== */
 
 	@Test
-	public void driverCreateAndSaveComment() {
+	public void driverCreateAndSave() {
 
 		final Object testingData[][] = {
 			{

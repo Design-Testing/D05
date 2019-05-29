@@ -1380,7 +1380,7 @@
 		======= Reservation ========= =================================================================== -->
 
 	<bean id="reservation1" class="domain.Reservation">
-		<property name="status" value="FINAL" />
+		<property name="status" value="PENDING" />
 		<property name="moment" value="2019/05/10 20:30" />
 		<property name="explanation" value="" />
 		<property name="cost" value="20.5" />
@@ -1397,9 +1397,21 @@
 		<property name="cost" value="15.5" />
 		<property name="hoursWeek" value="1" />
 		<property name="student" ref="student1" />
+		<property name="lesson" ref="lesson3" />
+		<property name="creditCard" ref="creditCard2" />
+	</bean>
+	
+	<bean id="reservation3" class="domain.Reservation">
+		<property name="status" value="FINAL" />
+		<property name="moment" value="2019/05/11 20:30" />
+		<property name="explanation" value="" />
+		<property name="cost" value="15.5" />
+		<property name="hoursWeek" value="1" />
+		<property name="student" ref="student1" />
 		<property name="lesson" ref="lesson2" />
 		<property name="creditCard" ref="creditCard2" />
 	</bean>
+	
 	
 		<!-- =================================================================== 
 		======= TimePeriod ========= =================================================================== -->
@@ -1416,6 +1428,13 @@
 		<property name="endHour" value="17" />
 		<property name="dayNumber" value="1" />
 		<property name="reservation" ref="reservation2" />
+	</bean>
+	
+	<bean id="timePeriod3" class="domain.TimePeriod">
+		<property name="startHour" value="17" />
+		<property name="endHour" value="18" />
+		<property name="dayNumber" value="1" />
+		<property name="reservation" ref="reservation3" />
 	</bean>
 	
 

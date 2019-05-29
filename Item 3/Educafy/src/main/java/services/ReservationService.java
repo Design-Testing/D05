@@ -115,17 +115,19 @@ public class ReservationService {
 			reservation.setCost(reservation.getHoursWeek() * reservation.getLesson().getPrice());
 		} else if (reservation.getStatus().equals("FINAL"))
 			Assert.notNull(reservation.getCreditCard());
-		else if (reservation.getStatus().equals("REVIEWING"))
+		else if (reservation.getStatus().equals("REVIEWING")) {
 			Assert.notNull(reservation.getExplanation(), "Debe indicar una explicacion.");
-		else if (reservation.getStatus().equals("ACCEPTED"))
+			Assert.isTrue(reservation.getExplanation() != "", "Debe indicar una explanation");
+		} else if (reservation.getStatus().equals("ACCEPTED"))
 			reservation.setExplanation("");
-		else if (reservation.getStatus().equals("REJECTED"))
+		else if (reservation.getStatus().equals("REJECTED")) {
 			Assert.notNull(reservation.getExplanation(), "Debe indicar una explicacion.");
+			Assert.isTrue(reservation.getExplanation() != "", "Debe indicar una explanation");
+		}
 		result = this.reservationRepository.save(reservation);
 		return result;
 
 	}
-
 	public void delete(final Reservation reservation) {
 		Assert.notNull(reservation);
 		Assert.isTrue(reservation.getId() != 0);

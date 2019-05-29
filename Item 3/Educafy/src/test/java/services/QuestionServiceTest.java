@@ -30,10 +30,10 @@ public class QuestionServiceTest extends AbstractTest {
 	private QuestionService	questionService;
 
 
-	/* ========================= Test Create and Save Comment =========================== */
+	/* ========================= Test Create and Save =========================== */
 
 	@Test
-	public void driverCreateAndSaveComment() {
+	public void driverCreateAndSave() {
 
 		final Object testingData[][] = {
 			{
