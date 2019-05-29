@@ -1,6 +1,7 @@
 
 package controllers.administrator;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import controllers.AbstractController;
 import domain.Actor;
 
 @Controller
-@RequestMapping(value = "/ban/administrator")
+@RequestMapping(value = "/actor/administrator")
 public class BanAdministratorController extends AbstractController {
 
 	@Autowired
@@ -28,14 +29,11 @@ public class BanAdministratorController extends AbstractController {
 	public ModelAndView listBannedSpammers() {
 		final ModelAndView result;
 
-		final List<Actor> actors = (List<Actor>) this.actorService.findAll();
+		final Collection<Actor> actors = this.actorService.findAllSpammers();
 		Assert.notNull(actors);
-		final List<Boolean> bannedList = this.actorService.getBannedList(actors);
-		Assert.notNull(bannedList);
 
 		result = new ModelAndView("ban/list");
 		result.addObject("actors", actors);
-		result.addObject("bannedList", bannedList);
 		result.addObject("requestURI", "ban/administrator/list.do");
 
 		return result;

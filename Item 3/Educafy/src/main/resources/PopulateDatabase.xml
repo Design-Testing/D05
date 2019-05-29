@@ -156,6 +156,7 @@
 		<property name="email" value="correo@gmail.com" />
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountSystem" />
 	</bean>
 	<!-- ========================= ======== =========================== -->
@@ -750,6 +751,7 @@
 		<property name="email" value="conwdasto@jmsx.es" />
 		<property name="phone" value="+34647607406" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountAdmin1" />
 	</bean>
 
@@ -765,6 +767,7 @@
 		<property name="email" value="lusi@gamil.es" />
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountAdmin2" />
 	</bean>
 
@@ -784,6 +787,7 @@
 		<property name="email" value="teacher1@gmail.es" />
 		<property name="phone" value="+34647607400" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountTeacher1" />
 	</bean>
 
@@ -799,6 +803,7 @@
 		<property name="email" value="teacher2@gmail.es" />
 		<property name="phone" value="+34647807400" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountTeacher2" />
 	</bean>
 	
@@ -814,6 +819,7 @@
 		<property name="email" value="teacher3@gmail.es" />
 		<property name="phone" value="+34647807400" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountTeacher3" />
 	</bean>
 
@@ -834,6 +840,7 @@
 		<property name="email" value="garcia@gmail.es" />
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountStudent1" />
 		<property name="finder" ref="finder1" />
 
@@ -851,6 +858,7 @@
 		<property name="email" value="lanzas@gmail.es" />
 		<property name="phone" value="+34647307406" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountStudent2" />
 		<property name="finder" ref="finder2" />
 	</bean>
@@ -867,6 +875,7 @@
 		<property name="email" value="cejas@gmail.es" />
 		<property name="phone" value="+34424424424" />
 		<property name="address" value="Avd de la Paz" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountStudent3" />
 		<property name="finder" ref="finder3" />
 	</bean>
@@ -888,6 +897,7 @@
 		<property name="email" value="certifier1@gmail.es" />
 		<property name="phone" value="+34647307480" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountCertifier1" />
 	</bean>
 
@@ -903,6 +913,7 @@
 		<property name="email" value="certifier2@gmail.es" />
 		<property name="phone" value="+34647307484" />
 		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
 		<property name="userAccount" ref="userAccountCertifier2" />
 	</bean>
 

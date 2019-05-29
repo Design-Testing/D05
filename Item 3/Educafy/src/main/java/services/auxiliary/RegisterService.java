@@ -49,6 +49,7 @@ public class RegisterService {
 		Administrator result;
 		final UserAccount ua = admin.getUserAccount();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		this.administratorService.findByPrincipal();
 		final String hash = encoder.encodePassword(ua.getPassword(), null);
 		if (admin.getId() == 0) {
 			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
@@ -140,6 +141,7 @@ public class RegisterService {
 		final UserAccount ua = certifier.getUserAccount();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		final String hash = encoder.encodePassword(ua.getPassword(), null);
+		this.administratorService.findByPrincipal();
 		if (certifier.getId() == 0) {
 			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
 			ua.setPassword(hash);
@@ -176,7 +178,6 @@ public class RegisterService {
 		result.setPhoto(actor.getPhoto());
 		result.setSurname(actor.getSurname());
 		result.setVersion(actor.getVersion());
-		// CreditCard
 
 		result.setUserAccountpassword(actor.getUserAccount().getPassword());
 		result.setUserAccountuser(actor.getUserAccount().getUsername());
