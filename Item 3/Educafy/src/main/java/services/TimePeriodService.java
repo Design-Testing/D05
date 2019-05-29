@@ -279,7 +279,7 @@ public class TimePeriodService {
 		Assert.notNull(schedule);
 		final Collection<TimePeriod> timePeriods = this.findByReservation(reservationId);
 		Assert.isTrue(reservation.getHoursWeek() > timePeriods.size(), "El número de tramos horarios debe ser menor o igual a las horas semanales solicitadas.");
-		Assert.isTrue(this.timePeriodFree(schedule) >= reservation.getHoursWeek(), "El número de tramos horarios debe ser mayor o igual a las horas semanales solicitadas.");
+		Assert.isTrue(this.timePeriodFree(schedule) >= reservation.getHoursWeek(), "El número de tramos horarios libres debe ser mayor o igual a las horas semanales solicitadas.");
 
 		final List<Boolean> newMonday = (List<Boolean>) schedule.getMonday();
 		final List<Boolean> newTuesday = (List<Boolean>) schedule.getTuesday();
