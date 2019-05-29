@@ -405,4 +405,8 @@ public class MessageService {
 		}
 	}
 
+	public void flush() {
+		this.messageRepository.flush();
+	}
+
 }

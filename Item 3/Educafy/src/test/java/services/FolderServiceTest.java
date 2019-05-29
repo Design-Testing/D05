@@ -20,7 +20,7 @@ import domain.Message;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-	"classpath:spring/datasource.xml", "classpath:spring/config/packages.xml"
+	"classpath:spring/junit.xml"
 })
 @Transactional
 public class FolderServiceTest extends AbstractTest {
@@ -39,17 +39,17 @@ public class FolderServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				//				A: Educafy Crear y guardar una carpeta
-				//				B: Test Positivo: Creación correcta de un comment
+				//				A: Un actor crea una carpeta
+				//				B: Test Positivo: Creación correcta de una carpeta
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"admin1", "carpeta1", false, new ArrayList<>(), null
 			}, {
-				//				A: Educafy Crear y guardar un assesment
-				//				B: Test Negativo: Creación incorrecta de un comment, text vacío
+				//				A: Un actor crea una carpeta
+				//				B: Test Negativo: Creación incorrecta de una carpeta, name vacio
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", "carpeta1", false, new ArrayList<>(), ConstraintViolationException.class
+				"admin1", "", false, new ArrayList<>(), ConstraintViolationException.class
 			}
 
 		};
@@ -60,12 +60,12 @@ public class FolderServiceTest extends AbstractTest {
 
 		Class<?> caught;
 		final Folder folder;
-		final Actor principal = this.actorService.findByPrincipal();
 
 		caught = null;
 
 		try {
 			this.authenticate(admin);
+			final Actor principal = this.actorService.findByPrincipal();
 
 			folder = this.folderService.create();
 			folder.setName(name);
@@ -88,17 +88,17 @@ public class FolderServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				//				A: Educafy Crear y guardar una carpeta
-				//				B: Test Positivo: Creación correcta de un comment
+				//				A: Editar una carpeta
+				//				B: Test Positivo: Creación correcta
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"admin1", "carpeta1", false, new ArrayList<>(), null
 			}, {
-				//				A: Educafy Crear y guardar un assesment
-				//				B: Test Negativo: Creación incorrecta de un comment, text vacío
+				//				A: Editar una carpeta
+				//				B: Test Negativo: Creación incorrecta , name null
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", "carpeta1", false, new ArrayList<>(), ConstraintViolationException.class
+				"admin1", null, false, new ArrayList<>(), NullPointerException.class
 			}
 
 		};
@@ -109,14 +109,13 @@ public class FolderServiceTest extends AbstractTest {
 
 		Class<?> caught;
 		final Folder folder;
-		final Actor principal = this.actorService.findByPrincipal();
 
 		caught = null;
 
 		try {
 			this.authenticate(admin);
-
-			folder = this.folderService.create();
+			final Actor principal = this.actorService.findByPrincipal();
+			folder = this.folderService.findInboxByUserId(principal.getUserAccount().getId());
 			folder.setName(name);
 			folder.setIsSystemFolder(isSystemFolder);
 			folder.setMessages(messages);
