@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.Validator;
 
 import repositories.ReservationRepository;
 import security.Authority;
@@ -43,9 +42,6 @@ public class ReservationService {
 
 	@Autowired
 	private TimePeriodService		timePeriodService;
-
-	@Autowired
-	private Validator				validator;
 
 	@Autowired
 	private MessageService			messageService;
@@ -242,6 +238,10 @@ public class ReservationService {
 		final Double[] res = this.reservationRepository.getStatisticsOfWeeklyCost();
 		Assert.notNull(res);
 		return res;
+	}
+
+	public void flush() {
+		this.reservationRepository.flush();
 	}
 
 }

@@ -11,19 +11,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import utilities.AbstractTest;
-import domain.Exam;
+import domain.Lesson;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class ExamServiceTest extends AbstractTest {
+public class LessonServiceTest extends AbstractTest {
 
 	// Services
 
 	@Autowired
-	private ExamService			examService;
+	private LessonService		lessonService;
 
 	@Autowired
 	private ReservationService	reservationService;
@@ -36,35 +36,36 @@ public class ExamServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				//				A: Educafy Crear y guardar un exam
-				//				B: Test Positivo: Creación correcta de un exam
+				//				A: Educafy Crear y guardar una Lesson
+				//				B: Test Positivo: Creación correcta de una Lesson
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "reservation1", "Exam test", null
+				"teacher1", "subject1", "Lesson test", "Description test", null
 			}, {
-				//				A: Educafy Crear y guardar un exam
-				//				B: Test Negativo: Creación incorrecta de un exam, title vacío
+				//				A: Educafy Crear y guardar una Lesson
+				//				B: Test Negativo: Creación incorrecta de una Lesson, title vacío
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "reservation1", "", ConstraintViolationException.class
+				"teacher1", "subject1", "", "Description test", ConstraintViolationException.class
 			}
 
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateCreateAndSave((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+			this.templateCreateAndSave((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
 	}
-	private void templateCreateAndSave(final String teacher, final String reservation, final String title, final Class<?> expected) {
+	private void templateCreateAndSave(final String teacher, final String subject, final String title, final String description, final Class<?> expected) {
 
 		Class<?> caught;
-		Exam exam;
+		Lesson lesson;
 		caught = null;
 
 		try {
 			this.authenticate(teacher);
-			exam = this.examService.create();
-			exam.setTitle(title);
-			this.examService.save(exam, super.getEntityId(reservation));
-			this.examService.flush();
+			lesson = this.lessonService.create();
+			lesson.setTitle(title);
+			lesson.setDescription(description);
+			this.lessonService.save(lesson, super.getEntityId(subject));
+			this.lessonService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
