@@ -377,4 +377,8 @@ public class TimePeriodService {
 
 		return suggests;
 	}
+
+	public void flush() {
+		this.timePeriodRepository.flush();
+	}
 }
