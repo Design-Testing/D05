@@ -17,23 +17,13 @@
 <tiles-definitions>
 	
 	<definition name="student/edit" extends="master.page">	
-		<put-attribute name="title" value="student: Edit" />
+		<put-attribute name="title" value="Student: Edit" />
 		<put-attribute name="body" value="/views/student/edit.jsp" />
 	</definition>
 	
 	<definition name="student/display" extends="master.page">	
-		<put-attribute name="title" value="student: Display" />
+		<put-attribute name="title" value="Student: Display" />
 		<put-attribute name="body" value="/views/student/display.jsp" />
-	</definition>
-	
-	<definition name="student/display2" extends="master.page">	
-		<put-attribute name="title" value="student: Display" />
-		<put-attribute name="body" value="/views/student/display2.jsp" />
-	</definition>
-	
-	<definition name="student/list" extends="master.page">	
-		<put-attribute name="title" value="student: List" />
-		<put-attribute name="body" value="/views/student/list.jsp" />
 	</definition>
 	
 </tiles-definitions>

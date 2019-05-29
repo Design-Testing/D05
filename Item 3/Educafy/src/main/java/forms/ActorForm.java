@@ -8,14 +8,11 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
@@ -32,7 +29,6 @@ public class ActorForm extends DomainEntity {
 	private String				email;
 	private String				phone;
 	private String				address;
-	private double				vat;
 
 	private Boolean				termsAndCondicions;
 
@@ -130,15 +126,6 @@ public class ActorForm extends DomainEntity {
 		this.address = address;
 	}
 
-	//	@Range(min = (long) -1.00, max = (long) 1.00)
-	//	public Double getScore() {
-	//		return this.score;
-	//	}
-	//
-	//	public void setScore(final Double score) {
-	//		this.score = score;
-	//	}
-
 	//	public Boolean getSpammer() {
 	//		return this.spammer;
 	//	}
@@ -146,17 +133,6 @@ public class ActorForm extends DomainEntity {
 	//	public void setSpammer(final Boolean spammer) {
 	//		this.spammer = spammer;
 	//	}
-
-	@NotNull
-	@Range(min = 0, max = 0)
-	@Digits(integer = 1, fraction = 2)
-	public double getVat() {
-		return this.vat;
-	}
-
-	public void setVat(final double vat) {
-		this.vat = vat;
-	}
 
 	@Override
 	public String toString() {

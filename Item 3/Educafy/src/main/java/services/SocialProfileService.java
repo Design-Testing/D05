@@ -76,4 +76,8 @@ public class SocialProfileService {
 
 	}
 
+	public void flush() {
+		this.socialProfileRepository.flush();
+	}
+
 }

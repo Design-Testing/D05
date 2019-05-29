@@ -17,6 +17,8 @@ import services.TeacherService;
 import services.UserAccountService;
 import domain.Actor;
 import domain.Administrator;
+import domain.Certifier;
+import domain.Student;
 import domain.Teacher;
 import forms.ActorForm;
 
@@ -47,6 +49,7 @@ public class RegisterService {
 		Administrator result;
 		final UserAccount ua = admin.getUserAccount();
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		this.administratorService.findByPrincipal();
 		final String hash = encoder.encodePassword(ua.getPassword(), null);
 		if (admin.getId() == 0) {
 			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
@@ -73,36 +76,36 @@ public class RegisterService {
 		return result;
 	}
 
-	//	public Student saveStudent(final Student student, final BindingResult binding) {
-	//		Student result;
-	//		final UserAccount ua = student.getUserAccount();
-	//		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-	//		final String hash = encoder.encodePassword(ua.getPassword(), null);
-	//		if (student.getId() == 0) {
-	//			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
-	//			ua.setPassword(hash);
-	//			student.setUserAccount(ua);
-	//			result = this.studentService.save(student);
-	//			UserAccount uaSaved = result.getUserAccount();
-	//			uaSaved.setAuthorities(ua.getAuthorities());
-	//			uaSaved.setUsername(ua.getUsername());
-	//			uaSaved.setPassword(ua.getPassword());
-	//			uaSaved = this.userAccountService.save(uaSaved);
-	//			result.setUserAccount(uaSaved);
-	//		} else {
-	//			final Student old = this.studentService.findOne(student.getId());
-	//
-	//			ua.setPassword(hash);
-	//			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
-	//				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
-	//
-	//			result = this.studentService.save(student);
-	//
-	//		}
-	//
-	//		return result;
-	//	}
-	//
+	public Student saveStudent(final Student student, final BindingResult binding) {
+		Student result;
+		final UserAccount ua = student.getUserAccount();
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String hash = encoder.encodePassword(ua.getPassword(), null);
+		if (student.getId() == 0) {
+			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+			ua.setPassword(hash);
+			student.setUserAccount(ua);
+			result = this.studentService.save(student);
+			UserAccount uaSaved = result.getUserAccount();
+			uaSaved.setAuthorities(ua.getAuthorities());
+			uaSaved.setUsername(ua.getUsername());
+			uaSaved.setPassword(ua.getPassword());
+			uaSaved = this.userAccountService.save(uaSaved);
+			result.setUserAccount(uaSaved);
+		} else {
+			final Student old = this.studentService.findOne(student.getId());
+
+			ua.setPassword(hash);
+			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
+				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+
+			result = this.studentService.save(student);
+
+		}
+
+		return result;
+	}
+
 	public Teacher saveTeacher(final Teacher teacher, final BindingResult binding) {
 		Teacher result;
 		final UserAccount ua = teacher.getUserAccount();
@@ -133,35 +136,36 @@ public class RegisterService {
 		return result;
 	}
 
-	//	public Certifier saveCertifier(final Certifier certifier, final BindingResult binding) {
-	//		Certifier result;
-	//		final UserAccount ua = certifier.getUserAccount();
-	//		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-	//		final String hash = encoder.encodePassword(ua.getPassword(), null);
-	//		if (certifier.getId() == 0) {
-	//			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
-	//			ua.setPassword(hash);
-	//			certifier.setUserAccount(ua);
-	//			result = this.certifierService.save(certifier);
-	//			UserAccount uaSaved = result.getUserAccount();
-	//			uaSaved.setAuthorities(ua.getAuthorities());
-	//			uaSaved.setUsername(ua.getUsername());
-	//			uaSaved.setPassword(ua.getPassword());
-	//			uaSaved = this.userAccountService.save(uaSaved);
-	//			result.setUserAccount(uaSaved);
-	//		} else {
-	//			final Certifier old = this.certifierService.findOne(certifier.getId());
-	//
-	//			ua.setPassword(hash);
-	//			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
-	//				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
-	//
-	//			result = this.certifierService.save(certifier);
-	//
-	//		}
-	//
-	//		return result;
-	//	}
+	public Certifier saveCertifier(final Certifier certifier, final BindingResult binding) {
+		Certifier result;
+		final UserAccount ua = certifier.getUserAccount();
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String hash = encoder.encodePassword(ua.getPassword(), null);
+		this.administratorService.findByPrincipal();
+		if (certifier.getId() == 0) {
+			Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+			ua.setPassword(hash);
+			certifier.setUserAccount(ua);
+			result = this.certifierService.save(certifier);
+			UserAccount uaSaved = result.getUserAccount();
+			uaSaved.setAuthorities(ua.getAuthorities());
+			uaSaved.setUsername(ua.getUsername());
+			uaSaved.setPassword(ua.getPassword());
+			uaSaved = this.userAccountService.save(uaSaved);
+			result.setUserAccount(uaSaved);
+		} else {
+			final Certifier old = this.certifierService.findOne(certifier.getId());
+
+			ua.setPassword(hash);
+			if (!old.getUserAccount().getUsername().equals(ua.getUsername()))
+				Assert.isTrue(this.userAccountRepository.findByUsername(ua.getUsername()) == null, "The username is register");
+
+			result = this.certifierService.save(certifier);
+
+		}
+
+		return result;
+	}
 
 	public ActorForm inyect(final Actor actor) {
 		final ActorForm result = new ActorForm();
@@ -173,9 +177,7 @@ public class RegisterService {
 		result.setPhone(actor.getPhone());
 		result.setPhoto(actor.getPhoto());
 		result.setSurname(actor.getSurname());
-		result.setVat(actor.getVat());
 		result.setVersion(actor.getVersion());
-		// CreditCard
 
 		result.setUserAccountpassword(actor.getUserAccount().getPassword());
 		result.setUserAccountuser(actor.getUserAccount().getUsername());

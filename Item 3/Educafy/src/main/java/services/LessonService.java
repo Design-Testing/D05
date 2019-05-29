@@ -16,6 +16,7 @@ import org.springframework.validation.Validator;
 
 import repositories.LessonRepository;
 import domain.Assesment;
+import domain.Comment;
 import domain.Lesson;
 import domain.Reservation;
 import domain.Student;
@@ -44,6 +45,9 @@ public class LessonService {
 
 	@Autowired
 	private SubjectService		subjectService;
+
+	@Autowired
+	private CommentService		commentService;
 
 	@Autowired
 	private Validator			validator;
@@ -101,6 +105,8 @@ public class LessonService {
 		final List<Reservation> reservations = (List<Reservation>) this.reservationService.findAllReservationByLesson(lesson.getId());
 		Assert.isTrue(reservations.isEmpty(), "No puede borrar una lesson que tenga reservations.");
 		final List<Assesment> assesments = (List<Assesment>) this.assesmentService.findAllAssesmentByLesson(lesson.getId());
+		final List<Comment> comments = (List<Comment>) this.deleteCommentsByAssesment(assesments);
+		this.commentService.deleteInBatch(comments);
 		this.assesmentService.deleteInBatch(assesments);
 		this.lessonRepository.delete(retrieved);
 	}
@@ -205,6 +211,38 @@ public class LessonService {
 		Collection<Lesson> res = new ArrayList<>();
 		final Student principal = this.studentService.findByPrincipal();
 		res = this.lessonRepository.findAllLessonByStudentId(principal.getUserAccount().getId());
+		Assert.notNull(res);
+		return res;
+	}
+
+	private Collection<Comment> deleteCommentsByAssesment(final Collection<Assesment> assesments) {
+		final Collection<Comment> res = new ArrayList<>();
+
+		for (final Assesment a : assesments)
+			res.addAll(this.commentService.findAllCommentsByAssesment(a.getId()));
+		return res;
+	}
+
+	public Collection<Lesson> findLessons(final String keyword, final String subjectLevel, final String subjectName, final String teacherName) {
+		final Collection<Lesson> res = this.lessonRepository.findLessons(keyword, subjectLevel, subjectName, teacherName);
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfLessonsPerTeacher() {
+		final Double[] res = this.lessonRepository.getStatisticsOfLessonsPerTeacher();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfLessonPrice() {
+		final Double[] res = this.lessonRepository.getStatisticsOfLessonPrice();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Double[] getStatisticsOfReservationPerLesson() {
+		final Double[] res = this.lessonRepository.getStatisticsOfReservationPerLesson();
 		Assert.notNull(res);
 		return res;
 	}

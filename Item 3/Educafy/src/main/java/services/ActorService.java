@@ -175,8 +175,7 @@ public class ActorService {
 		auths.add(auth);
 		user.setAuthorities(auths);
 
-		// TODO
-		Assert.isTrue(a.getSpammer() /* || (a.getScore() < -0.5) */, "Para banear un actor este debe ser spammer o tener una puntuación menor que -0.5");
+		Assert.isTrue(a.getSpammer(), "Para banear un actor este debe ser spammer");
 		this.userAccountService.save(user);
 
 		this.update(a);
@@ -281,11 +280,6 @@ public class ActorService {
 			if (a2.getEmail() != null)
 				return false;
 		} else if (!a1.getEmail().equals(a2.getEmail()))
-			return false;
-		if (a1.getVat() == null) {
-			if (a2.getVat() != null)
-				return false;
-		} else if (!a1.getVat().equals(a2.getVat()))
 			return false;
 		if (a1.getName() == null) {
 			if (a2.getName() != null)

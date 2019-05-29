@@ -24,6 +24,14 @@
 	
 	<display:column property="teacher.name" titleKey="lesson.teacher" />
 	
+	<jstl:choose>
+		<jstl:when test="${not empty backURL}">
+			<display:column>
+				<acme:button url="lesson/displayR=lessonId=${row.id}&url=${lesson/teacher/myLessons.do}" name="" code=""/>
+			</display:column>
+		</jstl:when>
+	</jstl:choose>
+	
 	<security:authorize access="hasRole('TEACHER')">
 		<display:column>
 			<jstl:if test="${row.isDraft}">
@@ -37,20 +45,23 @@
 			</jstl:if>
 		</display:column>
 		
-		<security:authorize access="hasRole('TEACHER')">
 			<jstl:choose>
 				<jstl:when test="${not empty reservations}">
 				</jstl:when>
 				<jstl:otherwise>
-					<acme:button url="lesson/teacher/delete.do?lessonId=${lesson.id}" name="delete" code="lesson.delete"/>
+					<display:column>
+					<acme:button url="lesson/teacher/delete.do?lessonId=${row.id}" name="delete" code="lesson.delete"/>
+					</display:column>
 				</jstl:otherwise>
 			</jstl:choose>
-		</security:authorize>
 		
 	</security:authorize>
 	
-	
-	
+	<security:authorize access="hasRole('STUDENT')">
+			<display:column>
+				<acme:button url="assesment/student/create.do?lessonId=${row.id}" name="create" code="lesson.assesment.create"/>
+			</display:column>
+		</security:authorize>
 
 </display:table>
 

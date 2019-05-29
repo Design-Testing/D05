@@ -19,14 +19,14 @@ img.resize {
 
 <jstl:choose>
 	<jstl:when test="${lang eq 'en'}">
-		<acme:display code="subject.nameEn" value="${subject.nameEn}"/>
+		<acme:display code="subject.name" value="${subject.nameEn}"/>
 		
-		<acme:display code="subject.descriptionEn" value="${subject.descriptionEn}"/>
+		<acme:display code="subject.description" value="${subject.descriptionEn}"/>
 	</jstl:when>
 	<jstl:otherwise>
-		<acme:display code="subject.nameEs" value="${subject.nameEs}"/>
+		<acme:display code="subject.name" value="${subject.nameEs}"/>
 		
-		<acme:display code="subject.descriptionEs" value="${subject.descriptionEs}"/>
+		<acme:display code="subject.description" value="${subject.descriptionEs}"/>
 	</jstl:otherwise>
 </jstl:choose>
 
@@ -74,4 +74,4 @@ img.resize {
 
 
 
-<acme:button url="subject/list.do" name="back" code="subject.back"/>
+<acme:button url="subject/list.do" name="back" code="subject.listing"/>

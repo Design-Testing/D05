@@ -49,10 +49,6 @@ img.resize {
 </jstl:choose>
 
 <h3><spring:message code="lesson.assesments"/></h3>
-<security:authorize access="hasRole('STUDENT')">
-	<acme:button url="assesment/student/create.do?lessonId=${lesson.id}" name="create" code="lesson.assesment.create"/>
-</security:authorize>
-
 <jstl:choose>
 	<jstl:when test="${not empty assesments}">
 		<display:table name="assesments" id="row" requestURI="${requestURI}" pagesize="5"
@@ -73,5 +69,5 @@ img.resize {
 	</jstl:otherwise>
 </jstl:choose>
 
-<acme:button url="subject/display.do?subjectId=${lesson.subject.id}" name="back" code="lesson.back" />
+<acme:button url="subject/display.do?subjectId=${lesson.subject.id}" name="back" code="lesson.subject" />
 

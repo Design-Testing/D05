@@ -39,6 +39,21 @@
 		<value>/views/student/tiles.xml</value>
 		<value>/views/certifier/tiles.xml</value>
 		<value>/views/creditCard/tiles.xml</value>
+
+		<value>/views/schedule/tiles.xml</value>
+		<value>/views/curriculum/tiles.xml</value>
+		<value>/views/personalRecord/tiles.xml</value>
+		<value>/views/educationRecord/tiles.xml</value>
+		<value>/views/miscellaneousRecord/tiles.xml</value>
+
+		<value>/views/reservation/tiles.xml</value>
+
+		<value>/views/exam/tiles.xml</value>
+		<value>/views/question/tiles.xml</value>
+		
+
+		<value>/views/timePeriod/tiles.xml</value>
+
 		
 		
 	</util:list>
