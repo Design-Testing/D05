@@ -16,7 +16,7 @@ import controllers.AbstractController;
 import domain.Actor;
 
 @Controller
-@RequestMapping(value = "/ban/administrator")
+@RequestMapping(value = "/actor/administrator")
 public class BanAdministratorController extends AbstractController {
 
 	@Autowired
