@@ -148,4 +148,8 @@ public class ExamService {
 		this.examRepository.deleteInBatch(exams);
 	}
 
+	public void flush() {
+		this.examRepository.flush();
+	}
+
 }
