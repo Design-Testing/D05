@@ -87,21 +87,20 @@ public class TeacherServiceTest extends AbstractTest {
 				//				B: Test Positivo: Creación correcta de un teacher
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "teacher1", "Teacher1", surnames, "teacher1@gmail.es", "+34647607400", "0.21", null
+				"teacher1", "teacher1", "Teacher1", surnames, "teacher1@gmail.es", "+34647607400", null
 			}, {
 				//				A: Educafy Req. 11.1. Create user accounts for new administrators
 				//				B: Test Negativo: Creación incorrecta de un teacher con name en blanco
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "teacher1", "", surnames, "teacher1@gmail.es", "+34647607400", "0.21", ConstraintViolationException.class
+				"teacher1", "teacher1", "", surnames, "teacher1@gmail.es", "+34647607400", ConstraintViolationException.class
 			}
 
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateCreateAndSave((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Collection<String>) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-				(Class<?>) testingData[i][7]);
+			this.templateCreateAndSave((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Collection<String>) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (Class<?>) testingData[i][6]);
 	}
-	private void templateCreateAndSave(final String username, final String password, final String name, final Collection<String> surname, final String email, final String phone, final String vat, final Class<?> expected) {
+	private void templateCreateAndSave(final String username, final String password, final String name, final Collection<String> surname, final String email, final String phone, final Class<?> expected) {
 
 		// para crear un administrador tienes que tener autoridad de administrador
 
@@ -117,7 +116,6 @@ public class TeacherServiceTest extends AbstractTest {
 			teacher.setSurname(surname);
 			teacher.setEmail(email);
 			teacher.setPhone(phone);
-			//			teacher.setVat(new Double(vat));
 			userAccount = teacher.getUserAccount();
 			userAccount.setUsername(username);
 			userAccount.setPassword(password);
@@ -149,20 +147,20 @@ public class TeacherServiceTest extends AbstractTest {
 				//				B: Test Positivo: Creación correcta de un admin
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "Teacher1Mod", surnames, "teacher1@gmail.es", "+34647607400", "0.21", null
+				"teacher1", "Teacher1Mod", surnames, "teacher1@gmail.es", "+34647607400", null
 			}, {
 				//				A: Acme HackerRank Req. 11.1. Update administrator profile
 				//				B: Test Negativo: Creación incorrecta de un admin con name en blanco
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "", surnames, "teacher1@gmail.es", "+34647607400", "0.21", ConstraintViolationException.class
+				"teacher1", "", surnames, "teacher1@gmail.es", "+34647607400", ConstraintViolationException.class
 			}
 
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateEditAndSave((String) testingData[i][0], (String) testingData[i][1], (Collection<String>) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (Class<?>) testingData[i][6]);
+			this.templateEditAndSave((String) testingData[i][0], (String) testingData[i][1], (Collection<String>) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Class<?>) testingData[i][5]);
 	}
-	private void templateEditAndSave(final String principal, final String name, final Collection<String> surname, final String email, final String phone, final String vat, final Class<?> expected) {
+	private void templateEditAndSave(final String principal, final String name, final Collection<String> surname, final String email, final String phone, final Class<?> expected) {
 
 		// para crear un administrador tienes que tener autoridad de administrador
 
@@ -178,7 +176,6 @@ public class TeacherServiceTest extends AbstractTest {
 			teacher.setSurname(surname);
 			teacher.setEmail(email);
 			teacher.setPhone(phone);
-			//			teacher.setVat(new Double(vat));
 			teacher = this.teacherService.save(teacher);
 			this.teacherService.flush();
 			super.unauthenticate();
