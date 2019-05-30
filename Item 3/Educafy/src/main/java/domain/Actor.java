@@ -27,7 +27,7 @@ import cz.jirutka.validator.collection.constraints.EachNotBlank;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "spammer"), @Index(columnList = "userAccount")
+	@Index(columnList = "spammer")
 })
 public class Actor extends DomainEntity {
 
