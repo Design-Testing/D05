@@ -39,7 +39,14 @@ public class CurriculumServiceTest extends AbstractTest {
 			//				C: 100% Recorre 80 de las 80 lineas posibles
 			//				D: cobertura de datos=1/3
 			{
-				"teacher3", null
+				"teacher11", null
+			},
+			//			A: Estudify Req. 17 -> Teachers can manage their curriculum
+			//				B: Test Positivo: Teacher crea curriculum
+			//				C: 100% Recorre 80 de las 80 lineas posibles
+			//				D: cobertura de datos=1/3
+			{
+				"teacher12", null
 			}
 			//				A: Estudify Req. 17 -> Teachers can manage their curriculum
 			//				B: Test Negativo: un estudiante intenta crear una curriculum
@@ -97,6 +104,14 @@ public class CurriculumServiceTest extends AbstractTest {
 			{
 				"teacher2", "curriculum2", null
 			},
+			//			A: Estudify Req. 17 -> Teachers can manage their curriculum
+			//				B: Test Positivo: Teacher borra su curriculum
+			//				C: 100% Recorre 64 de las 64 lineas posibles
+			//				D: cobertura de datos=1/3
+
+			{
+				"teacher1", "curriculum1", null
+			},
 
 			//				A: Estudify Req. 17 -> Teachers can manage their curriculum
 			//				B: Test Negativo: Un profesor intenta borrar un curriculum que no es suyo
@@ -105,6 +120,14 @@ public class CurriculumServiceTest extends AbstractTest {
 
 			{
 				"teacher1", "curriculum2", IllegalArgumentException.class
+			},
+			//			A: Estudify Req. 17 -> Teachers can manage their curriculum
+			//				B: Test Negativo: Un estudiante intenta borrar un curriculum
+			//				C: 12,5% Recorre 8 de las 64 lineas posibles
+			//				D: cobertura de datos=1/3
+
+			{
+				"student1", "curriculum1", IllegalArgumentException.class
 			},
 
 		};

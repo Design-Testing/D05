@@ -43,6 +43,12 @@ public class PersonalRecordServiceTest extends AbstractTest {
 				"teacher1", "teacher 1 fullname", "statement test", "http://www.github.com/test", "http://testPhoto.com", "http://www.linkedin.com/test", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their curriculum
+				//			B: Test Positivo: Teacher creaPersonalRecord
+				//			C: 100% Recorre 68 de las 68 lineas posibles
+				//			D: cobertura de datos=4/54
+				"teacher2", "teacher 2 fullname", "statement test", "http://www.github.com/test", "http://testPhoto.com", "http://www.linkedin.com/test", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their curriculum
 				//			B: Test Negativo: no introduce una url como github link
 				//			C: 89,70% Recorre 61 de las 68 lineas posibles
 				//			D: cobertura de datos=4/54
@@ -92,10 +98,16 @@ public class PersonalRecordServiceTest extends AbstractTest {
 		final Object testingRecord[][] = {
 			{
 				//			A: Educafy Req. 17 -> Teachers can manage their curriculum
-				//			B: Test Positivo: Teacher creaPersonalRecord
+				//			B: Test Positivo: Teacher edita PersonalRecord correctamente
 				//			C: 100% Recorre 68 de las 68 lineas posibles
 				//			D: cobertura de datos=4/54
 				"teacher1", "teacher1", "teacher 1 fullname", "statement test", "http://www.github.com/test", "http://testPhoto.com", "http://www.linkedin.com/test", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their curriculum
+				//			B: Test Positivo: Teacher edita PersonalRecord correctamente
+				//			C: 100% Recorre 68 de las 68 lineas posibles
+				//			D: cobertura de datos=4/54
+				"teacher3", "teacher3", "teacher 3 fullname", "statement test", "http://www.github.com/test", "http://testPhoto.com", "http://www.linkedin.com/test", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their curriculum
 				//			B: Test Negativo: no introduce una url como github link
@@ -114,6 +126,12 @@ public class PersonalRecordServiceTest extends AbstractTest {
 				//			C: 98,52% Recorre 67 de las 68 lineas posibles
 				//			D: cobertura de datos=4/54
 				"teacher1", "teacher1", null, "statement test", "http://www.github.com/test", "http://testPhoto.com", "http://www.linkedin.com/test", javax.validation.ConstraintViolationException.class
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their curriculum
+				//			B: Test Negativo: teacher intenta editar personal record en final mode
+				//			C: 98,52% Recorre 67 de las 68 lineas posibles
+				//			D: cobertura de datos=4/54
+				"teacher2", "teacher2", "teacher 2 fullname", "statement test", "http://www.github.com/test", "http://testPhoto.com", "http://www.linkedin.com/test", java.lang.IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingRecord.length; i++)
@@ -158,10 +176,22 @@ public class PersonalRecordServiceTest extends AbstractTest {
 				"teacher1", "personalRecord1", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
-				//			B: Test Positivo: Teacher intenar pasar a final PersonalRecord que ya etsá en final mode
+				//			B: Test Positivo: Teacher pasa a final PersonalRecord en draft mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher3", "personalRecord3", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Negativo: Teacher intenar pasar a final PersonalRecord que ya etsá en final mode
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher2", "personalRecord2", IllegalArgumentException.class
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Negativo: Teacher intenar pasar a final PersonalRecord que ya etsá en final mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher13", "personalRecord5", IllegalArgumentException.class
 			}
 		};
 
@@ -207,6 +237,12 @@ public class PersonalRecordServiceTest extends AbstractTest {
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
 				"certifier1", "personalRecord1", IllegalArgumentException.class
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Un certificador certifica un registro en modo final
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"certifier1", "personalRecord5", null
 			}
 		};
 
