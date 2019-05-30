@@ -41,7 +41,13 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 				//			B: Test Positivo: Teacher crea MiscellaneousRecord 
 				//			C: 100% Recorre 49 de las 49 lineas posibles
 				//			D: cobertura de datos=6/405
-				"teacher1", "freeText1", attachments, null
+				"teacher1", "Disfruto enseñando", attachments, null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher crea MiscellaneousRecord 
+				//			C: 100% Recorre 49 de las 49 lineas posibles
+				//			D: cobertura de datos=6/405
+				"teacher1", "Escribo varios blogs", attachments, null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Negativo: Un teacher intenta crear una MiscellaneousRecord con el texto vacío
@@ -99,6 +105,12 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 				"teacher1", "freeText1", attachments, "miscellaneousRecord1", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher edita MiscellaneousRecord 
+				//			C: 100% Recorre 49 de las 49 lineas posibles
+				//			D: cobertura de datos=6/405
+				"teacher3", "freeText1", attachments, "miscellaneousRecord4", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Negativo: Un teacher intenta editar una MiscellaneousRecord con el texto vacío
 				//			C: 32,65% Recorre 16 de las 49 lineas posibles
 				//			D: cobertura de datos=6/405
@@ -154,6 +166,12 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 				"teacher1", "miscellaneousRecord1", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher borra MiscellaneousRecord 
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher3", "miscellaneousRecord4", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Negativo: Teacher intenta borrar MiscellaneousRecord que no está en draft mode
 				//			C: 10,25% Recorre 8 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
@@ -199,10 +217,22 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 				"teacher1", "miscellaneousRecord1", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher pasa a final MiscellaneousRecord en draft mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher3", "miscellaneousRecord4", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Positivo: Teacher intenar pasar a final MiscellaneousRecord que ya etsá en final mode
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher1", "miscellaneousRecord2", IllegalArgumentException.class
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher intenar pasar a final MiscellaneousRecord que ya etsá en final mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher13", "miscellaneousRecord5", IllegalArgumentException.class
 			}
 		};
 
@@ -242,6 +272,12 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
 				"certifier1", "miscellaneousRecord2", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Un certificador certifica un registro en modo final
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"certifier1", "miscellaneousRecord5", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Positivo: Un certificador intenta certificar un registro en modo draft
