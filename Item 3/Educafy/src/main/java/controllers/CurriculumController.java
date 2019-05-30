@@ -138,7 +138,7 @@ public class CurriculumController extends AbstractController {
 		final Curriculum curriculum = this.curriculumService.findOne(curriculumId);
 		this.curriculumService.delete(curriculum);
 		result = this.display();
-		result.addObject("curriculum", curriculum);
+		//result.addObject("curriculum", curriculum);
 		return result;
 	}
 
