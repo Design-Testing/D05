@@ -1480,6 +1480,12 @@
 		<property name="status" value="PENDING" />
 		<property name="reservation" ref="reservation2"/>
 	</bean>
+	
+	<bean id="exam5" class="domain.Exam">
+		<property name="title" value="Title Exam 5" />
+		<property name="status" value="PENDING" />
+		<property name="reservation" ref="reservation3"/>
+	</bean>
 
 	<!-- =================================================================== 
 		======= Question ========= =================================================================== -->

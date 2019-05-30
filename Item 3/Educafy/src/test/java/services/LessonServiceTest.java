@@ -44,6 +44,12 @@ public class LessonServiceTest extends AbstractTest {
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"teacher1", "subject1", "", "Description test", ConstraintViolationException.class
+			}, {
+				//				A: Educafy Crear y guardar una Lesson
+				//				B: Test Negativo: Creación incorrecta de una Lesson, description vacío
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"teacher1", "subject1", "Lesson test", "", ConstraintViolationException.class
 			}
 
 		};
