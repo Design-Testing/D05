@@ -79,19 +79,18 @@ public class CommentTeacherController extends AbstractController {
 		paramAssesmentId = request.getParameter("assesmentId");
 		assesmentId = paramAssesmentId.isEmpty() ? null : Integer.parseInt(paramAssesmentId);
 
-		final Comment comment = this.commentService.reconstruct(commentForm, binding);
-
 		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(comment, assesmentId);
+			result = this.createEditModelAndView(commentForm, assesmentId);
 			result.addObject("errors", binding.getAllErrors());
 		} else
 			try {
+				final Comment comment = this.commentService.reconstruct(commentForm, binding);
 				this.commentService.save(comment, assesmentId);
 				result = this.assesmentController.display(assesmentId);
 			} catch (final ValidationException oops) {
-				result = this.createEditModelAndView(comment, assesmentId, "commit.assesment.error");
+				result = this.createEditModelAndView(commentForm, assesmentId, "commit.assesment.error");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(comment, assesmentId, "commit.assesment.error");
+				result = this.createEditModelAndView(commentForm, assesmentId, "commit.assesment.error");
 				result.addObject("errors", binding.getAllErrors());
 			}
 
@@ -99,6 +98,24 @@ public class CommentTeacherController extends AbstractController {
 	}
 
 	// ANCILLIARY METHODS --------------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(final CommentForm commentForm, final int assesmentId) {
+		ModelAndView result;
+		result = this.createEditModelAndView(commentForm, assesmentId, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final CommentForm commentForm, final int assesmentId, final String messageCode) {
+		Assert.notNull(commentForm);
+		final ModelAndView result;
+
+		result = new ModelAndView("comment/edit");
+		result.addObject("commentForm", commentForm);
+		result.addObject("assesmentId", assesmentId);
+		result.addObject("message", messageCode);
+
+		return result;
+	}
 
 	protected ModelAndView createEditModelAndView(final Comment comment, final int assesmentId) {
 		ModelAndView result;
