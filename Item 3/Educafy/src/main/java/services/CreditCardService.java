@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
-import security.Authority;
 import domain.Actor;
 import domain.CreditCard;
 import domain.Reservation;
+import domain.Student;
 
 @Service
 @Transactional
@@ -40,9 +40,7 @@ public class CreditCardService {
 	// findAll
 	public Collection<CreditCard> findAll() {
 		final Collection<CreditCard> res;
-		final Actor principal = this.actorService.findByPrincipal();
-		final boolean isStudent = this.actorService.checkAuthority(principal, Authority.STUDENT);
-		Assert.isTrue(isStudent);
+		final Student principal = this.studentService.findByPrincipal();
 		res = this.creditCardRepository.findAllByUserId(principal.getUserAccount().getId());
 		Assert.notNull(res);
 
@@ -56,7 +54,7 @@ public class CreditCardService {
 		return creditCard;
 	}
 
-	public CreditCard findByApplicationId(final int id) {
+	public CreditCard findByReservationId(final int id) {
 		Assert.isTrue(id != 0);
 		final Actor principal = this.actorService.findByPrincipal();
 		final CreditCard creditCard = this.creditCardRepository.findByReservationId(id);
@@ -73,10 +71,8 @@ public class CreditCardService {
 
 	public CreditCard save(final CreditCard c) {
 		Assert.notNull(c);
-		final Actor principal = this.actorService.findByPrincipal();
-		c.setActor(principal);
-		final boolean isStudent = this.actorService.checkAuthority(principal, Authority.STUDENT);
-		Assert.isTrue(isStudent);
+		final Student principal = this.studentService.findByPrincipal();
+		Assert.isTrue(c.getActor().getId() == principal.getId());
 		Assert.isTrue(!this.tarjetaCaducada(c));
 		final String s = c.getNumber().replace(" ", "");
 		c.setNumber(s);
@@ -89,14 +85,8 @@ public class CreditCardService {
 		final CreditCard c = this.findOne(creditCardId);
 		Assert.isTrue(this.findAll().contains(c));
 
-		final Actor principal = this.actorService.findByPrincipal();
-		final boolean isStudent = this.actorService.checkAuthority(principal, Authority.STUDENT);
-		Assert.isTrue(isStudent);
-
-		if (isStudent) {
-			final Collection<Reservation> reservations = this.reservationService.findAllByCreditCard(c.getId());
-			Assert.isTrue(reservations.isEmpty());
-		}
+		final Collection<Reservation> reservations = this.reservationService.findAllByCreditCard(c.getId());
+		Assert.isTrue(reservations.isEmpty());
 
 		this.creditCardRepository.delete(c);
 	}
