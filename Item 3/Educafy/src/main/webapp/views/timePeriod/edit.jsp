@@ -15,7 +15,16 @@
 	
 	<acme:textbox code="timePeriod.startHour" path="startHour"/>
 	<acme:textbox code="timePeriod.endHour" path="endHour"/>
-	<acme:textbox code="timePeriod.dayNumber" path="dayNumber"/>
+	<form:label path="dayNumber">
+    	<spring:message code="timePeriod.dayNumber" />:
+    </form:label>
+	<form:select path="dayNumber">
+  		<form:option value="1"><spring:message code="monday"/></form:option>
+  		<form:option value="2"><spring:message code="tuesday"/></form:option>
+  		<form:option value="3"><spring:message code="wednesday"/></form:option>
+  		<form:option value="4"><spring:message code="thursday"/></form:option>
+  		<form:option value="5"><spring:message code="friday"/></form:option>
+	</form:select> 
 	<br>
 
 	<input type="submit" name="save"

@@ -211,7 +211,7 @@ public class TimePeriodService {
 		this.scheduleService.save2(schedule, teacher);
 		return schedule;
 	}
-	private Boolean getTimePeriod(final TimePeriod timePeriod) {
+	public Boolean getTimePeriod(final TimePeriod timePeriod) {
 		Boolean result = false;
 		List<Boolean> res;
 		final Teacher teacher = this.teacherService.findByPrincipal();
@@ -375,6 +375,25 @@ public class TimePeriodService {
 		this.scheduleService.save(schedule);
 
 		return suggests;
+	}
+
+	public boolean equals(final TimePeriod t, final TimePeriod other) {
+		if (t.getDayNumber() == null) {
+			if (other.getDayNumber() != null)
+				return false;
+		} else if (!t.getDayNumber().equals(other.getDayNumber()))
+			return false;
+		if (t.getEndHour() == null) {
+			if (other.getEndHour() != null)
+				return false;
+		} else if (!t.getEndHour().equals(other.getEndHour()))
+			return false;
+		if (t.getStartHour() == null) {
+			if (other.getStartHour() != null)
+				return false;
+		} else if (!t.getStartHour().equals(other.getStartHour()))
+			return false;
+		return true;
 	}
 
 	public void flush() {

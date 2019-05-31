@@ -1956,10 +1956,28 @@
 		<property name="creditCard" ref="creditCard2" />
 	</bean>
 	
+	<bean id="reservation4" class="domain.Reservation">
+		<property name="status" value="FINAL" />
+		<property name="moment" value="2019/05/11 20:30" />
+		<property name="explanation" value="" />
+		<property name="cost" value="15.5" />
+		<property name="hoursWeek" value="1" />
+		<property name="student" ref="student2" />
+		<property name="lesson" ref="lesson4" />
+		<property name="creditCard" ref="creditCard7" />
+	</bean>
+	
 	
 		<!-- =================================================================== 
 		======= TimePeriod ========= =================================================================== -->
 
+	<bean id="timePeriod1" class="domain.TimePeriod">
+		<property name="startHour" value="19" />
+		<property name="endHour" value="20" />
+		<property name="dayNumber" value="1" />
+		<property name="reservation" ref="reservation4" />
+	</bean>
+	
 	<bean id="timePeriod2" class="domain.TimePeriod">
 		<property name="startHour" value="16" />
 		<property name="endHour" value="17" />
@@ -2243,7 +2261,7 @@
 				<value>true</value>
 				<value>false</value>
 				<value>false</value>
-				<value>false</value>
+				<value>true</value>
 				<value>false</value>
 			</list>
 		</property>

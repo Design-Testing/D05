@@ -13,7 +13,7 @@
 	<form:hidden path="version"/>
 	<input type="hidden" name="lessonId" value="${lessonId}" />
 	
-	<acme:textbox code="assesment.score" path="score"/>
+	<acme:numberbox code="assesment.score" path="score" min="0" max="5"/>
 	<acme:textarea code="assesment.comment" path="comment"/>
 
 <br>
