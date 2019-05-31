@@ -61,15 +61,21 @@ public class TimePeriodController extends AbstractController {
 			} catch (final Throwable oops) {
 				String msg = "tp.commit.error";
 				res = this.createEditModelAndView(timePeriod);
-				if (!timePeriod.getReservation().getStatus().equals("PENDING"))
+				final boolean n = (timePeriod.getStartHour() != null) && (timePeriod.getEndHour() != null);
+				if (n && !timePeriod.getReservation().getStatus().equals("PENDING"))
 					msg = "tp.no.pending";
-				if (!this.timePeriodService.checkTimePeriodHours(timePeriod))
+				if (n && this.timePeriodService.getTimePeriod(timePeriod))
+					msg = "tp.busy";
+				if (n && this.timePeriodService.equals(timePeriod, this.timePeriodService.findOne(timePeriod.getId())))
+					msg = "tp.no.change";
+				if (n && !this.timePeriodService.checkTimePeriodHours(timePeriod))
 					msg = "tp.hours.error";
+				if (!n)
+					msg = "tp.null.error";
 				res.addObject("msg", msg);
 			}
 		return res;
 	}
-
 	protected ModelAndView createEditModelAndView(final TimePeriod timePeriod) {
 
 		ModelAndView res;
