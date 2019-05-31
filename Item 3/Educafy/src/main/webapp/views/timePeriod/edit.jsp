@@ -22,8 +22,9 @@
 		value="<spring:message code="timePeriod.submit" />" />
 	
 	<acme:button url="reservation/teacher/display.do?reservationId=${timePeriod.reservation.id}" name="back" code="timePeriod.back"/>
-	<jstl:if test="${not empty error}">
-			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
+
+	<jstl:if test="${not empty msg}">
+			<h4 style="color: red;"><spring:message code="${msg}"/></h4>
 	</jstl:if>
 
 </form:form>

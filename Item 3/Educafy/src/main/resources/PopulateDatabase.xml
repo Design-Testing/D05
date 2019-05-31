@@ -1960,13 +1960,6 @@
 		<!-- =================================================================== 
 		======= TimePeriod ========= =================================================================== -->
 
-	<bean id="timePeriod1" class="domain.TimePeriod">
-		<property name="startHour" value="12" />
-		<property name="endHour" value="13" />
-		<property name="dayNumber" value="4" />
-		<property name="reservation" ref="reservation1" />
-	</bean>
-
 	<bean id="timePeriod2" class="domain.TimePeriod">
 		<property name="startHour" value="16" />
 		<property name="endHour" value="17" />

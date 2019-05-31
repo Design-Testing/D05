@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ConfigurationParametersService;
-import services.ReservationService;
 import services.TimePeriodService;
 import controllers.teacher.ReservationTeacherController;
 import domain.TimePeriod;
@@ -23,9 +22,6 @@ public class TimePeriodController extends AbstractController {
 
 	@Autowired
 	private TimePeriodService				timePeriodService;
-
-	@Autowired
-	private ReservationService				reservationService;
 
 	@Autowired
 	private ReservationTeacherController	reservationTeacherController;
@@ -53,23 +49,24 @@ public class TimePeriodController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final TimePeriod timePeriod, final BindingResult binding) {
-
 		ModelAndView res = null;
-		//		final Actor principal = this.actorService.findByPrincipal();
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(timePeriod);
 
 		else if (timePeriod != null)
-
 			try {
 				this.timePeriodService.save(timePeriod);
 				res = this.reservationTeacherController.display(timePeriod.getReservation().getId());
 			} catch (final Throwable oops) {
+				String msg = "tp.commit.error";
 				res = this.createEditModelAndView(timePeriod);
-				res.addObject("error", oops);
+				if (!timePeriod.getReservation().getStatus().equals("PENDING"))
+					msg = "tp.no.pending";
+				if (!this.timePeriodService.checkTimePeriodHours(timePeriod))
+					msg = "tp.hours.error";
+				res.addObject("msg", msg);
 			}
-
 		return res;
 	}
 
