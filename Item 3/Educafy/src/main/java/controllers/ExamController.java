@@ -132,16 +132,16 @@ public class ExamController extends AbstractController {
 
 		if (exam == null) {
 			result = this.reservationTeacherController.myReservations();
-			result.addObject("msg", "exam.submitted.error");
+			result.addObject("msg", "exam.inprogress.error");
 		} else
 			try {
 				this.examService.toInprogressMode(examId);
 				result = this.reservationTeacherController.display(exam.getReservation().getId());
 			} catch (final Throwable oops) {
-				String errormsg = "exam.submitted.error";
+				String errormsg = "exam.inprogress.error";
 				result = this.reservationTeacherController.myReservations();
 				if (!(exam.getStatus().equals("PENDING")))
-					errormsg = "exam.submitted.error";
+					errormsg = "exam.inprogress.error";
 				result.addObject("msg", errormsg);
 			}
 
@@ -176,9 +176,11 @@ public class ExamController extends AbstractController {
 		ModelAndView result;
 		Exam exam;
 		exam = this.examService.findOne(examId);
-		if (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED"))
+		final Reservation reservation = exam.getReservation();
+		if (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED")) {
 			result = this.createEditModelAndView(exam);
-		else
+			result.addObject("reservation", reservation);
+		} else
 			result = new ModelAndView("redirect:misc/403");
 		return result;
 	}

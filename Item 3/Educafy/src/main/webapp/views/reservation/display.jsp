@@ -83,6 +83,7 @@ img.resize {
 			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
 </jstl:if>
 
+<jstl:if test="${reservation.status eq 'FINAL' }">
 <br><br>
 <h3><spring:message code="reservation.exams"/></h3>
 <jstl:choose>
@@ -121,11 +122,9 @@ img.resize {
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('STUDENT')">
-		<jstl:if test="${reservation.status eq 'FINAL' && row.status eq 'INPROGRESS' }">
+		<jstl:if test="${row.status eq 'INPROGRESS' }">
 			<display:column>
-				
-					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
-				
+				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
 			</display:column>
 		</jstl:if>
 		</security:authorize>
@@ -139,9 +138,9 @@ img.resize {
 <jstl:if test="${rol eq 'teacher' }">
 	<acme:button url="exam/create.do?reservationId=${reservation.id}" name="create" code="exam.create"/>
 </jstl:if>
+
+</jstl:if>
 <br><br>
-
-
 <jstl:choose>
 	<jstl:when test="${rol eq 'teacher' }">
 		<acme:button url="reservation/teacher/myReservations.do" name="back" code="reservation.back"/>

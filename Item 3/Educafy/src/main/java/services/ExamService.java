@@ -78,7 +78,7 @@ public class ExamService {
 
 		final Reservation reservation = this.reservationService.findOne(reservationId);
 		final Exam result;
-
+		Assert.isTrue(reservation.getStatus().equals("FINAL"));
 		if (exam.getId() == 0) {
 			if (isTeacher) {
 				Assert.isTrue(this.teacherService.findTeacherByReservation(reservationId).equals(ppal), "No puede crear un examen en una reserva que no es suya.");
