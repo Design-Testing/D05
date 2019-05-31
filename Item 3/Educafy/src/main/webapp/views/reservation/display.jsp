@@ -92,7 +92,9 @@ img.resize {
 		class="displaytag">
 		
 		<display:column property="title" titleKey="exam.title" />
-		<display:column property="status" titleKey="exam.status" />
+		<display:column titleKey="exam.status" >
+			<acme:statusChoose status="${row.status}"/>
+		</display:column>
 		
 		<display:column titleKey="exam.score">
 			<jstl:if test="${row.status eq 'EVALUATED' }">

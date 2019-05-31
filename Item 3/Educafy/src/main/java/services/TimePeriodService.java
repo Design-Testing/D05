@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TimePeriodRepository;
-import domain.Actor;
 import domain.Reservation;
 import domain.Schedule;
 import domain.Teacher;
@@ -60,22 +59,22 @@ public class TimePeriodService {
 
 	public TimePeriod save(final TimePeriod timePeriod) {
 		Assert.notNull(timePeriod);
-		final Actor principal = this.actorService.findByPrincipal();
+		final Teacher principal = this.teacherService.findByPrincipal();
 		Assert.isTrue(this.teacherService.findTeacherByReservation(timePeriod.getReservation().getId()).equals(principal), "Esta Acción solo la pueden hacer los profesores.");
 		final Integer tramoHorario = timePeriod.getEndHour() - timePeriod.getStartHour();
 		Assert.isTrue(tramoHorario == 1, "Los tramos horarios deben ser de 1 hora.");
 		final Collection<Reservation> reservations = this.reservationService.findAllReservationByTeacher(principal.getUserAccount().getId());
-		Assert.isTrue(!this.setTimePeriod(timePeriod) == true, "Este tramo horario ya ha sido escogido.");
-		final Collection<TimePeriod> timePeriods = this.findByReservation(timePeriod.getReservation().getId());
-		Schedule schedule = this.scheduleService.findScheduleByTeacher(this.teacherService.findByPrincipal());
+		Assert.isTrue(!this.getTimePeriod(timePeriod) == true, "Este tramo horario ya ha sido escogido.");
+		this.findByReservation(timePeriod.getReservation().getId());
 		Assert.isTrue(timePeriod.getReservation().getStatus().equals("PENDING"), "No puede añadir un timePeriod si la reserva está en Final");
-		schedule = this.setScheduleTrue(timePeriod);
+		final Schedule schedule = this.setScheduleTrue(timePeriod);
 		if (timePeriod.getId() != 0) {
 			final TimePeriod t = this.findOne(timePeriod.getId());
 			this.setScheduleFalse(t);
 			Assert.isTrue(reservations.contains(timePeriod.getReservation()), "No puedes modificar un periodo de tiempo que no sea de su reserva.");
 		}
 		final TimePeriod tPeriod = this.timePeriodRepository.save(timePeriod);
+		this.scheduleService.save(schedule);
 		Assert.notNull(tPeriod);
 		return tPeriod;
 	}
@@ -96,77 +95,85 @@ public class TimePeriodService {
 		this.timePeriodRepository.deleteInBatch(timePeriods);
 
 	}
+	//	private Schedule setScheduleTrue(final TimePeriod timePeriod) {
+	//		final Teacher teacher = this.teacherService.findByPrincipal();
+	//		final Schedule schedule = this.scheduleService.findScheduleByTeacher(teacher);
+	//		final List<Boolean> newMonday = (List<Boolean>) schedule.getMonday();
+	//		final List<Boolean> newTuesday = (List<Boolean>) schedule.getTuesday();
+	//		final List<Boolean> newWednesday = (List<Boolean>) schedule.getWednesday();
+	//		final List<Boolean> newThursday = (List<Boolean>) schedule.getThursday();
+	//		final List<Boolean> newFriday = (List<Boolean>) schedule.getFriday();
+	//		if (timePeriod.getDayNumber() == 1) {
+	//			for (int i = 0; i < 14; i++)
+	//				if (timePeriod.getStartHour() == i + 8)
+	//					newMonday.set(i, true);
+	//		} else if (timePeriod.getDayNumber() == 2) {
+	//			for (int i = 0; i < 14; i++)
+	//				if (timePeriod.getStartHour() == i + 8)
+	//					newTuesday.set(i - 1, true);
+	//		} else if (timePeriod.getDayNumber() == 3) {
+	//			for (int i = 0; i < 14; i++)
+	//				if (timePeriod.getStartHour() == i + 8)
+	//					newWednesday.set(i - 1, true);
+	//		} else if (timePeriod.getDayNumber() == 4) {
+	//			for (int i = 0; i < 14; i++)
+	//				if (timePeriod.getStartHour() == i + 8)
+	//					newThursday.set(i - 1, true);
+	//		} else if (timePeriod.getDayNumber() == 5)
+	//			for (int i = 0; i < 14; i++)
+	//				if (timePeriod.getStartHour() == i + 8)
+	//					newFriday.set(i - 1, true);
+	//		schedule.setMonday(newMonday);
+	//		schedule.setTuesday(newTuesday);
+	//		schedule.setWednesday(newWednesday);
+	//		schedule.setThursday(newThursday);
+	//		schedule.setFriday(newFriday);
+	//		this.scheduleService.save(schedule);
+	//		return schedule;
+	//	}
+
 	private Schedule setScheduleTrue(final TimePeriod timePeriod) {
-		final Teacher teacher = this.teacherService.findByPrincipal();
-		final Schedule schedule = this.scheduleService.findScheduleByTeacher(teacher);
-		final List<Boolean> newMonday = (List<Boolean>) schedule.getMonday();
-		final List<Boolean> newTuesday = (List<Boolean>) schedule.getTuesday();
-		final List<Boolean> newWednesday = (List<Boolean>) schedule.getWednesday();
-		final List<Boolean> newThursday = (List<Boolean>) schedule.getThursday();
-		final List<Boolean> newFriday = (List<Boolean>) schedule.getFriday();
-		if (timePeriod.getDayNumber() == 1) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newMonday.set(i, true);
-		} else if (timePeriod.getDayNumber() == 2) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newTuesday.set(i - 1, true);
-		} else if (timePeriod.getDayNumber() == 3) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newWednesday.set(i - 1, true);
-		} else if (timePeriod.getDayNumber() == 4) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newThursday.set(i - 1, true);
-		} else if (timePeriod.getDayNumber() == 5)
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newFriday.set(i - 1, true);
-		schedule.setMonday(newMonday);
-		schedule.setTuesday(newTuesday);
-		schedule.setWednesday(newWednesday);
-		schedule.setThursday(newThursday);
-		schedule.setFriday(newFriday);
-		this.scheduleService.save(schedule);
-		return schedule;
+		return this.setScheduleTrueFalse(timePeriod, true);
 	}
 
 	private Schedule setScheduleFalse(final TimePeriod timePeriod) {
+		return this.setScheduleTrueFalse(timePeriod, false);
+	}
+
+	private Schedule setScheduleTrueFalse(final TimePeriod timePeriod, final boolean b) {
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Schedule schedule = this.scheduleService.findScheduleByTeacher(teacher);
-		final List<Boolean> newMonday = (List<Boolean>) schedule.getMonday();
-		final List<Boolean> newTuesday = (List<Boolean>) schedule.getTuesday();
-		final List<Boolean> newWednesday = (List<Boolean>) schedule.getWednesday();
-		final List<Boolean> newThursday = (List<Boolean>) schedule.getThursday();
-		final List<Boolean> newFriday = (List<Boolean>) schedule.getFriday();
-		if (timePeriod.getDayNumber() == 1) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newMonday.set(i, false);
-		} else if (timePeriod.getDayNumber() == 2) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newTuesday.set(i, false);
-		} else if (timePeriod.getDayNumber() == 3) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newWednesday.set(i, false);
-		} else if (timePeriod.getDayNumber() == 4) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newThursday.set(i, false);
-		} else if (timePeriod.getDayNumber() == 5)
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8)
-					newFriday.set(i, false);
+		List<Boolean> ls;
+		final int day = timePeriod.getDayNumber();
+		final int hour = timePeriod.getStartHour();
+		switch (day) {
+		case 1:
+			ls = (List<Boolean>) schedule.getMonday();
+			ls.set(hour - 8, b);
+			schedule.setMonday(ls);
+			break;
+		case 2:
+			ls = (List<Boolean>) schedule.getTuesday();
+			ls.set(hour - 8, b);
+			schedule.setTuesday(ls);
+			break;
+		case 3:
+			ls = (List<Boolean>) schedule.getWednesday();
+			ls.set(hour - 8, b);
+			schedule.setWednesday(ls);
+			break;
+		case 4:
+			ls = (List<Boolean>) schedule.getThursday();
+			ls.set(hour - 8, b);
+			schedule.setThursday(ls);
+			break;
+		case 5:
+			ls = (List<Boolean>) schedule.getFriday();
+			ls.set(hour - 8, b);
+			schedule.setFriday(ls);
+			break;
+		}
 
-		schedule.setMonday(newMonday);
-		schedule.setTuesday(newTuesday);
-		schedule.setWednesday(newWednesday);
-		schedule.setThursday(newThursday);
-		schedule.setFriday(newFriday);
 		this.scheduleService.save(schedule);
 		return schedule;
 	}
@@ -208,43 +215,39 @@ public class TimePeriodService {
 		this.scheduleService.save2(schedule, teacher);
 		return schedule;
 	}
-	private Boolean setTimePeriod(final TimePeriod timePeriod) {
+	private Boolean getTimePeriod(final TimePeriod timePeriod) {
 		Boolean result = false;
+		List<Boolean> res;
 		final Teacher teacher = this.teacherService.findByPrincipal();
 		final Schedule schedule = this.scheduleService.findScheduleByTeacher(teacher);
 		if (timePeriod.getDayNumber() == 1) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8) {
-					final List<Boolean> res = (List<Boolean>) schedule.getMonday();
-					result = res.get(i);
-				}
+			res = (List<Boolean>) schedule.getMonday();
+			result = res.get(timePeriod.getStartHour() - 8);
 		} else if (timePeriod.getDayNumber() == 2) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8) {
-					final List<Boolean> res = (List<Boolean>) schedule.getTuesday();
-					result = res.get(i);
-				}
+			res = (List<Boolean>) schedule.getTuesday();
+			result = res.get(timePeriod.getStartHour() - 8);
 		} else if (timePeriod.getDayNumber() == 3) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8) {
-					final List<Boolean> res = (List<Boolean>) schedule.getWednesday();
-					result = res.get(i);
-				}
+			res = (List<Boolean>) schedule.getWednesday();
+			result = res.get(timePeriod.getStartHour() - 8);
 		} else if (timePeriod.getDayNumber() == 4) {
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8) {
-					final List<Boolean> res = (List<Boolean>) schedule.getThursday();
-					result = res.get(i);
-				}
-		} else if (timePeriod.getDayNumber() == 5)
-			for (int i = 0; i < 14; i++)
-				if (timePeriod.getStartHour() == i + 8) {
-					final List<Boolean> res = (List<Boolean>) schedule.getFriday();
-					result = res.get(i);
-				}
+			res = (List<Boolean>) schedule.getThursday();
+			result = res.get(timePeriod.getStartHour() - 8);
+		} else if (timePeriod.getDayNumber() == 5) {
+			res = (List<Boolean>) schedule.getFriday();
+			result = res.get(timePeriod.getStartHour() - 8);
+		}
 		return result;
 	}
 
+	public boolean checkTimePeriodHours(final TimePeriod timePeriod) {
+		boolean res = false;
+		if (timePeriod.getStartHour() > 7 && timePeriod.getStartHour() < 22)
+			if (timePeriod.getEndHour() > 7 && timePeriod.getEndHour() < 22)
+				if (timePeriod.getStartHour() < timePeriod.getEndHour())
+					if (timePeriod.getEndHour() - timePeriod.getStartHour() == 1)
+						res = true;
+		return res;
+	}
 	public Integer timePeriodFree(final Schedule schedule) {
 		Integer contador = 0;
 		final List<Boolean> newMonday = (List<Boolean>) schedule.getMonday();
