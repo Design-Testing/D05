@@ -321,9 +321,15 @@
                 onclick="relativeRedir('curriculum/delete.do?curriculumId=${curriculum.id}')" />
 	</jstl:if>
 </jstl:if>
+
 <jstl:if test="${empty curriculum}">
+	<spring:message code="curriculum.empty.msg"/><br>
+	<security:authorize access="hasRole('TEACHER')">
+	<jstl:if test="${principal}">
 	<input type="button" name="create"
 			value="<spring:message code="record.create.curriculum" />"
 			onclick="relativeRedir('curriculum/create.do')" />
 		<br>
+	</jstl:if>
+	</security:authorize>
 </jstl:if>
