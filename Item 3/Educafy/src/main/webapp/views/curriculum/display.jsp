@@ -21,10 +21,8 @@
                name="curriculum.personalRecord" requestURI="${requestURI}" id="row">
     <!-- Attributes -->
 	
-    <spring:message var="fullName" code="record.fullname"/>
-    <display:column property="fullName" title="${fullname}" sortable="true"/>
-    <spring:message var="statement" code="record.statement"/>
-    <display:column property="statement" title="${statement}" sortable="true"/>
+    <display:column property="fullName" titleKey="record.fullname" sortable="true"/>
+    <display:column property="statement" titleKey="record.statement" sortable="true"/>
     <jstl:choose>
     <jstl:when test="${buttons}">
     <security:authorize access="hasRole('TEACHER')">
@@ -45,15 +43,15 @@
                 	onclick="relativeRedir('personalRecord/toFinal.do?personalRecordId=${row.id}')" />
                 </jstl:if>
                 <jstl:if test="${row.isDraft eq false}">
-                	<jstl:out value="In final mode" />
+                	<spring:message code="record.finalMode" />
                 </jstl:if>
 	</display:column>
 	<display:column>
                 <jstl:if test="${row.isCertified eq true}">
-                	<jstl:out value="Certified" />
+                	<spring:message code="record.certified" />
                 </jstl:if>
                 <jstl:if test="${row.isCertified eq false}">
-                	<jstl:out value="Not certified" />
+                	<spring:message code="record.not.certified" />
                 </jstl:if>
 	</display:column>
 	</security:authorize>
@@ -68,14 +66,14 @@
     		</jstl:if>
     		<jstl:if test="${row.isCertified eq false}">
 				<display:column>
-				<jstl:out value="Not certified" />
+				<spring:message code="record.not.certified" />
 				</display:column>
     		</jstl:if>
     </jstl:when>
      <jstl:when test="${buttonsCertifier}">
 			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
 				<display:column>
-				<jstl:out value="Not final" />
+				<spring:message code="record.no.final" />
 				</display:column>
     		</jstl:if>
     		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
@@ -92,7 +90,7 @@
     		</jstl:if>
     		<jstl:if test="${row.isCertified eq true}">
 				<display:column>
-				<jstl:out value="Certified" />
+				<spring:message code="record.certified" />
 				</display:column>
 				<display:column>
 			<input type="button" name="display"
@@ -144,15 +142,15 @@
                 	onclick="relativeRedir('educationRecord/toFinal.do?educationRecordId=${row.id}')" />
                 </jstl:if>
                 <jstl:if test="${row.isDraft eq false}">
-                	<jstl:out value="In final mode" />
+                	<spring:message code="record.finalMode" />
                 </jstl:if>
 	</display:column>
 	<display:column>
                 <jstl:if test="${row.isCertified eq true}">
-                	<jstl:out value="Certified" />
+                	<spring:message code="record.certified" />
                 </jstl:if>
                 <jstl:if test="${row.isCertified eq false}">
-                	<jstl:out value="Not certified" />
+                	<spring:message code="record.not.certified" />
                 </jstl:if>
 	</display:column>
 	</security:authorize>
@@ -167,14 +165,14 @@
     		</jstl:if>
     		<jstl:if test="${row.isCertified eq false}">
 				<display:column>
-				<jstl:out value="Not certified" />
+				<spring:message code="record.not.certified" />
 				</display:column>
     		</jstl:if>
     </jstl:when>
      <jstl:when test="${buttonsCertifier}">
 			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
 				<display:column>
-				<jstl:out value="Not final" />
+				<spring:message code="record.no.final" />
 				</display:column>
     		</jstl:if>
     		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
@@ -191,7 +189,7 @@
     		</jstl:if>
     		<jstl:if test="${row.isCertified eq true}">
 				<display:column>
-				<jstl:out value="Certified" />
+				<spring:message code="record.certified" />
 				</display:column>
 				<display:column>
 			<input type="button" name="display"
@@ -250,15 +248,15 @@
                 	onclick="relativeRedir('miscellaneousRecord/toFinal.do?miscellaneousRecordId=${row.id}')" />
                 </jstl:if>
                 <jstl:if test="${row.isDraft eq false}">
-                	<jstl:out value="In final mode" />
+                	<spring:message code="record.finalMode" />
                 </jstl:if>
 	</display:column>
 	<display:column>
                 <jstl:if test="${row.isCertified eq true}">
-                	<jstl:out value="Certified" />
+                	<spring:message code="record.certified" />
                 </jstl:if>
                 <jstl:if test="${row.isCertified eq false}">
-                	<jstl:out value="Not certified" />
+                	<spring:message code="record.not.certified" />
                 </jstl:if>
 	</display:column>
 	</security:authorize>
@@ -273,14 +271,14 @@
     		</jstl:if>
     		<jstl:if test="${row.isCertified eq false}">
 				<display:column>
-				<jstl:out value="Not certified" />
+				<spring:message code="record.not.certified" />
 				</display:column>
     		</jstl:if>
     </jstl:when>
      <jstl:when test="${buttonsCertifier}">
 			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
 				<display:column>
-				<jstl:out value="Not final" />
+				<spring:message code="record.no.final" />
 				</display:column>
     		</jstl:if>
     		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
@@ -297,7 +295,7 @@
     		</jstl:if>
     		<jstl:if test="${row.isCertified eq true}">
 				<display:column>
-				<jstl:out value="Certified" />
+				<spring:message code="record.certified" />
 				</display:column>
 				<display:column>
 			<input type="button" name="display"

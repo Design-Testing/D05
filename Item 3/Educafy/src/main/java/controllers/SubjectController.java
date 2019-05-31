@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
+import services.AdministratorService;
 import services.ConfigurationParametersService;
 import services.LessonService;
 import services.SubjectService;
@@ -32,7 +32,7 @@ public class SubjectController extends AbstractController {
 	private LessonService					lessonService;
 
 	@Autowired
-	private ActorService					actorService;
+	private AdministratorService			administratorService;
 
 	@Autowired
 	private ConfigurationParametersService	configurationParametersService;
@@ -44,7 +44,7 @@ public class SubjectController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
-
+		this.administratorService.findByPrincipal();
 		ModelAndView res;
 		Subject subject;
 
@@ -60,6 +60,7 @@ public class SubjectController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int subjectId) {
+		this.administratorService.findByPrincipal();
 		ModelAndView result;
 		Subject subject;
 
@@ -76,7 +77,7 @@ public class SubjectController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Subject subject, final BindingResult binding) {
-
+		this.administratorService.findByPrincipal();
 		ModelAndView res = null;
 		//		final Actor principal = this.actorService.findByPrincipal();
 
@@ -99,6 +100,7 @@ public class SubjectController extends AbstractController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int subjectId) {
+		this.administratorService.findByPrincipal();
 		ModelAndView result;
 		final Subject subject = this.subjectService.findOne(subjectId);
 
@@ -168,6 +170,7 @@ public class SubjectController extends AbstractController {
 		res.addObject("subject", subject);
 
 		res.addObject("message", messageCode);
+		res.addObject("subjectLevel", this.configurationParametersService.findSubjectLevels());
 		final String banner = this.configurationParametersService.find().getBanner();
 		res.addObject("banner", banner);
 
