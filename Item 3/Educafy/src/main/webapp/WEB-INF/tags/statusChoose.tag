@@ -35,11 +35,17 @@
 	<jstl:when test="${status eq 'REJECTED'}">
 		<spring:message code="rejected" />
 	</jstl:when>
+	<jstl:when test="${status eq 'REVIEWING'}">
+		<spring:message code="reviewing" />
+	</jstl:when>
 	<jstl:when test="${status eq 'PENDING'}">
 		<spring:message code="pending" />
 	</jstl:when>
 	<jstl:when test="${status eq 'SUBMITTED'}">
 		<spring:message code="submitted" />
+	</jstl:when>
+	<jstl:when test="${status eq 'FINAL'}">
+		<spring:message code="final" />
 	</jstl:when>
 	<jstl:otherwise>
 		<spring:message code="invalid.status" />

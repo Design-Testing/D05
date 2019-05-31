@@ -17,9 +17,9 @@ img.resize {
 }
 </style>
 
-<acme:display code="reservation.status" value="${reservation.status}"/>
-
-
+<spring:message code="reservation.status" />:
+<acme:statusChoose status="${reservation.status}"/>
+<br />
 <jstl:choose>
 	<jstl:when test="${lang eq 'en' }">
 		<spring:message code="reservation.moment"/>: <fmt:formatDate value="${reservation.moment}" type="both" pattern="yyyy-MM-dd HH:mm"/>

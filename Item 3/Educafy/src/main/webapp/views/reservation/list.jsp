@@ -21,7 +21,10 @@
 
 	<display:column property="lesson.title" titleKey="reservation.lesson" />
 	
-	<display:column property="status" titleKey="reservation.status" />
+	<display:column titleKey="reservation.status">
+		
+		<acme:statusChoose status="${row.status}"/>
+	</display:column>
 	
 	<display:column property="student.name" titleKey="reservation.student" />
 
