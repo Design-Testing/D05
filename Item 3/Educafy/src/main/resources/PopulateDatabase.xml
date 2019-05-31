@@ -1805,25 +1805,25 @@
 	<bean id="exam1" class="domain.Exam">
 		<property name="title" value="Title Exam 1" />
 		<property name="status" value="PENDING"/>
-		<property name="reservation" ref="reservation1"/>
+		<property name="reservation" ref="reservation3"/>
 	</bean>
 
 	<bean id="exam2" class="domain.Exam">
 		<property name="title" value="Title Exam 2" />
 		<property name="status" value="SUBMITTED"/>
-		<property name="reservation" ref="reservation1"/>
+		<property name="reservation" ref="reservation3"/>
 	</bean>
 
 	<bean id="exam3" class="domain.Exam">
 		<property name="title" value="Title Exam 3" />
 		<property name="status" value="PENDING"/>
-		<property name="reservation" ref="reservation2"/>
+		<property name="reservation" ref="reservation3"/>
 	</bean>
 
 	<bean id="exam4" class="domain.Exam">
 		<property name="title" value="Title Exam 4" />
 		<property name="status" value="PENDING" />
-		<property name="reservation" ref="reservation2"/>
+		<property name="reservation" ref="reservation4"/>
 	</bean>
 	
 	<bean id="exam5" class="domain.Exam">
