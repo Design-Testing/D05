@@ -92,7 +92,6 @@ public class EducationRecordController extends AbstractController {
 				result.addObject("buttons", true);
 
 			} catch (final Throwable e) {
-				System.out.println(e.getMessage());
 				if (e.getMessage().equals("End date must be after start date")) {
 					result = new ModelAndView("educationRecord/edit");
 					result.addObject("educationRecord", educationRecord);
@@ -113,20 +112,15 @@ public class EducationRecordController extends AbstractController {
 			final EducationRecord educationRecord;
 			final Teacher teacher = this.teacherService.findByPrincipal();
 			educationRecord = this.educationRecordService.findOne(educationRecordId);
-			System.out.println("wwwwww");
 			Assert.isTrue(this.teacherService.hasEducationRecord(teacher.getId(), educationRecordId), "This education record is not of your property");
-			System.out.println("ups");
 			this.educationRecordService.toFinal(educationRecord);
-			System.out.println("qqqqq");
 			final Curriculum curriculum = this.curriculumService.findCurriculumByEducationRecord(educationRecord.getId());
-			System.out.println("vvvvv");
 			result = new ModelAndView("curriculum/display");
 			result.addObject("curriculum", curriculum);
 			result.addObject("curriculumId", curriculum.getId());
 			result.addObject("messages", null);
 			result.addObject("buttons", true);
 		} catch (final Exception e) {
-			System.out.println("AQUIIII" + e.getMessage());
 			result = new ModelAndView("administrator/error");
 			result.addObject("trace", e.getMessage());
 		}

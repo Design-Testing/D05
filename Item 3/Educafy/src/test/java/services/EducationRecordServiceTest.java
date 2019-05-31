@@ -89,15 +89,12 @@ public class EducationRecordServiceTest extends AbstractTest {
 			start = (new SimpleDateFormat("yyyy-MM-dd")).parse(startDate);
 			lRec.setStartDate(start);
 			lRec.setEndDate(end);
-			System.out.println("hola");
 			final EducationRecord lRecSaved = this.educationRecordService.save(lRec, curriculum.getId());
-			System.out.println("adios");
 			Assert.isTrue(lRecSaved.getId() != 0);
 			this.educationRecordService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
-			System.out.println(oops.getMessage());
 		}
 
 		super.checkExceptions(expected, caught);
