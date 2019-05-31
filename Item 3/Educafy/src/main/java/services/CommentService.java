@@ -64,7 +64,7 @@ public class CommentService {
 		assesment = this.assesmentService.findOne(assesmentId);
 
 		if (comment.getId() == 0) {
-			Assert.isTrue(assesment.getLesson().getTeacher().equals(principal), "No puede realizar un comentario a una evaluación que no le pertenece.");
+			Assert.isTrue(assesment.getLesson().getTeacher().equals(principal), "No puede realizar un comentario a una valoración que no le pertenece.");
 			comment.setAssesment(assesment);
 			final Date moment = new Date(System.currentTimeMillis() - 1);
 			comment.setMoment(moment);

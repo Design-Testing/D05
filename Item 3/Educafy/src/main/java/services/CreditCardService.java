@@ -49,8 +49,9 @@ public class CreditCardService {
 
 	// findOne
 	public CreditCard findOne(final int id) {
+		final Student s = this.studentService.findByPrincipal();
 		final CreditCard creditCard = this.creditCardRepository.findOne(id);
-
+		Assert.isTrue(creditCard.getActor().getId() == s.getId());
 		return creditCard;
 	}
 
@@ -71,14 +72,19 @@ public class CreditCardService {
 
 	public CreditCard save(final CreditCard c) {
 		Assert.notNull(c);
+		CreditCard retrieved;
 		final Student principal = this.studentService.findByPrincipal();
-		Assert.isTrue(c.getActor().getId() == principal.getId());
+		if (c.getId() == 0)
+			c.setActor(principal);
+		else {
+			retrieved = this.findOne(c.getId()); // ya en el findOne compruebo que sea su creditCard
+			c.setActor(retrieved.getActor());
+		}
 		Assert.isTrue(!this.tarjetaCaducada(c));
 		final String s = c.getNumber().replace(" ", "");
 		c.setNumber(s);
 		return this.creditCardRepository.save(c);
 	}
-
 	// delete
 	public void delete(final int creditCardId) {
 		Assert.isTrue(creditCardId != 0);

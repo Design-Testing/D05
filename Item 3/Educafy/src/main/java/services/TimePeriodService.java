@@ -27,9 +27,6 @@ public class TimePeriodService {
 	private TeacherService			teacherService;
 
 	@Autowired
-	private ActorService			actorService;
-
-	@Autowired
 	private ReservationService		reservationService;
 
 	@Autowired
@@ -185,28 +182,27 @@ public class TimePeriodService {
 		final List<Boolean> newWednesday = (List<Boolean>) schedule.getWednesday();
 		final List<Boolean> newThursday = (List<Boolean>) schedule.getThursday();
 		final List<Boolean> newFriday = (List<Boolean>) schedule.getFriday();
-		for (final TimePeriod timePeriod : timePeriods)
-
-			if (timePeriod.getDayNumber() == 1) {
-				for (int i = 0; i < 14; i++)
-					if (timePeriod.getStartHour() == i + 8)
-						newMonday.set(i, false);
-			} else if (timePeriod.getDayNumber() == 2) {
-				for (int i = 0; i < 14; i++)
-					if (timePeriod.getStartHour() == i + 8)
-						newTuesday.set(i, false);
-			} else if (timePeriod.getDayNumber() == 3) {
-				for (int i = 0; i < 14; i++)
-					if (timePeriod.getStartHour() == i + 8)
-						newWednesday.set(i, false);
-			} else if (timePeriod.getDayNumber() == 4) {
-				for (int i = 0; i < 14; i++)
-					if (timePeriod.getStartHour() == i + 8)
-						newThursday.set(i, false);
-			} else if (timePeriod.getDayNumber() == 5)
-				for (int i = 0; i < 14; i++)
-					if (timePeriod.getStartHour() == i + 8)
-						newFriday.set(i, false);
+		for (final TimePeriod timePeriod : timePeriods) {
+			final int day = timePeriod.getDayNumber();
+			final int hour = timePeriod.getStartHour();
+			switch (day) {
+			case 1:
+				newMonday.set(hour - 8, false);
+				break;
+			case 2:
+				newThursday.set(hour - 8, false);
+				break;
+			case 3:
+				newWednesday.set(hour - 8, false);
+				break;
+			case 4:
+				newThursday.set(hour - 8, false);
+				break;
+			case 5:
+				newFriday.set(hour - 8, false);
+				break;
+			}
+		}
 		schedule.setMonday(newMonday);
 		schedule.setTuesday(newTuesday);
 		schedule.setWednesday(newWednesday);

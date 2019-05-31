@@ -69,17 +69,18 @@ public class AssesmentService {
 		Assert.isTrue(lessonId != 0);
 		final Student principal = this.studentService.findByPrincipal();
 		final Assesment result;
+		final Collection<Lesson> lessons = this.lessonService.findAllByStudent();
+		final Lesson lesson = this.lessonService.findOne(lessonId);
+		Assert.isTrue(lessons.contains(lesson));
 
 		if (assesment.getId() == 0) {
 			assesment.setStudent(principal);
-			final Lesson lesson = this.lessonService.findOne(lessonId);
 			assesment.setLesson(lesson);
 		}
 		result = this.assesmentRepository.save(assesment);
 		return result;
 
 	}
-
 	public void delete(final Assesment assesment) {
 		Assert.notNull(assesment);
 		Assert.isTrue(assesment.getId() != 0);

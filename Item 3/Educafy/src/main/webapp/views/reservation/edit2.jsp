@@ -28,7 +28,7 @@
 	<input type="submit" name="reject"
 		value="<spring:message code="reservation.rejected" />" />
 	
-		<acme:button url="reservation/teacher/myReservation.do" name="back" code="reservation.back"/>
+		<acme:button url="reservation/teacher/myReservations.do" name="back" code="reservation.back"/>
 	
 </form:form>
 </security:authorize>
@@ -53,7 +53,7 @@
 	<input type="submit" name="review"
 		value="<spring:message code="reservation.reviewing" />" />
 	
-		<acme:button url="reservation/student/myReservation.do" name="back" code="reservation.back"/>
+		<acme:button url="reservation/student/myReservations.do" name="back" code="reservation.back"/>
 	
 </form:form>
 </security:authorize>

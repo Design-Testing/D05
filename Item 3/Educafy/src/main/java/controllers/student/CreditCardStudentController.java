@@ -124,8 +124,6 @@ public class CreditCardStudentController extends AbstractController {
 				result = new ModelAndView("redirect:/creditCard/student/list.do");
 			} catch (final Throwable oops) {
 				String errorMessage = "creditCard.commit.error";
-				if (oops.getMessage().contains("message.error"))
-					errorMessage = oops.getMessage();
 				if (this.creditCardService.tarjetaCaducada(creditCard))
 					errorMessage = "creditCard.tarjeta.caducada";
 				result = this.createEditModelAndView(creditCard, errorMessage);
