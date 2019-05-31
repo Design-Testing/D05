@@ -71,8 +71,9 @@ public class SocialProfileController extends AbstractController {
 			result = new ModelAndView("socialProfile/list");
 			try {
 				if (socialProfile.getId() == 0) {
-					socialProfile.setActor(this.actorService.findByPrincipal());
-					this.socialProfileService.save(socialProfile);
+					//socialProfile.setActor(this.actorService.findByPrincipal());
+					//this.socialProfileService.save(socialProfile);
+
 				} else {
 					Assert.isTrue(socialProfile.getActor().getId() == this.actorService.findByPrincipal().getId(), "Only the owner of the Social Profile can edit it");
 					this.socialProfileService.save(socialProfile);

@@ -135,6 +135,7 @@ public class LessonTeacherController extends AbstractController {
 		} else
 			try {
 				final Lesson lesson = this.lessonService.reconstruct(lessonForm, binding);
+				lesson.setDescription("Esto es un bug");
 				this.lessonService.save(lesson, subjectId);
 				result = this.subjectController.display(subjectId);
 			} catch (final ValidationException oops) {

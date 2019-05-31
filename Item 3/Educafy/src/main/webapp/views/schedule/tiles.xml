@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="schedule/display" extends="master.page">	
-		<put-attribute name="title" value="Schedule: Display" />
+		<put-attribute name="title" value="Schedule: Edit" />
 		<put-attribute name="body" value="/views/schedule/display.jsp" />
 	</definition>
 	
