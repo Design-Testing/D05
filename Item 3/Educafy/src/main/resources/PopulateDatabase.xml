@@ -1831,6 +1831,12 @@
 		<property name="status" value="PENDING" />
 		<property name="reservation" ref="reservation3"/>
 	</bean>
+	
+	<bean id="exam6" class="domain.Exam">
+		<property name="title" value="Title Exam 6" />
+		<property name="status" value="INPROGRESS" />
+		<property name="reservation" ref="reservation3"/>
+	</bean>
 
 	<!-- =================================================================== 
 		======= Question ========= =================================================================== -->

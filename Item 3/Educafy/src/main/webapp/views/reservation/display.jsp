@@ -122,11 +122,11 @@ img.resize {
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('STUDENT')">
-		<jstl:if test="${row.status eq 'INPROGRESS' }">
-			<display:column>
+		<display:column>
+			<jstl:if test="${row.status eq 'INPROGRESS' }">
 				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
-			</display:column>
-		</jstl:if>
+			</jstl:if>
+		</display:column>
 		</security:authorize>
 	</display:table>
 	</jstl:when>
@@ -149,3 +149,6 @@ img.resize {
 		<acme:button url="reservation/student/myReservations.do" name="back" code="reservation.back"/>
 	</jstl:when>
 </jstl:choose>
+<jstl:if test="${not empty msg}">
+	<h3 style="color: red;"><spring:message code="${msg}"/></h3>
+</jstl:if>

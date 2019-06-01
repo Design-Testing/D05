@@ -147,15 +147,16 @@ public class ExamController extends AbstractController {
 		final Exam exam = this.examService.findOne(examId);
 
 		if (exam == null) {
-			result = this.reservationTeacherController.myReservations();
+			result = this.reservationTeacherController.display(exam.getReservation().getId());
 			result.addObject("msg", "exam.inprogress.error");
 		} else
 			try {
 				this.examService.toInprogressMode(examId);
 				result = this.reservationTeacherController.display(exam.getReservation().getId());
 			} catch (final Throwable oops) {
-				String errormsg = "exam.inprogress.error";
-				result = this.reservationTeacherController.myReservations();
+				//String errormsg = "exam.inprogress.error";
+				String errormsg = oops.getMessage();
+				result = this.reservationTeacherController.display(exam.getReservation().getId());
 				if (!(exam.getStatus().equals("PENDING")))
 					errormsg = "exam.inprogress.error";
 				result.addObject("msg", errormsg);
