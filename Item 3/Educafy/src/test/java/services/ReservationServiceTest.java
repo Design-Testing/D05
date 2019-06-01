@@ -69,9 +69,9 @@ public class ReservationServiceTest extends AbstractTest {
 		Reservation reservation;
 		caught = null;
 		final Lesson les = this.lessonService.findOne(super.getEntityId(lesson));
-		final CreditCard card = this.creditCardService.findOne(super.getEntityId(creditCard));
 		try {
 			this.authenticate(student);
+			final CreditCard card = this.creditCardService.findOne(super.getEntityId(creditCard));
 			reservation = this.reservationService.create();
 			reservation.setHoursWeek(hoursWeek);
 			reservation.setCreditCard(card);

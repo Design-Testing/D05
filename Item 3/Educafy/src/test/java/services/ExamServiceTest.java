@@ -37,19 +37,19 @@ public class ExamServiceTest extends AbstractTest {
 				//				B: Test Positivo: Creación correcta de un exam
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "reservation1", "Exam test", null
+				"teacher2", "reservation4", "Exam test", null
 			}, {
 				//				A: Educafy Crear y guardar un exam
 				//				B: Test Negativo: Creación incorrecta de un exam, title vacío
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "reservation1", "", ConstraintViolationException.class
+				"teacher2", "reservation4", "", ConstraintViolationException.class
 			}, {
 				//				A: Educafy Crear y guardar un exam
 				//				B: Test Negativo: Creación incorrecta de un exam, la reservation no pertece al teacher registrado
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher2", "reservation1", "Exam test", IllegalArgumentException.class
+				"teacher1", "reservation4", "Exam test", IllegalArgumentException.class
 			}
 
 		};

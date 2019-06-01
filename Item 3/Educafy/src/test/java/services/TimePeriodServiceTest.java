@@ -35,19 +35,19 @@ public class TimePeriodServiceTest extends AbstractTest {
 				//				B: Test Positivo: Edicion correcta de un TimePeriod
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "timePeriod1", 14, 15, 3, null
+				"teacher1", "timePeriod4", 14, 15, 3, null
 			}, {
 				//				A: Educafy editar un TimePeriod
 				//				B: Test Negativo: Editar introduciendo un tramo de mas de una hora
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "timePeriod1", 14, 16, 3, IllegalArgumentException.class
+				"teacher1", "timePeriod4", 14, 16, 3, IllegalArgumentException.class
 			}, {
 				//				A: Educafy editar un TimePeriod
 				//				B: Test Negativo: Editar introduciendo un tramo de mas de una hora
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "timePeriod1", 15, 14, 2, IllegalArgumentException.class
+				"teacher1", "timePeriod4", 15, 14, 2, IllegalArgumentException.class
 			}
 
 		};
