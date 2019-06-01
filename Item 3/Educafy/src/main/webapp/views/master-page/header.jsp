@@ -66,7 +66,7 @@
 			<li><a href="lesson/student/myLessons.do"><spring:message code="master.page.lesson.myLessons" /></a></li>
 			<li><a href="finder/student/edit.do"><spring:message code="master.page.finder.student.edit" /></a></li>
 			<li><a href="assesment/student/myAssesments.do"><spring:message code="master.page.assesment.myAssesments" /></a></li>
-
+			<li><a href="exam/myexams.do"><spring:message code="master.page.myexams" /></a></li>
 			<li><a href="creditCard/student/list.do"><spring:message code="master.page.student.creditCard.list" /></a></li>
 
 			<!-- RESERVATION -->

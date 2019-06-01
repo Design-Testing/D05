@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 
@@ -98,6 +100,20 @@ public class ExamController extends AbstractController {
 		return result;
 	}
 
+	// MYEXAMS --------------------------------------------------------
+
+	@RequestMapping(value = "/myexams", method = RequestMethod.GET)
+	public ModelAndView myexams() {
+		final ModelAndView result;
+		Collection<Exam> exams;
+		exams = this.examService.findAllExamsByStudent();
+		result = new ModelAndView("exam/myexams");
+		result.addObject("exam", exams);
+		result.addObject("requestURI", "exam/myexams.do");
+		result.addObject("lang", this.lang);
+
+		return result;
+	}
 	// TO SUBMITTED --------------------------------------------------------
 
 	@RequestMapping(value = "/submitted", method = RequestMethod.GET)

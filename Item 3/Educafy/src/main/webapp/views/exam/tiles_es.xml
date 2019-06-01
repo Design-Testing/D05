@@ -33,7 +33,12 @@
 	
 	<definition name="exam/error" extends="master.page">	
 		<put-attribute name="title" value="Examen: Error" />
-		<put-attribute name="body" value="/views/exams/error.jsp" />
+		<put-attribute name="body" value="/views/exam/error.jsp" />
+	</definition>
+	
+	<definition name="exam/myexams" extends="master.page">	
+		<put-attribute name="title" value="Exam: Lista" />
+		<put-attribute name="body" value="/views/exam/list.jsp" />
 	</definition>
 	
 </tiles-definitions>

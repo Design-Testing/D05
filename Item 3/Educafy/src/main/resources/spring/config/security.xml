@@ -90,6 +90,7 @@
 		<security:intercept-url pattern="/exam/delete.do" access="hasRole('TEACHER')" />  		
  		<security:intercept-url pattern="/exam/evaluated.do" access="hasRole('TEACHER')" /> 
  		<security:intercept-url pattern="/exam/inprogress.do" access="hasRole('TEACHER')" /> 
+ 		<security:intercept-url pattern="/exam/myexams.do" access="hasRole('STUDENT')" />
  		
  		
  		<!-- QUESTION -->

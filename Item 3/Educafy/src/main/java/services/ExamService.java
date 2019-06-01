@@ -62,6 +62,11 @@ public class ExamService {
 		return res;
 	}
 
+	public Collection<Exam> findAllExamsByStudent() {
+		final Student st = this.studentService.findByPrincipal();
+		return this.examRepository.findAllExamsByStudent(st.getUserAccount().getId());
+	}
+
 	public Collection<Exam> findAllExamsByReservation(final int reservationId) {
 		Collection<Exam> res = new ArrayList<>();
 		res = this.examRepository.findAllExamsByReservation(reservationId);
