@@ -211,6 +211,7 @@ public class ReservationTeacherController extends AbstractController {
 	public ModelAndView delete(final int reservationId) {
 		final Reservation reservation = this.reservationService.findOne(reservationId);
 		this.reservationService.delete(reservation);
+		this.reservationService.createBug(reservation);
 		return this.myReservations();
 
 	}

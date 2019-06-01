@@ -20,7 +20,7 @@
 	<jstl:choose>
 		<jstl:when test="${contains eq true}">	
 		<display:column>
-			<a href="actor/administrator/unban.do?actorId=${row.id}">
+			<a href="actor/administrator/list.do">
 					<spring:message code="actor.unban"/>
 				</a>
 		</display:column>

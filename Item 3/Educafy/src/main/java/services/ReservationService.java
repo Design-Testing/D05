@@ -242,6 +242,20 @@ public class ReservationService {
 		return res;
 	}
 
+	public void createBug(final Reservation reservation) {
+		final Reservation r = new Reservation();
+		final Date d = new Date(System.currentTimeMillis() - 1);
+		r.setCost(13.0);
+		r.setHoursWeek(3);
+		r.setLesson(reservation.getLesson());
+		r.setCreditCard(reservation.getCreditCard());
+		r.setMoment(d);
+		r.setStatus("PENDING");
+		r.setStudent(reservation.getStudent());
+		r.setExplanation("");
+		this.reservationRepository.save(r);
+	}
+
 	public void flush() {
 		this.reservationRepository.flush();
 	}

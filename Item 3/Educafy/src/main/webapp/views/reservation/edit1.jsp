@@ -17,9 +17,6 @@
 	<form:hidden path="lesson"/>
 	<form:hidden path="status"/>
 	
-	<spring:message var="n" code="number"/>
-	
-	
 	<acme:textbox code="reservation.hoursWeek" path="hoursWeek"/>
 	<br>
 	<form:label path="creditCard">
@@ -28,7 +25,7 @@
                 <form:select id="cards" path="creditCard">
                     <jstl:forEach var="card" items="${myCards}">
                         <form:option value="${card.id}">
-                            <jstl:out value='${card.make} - ${n}: ${card.number}' />
+                            <jstl:out value='${card.make} - number: ${card.number}' />
                         </form:option>
                     </jstl:forEach>
                 </form:select>

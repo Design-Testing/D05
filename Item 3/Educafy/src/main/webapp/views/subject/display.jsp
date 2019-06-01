@@ -68,10 +68,11 @@ img.resize {
 
 <br><br>
 
+<security:authorize access="hasRole('ADMIN')">
 <jstl:if test="${empty lessons}">
-		<acme:button url="subject/delete.do?subjectId=${subject.id}" name="back" code="subject.delete"/>
+		<acme:button url="subject/list.do" name="back" code="subject.delete"/>
 </jstl:if>
-
+</security:authorize>
 
 
 <acme:button url="subject/list.do" name="back" code="subject.listing"/>
