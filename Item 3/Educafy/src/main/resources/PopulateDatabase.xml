@@ -2039,6 +2039,13 @@
 		<property name="reservation" ref="reservation3" />
 	</bean>
 	
+	<bean id="timePeriod4" class="domain.TimePeriod">
+		<property name="startHour" value="8" />
+		<property name="endHour" value="9" />
+		<property name="dayNumber" value="3" />
+		<property name="reservation" ref="reservation1" />
+	</bean>
+	
 
 	<!-- =================================================================== 
 		======= Assesment ========= =================================================================== -->

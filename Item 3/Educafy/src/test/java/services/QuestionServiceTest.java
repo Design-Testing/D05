@@ -41,13 +41,13 @@ public class QuestionServiceTest extends AbstractTest {
 				//				B: Test Positivo: Creación correcta de un question
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "exam1", "Question 1", null
+				"teacher2", "exam1", "Question 1", null
 			}, {
 				//				A: Educafy Crear y guardar un question
 				//				B: Test Negativo: Creación incorrecta de un question, title vacío
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "exam1", "", ConstraintViolationException.class
+				"teacher2", "exam1", "", ConstraintViolationException.class
 			}, {
 				//				A: Educafy Crear y guardar un question
 				//				B: Test Negativo: Creación incorrecta de un question, el examen donde se guarda no pertenece al teacher registrado
