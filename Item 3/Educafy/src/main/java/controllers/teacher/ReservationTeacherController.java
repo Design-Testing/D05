@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ExamService;
+import services.MessageService;
 import services.ReservationService;
-import services.ScheduleService;
 import services.TeacherService;
 import services.TimePeriodService;
 import controllers.AbstractController;
@@ -44,7 +44,7 @@ public class ReservationTeacherController extends AbstractController {
 	private TimePeriodService	timePeriodService;
 
 	@Autowired
-	private ScheduleService		scheduleService;
+	private MessageService		messageService;
 
 	final String				lang	= LocaleContextHolder.getLocale().getLanguage();
 
@@ -131,6 +131,7 @@ public class ReservationTeacherController extends AbstractController {
 		} else
 			try {
 				this.reservationService.toAcceptedMode(reservation);
+				this.messageService.acceptedNotification(reservation);
 				result = this.myReservations();
 			} catch (final Throwable oops) {
 				String errormsg = "reservation.accepted.error";
@@ -155,6 +156,7 @@ public class ReservationTeacherController extends AbstractController {
 		} else
 			try {
 				reservation = this.reservationService.toRejectedMode(reservation);
+				this.messageService.rejectedNotification(reservation);
 				result = new ModelAndView("redirect:myReservations.do");
 			} catch (final Throwable oops) {
 				final String errormsg = "reservation.rejected.error";

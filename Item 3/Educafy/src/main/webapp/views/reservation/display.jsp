@@ -67,7 +67,7 @@ img.resize {
 				<jstl:otherwise><spring:message code="friday"/></jstl:otherwise>				
 			</jstl:choose> 
 		</display:column>
-		<jstl:if test="${rol eq 'teacher' && reservation.status eq 'PENDING'}">
+		<jstl:if test="${rol eq 'teacher' && (reservation.status eq 'PENDING') or (reservation.status eq 'REVIEWING')}">
 			<display:column>
 				<acme:button url="timePeriod/edit.do?timePeriodId=${row.id}" name="edit" code="reservation.edit"/>
 			</display:column>

@@ -63,7 +63,7 @@ public class TimePeriodService {
 		final Collection<Reservation> reservations = this.reservationService.findAllReservationByTeacher(principal.getUserAccount().getId());
 		Assert.isTrue(!this.getTimePeriod(timePeriod) == true, "Este tramo horario ya ha sido escogido.");
 		this.findByReservation(timePeriod.getReservation().getId());
-		Assert.isTrue(timePeriod.getReservation().getStatus().equals("PENDING"), "No puede añadir un timePeriod si la reserva está en Final");
+		Assert.isTrue(timePeriod.getReservation().getStatus().equals("PENDING") || timePeriod.getReservation().getStatus().equals("REVIEWING"), "No puede añadir un timePeriod si la reserva está en Final");
 		final Schedule schedule = this.setScheduleTrue(timePeriod);
 		if (timePeriod.getId() != 0) {
 			final TimePeriod t = this.findOne(timePeriod.getId());

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ExamService;
+import services.MessageService;
 import services.QuestionService;
 import services.ReservationService;
 import controllers.student.ReservationStudentController;
@@ -40,6 +41,9 @@ public class ExamController extends AbstractController {
 
 	@Autowired
 	private QuestionService					questionService;
+
+	@Autowired
+	private MessageService					messageService;
 
 	@Autowired
 	private ReservationStudentController	reservationStudentController;
@@ -177,6 +181,7 @@ public class ExamController extends AbstractController {
 		} else
 			try {
 				this.examService.toEvaluatedMode(exam);
+				this.messageService.evaluatedExam(exam);
 				result = this.reservationTeacherController.display(exam.getReservation().getId());
 			} catch (final Throwable oops) {
 				final String errormsg = "exam.evaluated.error";
@@ -185,7 +190,6 @@ public class ExamController extends AbstractController {
 
 		return result;
 	}
-
 	// EDIT --------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
