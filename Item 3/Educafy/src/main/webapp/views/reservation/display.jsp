@@ -111,7 +111,7 @@ img.resize {
 				<jstl:if test="${row.status eq 'SUBMITTED' }">
 					<acme:button url="exam/edit.do?examId=${row.id}" name="evaluate" code="exam.evaluate"/>
 				</jstl:if>
-				<jstl:if test="${row.status eq 'PENDING' }">
+				<jstl:if test="${row.status eq 'PENDING' and (not empty row.questions)}">
 					<acme:button url="exam/inprogress.do?examId=${row.id}" name="inprogress" code="exam.inprogress"/>
 				</jstl:if>
 			</display:column>

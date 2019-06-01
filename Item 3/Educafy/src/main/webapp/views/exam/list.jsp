@@ -27,11 +27,11 @@
 			</jstl:if>
 		</display:column>
 		<security:authorize access="hasRole('STUDENT')">
+		<display:column>
 		<jstl:if test="${row.status eq 'INPROGRESS' }">
-			<display:column>
 				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
-			</display:column>
 		</jstl:if>
+		</display:column>
 		</security:authorize>
 	</display:table>
 	</jstl:when>

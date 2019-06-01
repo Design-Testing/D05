@@ -59,13 +59,15 @@ img.resize {
 </jstl:choose>
 <br><br>
 <security:authorize access="hasRole('TEACHER')">
+<jstl:if test="${exam.status eq 'PENDING' }">
 	<acme:button url="question/create.do?examId=${exam.id}" name="create" code="question.create"/>
-	<acme:button url="reservation/teacher/display.do?reservationId=${exam.reservation.id}" name="back" code="exam.back"/>
 	<acme:button url="exam/delete.do?examId=${exam.id}" name="delete" code="exam.delete"/>
+</jstl:if>
+	<acme:button url="reservation/teacher/display.do?reservationId=${exam.reservation.id}" name="back" code="exam.back"/>
 <br><br>
 </security:authorize>
 
 <security:authorize access="hasRole('STUDENT')">
 	<acme:button url="exam/submitted.do?examId=${exam.id}" name="submitted" code="exam.submit"/>
-<br><br>
+	<br><br>
 </security:authorize>

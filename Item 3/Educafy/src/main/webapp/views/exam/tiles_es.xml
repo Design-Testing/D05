@@ -37,7 +37,7 @@
 	</definition>
 	
 	<definition name="exam/myexams" extends="master.page">	
-		<put-attribute name="title" value="Exam: Lista" />
+		<put-attribute name="title" value="Examen: Lista" />
 		<put-attribute name="body" value="/views/exam/list.jsp" />
 	</definition>
 	
