@@ -111,7 +111,7 @@ img.resize {
 				<jstl:if test="${row.status eq 'SUBMITTED' }">
 					<acme:button url="exam/edit.do?examId=${row.id}" name="evaluate" code="exam.evaluate"/>
 				</jstl:if>
-				<jstl:if test="${row.status eq 'PENDING' }">
+				<jstl:if test="${row.status eq 'PENDING' and (not empty row.questions)}">
 					<acme:button url="exam/inprogress.do?examId=${row.id}" name="inprogress" code="exam.inprogress"/>
 				</jstl:if>
 			</display:column>
@@ -122,11 +122,11 @@ img.resize {
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('STUDENT')">
-		<jstl:if test="${row.status eq 'INPROGRESS' }">
-			<display:column>
+		<display:column>
+			<jstl:if test="${row.status eq 'INPROGRESS' }">
 				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
-			</display:column>
-		</jstl:if>
+			</jstl:if>
+		</display:column>
 		</security:authorize>
 	</display:table>
 	</jstl:when>
@@ -149,3 +149,6 @@ img.resize {
 		<acme:button url="reservation/student/myReservations.do" name="back" code="reservation.back"/>
 	</jstl:when>
 </jstl:choose>
+<jstl:if test="${not empty msg}">
+	<h3 style="color: red;"><spring:message code="${msg}"/></h3>
+</jstl:if>

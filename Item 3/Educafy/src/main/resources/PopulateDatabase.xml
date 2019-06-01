@@ -1805,31 +1805,59 @@
 	<bean id="exam1" class="domain.Exam">
 		<property name="title" value="Title Exam 1" />
 		<property name="status" value="PENDING"/>
-		<property name="reservation" ref="reservation1"/>
+		<property name="reservation" ref="reservation3"/>
 	</bean>
 
 	<bean id="exam2" class="domain.Exam">
 		<property name="title" value="Title Exam 2" />
 		<property name="status" value="SUBMITTED"/>
-		<property name="reservation" ref="reservation1"/>
+		<property name="reservation" ref="reservation3"/>
+		<property name="questions">
+			<list>
+				<ref bean="question11" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="exam3" class="domain.Exam">
 		<property name="title" value="Title Exam 3" />
 		<property name="status" value="PENDING"/>
-		<property name="reservation" ref="reservation2"/>
+		<property name="reservation" ref="reservation3"/>
 	</bean>
 
 	<bean id="exam4" class="domain.Exam">
 		<property name="title" value="Title Exam 4" />
 		<property name="status" value="PENDING" />
-		<property name="reservation" ref="reservation2"/>
+		<property name="reservation" ref="reservation4"/>
 	</bean>
 	
 	<bean id="exam5" class="domain.Exam">
 		<property name="title" value="Title Exam 5" />
 		<property name="status" value="PENDING" />
 		<property name="reservation" ref="reservation3"/>
+	</bean>
+	
+	<bean id="exam6" class="domain.Exam">
+		<property name="title" value="Title Exam 6" />
+		<property name="status" value="INPROGRESS" />
+		<property name="reservation" ref="reservation3"/>
+		<property name="questions">
+			<list>
+				<ref bean="question12" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="exam7" class="domain.Exam">
+		<property name="title" value="Title Exam 7" />
+		<property name="status" value="SUBMITTED"/>
+		<property name="reservation" ref="reservation3"/>
+		<property name="questions">
+			<list>
+				<ref bean="question9" />
+				<ref bean="question10" />
+			</list>
+		</property>
 	</bean>
 
 	<!-- =================================================================== 
@@ -1875,6 +1903,25 @@
 	<bean id="question8" class="domain.Question">
 		<property name="title" value="Question 8" />
 		<property name="answer" value="Answer 8" />
+	</bean>
+	
+	<bean id="question9" class="domain.Question">
+		<property name="title" value="Question 9" />
+		<property name="answer" value="Answer 9" />
+	</bean>
+
+	<bean id="question10" class="domain.Question">
+		<property name="title" value="Question 10" />
+		<property name="answer" value="Answer 10" />
+	</bean>
+	
+	<bean id="question11" class="domain.Question">
+		<property name="title" value="Question 11" />
+		<property name="answer" value="Answer 11" />
+	</bean>
+	
+	<bean id="question12" class="domain.Question">
+		<property name="title" value="Question 12" />
 	</bean>
 
 	<!-- =================================================================== 

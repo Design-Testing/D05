@@ -12,7 +12,7 @@
     <%-- Curriculum --%>
 
     <!-- Personal Record -->
-    <div id="inceptionRecord">
+    <div id="personalRecord">
         <ul style="list-style-type: disc">
             <li><b><spring:message code="personalRecord"/></b>
         </ul>
@@ -73,33 +73,30 @@
     		</jstl:if>
     </jstl:when>
      <jstl:when test="${buttonsCertifier}">
-			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
-				<display:column>
+     		<display:column>
+				<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
 				<spring:message code="record.no.final" />
-				</display:column>
-    		</jstl:if>
-    		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
-				<display:column>
+				</jstl:if>
+			</display:column>
+			<display:column>
+			<jstl:if test="${row.isDraft eq false}">
+				<input type="button" name="display"
+                value="<spring:message code="record.display" />"
+                onclick="relativeRedir('personalRecord/display.do?personalRecordId=${row.id}')" />
+			</jstl:if>
+			</display:column>
+			<display:column>
+			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
 				<input type="button" name="display"
                 value="<spring:message code="record.certify" />"
                 onclick="relativeRedir('personalRecord/certify.do?personalRecordId=${row.id}')" />
-				</display:column>
-				<display:column>
-			<input type="button" name="display"
-                value="<spring:message code="record.display" />"
-                onclick="relativeRedir('personalRecord/display.do?personalRecordId=${row.id}')" />
+			</jstl:if>
 			</display:column>
-    		</jstl:if>
-    		<jstl:if test="${row.isCertified eq true}">
-				<display:column>
+			<display:column>
+			<jstl:if test="${row.isCertified eq true}">
 				<spring:message code="record.certified" />
-				</display:column>
-				<display:column>
-			<input type="button" name="display"
-                value="<spring:message code="record.display" />"
-                onclick="relativeRedir('personalRecord/display.do?personalRecordId=${row.id}')" />
+			</jstl:if>
 			</display:column>
-    		</jstl:if>
     </jstl:when>
     </jstl:choose>
 	</display:table>
@@ -175,34 +172,31 @@
 				</display:column>
     		</jstl:if>
     </jstl:when>
-     <jstl:when test="${buttonsCertifier}">
-			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
-				<display:column>
+      <jstl:when test="${buttonsCertifier}">
+     		<display:column>
+				<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
 				<spring:message code="record.no.final" />
-				</display:column>
-    		</jstl:if>
-    		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
-				<display:column>
+				</jstl:if>
+			</display:column>
+			<display:column>
+			<jstl:if test="${row.isDraft eq false}">
+				<input type="button" name="display"
+                value="<spring:message code="record.display" />"
+                onclick="relativeRedir('educationRecord/display.do?educationRecordId=${row.id}')" />
+			</jstl:if>
+			</display:column>
+			<display:column>
+			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
 				<input type="button" name="display"
                 value="<spring:message code="record.certify" />"
                 onclick="relativeRedir('educationRecord/certify.do?educationRecordId=${row.id}')" />
-				</display:column>
-				<display:column>
-			<input type="button" name="display"
-                value="<spring:message code="record.display" />"
-                onclick="relativeRedir('educationRecord/display.do?educationRecordId=${row.id}')" />
+			</jstl:if>
 			</display:column>
-    		</jstl:if>
-    		<jstl:if test="${row.isCertified eq true}">
-				<display:column>
+			<display:column>
+			<jstl:if test="${row.isCertified eq true}">
 				<spring:message code="record.certified" />
-				</display:column>
-				<display:column>
-			<input type="button" name="display"
-                value="<spring:message code="record.display" />"
-                onclick="relativeRedir('educationRecord/display.do?educationRecordId=${row.id}')" />
+			</jstl:if>
 			</display:column>
-    		</jstl:if>
     </jstl:when>
     </jstl:choose>
 	</display:table>
@@ -285,34 +279,31 @@
 				</display:column>
     		</jstl:if>
     </jstl:when>
-     <jstl:when test="${buttonsCertifier}">
-			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
-				<display:column>
+      <jstl:when test="${buttonsCertifier}">
+     		<display:column>
+				<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq true)}">
 				<spring:message code="record.no.final" />
-				</display:column>
-    		</jstl:if>
-    		<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
-				<display:column>
+				</jstl:if>
+			</display:column>
+			<display:column>
+			<jstl:if test="${row.isDraft eq false}">
+				<input type="button" name="display"
+                value="<spring:message code="record.display" />"
+                onclick="relativeRedir('miscellaneousRecord/display.do?miscellaneousRecordId=${row.id}')" />
+			</jstl:if>
+			</display:column>
+			<display:column>
+			<jstl:if test="${(row.isCertified eq false) and (row.isDraft eq false)}">
 				<input type="button" name="display"
                 value="<spring:message code="record.certify" />"
                 onclick="relativeRedir('miscellaneousRecord/certify.do?miscellaneousRecordId=${row.id}')" />
-				</display:column>
-				<display:column>
-			<input type="button" name="display"
-                value="<spring:message code="record.display" />"
-                onclick="relativeRedir('miscellaneousRecord/display.do?miscellaneousRecordId=${row.id}')" />
+			</jstl:if>
 			</display:column>
-    		</jstl:if>
-    		<jstl:if test="${row.isCertified eq true}">
-				<display:column>
+			<display:column>
+			<jstl:if test="${row.isCertified eq true}">
 				<spring:message code="record.certified" />
-				</display:column>
-				<display:column>
-			<input type="button" name="display"
-                value="<spring:message code="record.display" />"
-                onclick="relativeRedir('miscellaneousRecord/display.do?miscellaneousRecordId=${row.id}')" />
+			</jstl:if>
 			</display:column>
-    		</jstl:if>
     </jstl:when>
     </jstl:choose>
 	</display:table>
