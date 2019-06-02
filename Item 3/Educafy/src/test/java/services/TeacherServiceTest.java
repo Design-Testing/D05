@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,17 +84,23 @@ public class TeacherServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				//				A: Educafy Req. 11.1. Create user accounts for new administrators
+				//				A: Educafy - Crear un teacher
 				//				B: Test Positivo: Creación correcta de un teacher
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"teacher1", "teacher1", "Teacher1", surnames, "teacher1@gmail.es", "+34647607400", null
 			}, {
-				//				A: Educafy Req. 11.1. Create user accounts for new administrators
+				//				A: Educafy - Crear un teacher
 				//				B: Test Negativo: Creación incorrecta de un teacher con name en blanco
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"teacher1", "teacher1", "", surnames, "teacher1@gmail.es", "+34647607400", ConstraintViolationException.class
+			}, {
+				//				A: Educafy - Crear un teacher
+				//				B: Test Negativo: Creación incorrecta de un teacher con email que no sigue el patrón
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"teacher1", "teacher1", "Teacher1", surnames, "mi correo", "+34647607400", DataIntegrityViolationException.class
 			}
 
 		};
@@ -132,7 +139,7 @@ public class TeacherServiceTest extends AbstractTest {
 	/* ========================= Test Create and Save Administrator =========================== */
 
 	@Test
-	public void driverEditAndSaveAdministrator() {
+	public void driverEditAndSaveTeacher() {
 		final Collection<String> surnames = new ArrayList<>();
 		surnames.add("Fernández");
 		final Collection<String> surnames1 = new ArrayList<>();
@@ -143,17 +150,23 @@ public class TeacherServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				//				A: Acme HackerRank Req. 11.1. Update administrator profile
-				//				B: Test Positivo: Creación correcta de un admin
+				//				A: Educafy - Editar el perfil de un Teacher
+				//				B: Test Positivo: Creación correcta de un teacher
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"teacher1", "Teacher1Mod", surnames, "teacher1@gmail.es", "+34647607400", null
 			}, {
-				//				A: Acme HackerRank Req. 11.1. Update administrator profile
-				//				B: Test Negativo: Creación incorrecta de un admin con name en blanco
+				//				A: Educafy - Editar el perfil de un Teacher
+				//				B: Test Negativo: Creación incorrecta de un teacher con name en blanco
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"teacher1", "", surnames, "teacher1@gmail.es", "+34647607400", ConstraintViolationException.class
+			}, {
+				//				A: Educafy - Editar el perfil de un Teacher
+				//				B: Test Negativo: Creación incorrecta de un teacher con email que no sigue el patrón
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"teacher1", "Teacher1", surnames, "mi correo", "+34647607400", ConstraintViolationException.class
 			}
 
 		};

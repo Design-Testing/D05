@@ -94,7 +94,7 @@ public class AdministratorServiceTest extends AbstractTest {
 				"admin1", "admin3", "admin3", "Administrator1", surnames, "garcia@us.es", "647307406", null
 			}, {
 				//				A: Educafy Req. 11.1. Create user accounts for new administrators
-				//				B: Test Negacion: Creacion incorrecta de un admin. Para registrar un actor como administrador el actor logeado tiene que ser un adninistrador
+				//				B: Test Negativo: Creacion incorrecta de un admin. Para registrar un actor como administrador el actor logeado tiene que ser un adninistrador
 				//				C: % Recorre 28 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"teacher1", "admin23", "admin23", "Administrator1", surnames, "garcia@us.es", "+34647307406", IllegalArgumentException.class
@@ -173,6 +173,12 @@ public class AdministratorServiceTest extends AbstractTest {
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"admin1", "", surnames, "lanzas@gmail.com", "+34647307406", ConstraintViolationException.class
+			}, {
+				//				A: Acme HackerRank Req. 11.1. Update administrator profile
+				//				B: Test Negativo: Creación incorrecta de un admin con email que no sigue el patrón
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"admin1", "Administrator1", surnames, "mi correo", "+34647307406", ConstraintViolationException.class
 			}
 
 		};
