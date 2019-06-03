@@ -15,6 +15,6 @@ import utilities.AbstractTest;
 
 })
 @Transactional
-public class SubjectFinderTest extends AbstractTest {
+public class SubjectServiceTest extends AbstractTest {
 
 }
