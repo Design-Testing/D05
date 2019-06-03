@@ -50,6 +50,12 @@ public class FolderServiceTest extends AbstractTest {
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"admin1", "", false, new ArrayList<>(), ConstraintViolationException.class
+			}, {
+				//				A: Un actor crea una carpeta
+				//				B: Test Negativo: Creación incorrecta de una carpeta, name nulo
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"admin1", null, false, new ArrayList<>(), NullPointerException.class
 			}
 
 		};
@@ -68,54 +74,6 @@ public class FolderServiceTest extends AbstractTest {
 			final Actor principal = this.actorService.findByPrincipal();
 
 			folder = this.folderService.create();
-			folder.setName(name);
-			folder.setIsSystemFolder(isSystemFolder);
-			folder.setMessages(messages);
-
-			this.folderService.save(folder, principal);
-			this.folderService.flush();
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-
-		this.checkExceptions(expected, caught);
-	}
-
-	/* ========================= Test Edit Folder =========================== */
-
-	@Test
-	public void driverEditFolder() {
-
-		final Object testingData[][] = {
-			{
-				//				A: Editar una carpeta
-				//				B: Test Positivo: Creación correcta
-				//				C: % Recorre 196 de la 196 lineas posibles
-				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", "carpeta1", false, new ArrayList<>(), null
-			}, {
-				//				A: Editar una carpeta
-				//				B: Test Negativo: Creación incorrecta , name null
-				//				C: % Recorre 54 de la 196 lineas posibles
-				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", null, false, new ArrayList<>(), NullPointerException.class
-			}
-
-		};
-		for (int i = 0; i < testingData.length; i++)
-			this.templateEdit((String) testingData[i][0], (String) testingData[i][1], (Boolean) testingData[i][2], (Collection<Message>) testingData[i][3], (Class<?>) testingData[i][4]);
-	}
-	private void templateEdit(final String admin, final String name, final Boolean isSystemFolder, final Collection<Message> messages, final Class<?> expected) {
-
-		Class<?> caught;
-		final Folder folder;
-
-		caught = null;
-
-		try {
-			this.authenticate(admin);
-			final Actor principal = this.actorService.findByPrincipal();
-			folder = this.folderService.findInboxByUserId(principal.getUserAccount().getId());
 			folder.setName(name);
 			folder.setIsSystemFolder(isSystemFolder);
 			folder.setMessages(messages);

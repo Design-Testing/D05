@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,53 +34,25 @@ public class FinderServiceTest extends AbstractTest {
 	public void driverCreateAndSaveFinder() {
 		final Object testingData[][] = {
 			{
-				//				A: Acme RookyRank R.17.2. Manage finder
-				//				B: Test Positivo: Un hacker puede actualizar su finder (todos los parametros de busqueda vacios)
+				//				A: Educafy Crear y guardar una finder
+				//				B: Test Positivo: Creación correcta de un finder (todos los parametros de busqueda vacios)
 				//				C: % Recorre 31 de las 31 lineas posibles
 				//				D: % cobertura de datos= 8/32
-				"student1", "", null, null, null, null, new ArrayList<Lesson>(), null
+				//				"student1", "lesson1", "", "", "", "", new ArrayList<Lesson>(), null
+				//			}, {
+
+				//				A: Educafy Crear y guardar una finder
+				//				B: Test Negativo: Creación incorrecta de un finder, parámetros nulos
+				//				C: % Recorre 31 de las 31 lineas posibles
+				//				D: % cobertura de datos= 8/32
+				"student1", null, null, null, null, null, new ArrayList<Lesson>(), ConstraintViolationException.class
 			}, {
-				//				A: Acme RookyRank R.17.2. Manage finder
-				//				B: Test Positivo: Un hacker puede actualizar su finder (todos los parametros de busqueda vacios menos keyword)
+
+				//				A: Educafy Crear y guardar una finder
+				//				B: Test Negativo: Creación incorrecta de un finder, teacher como actor
 				//				C: % Recorre 31 de las 31 lineas posibles
 				//				D: % cobertura de datos= 8/32
-				"student1", "lesson", null, null, null, null, new ArrayList<Lesson>(), null
-			}, {
-				//				A: Acme RookyRank R.17.2. Manage finder
-				//				B: Test Positivo: Un hacker puede actualizar su finder (todos los parametros de busqueda vacios menos min salary)
-				//				C: % Recorre 31 de las 31 lineas posibles
-				//				D: % cobertura de datos= 8/32
-				"student1", "", "teacher1", null, null, null, new ArrayList<Lesson>(), null
-			}, {
-				//				A: Acme RookyRank R.17.2. Manage finder
-				//				B: Test Positivo: Un hacker puede actualizar su finder (todos los parametros de busqueda vacios menos max salary)
-				//				C: % Recorre 31 de las 31 lineas posibles
-				//				D: % cobertura de datos= 8/32
-				"student1", "", null, "subject1", null, null, new ArrayList<Lesson>(), null
-			}, {
-				//				A: Acme RookyRank R.17.2. Manage finder
-				//				B: Test Positivo: Un hacker puede actualizar su finder (todos los parametros de busqueda vacios menos min deadline)
-				//				C: % Recorre 31 de las 31 lineas posibles
-				//				D: % cobertura de datos= 8/32
-				"student1", "", null, null, "1ESO", null, new ArrayList<Lesson>(), null
-			}, {
-				//				A: Acme RookyRank R.17.2. Manage finder
-				//				B: Test Positivo: Un hacker puede actualizar su finder (todos los parametros de busqueda vacios menos max deadline)
-				//				C: % Recorre 31 de las 31 lineas posibles
-				//				D: % cobertura de datos= 8/32
-				"student1", "", null, null, null, "2019-05-05 20:00", new ArrayList<Lesson>(), null
-			//			}, {
-			//				//				A: Acme RookyRank R.17.2. Manage finder
-			//				//				B: Test Positivo: Un hacker puede actualizar su finder (todos los parametros de busqueda)
-			//				//				C: % Recorre 31 de las 31 lineas posibles
-			//				//				D: % cobertura de datos= 8/32
-			//				"hacker1", "jotaunit", "200.0", "1000.0", "2019-02-02 10:00", "2019-02-02 20:00", new ArrayList<Position>(), null
-			//			}, {
-			//				//				A: Acme RookyRank R.17.2. Manage finder
-			//				//				B: Test Negativo: Un hacker puede actualizar su finder. Ningun actor ajeno a el puede hacerlo
-			//				//				C: % Recorre 6 de las 31 lineas posibles
-			//				//				D: % cobertura de datos= 8/32
-			//				"company1", "jotaunit", "200.0", "1000.0", "2019-02-02 10:00", "2019-02-02 20:00", new ArrayList<Position>(), IllegalArgumentException.class
+				"teacher1", null, null, null, null, null, new ArrayList<Lesson>(), IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -99,7 +73,6 @@ public class FinderServiceTest extends AbstractTest {
 
 			final Finder finder = this.finderService.findStudentFinder();
 			finder.setKeyword(keyword);
-			finder.setLessons(lessons);
 			finder.setSubjectLevel(subjectLevel);
 			finder.setSubjectName(subjectName);
 			finder.setCreationDate(creationD);
@@ -118,17 +91,17 @@ public class FinderServiceTest extends AbstractTest {
 	public void driverFindFinder() {
 		final Object testingData[][] = {
 			{
-				//				A: Acme RookyRank R.17.2. Listing finder's contents
-				//				B: Test Positivo: Un hacker puede listar el contenido de su finder
+				//				A: Educafy Listing finder's contents
+				//				B: Test Positivo: Un student puede listar el contenido de su finder
 				//				C: % Recorre 34 de las 34 lineas posibles
 				//				D: % cobertura de datos= 2/2
-				"hacker1", null
+				"student1", null
 			}, {
-				//				A: Acme RookyRank R.17.2. Listing finder's contents
-				//				B: Test Positivo: Un HACKER puede listar el contenido de su finder
+				//				A: Educafy Listing finder's contents
+				//				B: Test Positivo: Un student no puede listar el contenido de su finder
 				//				C: % Recorre 14 de las 31 lineas posibles
 				//				D: % cobertura de datos= 2/2
-				"company1", IllegalArgumentException.class
+				"teacher1", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -155,17 +128,17 @@ public class FinderServiceTest extends AbstractTest {
 	public void driverClearFinder() {
 		final Object testingData[][] = {
 			{
-				//				A: Acme RookyRank R.17.2. Clear finder
-				//				B: Test Positivo: Un hacker puede limpiar su finder
+				//				A: Educafy Clear finder
+				//				B: Test Positivo: Un student puede limpiar su finder
 				//				C: % Recorre 35 de las 35 lineas posibles
 				//				D: % cobertura de datos= 2/2
-				"hacker1", null
+				"student1", null
 			}, {
-				//				A: Acme RookyRank R.17.2. Clear finder
-				//				B: Test Negativo: Un HACKER puede limpiar su finder
+				//				A: Educafy Clear finder
+				//				B: Test Negativo: Un teacher no puede limpiar su finder
 				//				C: % Recorre 14 de las 35 lineas posibles
 				//				D: % cobertura de datos= 2/2
-				"company1", IllegalArgumentException.class
+				"teacher1", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -187,5 +160,4 @@ public class FinderServiceTest extends AbstractTest {
 
 		super.checkExceptions(expected, caught);
 	}
-
 }
