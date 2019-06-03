@@ -39,7 +39,13 @@ public class EducationRecordServiceTest extends AbstractTest {
 				//			B: Test Positivo: Teacher crea EducationRecord 
 				//			C: 100% Recorre 49 de las 49 lineas posibles
 				//			D: cobertura de datos=6/405
-				"teacher1", "degree1", "institution1", 5, "2014-09-15", "2018-09-20", null
+				"teacher1", "Derecho", "Universidad de Málaga", 5, "2014-09-15", "2018-09-20", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher crea EducationRecord 
+				//			C: 100% Recorre 49 de las 49 lineas posibles
+				//			D: cobertura de datos=6/405
+				"teacher1", "Física", "Universidad de Sevilla", 5, "2014-09-15", "2018-09-20", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Negativo: Un member intenta crear una EducationRecord sin grado
@@ -83,15 +89,12 @@ public class EducationRecordServiceTest extends AbstractTest {
 			start = (new SimpleDateFormat("yyyy-MM-dd")).parse(startDate);
 			lRec.setStartDate(start);
 			lRec.setEndDate(end);
-			System.out.println("hola");
 			final EducationRecord lRecSaved = this.educationRecordService.save(lRec, curriculum.getId());
-			System.out.println("adios");
 			Assert.isTrue(lRecSaved.getId() != 0);
 			this.educationRecordService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
-			System.out.println(oops.getMessage());
 		}
 
 		super.checkExceptions(expected, caught);
@@ -104,7 +107,13 @@ public class EducationRecordServiceTest extends AbstractTest {
 				//			B: Test Positivo: Teacher crea EducationRecord 
 				//			C: 100% Recorre 49 de las 49 lineas posibles
 				//			D: cobertura de datos=6/405
-				"teacher1", "degree1", "institution1", 5, "2014-09-15", "2018-09-20", "educationRecord1", null
+				"teacher1", "Ingeniería de la Slud", "Universidad de Sevilla", 5, "2014-09-15", "2018-09-20", "educationRecord1", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher crea EducationRecord 
+				//			C: 100% Recorre 49 de las 49 lineas posibles
+				//			D: cobertura de datos=6/405
+				"teacher3", "Ingeniería Química", "Pablo Olavide", 5, "2014-09-15", "2018-09-20", "educationRecord4", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Negativo: Un member intenta crear una EducationRecord sin grado
@@ -128,7 +137,7 @@ public class EducationRecordServiceTest extends AbstractTest {
 				//			B: Test Negativo: Teacher intena editar un EducationRecord que no está en draft mode
 				//			C: 100% Recorre 49 de las 49 lineas posibles
 				//			D: cobertura de datos=6/405
-				"teacher1", "degree1", "institution1", 5, "2014-09-15", "2018-09-20", "educationRecord2", javax.validation.ConstraintViolationException.class
+				"teacher2", "degree1", "institution1", 5, "2014-09-15", "2018-09-20", "educationRecord3", javax.validation.ConstraintViolationException.class
 			}
 		};
 
@@ -176,6 +185,12 @@ public class EducationRecordServiceTest extends AbstractTest {
 				"teacher1", "educationRecord1", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher borra EducationRecord 
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher3", "educationRecord4", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Positivo: Teacher intenar borrar EducationRecord que no esta en drft mode
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
@@ -221,10 +236,22 @@ public class EducationRecordServiceTest extends AbstractTest {
 				"teacher1", "educationRecord1", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher pasa a final EducationRecord en draft mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher3", "educationRecord4", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Positivo: Teacher intenar pasar a final EducationRecord que ya etsá en final mode
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher1", "educationRecord2", IllegalArgumentException.class
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Teacher intenar pasar a final EducationRecord que ya etsá en final mode
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher13", "educationRecord5", IllegalArgumentException.class
 			}
 		};
 
@@ -264,6 +291,12 @@ public class EducationRecordServiceTest extends AbstractTest {
 				//			C: 100% Recorre 78 de las 78 lineas posibles
 				//			D: cobertura de datos=1/3
 				"certifier1", "educationRecord2", null
+			}, {
+				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			B: Test Positivo: Un certificador certifica un registro en modo final
+				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			D: cobertura de datos=1/3
+				"certifier1", "educationRecord5", null
 			}, {
 				//			A: Educafy Req. 17 -> Teachers can manage their history
 				//			B: Test Positivo: Un certificador intenta certificar un registro en modo draft

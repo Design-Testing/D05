@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.MessageRepository;
 import domain.Actor;
 import domain.Administrator;
+import domain.Exam;
 import domain.Folder;
 import domain.Message;
 import domain.Reservation;
@@ -31,6 +32,9 @@ public class MessageService {
 
 	@Autowired
 	private FolderService					folderService;
+
+	@Autowired
+	private ReservationService				reservationService;
 
 	@Autowired
 	private AdministratorService			administratorService;
@@ -397,7 +401,200 @@ public class MessageService {
 		outboxMessages.add(sent);
 		outbox.setMessages(outboxMessages);
 		for (final Actor r : recipients) {
-			inbox = this.folderService.findInboxByUserId(r.getUserAccount().getId());
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
+			final Collection<Message> inboxMessages = inbox.getMessages();
+			inboxMessages.add(sent);
+			inbox.setMessages(inboxMessages);
+			this.folderService.save(inbox, r);
+		}
+	}
+
+	public void evaluatedExam(final Exam ex) {
+		final Message m = new Message();
+		final Collection<String> tags = new ArrayList<>();
+		m.setTags(tags);
+		final Administrator sender = this.administratorService.findSystem();
+		final Reservation reservation = ex.getReservation();
+		final Student st = reservation.getStudent();
+		final Teacher teacher = reservation.getLesson().getTeacher();
+		m.setSubject("Exam " + ex.getTitle() + "evaluated by " + teacher.getName());
+		final String body = "The exam with the title " + ex.getTitle() + " associated with the class " + reservation.getLesson().getTitle() + " has been evaluated.";
+		m.setBody(body);
+		m.setPriority("HIGH");
+		m.setSender(sender);
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(st);
+		m.setRecipients(recipients);
+		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
+		final Collection<Message> outboxMessages = outbox.getMessages();
+		final Date moment = new Date(System.currentTimeMillis() - 1000);
+		m.setMoment(moment);
+		Folder inbox;
+		final Message sent = this.save(m);
+		outboxMessages.add(sent);
+		outbox.setMessages(outboxMessages);
+		for (final Actor r : recipients) {
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
+			final Collection<Message> inboxMessages = inbox.getMessages();
+			inboxMessages.add(sent);
+			inbox.setMessages(inboxMessages);
+			this.folderService.save(inbox, r);
+		}
+	}
+	public void reservationReceived(final Reservation reservation) {
+		final Message m = new Message();
+		final Collection<String> tags = new ArrayList<>();
+		m.setTags(tags);
+		final Administrator sender = this.administratorService.findSystem();
+		final Student st = reservation.getStudent();
+		final Teacher teacher = reservation.getLesson().getTeacher();
+		m.setSubject("The student " + st.getName() + " has asked you for a reservation");
+		final String body = "The student " + st.getName() + " has asked for a reservation for the class with a title " + reservation.getLesson().getTitle() + ", asking for " + reservation.getHoursWeek() + " hours a week.";
+		m.setBody(body);
+		m.setPriority("HIGH");
+		m.setSender(sender);
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(teacher);
+		m.setRecipients(recipients);
+		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
+		final Collection<Message> outboxMessages = outbox.getMessages();
+		final Date moment = new Date(System.currentTimeMillis() - 1000);
+		m.setMoment(moment);
+		Folder inbox;
+		final Message sent = this.save(m);
+		outboxMessages.add(sent);
+		outbox.setMessages(outboxMessages);
+		for (final Actor r : recipients) {
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
+			final Collection<Message> inboxMessages = inbox.getMessages();
+			inboxMessages.add(sent);
+			inbox.setMessages(inboxMessages);
+			this.folderService.save(inbox, r);
+		}
+	}
+
+	public void acceptedNotification(final Reservation reservation) {
+		final Message m = new Message();
+		final Collection<String> tags = new ArrayList<>();
+		m.setTags(tags);
+		final Administrator sender = this.administratorService.findSystem();
+		final Student st = reservation.getStudent();
+		final Teacher teacher = reservation.getLesson().getTeacher();
+		m.setSubject("Time period proposal");
+		final String body = "Teacher " + teacher.getName() + " has accepted your reservation and has made you a proposal for a time period";
+		m.setBody(body);
+		m.setPriority("HIGH");
+		m.setSender(sender);
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(st);
+		m.setRecipients(recipients);
+		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
+		final Collection<Message> outboxMessages = outbox.getMessages();
+		final Date moment = new Date(System.currentTimeMillis() - 1000);
+		m.setMoment(moment);
+		Folder inbox;
+		final Message sent = this.save(m);
+		outboxMessages.add(sent);
+		outbox.setMessages(outboxMessages);
+		for (final Actor r : recipients) {
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
+			final Collection<Message> inboxMessages = inbox.getMessages();
+			inboxMessages.add(sent);
+			inbox.setMessages(inboxMessages);
+			this.folderService.save(inbox, r);
+		}
+	}
+
+	public void rejectedNotification(final Reservation reservation) {
+		final Message m = new Message();
+		final Collection<String> tags = new ArrayList<>();
+		m.setTags(tags);
+		final Administrator sender = this.administratorService.findSystem();
+		final Student st = reservation.getStudent();
+		final Teacher teacher = reservation.getLesson().getTeacher();
+		m.setSubject("Rejected class reservation");
+		final String body = "Teacher " + teacher.getName() + " has rejected the reservation to give the " + reservation.getLesson().getTitle() + " class";
+		m.setBody(body);
+		m.setPriority("HIGH");
+		m.setSender(sender);
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(st);
+		m.setRecipients(recipients);
+		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
+		final Collection<Message> outboxMessages = outbox.getMessages();
+		final Date moment = new Date(System.currentTimeMillis() - 1000);
+		m.setMoment(moment);
+		Folder inbox;
+		final Message sent = this.save(m);
+		outboxMessages.add(sent);
+		outbox.setMessages(outboxMessages);
+		for (final Actor r : recipients) {
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
+			final Collection<Message> inboxMessages = inbox.getMessages();
+			inboxMessages.add(sent);
+			inbox.setMessages(inboxMessages);
+			this.folderService.save(inbox, r);
+		}
+	}
+
+	public void reviewNotification(final Reservation reservation) {
+		final Message m = new Message();
+		final Collection<String> tags = new ArrayList<>();
+		m.setTags(tags);
+		final Administrator sender = this.administratorService.findSystem();
+		final Student st = reservation.getStudent();
+		final Teacher teacher = reservation.getLesson().getTeacher();
+		m.setSubject("Revised " + reservation.getLesson().getTitle() + " lesson proposal");
+		final String body = "The student " + st.getName() + " has rejected the proposal about the " + reservation.getLesson().getTitle() + " lesson and has written the corresponding explanation in the revision.";
+		m.setBody(body);
+		m.setPriority("HIGH");
+		m.setSender(sender);
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(teacher);
+		m.setRecipients(recipients);
+		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
+		final Collection<Message> outboxMessages = outbox.getMessages();
+		final Date moment = new Date(System.currentTimeMillis() - 1000);
+		m.setMoment(moment);
+		Folder inbox;
+		final Message sent = this.save(m);
+		outboxMessages.add(sent);
+		outbox.setMessages(outboxMessages);
+		for (final Actor r : recipients) {
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
+			final Collection<Message> inboxMessages = inbox.getMessages();
+			inboxMessages.add(sent);
+			inbox.setMessages(inboxMessages);
+			this.folderService.save(inbox, r);
+		}
+	}
+
+	public void finalNotification(final Reservation reservation) {
+		final Message m = new Message();
+		final Collection<String> tags = new ArrayList<>();
+		m.setTags(tags);
+		final Administrator sender = this.administratorService.findSystem();
+		final Student st = reservation.getStudent();
+		final Teacher teacher = reservation.getLesson().getTeacher();
+		m.setSubject("Accepted " + reservation.getLesson().getTitle() + " lesson proposal");
+		final String body = "The student " + st.getName() + " has accepted the proposed hours for " + reservation.getLesson().getTitle() + " lesson and has passed the reservation to final mode. We have a lesson!";
+		m.setBody(body);
+		m.setPriority("HIGH");
+		m.setSender(sender);
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(st);
+		recipients.add(teacher);
+		m.setRecipients(recipients);
+		final Folder outbox = this.folderService.findOutboxByUserId(sender.getUserAccount().getId());
+		final Collection<Message> outboxMessages = outbox.getMessages();
+		final Date moment = new Date(System.currentTimeMillis() - 1000);
+		m.setMoment(moment);
+		Folder inbox;
+		final Message sent = this.save(m);
+		outboxMessages.add(sent);
+		outbox.setMessages(outboxMessages);
+		for (final Actor r : recipients) {
+			inbox = this.folderService.findNotificationboxByUserId(r.getUserAccount().getId());
 			final Collection<Message> inboxMessages = inbox.getMessages();
 			inboxMessages.add(sent);
 			inbox.setMessages(inboxMessages);

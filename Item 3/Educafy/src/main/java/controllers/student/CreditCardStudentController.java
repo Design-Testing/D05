@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.ConfigurationParametersService;
 import services.CreditCardService;
+import services.ReservationService;
 import services.StudentService;
 import controllers.AbstractController;
 import domain.CreditCard;
+import domain.Reservation;
 
 @Controller
 @RequestMapping("/creditCard/student")
@@ -35,6 +37,9 @@ public class CreditCardStudentController extends AbstractController {
 
 	@Autowired
 	ActorService					actorService;
+
+	@Autowired
+	ReservationService				reservationService;
 
 
 	// List
@@ -115,13 +120,10 @@ public class CreditCardStudentController extends AbstractController {
 			result = this.createEditModelAndView(creditCard);
 		else
 			try {
-				this.studentService.findByPrincipal();
 				this.creditCardService.save(creditCard);
 				result = new ModelAndView("redirect:/creditCard/student/list.do");
 			} catch (final Throwable oops) {
 				String errorMessage = "creditCard.commit.error";
-				if (oops.getMessage().contains("message.error"))
-					errorMessage = oops.getMessage();
 				if (this.creditCardService.tarjetaCaducada(creditCard))
 					errorMessage = "creditCard.tarjeta.caducada";
 				result = this.createEditModelAndView(creditCard, errorMessage);
@@ -140,8 +142,12 @@ public class CreditCardStudentController extends AbstractController {
 			this.creditCardService.delete(creditCardId);
 			result = new ModelAndView("redirect:/creditCard/student/list.do");
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/creditCard/student/list.do");
-			result.addObject("msg", "creditCard.delete.error");
+			String msg = "creditCard.delete.error";
+			result = this.list();
+			final Collection<Reservation> reservations = this.reservationService.findAllByCreditCard(creditCardId);
+			if (!reservations.isEmpty())
+				msg = "creditCard.delete.error.reservation";
+			result.addObject("msg", msg);
 		}
 
 		return result;

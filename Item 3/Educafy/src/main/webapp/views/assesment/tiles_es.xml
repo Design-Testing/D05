@@ -17,22 +17,22 @@
 <tiles-definitions>
 
 	<definition name="assesment/display" extends="master.page">	
-		<put-attribute name="title" value="Evaluación: Mostrar" />
+		<put-attribute name="title" value="Valoración: Mostrar" />
 		<put-attribute name="body" value="/views/assesment/display.jsp" />
 	</definition>
 	
 	<definition name="assesment/list" extends="master.page">	
-		<put-attribute name="title" value="Evaluación: Listar" />
+		<put-attribute name="title" value="Valoración: Listar" />
 		<put-attribute name="body" value="/views/assesment/list.jsp" />
 	</definition>
 	
 	<definition name="assesment/edit" extends="master.page">	
-		<put-attribute name="title" value="Evaluación: Editar" />
+		<put-attribute name="title" value="Valoración: Editar" />
 		<put-attribute name="body" value="/views/assesment/edit.jsp" />
 	</definition>
 	
 	<definition name="assesment/error" extends="master.page">	
-		<put-attribute name="title" value="Evaluación: Error" />
+		<put-attribute name="title" value="Valoración: Error" />
 		<put-attribute name="body" value="/views/assesment/error.jsp" />
 	</definition>
 	

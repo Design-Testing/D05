@@ -247,4 +247,8 @@ public class LessonService {
 		return res;
 	}
 
+	public void flush() {
+		this.lessonRepository.flush();
+	}
+
 }

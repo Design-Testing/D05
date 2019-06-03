@@ -1,6 +1,8 @@
 
 package services;
 
+import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,12 @@ public class AssesmentServiceTest extends AbstractTest {
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"student1", "lesson1", "", "Bien Trabajado", NumberFormatException.class
+			}, {
+				//				A: Educafy Crear y guardar un assesment
+				//				B: Test Negativo: Creación incorrecta de un assesment, comment vacío
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"student1", "lesson1", "3", "", ConstraintViolationException.class
 			}
 
 		};
@@ -88,17 +96,23 @@ public class AssesmentServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				//				A: Educafy Editar un assesment
+				//				A: Educafy - Editar un assesment
 				//				B: Test Positivo: Edición correcta de un assesment
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"assesment1", "student1", "lesson1", "4", "Bien Trabajado", null
 			}, {
-				//				A: Educafy Req. 11.1. Create user accounts for new administrators
-				//				B: Test Negativo: Edición incorrecta de un teacher con name en blanco
+				//				A: Educafy - Editar un assesment
+				//				B: Test Negativo: Edición incorrecta de un assesment con score en blanco
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
 				"assesment1", "student1", "lesson1", "", "Bien Trabajado", NumberFormatException.class
+			}, {
+				//				A: Educafy - Editar un assesment
+				//				B: Test Negativo: Edición incorrecta de un assesment con comment en blanco
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"assesment1", "student1", "lesson1", "4", "", ConstraintViolationException.class
 			}
 
 		};

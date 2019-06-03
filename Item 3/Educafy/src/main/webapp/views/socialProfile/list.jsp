@@ -26,6 +26,12 @@
 		</a>
 	</display:column>
 	
+	<display:column titleKey="socialProfile.display">
+		<a href="socialProfile/display.do?socialProfileId=${row.id}"> 
+			<spring:message code="socialProfile.display"/>
+		</a>
+	</display:column>
+	
 	<display:column titleKey="socialProfile.delete">
 		<a href="socialProfile/delete.do?id=${row.id}"> 
 			<spring:message code="socialProfile.delete"/>

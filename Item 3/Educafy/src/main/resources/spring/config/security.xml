@@ -75,6 +75,7 @@
  		<security:intercept-url pattern="/lesson/teacher/**" access="hasRole('TEACHER')" /> 
  		<security:intercept-url pattern="/lesson/student/**" access="hasRole('STUDENT')" /> 
  		
+ 		
  		<!-- RESERVATION -->
  		<security:intercept-url pattern="/reservation/teacher/**" access="hasRole('TEACHER')" /> 
  		<security:intercept-url pattern="/reservation/student/**" access="hasRole('STUDENT')" /> 
@@ -89,6 +90,7 @@
 		<security:intercept-url pattern="/exam/delete.do" access="hasRole('TEACHER')" />  		
  		<security:intercept-url pattern="/exam/evaluated.do" access="hasRole('TEACHER')" /> 
  		<security:intercept-url pattern="/exam/inprogress.do" access="hasRole('TEACHER')" /> 
+ 		<security:intercept-url pattern="/exam/myexams.do" access="hasRole('STUDENT')" />
  		
  		
  		<!-- QUESTION -->

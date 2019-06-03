@@ -13,7 +13,7 @@
 
 
 <display:table name="teachers" id="row"
-	requestURI="teacher/list.Alldo" pagesize="5"
+	requestURI="teacher/listAll.do" pagesize="5"
 	class="displaytag">
 
 

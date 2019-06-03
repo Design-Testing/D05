@@ -27,19 +27,30 @@
 
 
 <%-- Definition --%>
-
 <jstl:choose>
 	<jstl:when test="${status eq 'ACCEPTED'}">
 		<spring:message code="approved" />
 	</jstl:when>
+	<jstl:when test="${status eq 'INPROGRESS'}">
+		<spring:message code="inprogess" />
+	</jstl:when>
+	<jstl:when test="${status eq 'EVALUATED'}">
+		<spring:message code="evaluated" />
+	</jstl:when>
 	<jstl:when test="${status eq 'REJECTED'}">
 		<spring:message code="rejected" />
+	</jstl:when>
+	<jstl:when test="${status eq 'REVIEWING'}">
+		<spring:message code="reviewing" />
 	</jstl:when>
 	<jstl:when test="${status eq 'PENDING'}">
 		<spring:message code="pending" />
 	</jstl:when>
 	<jstl:when test="${status eq 'SUBMITTED'}">
 		<spring:message code="submitted" />
+	</jstl:when>
+	<jstl:when test="${status eq 'FINAL'}">
+		<spring:message code="final" />
 	</jstl:when>
 	<jstl:otherwise>
 		<spring:message code="invalid.status" />

@@ -64,8 +64,30 @@ public class SocialProfileServiceTest extends AbstractTest {
 		final SocialProfile socialProfile = this.socialProfileService.create();
 
 		socialProfile.setProfileLink("http://www.facebook.com/teacher1");
-		socialProfile.setSocialNetwork(" ");
+		socialProfile.setSocialNetwork("");
 		socialProfile.setNick("nickTeacher1");
+
+		final SocialProfile result = this.socialProfileService.save(socialProfile);
+		Assert.notNull(result);
+
+		this.socialProfileService.flush();
+		super.unauthenticate();
+	}
+
+	//				A: Educafy Crear y guardar un social profile
+	//				B: Test Negativo: Creación incorrecta de un social profile, nick vacío
+	//				C: % Recorre 61 de la 188 lineas posibles
+	//				D: cobertura de datos=Combinaciones con sentido/numero atributos=67.50%
+
+	@Test(expected = ConstraintViolationException.class)
+	public void testCreateAndSaveNegative2() {
+		super.authenticate("teacher1");
+
+		final SocialProfile socialProfile = this.socialProfileService.create();
+
+		socialProfile.setProfileLink("http://www.facebook.com/teacher1");
+		socialProfile.setSocialNetwork("Facebook");
+		socialProfile.setNick("");
 
 		final SocialProfile result = this.socialProfileService.save(socialProfile);
 		Assert.notNull(result);
@@ -115,6 +137,24 @@ public class SocialProfileServiceTest extends AbstractTest {
 
 	}
 
+	//				A: Educafy Editar un social profile
+	//				B: Test Negativo: Modificación incorrecta de un social profile, socilNetwork vacía
+	//				C: % Recorre 61 de la 188 lineas posibles
+	//				D: cobertura de datos=Combinaciones con sentido/numero atributos=67.50%
+
+	@Test(expected = ConstraintViolationException.class)
+	public void testEditNegative2() {
+		super.authenticate("teacher1");
+
+		final SocialProfile socialProfile = this.socialProfileService.findOne(super.getEntityId("socialProfileTeacher1"));
+		socialProfile.setSocialNetwork("");
+		this.socialProfileService.save(socialProfile);
+
+		this.socialProfileService.flush();
+		super.unauthenticate();
+
+	}
+
 	/* ========================= Test Delete Social Profile =========================== */
 
 	//				A: Educafy Borrar un social profile
@@ -148,4 +188,5 @@ public class SocialProfileServiceTest extends AbstractTest {
 		this.socialProfileService.flush();
 		super.unauthenticate();
 	}
+
 }

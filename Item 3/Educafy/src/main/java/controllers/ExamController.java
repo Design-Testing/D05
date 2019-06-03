@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ExamService;
+import services.MessageService;
 import services.QuestionService;
 import services.ReservationService;
 import controllers.student.ReservationStudentController;
@@ -38,6 +41,9 @@ public class ExamController extends AbstractController {
 
 	@Autowired
 	private QuestionService					questionService;
+
+	@Autowired
+	private MessageService					messageService;
 
 	@Autowired
 	private ReservationStudentController	reservationStudentController;
@@ -98,6 +104,20 @@ public class ExamController extends AbstractController {
 		return result;
 	}
 
+	// MYEXAMS --------------------------------------------------------
+
+	@RequestMapping(value = "/myexams", method = RequestMethod.GET)
+	public ModelAndView myexams() {
+		final ModelAndView result;
+		Collection<Exam> exams;
+		exams = this.examService.findAllExamsByStudent();
+		result = new ModelAndView("exam/myexams");
+		result.addObject("exam", exams);
+		result.addObject("requestURI", "exam/myexams.do");
+		result.addObject("lang", this.lang);
+
+		return result;
+	}
 	// TO SUBMITTED --------------------------------------------------------
 
 	@RequestMapping(value = "/submitted", method = RequestMethod.GET)
@@ -131,17 +151,18 @@ public class ExamController extends AbstractController {
 		final Exam exam = this.examService.findOne(examId);
 
 		if (exam == null) {
-			result = this.reservationTeacherController.myReservations();
-			result.addObject("msg", "exam.submitted.error");
+			result = this.reservationTeacherController.display(exam.getReservation().getId());
+			result.addObject("msg", "exam.inprogress.error");
 		} else
 			try {
 				this.examService.toInprogressMode(examId);
 				result = this.reservationTeacherController.display(exam.getReservation().getId());
 			} catch (final Throwable oops) {
-				String errormsg = "exam.submitted.error";
-				result = this.reservationTeacherController.myReservations();
+				//String errormsg = "exam.inprogress.error";
+				String errormsg = oops.getMessage();
+				result = this.reservationTeacherController.display(exam.getReservation().getId());
 				if (!(exam.getStatus().equals("PENDING")))
-					errormsg = "exam.submitted.error";
+					errormsg = "exam.inprogress.error";
 				result.addObject("msg", errormsg);
 			}
 
@@ -160,6 +181,7 @@ public class ExamController extends AbstractController {
 		} else
 			try {
 				this.examService.toEvaluatedMode(exam);
+				this.messageService.evaluatedExam(exam);
 				result = this.reservationTeacherController.display(exam.getReservation().getId());
 			} catch (final Throwable oops) {
 				final String errormsg = "exam.evaluated.error";
@@ -168,7 +190,6 @@ public class ExamController extends AbstractController {
 
 		return result;
 	}
-
 	// EDIT --------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -176,9 +197,11 @@ public class ExamController extends AbstractController {
 		ModelAndView result;
 		Exam exam;
 		exam = this.examService.findOne(examId);
-		if (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED"))
+		final Reservation reservation = exam.getReservation();
+		if (exam.getStatus().equals("PENDING") || exam.getStatus().equals("SUBMITTED")) {
 			result = this.createEditModelAndView(exam);
-		else
+			result.addObject("reservation", reservation);
+		} else
 			result = new ModelAndView("redirect:misc/403");
 		return result;
 	}

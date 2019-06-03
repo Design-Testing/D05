@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import repositories.CreditCardRepository;
 import services.ExamService;
 import services.LessonService;
+import services.MessageService;
 import services.ReservationService;
 import services.StudentService;
 import services.TimePeriodService;
@@ -39,6 +40,9 @@ public class ReservationStudentController extends AbstractController {
 
 	@Autowired
 	private LessonService			lessonService;
+
+	@Autowired
+	private MessageService			messageService;
 
 	@Autowired
 	private ExamService				examService;
@@ -125,6 +129,7 @@ public class ReservationStudentController extends AbstractController {
 		} else
 			try {
 				this.reservationService.toFinalMode(reservationId);
+				this.messageService.finalNotification(reservation);
 				result = this.myReservations();
 			} catch (final Throwable oops) {
 				String errormsg = "reservation.final.error";
@@ -149,6 +154,7 @@ public class ReservationStudentController extends AbstractController {
 		} else
 			try {
 				reservation = this.reservationService.toReviewingMode(reservation);
+				this.messageService.reviewNotification(reservation);
 				result = new ModelAndView("redirect:myReservations.do");
 			} catch (final Throwable oops) {
 				final String errormsg = "reservation.reviewing.error";
@@ -188,6 +194,7 @@ public class ReservationStudentController extends AbstractController {
 		} else
 			try {
 				this.reservationService.save(reservation);
+				this.messageService.reservationReceived(reservation);
 				result = this.myReservations();
 			} catch (final ValidationException oops) {
 				result = this.createEditModelAndView1(reservation, "commit.reservation.error");
@@ -198,7 +205,6 @@ public class ReservationStudentController extends AbstractController {
 
 		return result;
 	}
-
 	// DELETE --------------------------------------------------------
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

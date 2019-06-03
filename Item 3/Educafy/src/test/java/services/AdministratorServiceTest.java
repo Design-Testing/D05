@@ -91,27 +91,27 @@ public class AdministratorServiceTest extends AbstractTest {
 				//				B: Test Positivo: Creación correcta de un admin
 				//				C: % Recorre 196 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", "admin3", "admin3", "Administrator1", surnames, "garcia@us.es", "647307406", "0.1", null
+				"admin1", "admin3", "admin3", "Administrator1", surnames, "garcia@us.es", "647307406", null
 			}, {
 				//				A: Educafy Req. 11.1. Create user accounts for new administrators
-				//				B: Test Negacion: Creacion incorrecta de un admin. Para registrar un actor como administrador el actor logeado tiene que ser un adninistrador
+				//				B: Test Negativo: Creacion incorrecta de un admin. Para registrar un actor como administrador el actor logeado tiene que ser un adninistrador
 				//				C: % Recorre 28 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"teacher1", "admin23", "admin23", "Administrator1", surnames, "garcia@us.es", "+34647307406", "0.1", IllegalArgumentException.class
+				"teacher1", "admin23", "admin23", "Administrator1", surnames, "garcia@us.es", "+34647307406", IllegalArgumentException.class
 			}, {
 				//				A: Educafy Req. 11.1. Create user accounts for new administrators
 				//				B: Test Negativo: Creación incorrecta de un admin con name en blanco
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", "admin43", "admin43", "", surnames, "lanzas@gmail.com", "+34647307406", "0.1", ConstraintViolationException.class
+				"admin1", "admin43", "admin43", "", surnames, "lanzas@gmail.com", "+34647307406", ConstraintViolationException.class
 			}
 
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.templateCreateAndSave((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Collection<String>) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-				(String) testingData[i][7], (Class<?>) testingData[i][8]);
+				(Class<?>) testingData[i][7]);
 	}
-	private void templateCreateAndSave(final String principal, final String username, final String password, final String name, final Collection<String> surname, final String email, final String phone, final String vat, final Class<?> expected) {
+	private void templateCreateAndSave(final String principal, final String username, final String password, final String name, final Collection<String> surname, final String email, final String phone, final Class<?> expected) {
 
 		// para crear un administrador tienes que tener autoridad de administrador
 
@@ -137,7 +137,6 @@ public class AdministratorServiceTest extends AbstractTest {
 			admin.setSurname(surname);
 			admin.setEmail(email);
 			admin.setPhone(phone);
-			//			admin.setVat(new Double(vat));
 			admin = this.adminService.save(admin);
 			this.adminService.flush();
 			this.userAccountService.flush();
@@ -167,20 +166,26 @@ public class AdministratorServiceTest extends AbstractTest {
 				//				B: Test Positivo: Creación correcta de un admin
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", "Administrator1", surnames, "garcia@us.es", "647307406", "0.1", null
+				"admin1", "Administrator1", surnames, "garcia@us.es", "647307406", null
 			}, {
 				//				A: Acme HackerRank Req. 11.1. Update administrator profile
 				//				B: Test Negativo: Creación incorrecta de un admin con name en blanco
 				//				C: % Recorre 54 de la 196 lineas posibles
 				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
-				"admin1", "", surnames, "lanzas@gmail.com", "+34647307406", "0.1", ConstraintViolationException.class
+				"admin1", "", surnames, "lanzas@gmail.com", "+34647307406", ConstraintViolationException.class
+			}, {
+				//				A: Acme HackerRank Req. 11.1. Update administrator profile
+				//				B: Test Negativo: Creación incorrecta de un admin con email que no sigue el patrón
+				//				C: % Recorre 54 de la 196 lineas posibles
+				//				D: % cobertura de datos=8/32 (casos cubiertos / combinaciones posibles de atributos entre ellos)
+				"admin1", "Administrator1", surnames, "mi correo", "+34647307406", ConstraintViolationException.class
 			}
 
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateEditAndSave((String) testingData[i][0], (String) testingData[i][1], (Collection<String>) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (Class<?>) testingData[i][6]);
+			this.templateEditAndSave((String) testingData[i][0], (String) testingData[i][1], (Collection<String>) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Class<?>) testingData[i][5]);
 	}
-	private void templateEditAndSave(final String principal, final String name, final Collection<String> surname, final String email, final String phone, final String vat, final Class<?> expected) {
+	private void templateEditAndSave(final String principal, final String name, final Collection<String> surname, final String email, final String phone, final Class<?> expected) {
 
 		// para crear un administrador tienes que tener autoridad de administrador
 
@@ -198,7 +203,6 @@ public class AdministratorServiceTest extends AbstractTest {
 			admin.setSurname(surname);
 			admin.setEmail(email);
 			admin.setPhone(phone);
-			//			admin.setVat(new Double(vat));
 			admin = this.adminService.save(admin);
 			this.adminService.flush();
 			super.unauthenticate();

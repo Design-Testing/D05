@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,8 @@ public class SocialProfileController extends AbstractController {
 	private SocialProfileService	socialProfileService;
 	@Autowired
 	private ActorService			actorService;
+
+	final String					lang	= LocaleContextHolder.getLocale().getLanguage();
 
 
 	@RequestMapping("/create")
@@ -95,6 +98,24 @@ public class SocialProfileController extends AbstractController {
 		result = new ModelAndView("socialProfile/list");
 		final Collection<SocialProfile> list = this.socialProfileService.findByActor(actor.getId());
 		result.addObject("socialProfiles", list);
+		return result;
+	}
+
+	// DISPLAY --------------------------------------------------------
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int socialProfileId) {
+		final ModelAndView result;
+		final SocialProfile socialProfile;
+
+		socialProfile = this.socialProfileService.findOne(socialProfileId);
+
+		if (socialProfile != null) {
+			result = new ModelAndView("socialProfile/display");
+			result.addObject("socialProfile", socialProfile);
+			result.addObject("lang", this.lang);
+		} else
+			result = new ModelAndView("redirect:misc/403");
+
 		return result;
 	}
 

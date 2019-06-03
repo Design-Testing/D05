@@ -24,13 +24,9 @@
 	
 	<display:column property="teacher.name" titleKey="lesson.teacher" />
 	
-	<jstl:choose>
-		<jstl:when test="${not empty backURL}">
-			<display:column>
-				<acme:button url="lesson/displayR=lessonId=${row.id}&url=${lesson/teacher/myLessons.do}" name="" code=""/>
-			</display:column>
-		</jstl:when>
-	</jstl:choose>
+	<display:column>
+		<acme:button url="lesson/display.do?lessonId=${row.id}" name="display" code="lesson.display"/>
+	</display:column>
 	
 	<security:authorize access="hasRole('TEACHER')">
 		<display:column>

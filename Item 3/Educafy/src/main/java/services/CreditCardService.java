@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
-import security.Authority;
 import domain.Actor;
 import domain.CreditCard;
 import domain.Reservation;
+import domain.Student;
 
 @Service
 @Transactional
@@ -40,9 +40,7 @@ public class CreditCardService {
 	// findAll
 	public Collection<CreditCard> findAll() {
 		final Collection<CreditCard> res;
-		final Actor principal = this.actorService.findByPrincipal();
-		final boolean isStudent = this.actorService.checkAuthority(principal, Authority.STUDENT);
-		Assert.isTrue(isStudent);
+		final Student principal = this.studentService.findByPrincipal();
 		res = this.creditCardRepository.findAllByUserId(principal.getUserAccount().getId());
 		Assert.notNull(res);
 
@@ -51,12 +49,13 @@ public class CreditCardService {
 
 	// findOne
 	public CreditCard findOne(final int id) {
+		final Student s = this.studentService.findByPrincipal();
 		final CreditCard creditCard = this.creditCardRepository.findOne(id);
-
+		Assert.isTrue(creditCard.getActor().getId() == s.getId());
 		return creditCard;
 	}
 
-	public CreditCard findByApplicationId(final int id) {
+	public CreditCard findByReservationId(final int id) {
 		Assert.isTrue(id != 0);
 		final Actor principal = this.actorService.findByPrincipal();
 		final CreditCard creditCard = this.creditCardRepository.findByReservationId(id);
@@ -73,30 +72,27 @@ public class CreditCardService {
 
 	public CreditCard save(final CreditCard c) {
 		Assert.notNull(c);
-		final Actor principal = this.actorService.findByPrincipal();
-		c.setActor(principal);
-		final boolean isStudent = this.actorService.checkAuthority(principal, Authority.STUDENT);
-		Assert.isTrue(isStudent);
+		CreditCard retrieved;
+		final Student principal = this.studentService.findByPrincipal();
+		if (c.getId() == 0)
+			c.setActor(principal);
+		else {
+			retrieved = this.findOne(c.getId()); // ya en el findOne compruebo que sea su creditCard
+			c.setActor(retrieved.getActor());
+		}
 		Assert.isTrue(!this.tarjetaCaducada(c));
 		final String s = c.getNumber().replace(" ", "");
 		c.setNumber(s);
 		return this.creditCardRepository.save(c);
 	}
-
 	// delete
 	public void delete(final int creditCardId) {
 		Assert.isTrue(creditCardId != 0);
 		final CreditCard c = this.findOne(creditCardId);
 		Assert.isTrue(this.findAll().contains(c));
 
-		final Actor principal = this.actorService.findByPrincipal();
-		final boolean isStudent = this.actorService.checkAuthority(principal, Authority.STUDENT);
-		Assert.isTrue(isStudent);
-
-		if (isStudent) {
-			final Collection<Reservation> reservations = this.reservationService.findAllByCreditCard(c.getId());
-			Assert.isTrue(reservations.isEmpty());
-		}
+		final Collection<Reservation> reservations = this.reservationService.findAllByCreditCard(c.getId());
+		Assert.isTrue(reservations.isEmpty());
 
 		this.creditCardRepository.delete(c);
 	}

@@ -17,9 +17,9 @@ img.resize {
 }
 </style>
 
-<acme:display code="reservation.status" value="${reservation.status}"/>
-
-
+<spring:message code="reservation.status" />:
+<acme:statusChoose status="${reservation.status}"/>
+<br />
 <jstl:choose>
 	<jstl:when test="${lang eq 'en' }">
 		<spring:message code="reservation.moment"/>: <fmt:formatDate value="${reservation.moment}" type="both" pattern="yyyy-MM-dd HH:mm"/>
@@ -67,7 +67,7 @@ img.resize {
 				<jstl:otherwise><spring:message code="friday"/></jstl:otherwise>				
 			</jstl:choose> 
 		</display:column>
-		<jstl:if test="${rol eq 'teacher' && reservation.status eq 'PENDING'}">
+		<jstl:if test="${rol eq 'teacher' && (reservation.status eq 'PENDING') or (reservation.status eq 'REVIEWING')}">
 			<display:column>
 				<acme:button url="timePeriod/edit.do?timePeriodId=${row.id}" name="edit" code="reservation.edit"/>
 			</display:column>
@@ -83,6 +83,7 @@ img.resize {
 			<h4 style="color: red;"><jstl:out value="${error.message}" /></h4>
 </jstl:if>
 
+<jstl:if test="${reservation.status eq 'FINAL' }">
 <br><br>
 <h3><spring:message code="reservation.exams"/></h3>
 <jstl:choose>
@@ -92,7 +93,9 @@ img.resize {
 		class="displaytag">
 		
 		<display:column property="title" titleKey="exam.title" />
-		<display:column property="status" titleKey="exam.status" />
+		<display:column titleKey="exam.status" >
+			<acme:statusChoose status="${row.status}"/>
+		</display:column>
 		
 		<display:column titleKey="exam.score">
 			<jstl:if test="${row.status eq 'EVALUATED' }">
@@ -108,7 +111,7 @@ img.resize {
 				<jstl:if test="${row.status eq 'SUBMITTED' }">
 					<acme:button url="exam/edit.do?examId=${row.id}" name="evaluate" code="exam.evaluate"/>
 				</jstl:if>
-				<jstl:if test="${row.status eq 'PENDING' }">
+				<jstl:if test="${row.status eq 'PENDING' and (not empty row.questions)}">
 					<acme:button url="exam/inprogress.do?examId=${row.id}" name="inprogress" code="exam.inprogress"/>
 				</jstl:if>
 			</display:column>
@@ -119,13 +122,11 @@ img.resize {
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('STUDENT')">
-		<jstl:if test="${reservation.status eq 'FINAL' && row.status eq 'INPROGRESS' }">
-			<display:column>
-				
-					<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
-				
-			</display:column>
-		</jstl:if>
+		<display:column>
+			<jstl:if test="${row.status eq 'INPROGRESS' }">
+				<acme:button url="exam/display.do?examId=${row.id}" name="display" code="exam.inprogress"/>
+			</jstl:if>
+		</display:column>
 		</security:authorize>
 	</display:table>
 	</jstl:when>
@@ -137,9 +138,9 @@ img.resize {
 <jstl:if test="${rol eq 'teacher' }">
 	<acme:button url="exam/create.do?reservationId=${reservation.id}" name="create" code="exam.create"/>
 </jstl:if>
+
+</jstl:if>
 <br><br>
-
-
 <jstl:choose>
 	<jstl:when test="${rol eq 'teacher' }">
 		<acme:button url="reservation/teacher/myReservations.do" name="back" code="reservation.back"/>
@@ -148,3 +149,6 @@ img.resize {
 		<acme:button url="reservation/student/myReservations.do" name="back" code="reservation.back"/>
 	</jstl:when>
 </jstl:choose>
+<jstl:if test="${not empty msg}">
+	<h3 style="color: red;"><spring:message code="${msg}"/></h3>
+</jstl:if>

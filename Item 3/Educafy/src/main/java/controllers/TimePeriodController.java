@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ConfigurationParametersService;
-import services.ReservationService;
 import services.TimePeriodService;
 import controllers.teacher.ReservationTeacherController;
 import domain.TimePeriod;
@@ -23,9 +22,6 @@ public class TimePeriodController extends AbstractController {
 
 	@Autowired
 	private TimePeriodService				timePeriodService;
-
-	@Autowired
-	private ReservationService				reservationService;
 
 	@Autowired
 	private ReservationTeacherController	reservationTeacherController;
@@ -53,26 +49,33 @@ public class TimePeriodController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final TimePeriod timePeriod, final BindingResult binding) {
-
 		ModelAndView res = null;
-		//		final Actor principal = this.actorService.findByPrincipal();
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(timePeriod);
 
 		else if (timePeriod != null)
-
 			try {
 				this.timePeriodService.save(timePeriod);
 				res = this.reservationTeacherController.display(timePeriod.getReservation().getId());
 			} catch (final Throwable oops) {
+				String msg = "tp.commit.error";
 				res = this.createEditModelAndView(timePeriod);
-				res.addObject("error", oops);
+				final boolean n = (timePeriod.getStartHour() != null) && (timePeriod.getEndHour() != null);
+				if (n && !timePeriod.getReservation().getStatus().equals("PENDING"))
+					msg = "tp.no.pending";
+				if (n && this.timePeriodService.getTimePeriod(timePeriod))
+					msg = "tp.busy";
+				if (n && this.timePeriodService.equals(timePeriod, this.timePeriodService.findOne(timePeriod.getId())))
+					msg = "tp.no.change";
+				if (n && !this.timePeriodService.checkTimePeriodHours(timePeriod))
+					msg = "tp.hours.error";
+				if (!n)
+					msg = "tp.null.error";
+				res.addObject("msg", msg);
 			}
-
 		return res;
 	}
-
 	protected ModelAndView createEditModelAndView(final TimePeriod timePeriod) {
 
 		ModelAndView res;

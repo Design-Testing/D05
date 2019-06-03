@@ -62,6 +62,11 @@ public class ExamService {
 		return res;
 	}
 
+	public Collection<Exam> findAllExamsByStudent() {
+		final Student st = this.studentService.findByPrincipal();
+		return this.examRepository.findAllExamsByStudent(st.getUserAccount().getId());
+	}
+
 	public Collection<Exam> findAllExamsByReservation(final int reservationId) {
 		Collection<Exam> res = new ArrayList<>();
 		res = this.examRepository.findAllExamsByReservation(reservationId);
@@ -78,7 +83,7 @@ public class ExamService {
 
 		final Reservation reservation = this.reservationService.findOne(reservationId);
 		final Exam result;
-
+		Assert.isTrue(reservation.getStatus().equals("FINAL"));
 		if (exam.getId() == 0) {
 			if (isTeacher) {
 				Assert.isTrue(this.teacherService.findTeacherByReservation(reservationId).equals(ppal), "No puede crear un examen en una reserva que no es suya.");
@@ -116,17 +121,17 @@ public class ExamService {
 		final Reservation reservation = exam.getReservation();
 		Assert.isTrue(this.teacherService.findTeacherByReservation(reservation.getId()).equals(teacher), "No puede ejecutar ninguna acción sobre un examen que no le pertenece.");
 		Assert.isTrue(exam.getStatus().equals("PENDING"), "Para poner el estado de un examen en INPROGRESS debe de estar anteriormente en estado PENDING.");
+		Assert.isTrue(!exam.getQuestions().isEmpty(), "error.no.questions");
 		exam.setStatus("INPROGRESS");
 		result = this.save(exam, exam.getReservation().getId());
 		return result;
 	}
-
 	public Exam toSubmittedMode(final int examId) {
 		final Exam exam = this.findOne(examId);
 		Assert.notNull(exam);
 		final Student student = this.studentService.findByPrincipal();
 		final Exam result;
-		Assert.isTrue(exam.getReservation().getStudent().equals(student), "No puede ejecutar ninguna acción sobre una exam que no le pertenece.");
+		Assert.isTrue(exam.getReservation().getStudent().equals(student), "No puede ejecutar ninguna accion sobre un exam que no le pertenece.");
 		Assert.isTrue(exam.getStatus().equals("INPROGRESS"), "Para poner el estado de un examen en SUBMITTED debe de estar anteriormente en estado INPROGRESS.");
 		exam.setStatus("SUBMITTED");
 		result = this.save(exam, exam.getReservation().getId());
@@ -146,6 +151,10 @@ public class ExamService {
 
 	public void deleteInBatch(final Collection<Exam> exams) {
 		this.examRepository.deleteInBatch(exams);
+	}
+
+	public void flush() {
+		this.examRepository.flush();
 	}
 
 }

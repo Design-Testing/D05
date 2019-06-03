@@ -26,5 +26,10 @@
 		<put-attribute name="body" value="/views/socialProfile/edit.jsp"/>
 	</definition>
 
+	<definition extends="master.page" name="socialProfile/display">
+		<put-attribute name="title" value="Profile: Display Social Profile"/>
+		<put-attribute name="body" value="/views/socialProfile/display.jsp"/>
+	</definition>
+
 	
 </tiles-definitions>
