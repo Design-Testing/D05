@@ -1366,7 +1366,7 @@
 		<property name="expirationMonth" value="06" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="163" />
-		<property name="actor" ref="student1" />
+		<property name="student" ref="student1" />
 	</bean>
 
 	<bean id="creditCard2" class="domain.CreditCard">
@@ -1376,7 +1376,7 @@
 		<property name="expirationMonth" value="10" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="728" />
-		<property name="actor" ref="student1" />
+		<property name="student" ref="student1" />
 	</bean>
 
 	<bean id="creditCard3" class="domain.CreditCard">
@@ -1386,7 +1386,7 @@
 		<property name="expirationMonth" value="06" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="533" />
-		<property name="actor" ref="student1" />
+		<property name="student" ref="student1" />
 	</bean>
 
 	<bean id="creditCard4" class="domain.CreditCard">
@@ -1396,7 +1396,7 @@
 		<property name="expirationMonth" value="10" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="266" />
-		<property name="actor" ref="student1" />
+		<property name="student" ref="student1" />
 	</bean>
 
 	<bean id="creditCard5" class="domain.CreditCard">
@@ -1406,7 +1406,7 @@
 		<property name="expirationMonth" value="02" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="885" />
-		<property name="actor" ref="student1" />
+		<property name="student" ref="student1" />
 	</bean>
 
 	<bean id="creditCard6" class="domain.CreditCard">
@@ -1416,7 +1416,7 @@
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="22" />
 		<property name="cvv" value="837" />
-		<property name="actor" ref="student2" />
+		<property name="student" ref="student2" />
 	</bean>
 
 	<bean id="creditCard7" class="domain.CreditCard">
@@ -1426,7 +1426,7 @@
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="988" />
-		<property name="actor" ref="student2" />
+		<property name="student" ref="student2" />
 	</bean>
 
 	<bean id="creditCard8" class="domain.CreditCard">
@@ -1436,7 +1436,7 @@
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="475" />
-		<property name="actor" ref="student2" />
+		<property name="student" ref="student2" />
 	</bean>
 
 	<bean id="creditCard9" class="domain.CreditCard">
@@ -1446,7 +1446,7 @@
 		<property name="expirationMonth" value="03" />
 		<property name="expirationYear" value="27" />
 		<property name="cvv" value="941" />
-		<property name="actor" ref="student2" />
+		<property name="student" ref="student2" />
 	</bean>
 
 	<bean id="creditCard10" class="domain.CreditCard">
@@ -1456,7 +1456,7 @@
 		<property name="expirationMonth" value="01" />
 		<property name="expirationYear" value="26" />
 		<property name="cvv" value="408" />
-		<property name="actor" ref="student2" />
+		<property name="student" ref="student2" />
 	</bean>
 
 
@@ -1467,7 +1467,7 @@
 		<property name="expirationMonth" value="01" />
 		<property name="expirationYear" value="20" />
 		<property name="cvv" value="906" />
-		<property name="actor" ref="student2" />
+		<property name="student" ref="student2" />
 	</bean>
 
 

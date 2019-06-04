@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "actor")
+	@Index(columnList = "student")
 })
 public class CreditCard extends DomainEntity {
 
@@ -30,7 +30,7 @@ public class CreditCard extends DomainEntity {
 	private Integer	expirationMonth;
 	private Integer	expirationYear;
 	private String	cvv;
-	private Actor	actor;
+	private Student	student;
 
 
 	@NotBlank
@@ -96,11 +96,11 @@ public class CreditCard extends DomainEntity {
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Actor getActor() {
-		return this.actor;
+	public Student getStudent() {
+		return this.student;
 	}
 
-	public void setActor(final Actor actor) {
-		this.actor = actor;
+	public void setStudent(final Student student) {
+		this.student = student;
 	}
 }
