@@ -108,4 +108,8 @@ public class CreditCardService {
 
 		return res;
 	}
+
+	public void flush() {
+		this.creditCardRepository.flush();
+	}
 }

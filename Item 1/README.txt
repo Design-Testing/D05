@@ -1,5 +1,3 @@
-#Item 1 content
+# Comments
 
-A document that describes the costs of your project. The rest of the documentation
-is expected to be provided in your project management system and your source
-code, where appropriate.
+Se ha considerado que se al solicitar un procedimiento de notificacion de renombramiento del sistema, tiene que existir implicitamente un procedimiento de renombramiento. Para ello se ha creado un Rebranding o renombramiento que cambia el nombre del sistema tanto en la aplicacion como en todas las ocurrencias del archivo de terminos y condiciones de uso, y al realizar ese rebranding, automaticamente se envia un mensaje al notification box de todos los usuarios del sistema menos al administrador en cuestion, notificando que se ha llevado un proceso de renombramiento del sistema.
