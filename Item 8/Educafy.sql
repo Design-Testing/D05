@@ -1,20 +1,18 @@
-﻿start transaction;
-
-drop database if exists `Educafy`;
-create database `Educafy`;
-
-use `Educafy`;
-
-drop user 'acme-user'@'%';
-
-drop user 'acme-manager'@'%';
-
-create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
-create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
-
-grant select, insert, update, delete on `Educafy`.* to 'acme-user'@'%';
-grant select, insert, update, delete, create, drop, references, index, alter, create temporary tables, lock tables, create view, create routine, alter routine, execute, trigger, show view on `Educafy`.* to 'acme-manager'@'%';
+﻿start transaction;
 
+drop database if exists `Educafy`;
+create database `Educafy`;
+
+use `Educafy`;
+
+drop user 'acme-user'@'%';
+drop user 'acme-manager'@'%';
+
+create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
+create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
+
+grant select, insert, update, delete on `Educafy`.* to 'acme-user'@'%';
+grant select, insert, update, delete, create, drop, references, index, alter, create temporary tables, lock tables, create view, create routine, alter routine, execute, trigger, show view on `Educafy`.* to 'acme-manager'@'%';
 
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
 --
@@ -52,6 +50,7 @@ CREATE TABLE `actor` (
   `user_account` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_i7xei45auwq1f6vu25985riuh` (`user_account`),
+  KEY `UK_k77r9upyn4vc6rupdcqapbko5` (`spammer`),
   CONSTRAINT `FK_i7xei45auwq1f6vu25985riuh` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -139,7 +138,7 @@ CREATE TABLE `actor_surname` (
 
 LOCK TABLES `actor_surname` WRITE;
 /*!40000 ALTER TABLE `actor_surname` DISABLE KEYS */;
-INSERT INTO `actor_surname` VALUES (3216,'System'),(3222,'Admin'),(3223,'Gonzalez'),(3224,'Teacher1'),(3225,'Teacher2'),(3226,'Teacher3'),(3227,'Garcia'),(3228,'Lanzas'),(3229,'Surname'),(3230,'Certifier\'s'),(3231,'Certifier\'s');
+INSERT INTO `actor_surname` VALUES (5293,'System'),(5299,'Admin'),(5300,'Gonzalez'),(5301,'Teacher1'),(5302,'Teacher2'),(5303,'Teacher3'),(5304,'Teacher11'),(5305,'Teacher12'),(5306,'Teacher13'),(5307,'Garcia'),(5308,'Lanzas'),(5309,'Surname'),(5310,'Certifier\'s'),(5311,'Certifier\'s');
 /*!40000 ALTER TABLE `actor_surname` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,6 +161,7 @@ CREATE TABLE `administrator` (
   `user_account` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_7ohwsa2usmvu0yxb44je2lge` (`user_account`),
+  KEY `administratorUK_k77r9upyn4vc6rupdcqapbko5` (`spammer`),
   CONSTRAINT `FK_7ohwsa2usmvu0yxb44je2lge` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -172,7 +172,7 @@ CREATE TABLE `administrator` (
 
 LOCK TABLES `administrator` WRITE;
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
-INSERT INTO `administrator` VALUES (3216,0,'','correo@gmail.com','Educafy','+34647307406','','\0',3215),(3222,0,'Reina Mercedes','conwdasto@jmsx.es','Admin1','+34647607406','http://tinyurl.com/picture.png','\0',3205),(3223,0,'Reina Mercedes','lusi@gamil.es','Admin2','+34647307406','http://tinyurl.com/picture.png','\0',3206);
+INSERT INTO `administrator` VALUES (5293,0,'','correo@gmail.com','Educafy','+34647307406','','\0',5292),(5299,0,'Reina Mercedes','conwdasto@jmsx.es','Admin1','+34647607406','http://tinyurl.com/picture.png','\0',5279),(5300,0,'Reina Mercedes','lusi@gamil.es','Admin2','+34647307406','http://tinyurl.com/picture.png','\0',5280);
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,8 +191,8 @@ CREATE TABLE `assesment` (
   `lesson` int(11) NOT NULL,
   `student` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_3swtmocbw460l08swr93a3gpw` (`lesson`),
-  KEY `FK_7ncrpimqna6ds08t5v5s2g1i2` (`student`),
+  KEY `UK_7ncrpimqna6ds08t5v5s2g1i2` (`student`),
+  KEY `UK_3swtmocbw460l08swr93a3gpw` (`lesson`),
   CONSTRAINT `FK_7ncrpimqna6ds08t5v5s2g1i2` FOREIGN KEY (`student`) REFERENCES `student` (`id`),
   CONSTRAINT `FK_3swtmocbw460l08swr93a3gpw` FOREIGN KEY (`lesson`) REFERENCES `lesson` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -204,7 +204,7 @@ CREATE TABLE `assesment` (
 
 LOCK TABLES `assesment` WRITE;
 /*!40000 ALTER TABLE `assesment` DISABLE KEYS */;
-INSERT INTO `assesment` VALUES (3341,0,'Bien trabajado',4,3333,3227),(3342,0,'Bien trabajado',3,3334,3227),(3343,0,'Enhorabuena !',4,3335,3228),(3344,0,'Bien hecho',4,3336,3228);
+INSERT INTO `assesment` VALUES (5455,0,'Bien trabajado',4,5443,5307),(5456,0,'Bien trabajado',3,5444,5307),(5457,0,'Enhorabuena !',4,5445,5308),(5458,0,'Bien hecho',4,5446,5308);
 /*!40000 ALTER TABLE `assesment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,6 +252,7 @@ CREATE TABLE `certifier` (
   `user_account` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_peycq2crr1xa7wus0x1ahv0gj` (`user_account`),
+  KEY `certifierUK_k77r9upyn4vc6rupdcqapbko5` (`spammer`),
   CONSTRAINT `FK_peycq2crr1xa7wus0x1ahv0gj` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -262,7 +263,7 @@ CREATE TABLE `certifier` (
 
 LOCK TABLES `certifier` WRITE;
 /*!40000 ALTER TABLE `certifier` DISABLE KEYS */;
-INSERT INTO `certifier` VALUES (3230,0,'Reina Mercedes','certifier1@gmail.es','Certifier1','+34647307480','http://tinyurl.com/picture.png','\0',3213),(3231,0,'Reina Mercedes','certifier2@gmail.es','Certifier2','+34647307484','http://tinyurl.com/picture.png','\0',3214);
+INSERT INTO `certifier` VALUES (5310,0,'Reina Mercedes','certifier1@gmail.es','Certifier1','+34647307480','http://tinyurl.com/picture.png','\0',5290),(5311,0,'Reina Mercedes','certifier2@gmail.es','Certifier2','+34647307484','http://tinyurl.com/picture.png','\0',5291);
 /*!40000 ALTER TABLE `certifier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +281,7 @@ CREATE TABLE `comment` (
   `text` varchar(255) DEFAULT NULL,
   `assesment` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_2x7bmc1pfbwvv22pfqyealq47` (`assesment`),
+  KEY `UK_2x7bmc1pfbwvv22pfqyealq47` (`assesment`),
   CONSTRAINT `FK_2x7bmc1pfbwvv22pfqyealq47` FOREIGN KEY (`assesment`) REFERENCES `assesment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -291,7 +292,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (3345,0,'2019-05-12 20:45:00','Text of comment 1',3341),(3346,0,'2019-05-12 10:45:00','Text of comment 2',3341),(3347,0,'2019-05-12 21:45:00','Text of comment 3',3342),(3348,0,'2019-05-12 20:40:00','Text of comment 4',3342),(3349,0,'2019-05-12 22:45:00','Text of comment 5',3343),(3350,0,'2019-05-12 11:45:00','Text of comment 6',3343),(3351,0,'2019-05-12 09:45:00','Text of comment 7',3344),(3352,0,'2019-05-12 14:45:00','Text of comment 8',3344);
+INSERT INTO `comment` VALUES (5459,0,'2019-05-12 20:45:00','Text of comment 1',5455),(5460,0,'2019-05-12 10:45:00','Text of comment 2',5455),(5461,0,'2019-05-12 21:45:00','Text of comment 3',5456),(5462,0,'2019-05-12 20:40:00','Text of comment 4',5456),(5463,0,'2019-05-12 22:45:00','Text of comment 5',5457),(5464,0,'2019-05-12 11:45:00','Text of comment 6',5457),(5465,0,'2019-05-12 09:45:00','Text of comment 7',5458),(5466,0,'2019-05-12 14:45:00','Text of comment 8',5458);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,7 +349,7 @@ CREATE TABLE `configuration_parameters` (
 
 LOCK TABLES `configuration_parameters` WRITE;
 /*!40000 ALTER TABLE `configuration_parameters` DISABLE KEYS */;
-INSERT INTO `configuration_parameters` VALUES (3243,2,'https://i.ibb.co/W3c4rmh/logo.png','+34',1,10,'\0','Educafy',0.21,'Welcome to Starbucks! Where student find the individual lessons they are looking for!','¡Bienvenidos a Starbucks! ¡El lugar donde los estudiantes encuentran las clases particulares que estaban buscando!');
+INSERT INTO `configuration_parameters` VALUES (5323,0,'https://i.ibb.co/W3c4rmh/logo.png','+34',1,10,'\0','Educafy',0.21,'Welcome to Educafy! Where student find the individual lessons they are looking for!','¡Bienvenidos a Educafy! ¡El lugar donde los estudiantes encuentran las clases particulares que estaban buscando!');
 /*!40000 ALTER TABLE `configuration_parameters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +374,7 @@ CREATE TABLE `configuration_parameters_credit_card_make` (
 
 LOCK TABLES `configuration_parameters_credit_card_make` WRITE;
 /*!40000 ALTER TABLE `configuration_parameters_credit_card_make` DISABLE KEYS */;
-INSERT INTO `configuration_parameters_credit_card_make` VALUES (3243,'VISA'),(3243,'MCARD'),(3243,'AMEX'),(3243,'DINNERS'),(3243,'FLY');
+INSERT INTO `configuration_parameters_credit_card_make` VALUES (5323,'VISA'),(5323,'MCARD'),(5323,'AMEX'),(5323,'DINNERS'),(5323,'FLY');
 /*!40000 ALTER TABLE `configuration_parameters_credit_card_make` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,7 +399,7 @@ CREATE TABLE `configuration_parameters_spam_words` (
 
 LOCK TABLES `configuration_parameters_spam_words` WRITE;
 /*!40000 ALTER TABLE `configuration_parameters_spam_words` DISABLE KEYS */;
-INSERT INTO `configuration_parameters_spam_words` VALUES (3243,'sex'),(3243,'viagra'),(3243,'cialis'),(3243,'one million'),(3243,'you\'ve been selected'),(3243,'nigeria'),(3243,'sexo'),(3243,'un millón'),(3243,'ha sido seleccionado');
+INSERT INTO `configuration_parameters_spam_words` VALUES (5323,'sex'),(5323,'viagra'),(5323,'cialis'),(5323,'one million'),(5323,'you\'ve been selected'),(5323,'nigeria'),(5323,'sexo'),(5323,'un millón'),(5323,'ha sido seleccionado');
 /*!40000 ALTER TABLE `configuration_parameters_spam_words` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +424,7 @@ CREATE TABLE `configuration_parameters_subject_levels` (
 
 LOCK TABLES `configuration_parameters_subject_levels` WRITE;
 /*!40000 ALTER TABLE `configuration_parameters_subject_levels` DISABLE KEYS */;
-INSERT INTO `configuration_parameters_subject_levels` VALUES (3243,'1ESO'),(3243,'2ESO'),(3243,'3ESO'),(3243,'4ESO'),(3243,'1BACH'),(3243,'2BACH');
+INSERT INTO `configuration_parameters_subject_levels` VALUES (5323,'1ESO'),(5323,'2ESO'),(5323,'3ESO'),(5323,'4ESO'),(5323,'1BACH'),(5323,'2BACH');
 /*!40000 ALTER TABLE `configuration_parameters_subject_levels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,7 +446,8 @@ CREATE TABLE `credit_card` (
   `number` varchar(255) DEFAULT NULL,
   `actor` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_2ncxn32sn2quehl710urqs0on` (`number`)
+  UNIQUE KEY `UK_2ncxn32sn2quehl710urqs0on` (`number`),
+  KEY `UK_kj6ag2kv2vppcsvh6y24est5s` (`actor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -455,7 +457,7 @@ CREATE TABLE `credit_card` (
 
 LOCK TABLES `credit_card` WRITE;
 /*!40000 ALTER TABLE `credit_card` DISABLE KEYS */;
-INSERT INTO `credit_card` VALUES (3232,0,'163',6,19,'HolderName Student 1','VISA','4716477920082572',3227),(3233,0,'728',10,20,'HolderName Student 1','MASTER','5498128346540526',3227),(3234,0,'533',6,19,'HolderName Student 1','AMEX','375278545368168',3227),(3235,0,'266',10,19,'HolderName Student 1','VISA','4532787155338743',3227),(3236,0,'885',2,19,'HolderName Student 1','VISA','4716699361876929',3227),(3237,0,'837',11,22,'HolderName Student 2','VISA','4231348143458624',3228),(3238,0,'988',11,20,'HolderName Student 2','VISA','4294148159742547',3228),(3239,0,'475',11,20,'HolderName Student 2','MASTERCARD','5547165664775350',3228),(3240,0,'941',3,27,'HolderName Student 2','VISA','4410435734979051',3228),(3241,0,'408',1,26,'HolderName Student 2','MASTERCARD','5316710759043864',3228),(3242,0,'906',1,20,'HolderName Student 2','MASTERCARD','5384948404521051',3228);
+INSERT INTO `credit_card` VALUES (5312,0,'163',6,19,'HolderName Student 1','VISA','4716477920082572',5307),(5313,0,'728',10,20,'HolderName Student 1','MASTER','5498128346540526',5307),(5314,0,'533',6,19,'HolderName Student 1','AMEX','375278545368168',5307),(5315,0,'266',10,19,'HolderName Student 1','VISA','4532787155338743',5307),(5316,0,'885',2,19,'HolderName Student 1','VISA','4716699361876929',5307),(5317,0,'837',11,22,'HolderName Student 2','VISA','4231348143458624',5308),(5318,0,'988',11,20,'HolderName Student 2','VISA','4294148159742547',5308),(5319,0,'475',11,20,'HolderName Student 2','MASTERCARD','5547165664775350',5308),(5320,0,'941',3,27,'HolderName Student 2','VISA','4410435734979051',5308),(5321,0,'408',1,26,'HolderName Student 2','MASTERCARD','5316710759043864',5308),(5322,0,'906',1,20,'HolderName Student 2','MASTERCARD','5384948404521051',5308);
 /*!40000 ALTER TABLE `credit_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -487,7 +489,7 @@ CREATE TABLE `curriculum` (
 
 LOCK TABLES `curriculum` WRITE;
 /*!40000 ALTER TABLE `curriculum` DISABLE KEYS */;
-INSERT INTO `curriculum` VALUES (3247,0,'COMM-1234',3248,3224),(3253,0,'COMX-1231',3254,3225);
+INSERT INTO `curriculum` VALUES (5327,0,'COMM-1234',5328,5301),(5333,0,'COMX-1231',5334,5302),(5337,0,'COMX-4444',5338,5303),(5341,0,'COMX-4441',5342,5306);
 /*!40000 ALTER TABLE `curriculum` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -514,7 +516,7 @@ CREATE TABLE `curriculum_education_records` (
 
 LOCK TABLES `curriculum_education_records` WRITE;
 /*!40000 ALTER TABLE `curriculum_education_records` DISABLE KEYS */;
-INSERT INTO `curriculum_education_records` VALUES (3247,3249),(3247,3250),(3253,3255);
+INSERT INTO `curriculum_education_records` VALUES (5327,5329),(5327,5330),(5333,5335),(5337,5339),(5341,5343);
 /*!40000 ALTER TABLE `curriculum_education_records` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -541,7 +543,7 @@ CREATE TABLE `curriculum_miscellaneous_records` (
 
 LOCK TABLES `curriculum_miscellaneous_records` WRITE;
 /*!40000 ALTER TABLE `curriculum_miscellaneous_records` DISABLE KEYS */;
-INSERT INTO `curriculum_miscellaneous_records` VALUES (3247,3251),(3247,3252),(3253,3256);
+INSERT INTO `curriculum_miscellaneous_records` VALUES (5327,5331),(5327,5332),(5333,5336),(5337,5340),(5341,5344);
 /*!40000 ALTER TABLE `curriculum_miscellaneous_records` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,7 +575,7 @@ CREATE TABLE `education_record` (
 
 LOCK TABLES `education_record` WRITE;
 /*!40000 ALTER TABLE `education_record` DISABLE KEYS */;
-INSERT INTO `education_record` VALUES (3249,0,'http://attachment1.com','Informática','2018-04-11','Universidad de Sevilla','\0','',7,'2014-04-11'),(3250,0,'http://attachment2.com','Magisterio','2019-04-11','Universidad de Sevilla','\0','\0',8,'2018-04-11'),(3255,0,'http://attachment3.com','Farmacia','2019-04-11','Universidad de Sevilla','','\0',7,'2018-04-11');
+INSERT INTO `education_record` VALUES (5329,0,'http://attachment1.com','Informática','2018-04-11','Universidad de Sevilla','\0','',7,'2014-04-11'),(5330,0,'http://attachment2.com','Magisterio','2019-04-11','Universidad de Sevilla','\0','\0',8,'2018-04-11'),(5335,0,'http://attachment3.com','Farmacia','2019-04-11','Universidad de Sevilla','','\0',7,'2018-04-11'),(5339,0,'http://attachment3.com','Biología','2019-04-11','Universidad de Sevilla','\0','',7,'2018-04-11'),(5343,0,'http://attachment3.com','Ingeniería Industrial','2019-04-11','Universidad de Sevilla','\0','\0',7,'2018-04-11');
 /*!40000 ALTER TABLE `education_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -603,7 +605,7 @@ CREATE TABLE `exam` (
 
 LOCK TABLES `exam` WRITE;
 /*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES (3353,0,10,'EVALUATED','Title Exam 1',3337),(3354,0,NULL,'SUBMITTED','Title Exam 2',3337),(3355,0,NULL,'PENDING','Title Exam 3',3338),(3356,0,NULL,'PENDING','Title Exam 4',3338);
+INSERT INTO `exam` VALUES (5467,0,NULL,'PENDING','Title Exam 1',5449),(5468,0,NULL,'SUBMITTED','Title Exam 2',5449),(5469,0,NULL,'PENDING','Title Exam 3',5449),(5470,0,NULL,'PENDING','Title Exam 4',5450),(5471,0,NULL,'PENDING','Title Exam 5',5449),(5472,0,NULL,'INPROGRESS','Title Exam 6',5449),(5473,0,NULL,'SUBMITTED','Title Exam 7',5449);
 /*!40000 ALTER TABLE `exam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -630,6 +632,7 @@ CREATE TABLE `exam_questions` (
 
 LOCK TABLES `exam_questions` WRITE;
 /*!40000 ALTER TABLE `exam_questions` DISABLE KEYS */;
+INSERT INTO `exam_questions` VALUES (5468,5355),(5472,5356),(5473,5353),(5473,5354);
 /*!40000 ALTER TABLE `exam_questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -658,7 +661,7 @@ CREATE TABLE `finder` (
 
 LOCK TABLES `finder` WRITE;
 /*!40000 ALTER TABLE `finder` DISABLE KEYS */;
-INSERT INTO `finder` VALUES (3244,0,'2019-05-23 09:00:00',NULL,'4ESO','IT','John'),(3245,0,'2019-05-23 09:00:00',NULL,'3ESO','MAT','Patrick'),(3246,0,'2019-05-23 09:00:00',NULL,'4ESO','LENG','Robert');
+INSERT INTO `finder` VALUES (5324,0,'2019-05-23 09:00:00',NULL,'4ESO','IT','John'),(5325,0,'2019-05-23 09:00:00',NULL,'3ESO','MAT','Patrick'),(5326,0,'2019-05-23 09:00:00',NULL,'4ESO','LENG','Robert');
 /*!40000 ALTER TABLE `finder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -702,7 +705,8 @@ CREATE TABLE `folder` (
   `name` varchar(255) DEFAULT NULL,
   `actor` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `UK_98saja6t4e4rrmw2ej3nbwgxq` (`actor`,`is_system_folder`)
+  KEY `UK_98saja6t4e4rrmw2ej3nbwgxq` (`actor`,`is_system_folder`),
+  KEY `UK_lnclqq7vcaqpv8y5di1gg5bm3` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -712,7 +716,7 @@ CREATE TABLE `folder` (
 
 LOCK TABLES `folder` WRITE;
 /*!40000 ALTER TABLE `folder` DISABLE KEYS */;
-INSERT INTO `folder` VALUES (3217,2,'','Out box',3216),(3218,0,'','In box',3216),(3219,0,'','Trash box',3216),(3220,0,'','Notification box',3216),(3221,0,'','Spam box',3216),(3277,0,'','Out box',3222),(3278,0,'','In box',3222),(3279,0,'','Trash box',3222),(3280,0,'','Notification box',3222),(3281,0,'','Spam box',3222),(3282,0,'','Out box',3223),(3283,0,'','In box',3223),(3284,0,'','Trash box',3223),(3285,2,'','Notification box',3223),(3286,0,'','Spam box',3223),(3287,0,'','Out box',3227),(3288,0,'','In box',3227),(3289,0,'','Trash box',3227),(3290,2,'','Notification box',3227),(3291,0,'','Spam box',3227),(3292,0,'','Out box',3228),(3293,0,'','In box',3228),(3294,0,'','Trash box',3228),(3295,2,'','Notification box',3228),(3296,0,'','Spam box',3228),(3297,0,'','Out box',3229),(3298,0,'','In box',3229),(3299,0,'','Trash box',3229),(3300,2,'','Notification box',3229),(3301,0,'','Spam box',3229),(3308,0,'','Out box',3224),(3309,0,'','In box',3224),(3310,0,'','Trash box',3224),(3311,2,'','Notification box',3224),(3312,0,'','Spam box',3224),(3313,0,'','Out box',3225),(3314,0,'','In box',3225),(3315,0,'','Trash box',3225),(3316,2,'','Notification box',3225),(3317,0,'','Spam box',3225),(3318,0,'','Out box',3226),(3319,0,'','In box',3226),(3320,0,'','Trash box',3226),(3321,2,'','Notification box',3226),(3322,0,'','Spam box',3226),(3323,0,'','Out box',3230),(3324,0,'','In box',3230),(3325,0,'','Trash box',3230),(3326,2,'','Notification box',3230),(3327,0,'','Spam box',3230),(3328,0,'','Out box',3231),(3329,0,'','In box',3231),(3330,0,'','Trash box',3231),(3331,2,'','Notification box',3231),(3332,0,'','Spam box',3231);
+INSERT INTO `folder` VALUES (5294,0,'','Out box',5293),(5295,0,'','In box',5293),(5296,0,'','Trash box',5293),(5297,0,'','Notification box',5293),(5298,0,'','Spam box',5293),(5372,0,'','Out box',5299),(5373,0,'','In box',5299),(5374,0,'','Trash box',5299),(5375,0,'','Notification box',5299),(5376,0,'','Spam box',5299),(5377,0,'','Out box',5300),(5378,0,'','In box',5300),(5379,0,'','Trash box',5300),(5380,0,'','Notification box',5300),(5381,0,'','Spam box',5300),(5382,0,'','Out box',5307),(5383,0,'','In box',5307),(5384,0,'','Trash box',5307),(5385,0,'','Notification box',5307),(5386,0,'','Spam box',5307),(5387,0,'','Out box',5308),(5388,0,'','In box',5308),(5389,0,'','Trash box',5308),(5390,0,'','Notification box',5308),(5391,0,'','Spam box',5308),(5392,0,'','Out box',5309),(5393,0,'','In box',5309),(5394,0,'','Trash box',5309),(5395,0,'','Notification box',5309),(5396,0,'','Spam box',5309),(5403,0,'','Out box',5301),(5404,0,'','In box',5301),(5405,0,'','Trash box',5301),(5406,0,'','Notification box',5301),(5407,0,'','Spam box',5301),(5408,0,'','Out box',5302),(5409,0,'','In box',5302),(5410,0,'','Trash box',5302),(5411,0,'','Notification box',5302),(5412,0,'','Spam box',5302),(5413,0,'','Out box',5303),(5414,0,'','In box',5303),(5415,0,'','Trash box',5303),(5416,0,'','Notification box',5303),(5417,0,'','Spam box',5303),(5418,0,'','Out box',5304),(5419,0,'','In box',5304),(5420,0,'','Trash box',5304),(5421,0,'','Notification box',5304),(5422,0,'','Spam box',5304),(5423,0,'','Out box',5305),(5424,0,'','In box',5305),(5425,0,'','Trash box',5305),(5426,0,'','Notification box',5305),(5427,0,'','Spam box',5305),(5428,0,'','Out box',5306),(5429,0,'','In box',5306),(5430,0,'','Trash box',5306),(5431,0,'','Notification box',5306),(5432,0,'','Spam box',5306),(5433,0,'','Out box',5310),(5434,0,'','In box',5310),(5435,0,'','Trash box',5310),(5436,0,'','Notification box',5310),(5437,0,'','Spam box',5310),(5438,0,'','Out box',5311),(5439,0,'','In box',5311),(5440,0,'','Trash box',5311),(5441,0,'','Notification box',5311),(5442,0,'','Spam box',5311);
 /*!40000 ALTER TABLE `folder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -763,7 +767,7 @@ CREATE TABLE `folder_messages` (
 
 LOCK TABLES `folder_messages` WRITE;
 /*!40000 ALTER TABLE `folder_messages` DISABLE KEYS */;
-INSERT INTO `folder_messages` VALUES (3287,3302),(3288,3303),(3288,3304),(3288,3305),(3288,3306),(3288,3307),(3297,3303),(3297,3304),(3297,3305),(3297,3306),(3297,3307),(3309,3302),(3217,32768),(3217,32769),(3290,32768),(3290,32769),(3295,32768),(3295,32769),(3300,32768),(3300,32769),(3285,32768),(3285,32769),(3311,32768),(3311,32769),(3316,32768),(3316,32769),(3321,32768),(3321,32769),(3326,32768),(3326,32769),(3331,32768),(3331,32769);
+INSERT INTO `folder_messages` VALUES (5382,5397),(5383,5398),(5383,5399),(5383,5400),(5383,5401),(5383,5402),(5392,5398),(5392,5399),(5392,5400),(5392,5401),(5392,5402),(5404,5397),(5419,5397);
 /*!40000 ALTER TABLE `folder_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -786,7 +790,7 @@ CREATE TABLE `hibernate_sequences` (
 
 LOCK TABLES `hibernate_sequences` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequences` DISABLE KEYS */;
-INSERT INTO `hibernate_sequences` VALUES ('domain_entity',2);
+INSERT INTO `hibernate_sequences` VALUES ('domain_entity',1);
 /*!40000 ALTER TABLE `hibernate_sequences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -809,8 +813,9 @@ CREATE TABLE `lesson` (
   `teacher` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_sdlp1n7jakeyyiqjmyrfw99jj` (`ticker`),
-  KEY `FK_8x2j3fj60lwhds7csm5xxs0sx` (`subject`),
-  KEY `FK_s6cdrqevim4qld1qh9vq2j5yd` (`teacher`),
+  KEY `UK_s6cdrqevim4qld1qh9vq2j5yd` (`teacher`),
+  KEY `UK_pf7noq198h1bhca8renj35jyh` (`is_draft`),
+  KEY `UK_8x2j3fj60lwhds7csm5xxs0sx` (`subject`),
   CONSTRAINT `FK_s6cdrqevim4qld1qh9vq2j5yd` FOREIGN KEY (`teacher`) REFERENCES `teacher` (`id`),
   CONSTRAINT `FK_8x2j3fj60lwhds7csm5xxs0sx` FOREIGN KEY (`subject`) REFERENCES `subject` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -822,7 +827,7 @@ CREATE TABLE `lesson` (
 
 LOCK TABLES `lesson` WRITE;
 /*!40000 ALTER TABLE `lesson` DISABLE KEYS */;
-INSERT INTO `lesson` VALUES (3333,0,'Description1','\0',16.5,'EYTS-6579','Lesson1',3266,3224),(3334,0,'Description2','\0',16.5,'KYTS-6529','Lesson2',3267,3225),(3335,0,'Description3','\0',16.5,'UYTO-6379','Lesson3',3267,3224),(3336,0,'Description4','\0',16.5,'EITS-4579','Lesson4',3266,3225);
+INSERT INTO `lesson` VALUES (5443,0,'Description1','\0',16.5,'EYTS-6579','Lesson1',5357,5301),(5444,0,'Description2','\0',16.5,'KYTS-6529','Lesson2',5358,5302),(5445,0,'Description3','\0',16.5,'UYTO-6379','Lesson3',5358,5301),(5446,0,'Description4','\0',16.5,'EITS-4579','Lesson4',5357,5302);
 /*!40000 ALTER TABLE `lesson` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -877,7 +882,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (3302,0,'Clases de matematicas sevilla','2018-11-04 13:00:00','HIGH','Clases particulares',3227),(3303,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',3229),(3304,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',3229),(3305,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',3229),(3306,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',3229),(3307,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',3229),(32768,1,'The system brand has been modified. Educafy rebrand to Starbucks. \nLa marca del sistema se ha modificado. Educafy renombrado a Starbucks.','2019-05-29 17:28:52','HIGH','Rebranding - Renombramiento',3216),(32769,1,'There\'s been a data breach in our system. Due to GDPR we have to notify you.\nSe ha producido una brecha de datos en nuestro sistema. Debido a la GDPR tenemos que notificarles.','2019-05-29 17:31:11','HIGH','Data breach - Brecha de datos',3216);
+INSERT INTO `message` VALUES (5397,0,'Clases de matematicas sevilla','2018-11-04 13:00:00','HIGH','Clases particulares',5307),(5398,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',5309),(5399,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',5309),(5400,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',5309),(5401,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',5309),(5402,0,'We have to buy kill of walkers','2018-11-04 13:00:00','HIGH','you\'ve been selected',5309);
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -902,7 +907,7 @@ CREATE TABLE `message_recipients` (
 
 LOCK TABLES `message_recipients` WRITE;
 /*!40000 ALTER TABLE `message_recipients` DISABLE KEYS */;
-INSERT INTO `message_recipients` VALUES (3302,3224),(3303,3227),(3304,3227),(3305,3227),(3306,3227),(3307,3227),(32768,3227),(32768,3228),(32768,3229),(32768,3223),(32768,3224),(32768,3225),(32768,3226),(32768,3230),(32768,3231),(32769,3227),(32769,3228),(32769,3229),(32769,3223),(32769,3224),(32769,3225),(32769,3226),(32769,3230),(32769,3231);
+INSERT INTO `message_recipients` VALUES (5397,5301),(5398,5307),(5399,5307),(5400,5307),(5401,5307),(5402,5307);
 /*!40000 ALTER TABLE `message_recipients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -927,7 +932,7 @@ CREATE TABLE `message_tags` (
 
 LOCK TABLES `message_tags` WRITE;
 /*!40000 ALTER TABLE `message_tags` DISABLE KEYS */;
-INSERT INTO `message_tags` VALUES (3302,'Mates'),(3302,'Sevilla'),(3303,'Zombies'),(3303,'Kill'),(3304,'Zombies'),(3304,'Kill'),(3305,'Zombies'),(3305,'Kill'),(3306,'Zombies'),(3306,'Kill'),(3307,'Zombies'),(3307,'Kill');
+INSERT INTO `message_tags` VALUES (5397,'Mates'),(5397,'Sevilla'),(5398,'Zombies'),(5398,'Kill'),(5399,'Zombies'),(5399,'Kill'),(5400,'Zombies'),(5400,'Kill'),(5401,'Zombies'),(5401,'Kill'),(5402,'Zombies'),(5402,'Kill');
 /*!40000 ALTER TABLE `message_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -954,7 +959,7 @@ CREATE TABLE `miscellaneous_record` (
 
 LOCK TABLES `miscellaneous_record` WRITE;
 /*!40000 ALTER TABLE `miscellaneous_record` DISABLE KEYS */;
-INSERT INTO `miscellaneous_record` VALUES (3251,0,'Miscellaneous record 1','\0',''),(3252,0,'Miscellaneous record 2','\0','\0'),(3256,0,'Miscellaneous record 3','','\0');
+INSERT INTO `miscellaneous_record` VALUES (5331,0,'Miscellaneous record 1','\0',''),(5332,0,'Miscellaneous record 2','\0','\0'),(5336,0,'Miscellaneous record 3','','\0'),(5340,0,'Miscellaneous record 3','\0',''),(5344,0,'Miscellaneous record 5','\0','\0');
 /*!40000 ALTER TABLE `miscellaneous_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -979,7 +984,7 @@ CREATE TABLE `miscellaneous_record_attachments` (
 
 LOCK TABLES `miscellaneous_record_attachments` WRITE;
 /*!40000 ALTER TABLE `miscellaneous_record_attachments` DISABLE KEYS */;
-INSERT INTO `miscellaneous_record_attachments` VALUES (3251,'http://attachment11.com'),(3251,'http://attachment12.com'),(3252,'http://attachment21.com'),(3252,'http://attachment22.com'),(3256,'http://attachment31.com'),(3256,'http://attachment32.com');
+INSERT INTO `miscellaneous_record_attachments` VALUES (5331,'http://attachment11.com'),(5331,'http://attachment12.com'),(5332,'http://attachment21.com'),(5332,'http://attachment22.com'),(5336,'http://attachment31.com'),(5336,'http://attachment32.com'),(5340,'http://attachment31.com'),(5340,'http://attachment32.com'),(5344,'http://attachment312.com'),(5344,'http://attachment342.com');
 /*!40000 ALTER TABLE `miscellaneous_record_attachments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1010,7 +1015,7 @@ CREATE TABLE `personal_record` (
 
 LOCK TABLES `personal_record` WRITE;
 /*!40000 ALTER TABLE `personal_record` DISABLE KEYS */;
-INSERT INTO `personal_record` VALUES (3248,0,'Teacher 1','http://www.githubTeacher1.com','\0','','http://www.linkedInTeacher1.com','http://photoTeacher1.com','Statement Teacher 1'),(3254,0,'Teacher 2','http://www.githubTeacher2.com','\0','\0','http://www.linkedInTeacher2.com','http://photoTeacher2.com','Statement Teacher 2'),(3257,0,'Teacher 2','http://www.githubTeacher2.com','\0','','http://www.linkedInTeacher2.com','http://photoTeacher3.com','Statement Teacher 2');
+INSERT INTO `personal_record` VALUES (5328,0,'Teacher 1','http://www.githubTeacher1.com','\0','','http://www.linkedInTeacher1.com','http://photoTeacher1.com','Statement Teacher 1'),(5334,0,'Teacher 2','http://www.githubTeacher2.com','\0','\0','http://www.linkedInTeacher2.com','http://photoTeacher2.com','Statement Teacher 2'),(5338,0,'Teacher 3','http://www.githubTeacher3.com','\0','','http://www.linkedInTeacher3.com','http://photoTeacher3.com','Statement Teacher 3'),(5342,0,'Teacher 13','http://www.githubTeacher13.com','\0','\0','http://www.linkedInTeacher13.com','http://photoTeacher13.com','Statement Teacher 13');
 /*!40000 ALTER TABLE `personal_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1036,7 +1041,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (3258,0,'Answer 1','Question 1'),(3259,0,'Answer 2','Question 2'),(3260,0,'Answer 3','Question 3'),(3261,0,'Answer 4','Question 4'),(3262,0,'Answer 5','Question 5'),(3263,0,'Answer 6','Question 6'),(3264,0,'Answer 7','Question 7'),(3265,0,'Answer 8','Question 8');
+INSERT INTO `question` VALUES (5345,0,'Answer 1','Question 1'),(5346,0,'Answer 2','Question 2'),(5347,0,'Answer 3','Question 3'),(5348,0,'Answer 4','Question 4'),(5349,0,'Answer 5','Question 5'),(5350,0,'Answer 6','Question 6'),(5351,0,'Answer 7','Question 7'),(5352,0,'Answer 8','Question 8'),(5353,0,'Answer 9','Question 9'),(5354,0,'Answer 10','Question 10'),(5355,0,'Answer 11','Question 11'),(5356,0,NULL,'Question 12');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1059,9 +1064,9 @@ CREATE TABLE `reservation` (
   `lesson` int(11) NOT NULL,
   `student` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_579gkur9nx7ydmw19u6l9ubad` (`student`),
   KEY `FK_ejj99bixyerta7ey6repfw6xp` (`credit_card`),
   KEY `FK_94kai2s68391ykl92mmh8y9x1` (`lesson`),
-  KEY `FK_579gkur9nx7ydmw19u6l9ubad` (`student`),
   CONSTRAINT `FK_579gkur9nx7ydmw19u6l9ubad` FOREIGN KEY (`student`) REFERENCES `student` (`id`),
   CONSTRAINT `FK_94kai2s68391ykl92mmh8y9x1` FOREIGN KEY (`lesson`) REFERENCES `lesson` (`id`),
   CONSTRAINT `FK_ejj99bixyerta7ey6repfw6xp` FOREIGN KEY (`credit_card`) REFERENCES `credit_card` (`id`)
@@ -1074,7 +1079,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (3337,0,20.5,'',1,'2019-05-10 20:30:00','FINAL',3232,3333,3227),(3338,0,15.5,'',1,'2019-05-11 20:30:00','ACCEPTED',3233,3334,3227);
+INSERT INTO `reservation` VALUES (5447,0,20.5,'',1,'2019-05-10 20:30:00','PENDING',5312,5443,5307),(5448,0,15.5,'',1,'2019-05-11 20:30:00','ACCEPTED',5313,5445,5307),(5449,0,15.5,'',1,'2019-05-11 20:30:00','FINAL',5313,5444,5307),(5450,0,15.5,'',1,'2019-05-11 20:30:00','FINAL',5318,5446,5308);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1090,7 +1095,7 @@ CREATE TABLE `schedule` (
   `version` int(11) NOT NULL,
   `teacher` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_94hm7tr8qm443etu19s1ejav8` (`teacher`),
+  KEY `UK_94hm7tr8qm443etu19s1ejav8` (`teacher`),
   CONSTRAINT `FK_94hm7tr8qm443etu19s1ejav8` FOREIGN KEY (`teacher`) REFERENCES `teacher` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1101,7 +1106,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (3275,0,3224),(3276,0,3225);
+INSERT INTO `schedule` VALUES (5366,0,5301),(5367,0,5302),(5368,0,5303),(5369,0,5304),(5370,0,5305),(5371,0,5306);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1126,7 +1131,7 @@ CREATE TABLE `schedule_friday` (
 
 LOCK TABLES `schedule_friday` WRITE;
 /*!40000 ALTER TABLE `schedule_friday` DISABLE KEYS */;
-INSERT INTO `schedule_friday` VALUES (3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0');
+INSERT INTO `schedule_friday` VALUES (5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0');
 /*!40000 ALTER TABLE `schedule_friday` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1151,7 +1156,7 @@ CREATE TABLE `schedule_monday` (
 
 LOCK TABLES `schedule_monday` WRITE;
 /*!40000 ALTER TABLE `schedule_monday` DISABLE KEYS */;
-INSERT INTO `schedule_monday` VALUES (3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,''),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0');
+INSERT INTO `schedule_monday` VALUES (5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,''),(5367,'\0'),(5367,'\0'),(5367,''),(5367,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0');
 /*!40000 ALTER TABLE `schedule_monday` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1176,7 +1181,7 @@ CREATE TABLE `schedule_thursday` (
 
 LOCK TABLES `schedule_thursday` WRITE;
 /*!40000 ALTER TABLE `schedule_thursday` DISABLE KEYS */;
-INSERT INTO `schedule_thursday` VALUES (3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,''),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0');
+INSERT INTO `schedule_thursday` VALUES (5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,''),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0');
 /*!40000 ALTER TABLE `schedule_thursday` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1201,7 +1206,7 @@ CREATE TABLE `schedule_tuesday` (
 
 LOCK TABLES `schedule_tuesday` WRITE;
 /*!40000 ALTER TABLE `schedule_tuesday` DISABLE KEYS */;
-INSERT INTO `schedule_tuesday` VALUES (3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0');
+INSERT INTO `schedule_tuesday` VALUES (5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0');
 /*!40000 ALTER TABLE `schedule_tuesday` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1226,7 +1231,7 @@ CREATE TABLE `schedule_wednesday` (
 
 LOCK TABLES `schedule_wednesday` WRITE;
 /*!40000 ALTER TABLE `schedule_wednesday` DISABLE KEYS */;
-INSERT INTO `schedule_wednesday` VALUES (3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3275,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0'),(3276,'\0');
+INSERT INTO `schedule_wednesday` VALUES (5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5366,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5367,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5368,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5369,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5370,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0'),(5371,'\0');
 /*!40000 ALTER TABLE `schedule_wednesday` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1244,7 +1249,8 @@ CREATE TABLE `social_profile` (
   `profile_link` varchar(255) DEFAULT NULL,
   `social_network` varchar(255) DEFAULT NULL,
   `actor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `UK_sbgl75onamh648sm42gak0vok` (`actor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1254,7 +1260,7 @@ CREATE TABLE `social_profile` (
 
 LOCK TABLES `social_profile` WRITE;
 /*!40000 ALTER TABLE `social_profile` DISABLE KEYS */;
-INSERT INTO `social_profile` VALUES (3271,0,'nickstudent1','http://www.linkstudent1.com','socialnetworkstudent1',3227),(3272,0,'nickstudent2','http://www.linkstudent2.com','socialnetworkstudent2',3228),(3273,0,'nickteacher1','http://www.linkteacher1.com','socialnetworkteacher1',3224),(3274,0,'nickteacher2','http://www.linkteacher2.com','socialnetworkteacher2',3225);
+INSERT INTO `social_profile` VALUES (5362,0,'nickstudent1','http://www.linkstudent1.com','socialnetworkstudent1',5307),(5363,0,'nickstudent2','http://www.linkstudent2.com','socialnetworkstudent2',5308),(5364,0,'nickteacher1','http://www.linkteacher1.com','socialnetworkteacher1',5301),(5365,0,'nickteacher2','http://www.linkteacher2.com','socialnetworkteacher2',5302);
 /*!40000 ALTER TABLE `social_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1278,6 +1284,7 @@ CREATE TABLE `student` (
   `finder` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_chfh7xwu983n9gc06715xkc0i` (`user_account`),
+  KEY `studentUK_k77r9upyn4vc6rupdcqapbko5` (`spammer`),
   KEY `FK_ma6lkckquup6k9py2sym3xste` (`finder`),
   CONSTRAINT `FK_chfh7xwu983n9gc06715xkc0i` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`),
   CONSTRAINT `FK_ma6lkckquup6k9py2sym3xste` FOREIGN KEY (`finder`) REFERENCES `finder` (`id`)
@@ -1290,7 +1297,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (3227,1,'Reina Mercedes','garcia@gmail.es','student1','+34647307406','http://tinyurl.com/picture.png','\0',3207,3244),(3228,1,'Reina Mercedes','lanzas@gmail.es','student2','+34647307406','http://tinyurl.com/picture.png','\0',3208,3245),(3229,1,'Avd de la Paz','cejas@gmail.es','student3','+34424424424','http://tinyurl.com/picture.png','',3209,3246);
+INSERT INTO `student` VALUES (5307,1,'Reina Mercedes','garcia@gmail.es','student1','+34647307406','http://tinyurl.com/picture.png','\0',5281,5324),(5308,1,'Reina Mercedes','lanzas@gmail.es','student2','+34647307406','http://tinyurl.com/picture.png','\0',5282,5325),(5309,1,'Avd de la Paz','cejas@gmail.es','student3','+34424424424','http://tinyurl.com/picture.png','',5283,5326);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1319,7 +1326,7 @@ CREATE TABLE `subject` (
 
 LOCK TABLES `subject` WRITE;
 /*!40000 ALTER TABLE `subject` DISABLE KEYS */;
-INSERT INTO `subject` VALUES (3266,0,'Description1','Descripcion1','1ESO','Subject1','Asignatura1'),(3267,0,'Description2','Descripcion2','2ESO','Subject2','Asignatura2'),(3268,0,'Description3','Descripcion3','1BACH','Subject3','Asignatura3'),(3269,0,'Description4','Descripcion4','2BACH','Subject4','Asignatura4'),(3270,0,'Description5','Descripcion5','2BACH','Subject5','Asignatura5');
+INSERT INTO `subject` VALUES (5357,0,'Description1','Descripcion1','1ESO','Subject1','Asignatura1'),(5358,0,'Description2','Descripcion2','2ESO','Subject2','Asignatura2'),(5359,0,'Description3','Descripcion3','1BACH','Subject3','Asignatura3'),(5360,0,'Description4','Descripcion4','2BACH','Subject4','Asignatura4'),(5361,0,'Description5','Descripcion5','2BACH','Subject5','Asignatura5');
 /*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1342,6 +1349,7 @@ CREATE TABLE `teacher` (
   `user_account` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_cx1vitere593bmwkerm1slh6h` (`user_account`),
+  KEY `teacherUK_k77r9upyn4vc6rupdcqapbko5` (`spammer`),
   CONSTRAINT `FK_cx1vitere593bmwkerm1slh6h` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1352,7 +1360,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (3224,0,'Reina Mercedes','teacher1@gmail.es','Teacher1','+34647607400','http://tinyurl.com/picture.png','\0',3210),(3225,0,'Reina Mercedes','teacher2@gmail.es','Teacher2','+34647807400','http://tinyurl.com/picture.png','\0',3211),(3226,0,'Reina Mercedes','teacher3@gmail.es','Teacher3','+34647807400','http://tinyurl.com/picture.png','\0',3212);
+INSERT INTO `teacher` VALUES (5301,0,'Reina Mercedes','teacher1@gmail.es','Teacher1','+34647607400','http://tinyurl.com/picture.png','\0',5284),(5302,0,'Reina Mercedes','teacher2@gmail.es','Teacher2','+34647807400','http://tinyurl.com/picture.png','\0',5285),(5303,0,'Reina Mercedes','teacher3@gmail.es','Teacher3','+34647807400','http://tinyurl.com/picture.png','\0',5286),(5304,0,'Reina Mercedes','teacher3@gmail.es','Teacher11','+34647807400','http://tinyurl.com/picture.png','\0',5287),(5305,0,'Reina Mercedes','teacher3@gmail.es','Teacher12','+34647807400','http://tinyurl.com/picture.png','\0',5288),(5306,0,'Reina Mercedes','teacher3@gmail.es','Teacher13','+34647807400','http://tinyurl.com/picture.png','\0',5289);
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1371,7 +1379,7 @@ CREATE TABLE `time_period` (
   `start_hour` int(11) DEFAULT NULL,
   `reservation` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_9e33dsn9kv95qeq483hy8422q` (`reservation`),
+  KEY `UK_9e33dsn9kv95qeq483hy8422q` (`reservation`),
   CONSTRAINT `FK_9e33dsn9kv95qeq483hy8422q` FOREIGN KEY (`reservation`) REFERENCES `reservation` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1382,7 +1390,7 @@ CREATE TABLE `time_period` (
 
 LOCK TABLES `time_period` WRITE;
 /*!40000 ALTER TABLE `time_period` DISABLE KEYS */;
-INSERT INTO `time_period` VALUES (3339,0,4,13,12,3337),(3340,0,1,17,16,3338);
+INSERT INTO `time_period` VALUES (5451,0,1,20,19,5450),(5452,0,1,17,16,5448),(5453,0,1,18,17,5449),(5454,0,3,9,8,5447);
 /*!40000 ALTER TABLE `time_period` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1409,7 +1417,7 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (3205,0,'e00cf25ad42683b3df678c61f42c6bda','admin1'),(3206,0,'c84258e9c39059a89ab77d846ddab909','admin2'),(3207,0,'5e5545d38a68148a2d5bd5ec9a89e327','student1'),(3208,0,'213ee683360d88249109c2f92789dbc3','student2'),(3209,0,'8e4947690532bc44a8e41e9fb365b76a','student3'),(3210,0,'41c8949aa55b8cb5dbec662f34b62df3','teacher1'),(3211,0,'ccffb0bb993eeb79059b31e1611ec353','teacher2'),(3212,0,'82470256ea4b80343b27afccbca1015b','teacher3'),(3213,0,'c7acc7970ffab6dcf9422fb98465399d','certifier1'),(3214,0,'99954134cc0cccdf1951c24cd5202d9d','certifier2'),(3215,0,'54b53072540eeeb8f8e9343e71f28176','system');
+INSERT INTO `user_account` VALUES (5279,0,'e00cf25ad42683b3df678c61f42c6bda','admin1'),(5280,0,'c84258e9c39059a89ab77d846ddab909','admin2'),(5281,0,'5e5545d38a68148a2d5bd5ec9a89e327','student1'),(5282,0,'213ee683360d88249109c2f92789dbc3','student2'),(5283,0,'8e4947690532bc44a8e41e9fb365b76a','student3'),(5284,0,'41c8949aa55b8cb5dbec662f34b62df3','teacher1'),(5285,0,'ccffb0bb993eeb79059b31e1611ec353','teacher2'),(5286,0,'82470256ea4b80343b27afccbca1015b','teacher3'),(5287,0,'ac1fab814f4b8bad93b45df881a19c75','teacher11'),(5288,0,'7aabe66cc596b0869c7cb2737a6f7b67','teacher12'),(5289,0,'3e0b812eec121a8dfaf8bfff266b3fee','teacher13'),(5290,0,'c7acc7970ffab6dcf9422fb98465399d','certifier1'),(5291,0,'99954134cc0cccdf1951c24cd5202d9d','certifier2'),(5292,0,'54b53072540eeeb8f8e9343e71f28176','system');
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1434,7 +1442,7 @@ CREATE TABLE `user_account_authorities` (
 
 LOCK TABLES `user_account_authorities` WRITE;
 /*!40000 ALTER TABLE `user_account_authorities` DISABLE KEYS */;
-INSERT INTO `user_account_authorities` VALUES (3205,'ADMIN'),(3206,'ADMIN'),(3207,'STUDENT'),(3208,'STUDENT'),(3209,'STUDENT'),(3210,'TEACHER'),(3211,'TEACHER'),(3212,'TEACHER'),(3213,'CERTIFIER'),(3214,'CERTIFIER'),(3215,'ADMIN');
+INSERT INTO `user_account_authorities` VALUES (5279,'ADMIN'),(5280,'ADMIN'),(5281,'STUDENT'),(5282,'STUDENT'),(5283,'STUDENT'),(5284,'TEACHER'),(5285,'TEACHER'),(5286,'TEACHER'),(5287,'TEACHER'),(5288,'TEACHER'),(5289,'TEACHER'),(5290,'CERTIFIER'),(5291,'CERTIFIER'),(5292,'ADMIN');
 /*!40000 ALTER TABLE `user_account_authorities` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1447,5 +1455,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-30  9:24:23
+-- Dump completed on 2019-06-05  0:01:05
 commit;

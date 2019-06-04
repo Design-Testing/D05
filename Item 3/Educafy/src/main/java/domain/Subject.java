@@ -6,6 +6,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -19,6 +20,7 @@ public class Subject extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getNameEn() {
 		return this.nameEn;
 	}
@@ -28,6 +30,7 @@ public class Subject extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getNameEs() {
 		return this.nameEs;
 	}
@@ -37,6 +40,7 @@ public class Subject extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescriptionEn() {
 		return this.descriptionEn;
 	}
@@ -46,6 +50,7 @@ public class Subject extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescriptionEs() {
 		return this.descriptionEs;
 	}
@@ -55,6 +60,7 @@ public class Subject extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getLevel() {
 		return this.level;
 	}

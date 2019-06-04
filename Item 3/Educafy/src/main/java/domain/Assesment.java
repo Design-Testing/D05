@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -36,6 +37,7 @@ public class Assesment extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getComment() {
 		return this.comment;
 	}

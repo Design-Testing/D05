@@ -10,9 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -43,6 +45,7 @@ public class Lesson extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return this.title;
 	}
@@ -52,6 +55,7 @@ public class Lesson extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
@@ -60,6 +64,7 @@ public class Lesson extends DomainEntity {
 		this.description = description;
 	}
 
+	@NotNull
 	@Min(0)
 	public Double getPrice() {
 		return this.price;
@@ -69,6 +74,7 @@ public class Lesson extends DomainEntity {
 		this.price = price;
 	}
 
+	@NotNull
 	public Boolean getIsDraft() {
 		return this.isDraft;
 	}

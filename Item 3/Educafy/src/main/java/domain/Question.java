@@ -6,6 +6,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -16,6 +17,7 @@ public class Question extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return this.title;
 	}
@@ -24,6 +26,7 @@ public class Question extends DomainEntity {
 		this.title = title;
 	}
 
+	@SafeHtml
 	public String getAnswer() {
 		return this.answer;
 	}

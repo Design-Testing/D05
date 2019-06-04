@@ -44,6 +44,7 @@ public class CreditCard extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getMake() {
 		return this.make;
 	}

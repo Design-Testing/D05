@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -25,6 +26,7 @@ public class TimePeriod extends DomainEntity {
 	private Reservation	reservation;
 
 
+	@NotNull
 	@Range(min = 8, max = 20)
 	public Integer getStartHour() {
 		return this.startHour;
@@ -34,6 +36,7 @@ public class TimePeriod extends DomainEntity {
 		this.startHour = startHour;
 	}
 
+	@NotNull
 	@Range(min = 9, max = 21)
 	public Integer getEndHour() {
 		return this.endHour;
@@ -43,6 +46,7 @@ public class TimePeriod extends DomainEntity {
 		this.endHour = endHour;
 	}
 
+	@NotNull
 	@Range(min = 1, max = 5)
 	public Integer getDayNumber() {
 		return this.dayNumber;
