@@ -1,0 +1,2775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- =================================================================== 
+		======= USER ACCOUNTS ========= =================================================================== -->
+
+	<bean id="userAccountAdmin1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountAdmin2" class="security.UserAccount">
+		<property name="username" value="admin2" />
+		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountStudent1" class="security.UserAccount">
+		<property name="username" value="student1" />
+		<property name="password" value="5e5545d38a68148a2d5bd5ec9a89e327" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="STUDENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountStudent2" class="security.UserAccount">
+		<property name="username" value="student2" />
+		<property name="password" value="213ee683360d88249109c2f92789dbc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="STUDENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountStudent3" class="security.UserAccount">
+		<property name="username" value="student3" />
+		<property name="password" value="8e4947690532bc44a8e41e9fb365b76a" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="STUDENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountTeacher1" class="security.UserAccount">
+		<property name="username" value="teacher1" />
+		<property name="password" value="41c8949aa55b8cb5dbec662f34b62df3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TEACHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountTeacher2" class="security.UserAccount">
+		<property name="username" value="teacher2" />
+		<property name="password" value="ccffb0bb993eeb79059b31e1611ec353" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TEACHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountTeacher3" class="security.UserAccount">
+		<property name="username" value="teacher3" />
+		<property name="password" value="82470256ea4b80343b27afccbca1015b" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TEACHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountTeacher11" class="security.UserAccount">
+		<property name="username" value="teacher11" />
+		<property name="password" value="ac1fab814f4b8bad93b45df881a19c75" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TEACHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountTeacher12" class="security.UserAccount">
+		<property name="username" value="teacher12" />
+		<property name="password" value="7aabe66cc596b0869c7cb2737a6f7b67" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TEACHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountTeacher13" class="security.UserAccount">
+		<property name="username" value="teacher13" />
+		<property name="password" value="3e0b812eec121a8dfaf8bfff266b3fee" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TEACHER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountCertifier1" class="security.UserAccount">
+		<property name="username" value="certifier1" />
+		<property name="password" value="c7acc7970ffab6dcf9422fb98465399d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CERTIFIER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccountCertifier2" class="security.UserAccount">
+		<property name="username" value="certifier2" />
+		<property name="password" value="99954134cc0cccdf1951c24cd5202d9d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CERTIFIER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- ========================= SYSTEM =========================== -->
+	<bean id="userAccountSystem" class="security.UserAccount">
+		<property name="username" value="system" />
+		<property name="password" value="54b53072540eeeb8f8e9343e71f28176" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="system" class="domain.Administrator">
+		<property name="name" value="Educafy" />
+		<property name="surname">
+			<list>
+				<value>System</value>
+			</list>
+		</property>
+		<property name="photo" value="" />
+		<property name="email" value="correo@gmail.com" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountSystem" />
+	</bean>
+	<!-- ========================= ======== =========================== -->
+
+	<bean id="outBoxSystem" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxSystem" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxSystem" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="notificationBoxSystem" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxSystem" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAdministrator2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outBoxStudent1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student1" />
+		<property name="messages">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxStudent1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student1" />
+		<property name="messages">
+			<list>
+				<ref bean="message2"/>
+				<ref bean="message3"/>
+				<ref bean="message4"/>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxStudent1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxStudent1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxStudent1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxStudent2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxStudent2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxStudent2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxStudent2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxStudent2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxStudent3" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student3" />
+		<property name="messages">
+			<list>
+				<ref bean="message2"/>
+				<ref bean="message3"/>
+				<ref bean="message4"/>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxStudent3" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxStudent3" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxStudent3" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxStudent3" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="student3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ========================================= -->
+		<bean id="message1" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="Clases particulares" />
+		<property name="body" value="Clases de matematicas sevilla" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Mates</value>
+				<value>Sevilla</value>
+			</list>
+		</property>
+		<property name="sender" ref="student1" />
+		<property name="recipients">
+			<list>
+				<ref bean="teacher1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message3" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message4" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message5" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="message6" class="domain.Message">
+		<property name="moment" value="2018/11/04 13:00" />
+		<property name="subject" value="you've been selected" />
+		<property name="body" value="We have to buy kill of walkers" />
+		<property name="priority" value="HIGH" />
+		<property name="tags">
+			<list>
+				<value>Zombies</value>
+				<value>Kill</value>
+			</list>
+		</property>
+		<property name="sender" ref="student3" />
+		<property name="recipients">
+			<list>
+				<ref bean="student1" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxTeacher1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxTeacher1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher1" />
+		<property name="messages">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxTeacher1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxTeacher1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxTeacher1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxTeacher2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxTeacher2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxTeacher2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxTeacher2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxTeacher2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	
+	<!-- ========================================= -->
+
+	<bean id="outBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxTeacher3" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxTeacher3" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher3" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxTeacher11" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher11" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxTeacher11" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher11" />
+		<property name="messages">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxTeacher11" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher11" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxTeacher11" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher11" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxTeacher11" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher11" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxTeacher12" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher12" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxTeacher12" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher12" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxTeacher12" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher12" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxTeacher12" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher12" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxTeacher12" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher12" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	
+	<!-- ========================================= -->
+
+	<bean id="outBoxTeacher13" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher13" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxTeacher13" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher13" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxTeacher13" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher13" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxTeacher13" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher13" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxTeacher13" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="teacher13" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxCertifier1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxCertifier1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxCertifier1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxCertifier1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxCertifier1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxCertifier2" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxCertifier2" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxCertifier2" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxCertifier2" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxCertifier2" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="certifier2" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- =================================================================== 
+		======= ADMINISTRATOR ========= =================================================================== -->
+
+	<bean id="administrator1" class="domain.Administrator">
+		<!-- Actor -->
+		<property name="name" value="Admin1" />
+		<property name="surname">
+			<list>
+				<value>Admin</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="conwdasto@jmsx.es" />
+		<property name="phone" value="+34647607406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountAdmin1" />
+	</bean>
+
+	<bean id="administrator2" class="domain.Administrator">
+		<!-- Actor -->
+		<property name="name" value="Admin2" />
+		<property name="surname">
+			<list>
+				<value>Gonzalez</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="lusi@gamil.es" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountAdmin2" />
+	</bean>
+
+
+	<!-- =================================================================== 
+		======= TEACHER ========= =================================================================== -->
+
+	<bean id="teacher1" class="domain.Teacher">
+		<!-- Actor -->
+		<property name="name" value="Teacher1" />
+		<property name="surname">
+			<list>
+				<value>Teacher1</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="teacher1@gmail.es" />
+		<property name="phone" value="+34647607400" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountTeacher1" />
+	</bean>
+
+	<bean id="teacher2" class="domain.Teacher">
+		<!-- Actor -->
+		<property name="name" value="Teacher2" />
+		<property name="surname">
+			<list>
+				<value>Teacher2</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="teacher2@gmail.es" />
+		<property name="phone" value="+34647807400" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountTeacher2" />
+	</bean>
+	
+	<bean id="teacher3" class="domain.Teacher">
+		<!-- Actor -->
+		<property name="name" value="Teacher3" />
+		<property name="surname">
+			<list>
+				<value>Teacher3</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="teacher3@gmail.es" />
+		<property name="phone" value="+34647807400" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountTeacher3" />
+	</bean>
+	
+	<bean id="teacher11" class="domain.Teacher">
+		<!-- Actor -->
+		<property name="name" value="Teacher11" />
+		<property name="surname">
+			<list>
+				<value>Teacher11</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="teacher3@gmail.es" />
+		<property name="phone" value="+34647807400" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountTeacher11" />
+	</bean>
+	
+	<bean id="teacher12" class="domain.Teacher">
+		<!-- Actor -->
+		<property name="name" value="Teacher12" />
+		<property name="surname">
+			<list>
+				<value>Teacher12</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="teacher3@gmail.es" />
+		<property name="phone" value="+34647807400" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountTeacher12" />
+	</bean>
+	
+	<bean id="teacher13" class="domain.Teacher">
+		<!-- Actor -->
+		<property name="name" value="Teacher13" />
+		<property name="surname">
+			<list>
+				<value>Teacher13</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="teacher3@gmail.es" />
+		<property name="phone" value="+34647807400" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountTeacher13" />
+	</bean>
+
+
+	<!-- ======= STUDENT =========
+	=================================================================== -->
+
+
+	<bean id="student1" class="domain.Student">
+		<!-- Actor -->
+		<property name="name" value="student1" />
+		<property name="surname">
+			<list>
+				<value>Garcia</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="garcia@gmail.es" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountStudent1" />
+		<property name="finder" ref="finder1" />
+
+	</bean>
+
+	<bean id="student2" class="domain.Student">
+		<!-- Actor -->
+		<property name="name" value="student2" />
+		<property name="surname">
+			<list>
+				<value>Lanzas</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="lanzas@gmail.es" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountStudent2" />
+		<property name="finder" ref="finder2" />
+	</bean>
+
+	<bean id="student3" class="domain.Student">
+		<!-- Actor -->
+		<property name="name" value="student3" />
+		<property name="surname">
+			<list>
+				<value>Surname</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="cejas@gmail.es" />
+		<property name="phone" value="+34424424424" />
+		<property name="address" value="Avd de la Paz" />
+		<property name="spammer" value="true" />
+		<property name="userAccount" ref="userAccountStudent3" />
+		<property name="finder" ref="finder3" />
+	</bean>
+
+
+
+	<!-- =================================================================== 
+		======= CERTIFIER ========= =================================================================== -->
+
+	<bean id="certifier1" class="domain.Certifier">
+		<!-- Actor -->
+		<property name="name" value="Certifier1" />
+		<property name="surname">
+			<list>
+				<value>Certifier's</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="certifier1@gmail.es" />
+		<property name="phone" value="+34647307480" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountCertifier1" />
+	</bean>
+
+	<bean id="certifier2" class="domain.Certifier">
+		<!-- Actor -->
+		<property name="name" value="Certifier2" />
+		<property name="surname">
+			<list>
+				<value>Certifier's</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="certifier2@gmail.es" />
+		<property name="phone" value="+34647307484" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="spammer" value="false" />
+		<property name="userAccount" ref="userAccountCertifier2" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= CreditCard ========= =================================================================== -->
+
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 1" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4716477920082572" />
+		<property name="expirationMonth" value="06" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="163" />
+		<property name="actor" ref="student1" />
+	</bean>
+
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 1" />
+		<property name="make" value="MASTER" />
+		<property name="number" value="5498128346540526" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="728" />
+		<property name="actor" ref="student1" />
+	</bean>
+
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 1" />
+		<property name="make" value="AMEX" />
+		<property name="number" value="375278545368168" />
+		<property name="expirationMonth" value="06" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="533" />
+		<property name="actor" ref="student1" />
+	</bean>
+
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 1" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4532787155338743" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="266" />
+		<property name="actor" ref="student1" />
+	</bean>
+
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 1" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4716699361876929" />
+		<property name="expirationMonth" value="02" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="885" />
+		<property name="actor" ref="student1" />
+	</bean>
+
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 2" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4231348143458624" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="22" />
+		<property name="cvv" value="837" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+	<bean id="creditCard7" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 2" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4294148159742547" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="988" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+	<bean id="creditCard8" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 2" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5547165664775350" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="475" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+	<bean id="creditCard9" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 2" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4410435734979051" />
+		<property name="expirationMonth" value="03" />
+		<property name="expirationYear" value="27" />
+		<property name="cvv" value="941" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+	<bean id="creditCard10" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 2" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5316710759043864" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="26" />
+		<property name="cvv" value="408" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+
+	<bean id="creditCard13" class="domain.CreditCard">
+		<property name="holderName" value="HolderName Student 2" />
+		<property name="make" value="MASTERCARD" />
+		<property name="number" value="5384948404521051" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="906" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+
+	<!-- =================================================================== 
+		======= Configuration Parameters ========= =================================================================== -->
+
+	<bean id="configurationParameters" class="domain.ConfigurationParameters">
+		<property name="sysName" value="Educafy" />
+		<property name="banner" value="https://i.ibb.co/W3c4rmh/logo.png" />
+		<property name="welcomeMessageEn"
+			value="Welcome to Educafy! Where student find the individual lessons they are looking for!" />
+		<property name="welcomeMessageEsp"
+			value="¡Bienvenidos a Educafy! ¡El lugar donde los estudiantes encuentran las clases particulares que estaban buscando!" />
+		<property name="countryPhoneCode" value="+34" />
+		<property name="spamWords">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>one million</value>
+				<value>you've been selected</value>
+				<value>nigeria</value>
+				<value>sexo</value>
+				<value>un millón</value>
+				<value>ha sido seleccionado</value>
+			</list>
+		</property>
+		<property name="maxFinderResults" value="10" />
+		<property name="finderTime" value="1" />
+		<property name="rebranding" value="false" />
+		<property name="vat" value="0.21" />
+		<property name="creditCardMake">
+			<list>
+				<value>VISA</value>
+				<value>MCARD</value>
+				<value>AMEX</value>
+				<value>DINNERS</value>
+				<value>FLY</value>
+			</list>
+		</property>
+		<property name="subjectLevels">
+			<list>
+				<value>1ESO</value>
+				<value>2ESO</value>
+				<value>3ESO</value>
+				<value>4ESO</value>
+				<value>1BACH</value>
+				<value>2BACH</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- =================================================================== 
+		======= FINDER ========= =================================================================== -->
+
+	<bean id="finder1" class="domain.Finder">
+		<!-- Finder -->
+		<property name="teacherName" value="John" />
+		<property name="subjectName" value="IT" />
+		<property name="subjectLevel" value="4ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
+
+		<!-- Relations -->
+		<property name="lessons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="finder2" class="domain.Finder">
+		<!-- Finder -->
+		<property name="teacherName" value="Patrick" />
+		<property name="subjectName" value="MAT" />
+		<property name="subjectLevel" value="3ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
+
+		<!-- Relations -->
+		<property name="lessons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="finder3" class="domain.Finder">
+		<!-- Finder -->
+		<property name="teacherName" value="Robert" />
+		<property name="subjectName" value="LENG" />
+		<property name="subjectLevel" value="4ESO" />
+		<property name="creationDate" value="2019/05/23 09:00" />
+
+		<!-- Relations -->
+		<property name="lessons">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- =================================================================== 
+		======= CURRICULA ========= =================================================================== -->
+
+	<bean id="curriculum1" class="domain.Curriculum">
+		<property name="ticker" value="COMM-1234" />
+		<property name="personalRecord" ref="personalRecord1" />
+		<property name="educationRecords">
+			<list>
+				<ref bean="educationRecord1" />
+				<ref bean="educationRecord2" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord1" />
+				<ref bean="miscellaneousRecord2" />
+			</list>
+		</property>
+		<property name="teacher" ref="teacher1" />
+	</bean>
+
+	<bean id="curriculum2" class="domain.Curriculum">
+		<property name="ticker" value="COMX-1231" />
+		<property name="personalRecord" ref="personalRecord2" />
+		<property name="educationRecords">
+			<list>
+				<ref bean="educationRecord3" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord3" />
+			</list>
+		</property>
+		<property name="teacher" ref="teacher2" />
+	</bean>
+	
+	<bean id="curriculum3" class="domain.Curriculum">
+		<property name="ticker" value="COMX-4444" />
+		<property name="personalRecord" ref="personalRecord3" />
+		<property name="educationRecords">
+			<list>
+				<ref bean="educationRecord4" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord4" />
+			</list>
+		</property>
+		<property name="teacher" ref="teacher3" />
+	</bean>
+	
+	<bean id="curriculum13" class="domain.Curriculum">
+		<property name="ticker" value="COMX-4441" />
+		<property name="personalRecord" ref="personalRecord5" />
+		<property name="educationRecords">
+			<list>
+				<ref bean="educationRecord5" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord5" />
+			</list>
+		</property>
+		<property name="teacher" ref="teacher13" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= PERSONAL RECORD ========= =================================================================== -->
+
+	<bean id="personalRecord1" class="domain.PersonalRecord">
+		<property name="fullName" value="Teacher 1" />
+		<property name="statement" value="Statement Teacher 1" />
+		<property name="github" value="http://www.githubTeacher1.com" />
+		<property name="photo" value="http://photoTeacher1.com" />
+		<property name="linkedin" value="http://www.linkedInTeacher1.com" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="personalRecord2" class="domain.PersonalRecord">
+		<property name="fullName" value="Teacher 2" />
+		<property name="statement" value="Statement Teacher 2" />
+		<property name="github" value="http://www.githubTeacher2.com" />
+		<property name="photo" value="http://photoTeacher2.com" />
+		<property name="linkedin" value="http://www.linkedInTeacher2.com" />
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="personalRecord3" class="domain.PersonalRecord">
+		<property name="fullName" value="Teacher 3" />
+		<property name="statement" value="Statement Teacher 3" />
+		<property name="github" value="http://www.githubTeacher3.com" />
+		<property name="photo" value="http://photoTeacher3.com" />
+		<property name="linkedin" value="http://www.linkedInTeacher3.com" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+	
+	<bean id="personalRecord5" class="domain.PersonalRecord">
+		<property name="fullName" value="Teacher 13" />
+		<property name="statement" value="Statement Teacher 13" />
+		<property name="github" value="http://www.githubTeacher13.com" />
+		<property name="photo" value="http://photoTeacher13.com" />
+		<property name="linkedin" value="http://www.linkedInTeacher13.com" />
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= EDUCATION RECORD ========= =================================================================== -->
+
+	<bean id="educationRecord1" class="domain.EducationRecord">
+		<property name="degree" value="Informática" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="7" />
+		<property name="attachment" value="http://attachment1.com" />
+		<property name="startDate" value="2014/04/11 13:00" />
+		<property name="endDate" value="2018/04/11 13:00" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="educationRecord2" class="domain.EducationRecord">
+		<property name="degree" value="Magisterio" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="8" />
+		<property name="attachment" value="http://attachment2.com" />
+		<property name="startDate" value="2018/04/11 13:00" />
+		<property name="endDate" value="2019/04/11 13:00" />
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="educationRecord3" class="domain.EducationRecord">
+		<property name="degree" value="Farmacia" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="7" />
+		<property name="attachment" value="http://attachment3.com" />
+		<property name="startDate" value="2018/04/11 13:00" />
+		<property name="endDate" value="2019/04/11 13:00" />
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="true" />
+	</bean>
+	
+	<bean id="educationRecord4" class="domain.EducationRecord">
+		<property name="degree" value="Biología" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="7" />
+		<property name="attachment" value="http://attachment3.com" />
+		<property name="startDate" value="2018/04/11 13:00" />
+		<property name="endDate" value="2019/04/11 13:00" />
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+	
+	<bean id="educationRecord5" class="domain.EducationRecord">
+		<property name="degree" value="Ingeniería Industrial" />
+		<property name="institution" value="Universidad de Sevilla" />
+		<property name="mark" value="7" />
+		<property name="attachment" value="http://attachment3.com" />
+		<property name="startDate" value="2018/04/11 13:00" />
+		<property name="endDate" value="2019/04/11 13:00" />
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= MISCELLANEOUS RECORD ========= =================================================================== -->
+
+	<bean id="miscellaneousRecord1" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 1" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment11.com</value>
+				<value>http://attachment12.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="miscellaneousRecord2" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 2" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment21.com</value>
+				<value>http://attachment22.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<bean id="miscellaneousRecord3" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 3" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment31.com</value>
+				<value>http://attachment32.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="true" />
+	</bean>
+	
+	<bean id="miscellaneousRecord4" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 3" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment31.com</value>
+				<value>http://attachment32.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="true" />
+		<property name="isCertified" value="false" />
+	</bean>
+	
+	<bean id="miscellaneousRecord5" class="domain.MiscellaneousRecord">
+		<property name="freeText" value="Miscellaneous record 5" />
+		<property name="attachments">
+			<list>
+				<value>http://attachment312.com</value>
+				<value>http://attachment342.com</value>
+			</list>
+		</property>
+		<property name="isDraft" value="false" />
+		<property name="isCertified" value="false" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= Exam ========= =================================================================== -->
+
+	<bean id="exam1" class="domain.Exam">
+		<property name="title" value="Title Exam 1" />
+		<property name="status" value="PENDING"/>
+		<property name="reservation" ref="reservation3"/>
+	</bean>
+
+	<bean id="exam2" class="domain.Exam">
+		<property name="title" value="Title Exam 2" />
+		<property name="status" value="SUBMITTED"/>
+		<property name="reservation" ref="reservation3"/>
+		<property name="questions">
+			<list>
+				<ref bean="question11" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="exam3" class="domain.Exam">
+		<property name="title" value="Title Exam 3" />
+		<property name="status" value="PENDING"/>
+		<property name="reservation" ref="reservation3"/>
+	</bean>
+
+	<bean id="exam4" class="domain.Exam">
+		<property name="title" value="Title Exam 4" />
+		<property name="status" value="PENDING" />
+		<property name="reservation" ref="reservation4"/>
+	</bean>
+	
+	<bean id="exam5" class="domain.Exam">
+		<property name="title" value="Title Exam 5" />
+		<property name="status" value="PENDING" />
+		<property name="reservation" ref="reservation3"/>
+	</bean>
+	
+	<bean id="exam6" class="domain.Exam">
+		<property name="title" value="Title Exam 6" />
+		<property name="status" value="INPROGRESS" />
+		<property name="reservation" ref="reservation3"/>
+		<property name="questions">
+			<list>
+				<ref bean="question12" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="exam7" class="domain.Exam">
+		<property name="title" value="Title Exam 7" />
+		<property name="status" value="SUBMITTED"/>
+		<property name="reservation" ref="reservation3"/>
+		<property name="questions">
+			<list>
+				<ref bean="question9" />
+				<ref bean="question10" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- =================================================================== 
+		======= Question ========= =================================================================== -->
+
+	<bean id="question1" class="domain.Question">
+		<property name="title" value="Question 1" />
+		<property name="answer" value="Answer 1" />
+	</bean>
+
+	<bean id="question2" class="domain.Question">
+		<property name="title" value="Question 2" />
+		<property name="answer" value="Answer 2" />
+		
+	</bean>
+
+	<bean id="question3" class="domain.Question">
+		<property name="title" value="Question 3" />
+		<property name="answer" value="Answer 3" />
+	</bean>
+
+	<bean id="question4" class="domain.Question">
+		<property name="title" value="Question 4" />
+		<property name="answer" value="Answer 4" />
+	</bean>
+
+	<bean id="question5" class="domain.Question">
+		<property name="title" value="Question 5" />
+		<property name="answer" value="Answer 5" />
+		
+	</bean>
+
+	<bean id="question6" class="domain.Question">
+		<property name="title" value="Question 6" />
+		<property name="answer" value="Answer 6" />
+	</bean>
+
+	<bean id="question7" class="domain.Question">
+		<property name="title" value="Question 7" />
+		<property name="answer" value="Answer 7" />
+	</bean>
+
+	<bean id="question8" class="domain.Question">
+		<property name="title" value="Question 8" />
+		<property name="answer" value="Answer 8" />
+	</bean>
+	
+	<bean id="question9" class="domain.Question">
+		<property name="title" value="Question 9" />
+		<property name="answer" value="Answer 9" />
+	</bean>
+
+	<bean id="question10" class="domain.Question">
+		<property name="title" value="Question 10" />
+		<property name="answer" value="Answer 10" />
+	</bean>
+	
+	<bean id="question11" class="domain.Question">
+		<property name="title" value="Question 11" />
+		<property name="answer" value="Answer 11" />
+	</bean>
+	
+	<bean id="question12" class="domain.Question">
+		<property name="title" value="Question 12" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= Lesson ========= =================================================================== -->
+
+	<bean id="lesson1" class="domain.Lesson">
+		<property name="ticker" value="EYTS-6579" />
+		<property name="title" value="Lesson1" />
+		<property name="description" value="Description1" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher1" />
+		<property name="subject" ref="subject1" />
+	</bean>
+
+	<bean id="lesson2" class="domain.Lesson">
+		<property name="ticker" value="KYTS-6529" />
+		<property name="title" value="Lesson2" />
+		<property name="description" value="Description2" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher2" />
+		<property name="subject" ref="subject2" />
+	</bean>
+
+	<bean id="lesson3" class="domain.Lesson">
+		<property name="ticker" value="UYTO-6379" />
+		<property name="title" value="Lesson3" />
+		<property name="description" value="Description3" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher1" />
+		<property name="subject" ref="subject2" />
+	</bean>
+
+	<bean id="lesson4" class="domain.Lesson">
+		<property name="ticker" value="EITS-4579" />
+		<property name="title" value="Lesson4" />
+		<property name="description" value="Description4" />
+		<property name="price" value="16.5" />
+		<property name="isDraft" value="false" />
+		<property name="teacher" ref="teacher2" />
+		<property name="subject" ref="subject1" />
+	</bean>
+	
+		<!-- =================================================================== 
+		======= Reservation ========= =================================================================== -->
+
+	<bean id="reservation1" class="domain.Reservation">
+		<property name="status" value="PENDING" />
+		<property name="moment" value="2019/05/10 20:30" />
+		<property name="explanation" value="" />
+		<property name="cost" value="20.5" />
+		<property name="hoursWeek" value="1" />
+		<property name="student" ref="student1" />
+		<property name="lesson" ref="lesson1" />
+		<property name="creditCard" ref="creditCard1" />
+	</bean>
+
+	<bean id="reservation2" class="domain.Reservation">
+		<property name="status" value="ACCEPTED" />
+		<property name="moment" value="2019/05/11 20:30" />
+		<property name="explanation" value="" />
+		<property name="cost" value="15.5" />
+		<property name="hoursWeek" value="1" />
+		<property name="student" ref="student1" />
+		<property name="lesson" ref="lesson3" />
+		<property name="creditCard" ref="creditCard2" />
+	</bean>
+	
+	<bean id="reservation3" class="domain.Reservation">
+		<property name="status" value="FINAL" />
+		<property name="moment" value="2019/05/11 20:30" />
+		<property name="explanation" value="" />
+		<property name="cost" value="15.5" />
+		<property name="hoursWeek" value="1" />
+		<property name="student" ref="student1" />
+		<property name="lesson" ref="lesson2" />
+		<property name="creditCard" ref="creditCard2" />
+	</bean>
+	
+	<bean id="reservation4" class="domain.Reservation">
+		<property name="status" value="FINAL" />
+		<property name="moment" value="2019/05/11 20:30" />
+		<property name="explanation" value="" />
+		<property name="cost" value="15.5" />
+		<property name="hoursWeek" value="1" />
+		<property name="student" ref="student2" />
+		<property name="lesson" ref="lesson4" />
+		<property name="creditCard" ref="creditCard7" />
+	</bean>
+	
+	
+		<!-- =================================================================== 
+		======= TimePeriod ========= =================================================================== -->
+
+	<bean id="timePeriod1" class="domain.TimePeriod">
+		<property name="startHour" value="19" />
+		<property name="endHour" value="20" />
+		<property name="dayNumber" value="1" />
+		<property name="reservation" ref="reservation4" />
+	</bean>
+	
+	<bean id="timePeriod2" class="domain.TimePeriod">
+		<property name="startHour" value="16" />
+		<property name="endHour" value="17" />
+		<property name="dayNumber" value="1" />
+		<property name="reservation" ref="reservation2" />
+	</bean>
+	
+	<bean id="timePeriod3" class="domain.TimePeriod">
+		<property name="startHour" value="17" />
+		<property name="endHour" value="18" />
+		<property name="dayNumber" value="1" />
+		<property name="reservation" ref="reservation3" />
+	</bean>
+	
+	<bean id="timePeriod4" class="domain.TimePeriod">
+		<property name="startHour" value="8" />
+		<property name="endHour" value="9" />
+		<property name="dayNumber" value="3" />
+		<property name="reservation" ref="reservation1" />
+	</bean>
+	
+
+	<!-- =================================================================== 
+		======= Assesment ========= =================================================================== -->
+
+	<bean id="assesment1" class="domain.Assesment">
+		<property name="score" value="4" />
+		<property name="comment" value="Bien trabajado" />
+		<property name="lesson" ref="lesson1" />
+		<property name="student" ref="student1" />
+	</bean>
+
+	<bean id="assesment2" class="domain.Assesment">
+		<property name="score" value="3" />
+		<property name="comment" value="Bien trabajado" />
+		<property name="lesson" ref="lesson2" />
+		<property name="student" ref="student1" />
+	</bean>
+
+	<bean id="assesment3" class="domain.Assesment">
+		<property name="score" value="4" />
+		<property name="comment" value="Enhorabuena !" />
+		<property name="lesson" ref="lesson3" />
+		<property name="student" ref="student2" />
+	</bean>
+
+	<bean id="assesment4" class="domain.Assesment">
+		<property name="score" value="4" />
+		<property name="comment" value="Bien hecho" />
+		<property name="lesson" ref="lesson4" />
+		<property name="student" ref="student2" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= Subject ========= =================================================================== -->
+
+	<bean id="subject1" class="domain.Subject">
+		<property name="nameEn" value="Subject1" />
+		<property name="nameEs" value="Asignatura1" />
+		<property name="descriptionEn" value="Description1" />
+		<property name="descriptionEs" value="Descripcion1" />
+		<property name="level" value="1ESO" />
+	</bean>
+
+	<bean id="subject2" class="domain.Subject">
+		<property name="nameEn" value="Subject2" />
+		<property name="nameEs" value="Asignatura2" />
+		<property name="descriptionEn" value="Description2" />
+		<property name="descriptionEs" value="Descripcion2" />
+		<property name="level" value="2ESO" />
+	</bean>
+
+	<bean id="subject3" class="domain.Subject">
+		<property name="nameEn" value="Subject3" />
+		<property name="nameEs" value="Asignatura3" />
+		<property name="descriptionEn" value="Description3" />
+		<property name="descriptionEs" value="Descripcion3" />
+		<property name="level" value="1BACH" />
+	</bean>
+
+	<bean id="subject4" class="domain.Subject">
+		<property name="nameEn" value="Subject4" />
+		<property name="nameEs" value="Asignatura4" />
+		<property name="descriptionEn" value="Description4" />
+		<property name="descriptionEs" value="Descripcion4" />
+		<property name="level" value="2BACH" />
+	</bean>
+	
+	<bean id="subject5" class="domain.Subject">
+		<property name="nameEn" value="Subject5" />
+		<property name="nameEs" value="Asignatura5" />
+		<property name="descriptionEn" value="Description5" />
+		<property name="descriptionEs" value="Descripcion5" />
+		<property name="level" value="2BACH" />
+	</bean>
+
+	<!-- =================================================================== 
+		======= SOCIAL PROFILES ========= =================================================================== -->
+
+	<bean id="socialProfileStudent1" class="domain.SocialProfile">
+		<property name="nick" value="nickstudent1" />
+		<property name="socialNetwork" value="socialnetworkstudent1" />
+		<property name="profileLink" value="http://www.linkstudent1.com" />
+		<property name="actor" ref="student1" />
+	</bean>
+
+	<bean id="socialProfileStudent2" class="domain.SocialProfile">
+		<property name="nick" value="nickstudent2" />
+		<property name="socialNetwork" value="socialnetworkstudent2" />
+		<property name="profileLink" value="http://www.linkstudent2.com" />
+		<property name="actor" ref="student2" />
+	</bean>
+
+	<bean id="socialProfileTeacher1" class="domain.SocialProfile">
+		<property name="nick" value="nickteacher1" />
+		<property name="socialNetwork" value="socialnetworkteacher1" />
+		<property name="profileLink" value="http://www.linkteacher1.com" />
+		<property name="actor" ref="teacher1" />
+	</bean>
+
+	<bean id="socialProfileTeacher2" class="domain.SocialProfile">
+		<property name="nick" value="nickteacher2" />
+		<property name="socialNetwork" value="socialnetworkteacher2" />
+		<property name="profileLink" value="http://www.linkteacher2.com" />
+		<property name="actor" ref="teacher2" />
+	</bean>
+	
+	<!-- =================================================================== 
+		======= COMMENTS ========= 
+		=================================================================== -->
+		
+		<bean id="comment1" class="domain.Comment">
+		<property name="text" value="Text of comment 1"/>
+		<property name="moment" value="2019/05/12 20:45"/>
+		<property name="assesment" ref="assesment1"/>
+		</bean>
+		
+		<bean id="comment2" class="domain.Comment">
+		<property name="text" value="Text of comment 2"/>
+		<property name="moment" value="2019/05/12 10:45"/>
+		<property name="assesment" ref="assesment1"/>
+		</bean>
+		
+		<bean id="comment3" class="domain.Comment">
+		<property name="text" value="Text of comment 3"/>
+		<property name="moment" value="2019/05/12 21:45"/>
+		<property name="assesment" ref="assesment2"/>
+		</bean>
+		
+		<bean id="comment4" class="domain.Comment">
+		<property name="text" value="Text of comment 4"/>
+		<property name="moment" value="2019/05/12 20:40"/>
+		<property name="assesment" ref="assesment2"/>
+		</bean>
+		
+		<bean id="comment5" class="domain.Comment">
+		<property name="text" value="Text of comment 5"/>
+		<property name="moment" value="2019/05/12 22:45"/>
+		<property name="assesment" ref="assesment3"/>
+		</bean>
+		
+		<bean id="comment6" class="domain.Comment">
+		<property name="text" value="Text of comment 6"/>
+		<property name="moment" value="2019/05/12 11:45"/>
+		<property name="assesment" ref="assesment3"/>
+		</bean>
+		
+		<bean id="comment7" class="domain.Comment">
+		<property name="text" value="Text of comment 7"/>
+		<property name="moment" value="2019/05/12 09:45"/>
+		<property name="assesment" ref="assesment4"/>
+		</bean>
+		
+		<bean id="comment8" class="domain.Comment">
+		<property name="text" value="Text of comment 8"/>
+		<property name="moment" value="2019/05/12 14:45"/>
+		<property name="assesment" ref="assesment4"/>
+		</bean>
+
+<!-- =================================================================== 
+		======= Schedule ========= =================================================================== -->
+
+	<bean id="schedule1" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>true</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher1" />
+
+	</bean>
+
+	<bean id="schedule2" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>true</value>
+				<value>false</value>
+				<value>false</value>
+				<value>true</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher2" />
+
+	</bean>
+	
+	<bean id="schedule3" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher3" />
+
+	</bean>
+
+	<bean id="schedule11" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher11" />
+
+	</bean>
+	
+	<bean id="schedule12" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher12" />
+
+	</bean>
+
+	<bean id="schedule13" class="domain.Schedule">
+		<property name="monday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="tuesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="wednesday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="thursday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+
+		<property name="friday">
+			<list>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+				<value>false</value>
+			</list>
+		</property>
+		<property name="teacher" ref="teacher13" />
+
+	</bean>
+	
+
+</beans>

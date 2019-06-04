@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="exam/display" extends="master.page">	
+		<put-attribute name="title" value="Examen: Mostrar" />
+		<put-attribute name="body" value="/views/exam/display.jsp" />
+	</definition>
+	
+	<definition name="exam/edit1" extends="master.page">	
+		<put-attribute name="title" value="Examen: Edit" />
+		<put-attribute name="body" value="/views/exam/edit1.jsp" />
+	</definition>
+	
+	<definition name="exam/edit2" extends="master.page">	
+		<put-attribute name="title" value="Examen: Editar" />
+		<put-attribute name="body" value="/views/exam/edit2.jsp" />
+	</definition>
+	
+	<definition name="exam/error" extends="master.page">	
+		<put-attribute name="title" value="Examen: Error" />
+		<put-attribute name="body" value="/views/exam/error.jsp" />
+	</definition>
+	
+	<definition name="exam/myexams" extends="master.page">	
+		<put-attribute name="title" value="Examen: Lista" />
+		<put-attribute name="body" value="/views/exam/list.jsp" />
+	</definition>
+	
+</tiles-definitions>
