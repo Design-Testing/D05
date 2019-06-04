@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccountAdmin1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= SYSTEM =========================== -->
+	<bean id="userAccountSystem" class="security.UserAccount">
+		<property name="username" value="system" />
+		<property name="password" value="54b53072540eeeb8f8e9343e71f28176" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="system" class="domain.Administrator">
+		<property name="name" value="AcmeParade" />
+		<property name="surname">
+			<list>
+				<value>System</value>
+			</list>
+		</property>
+		<property name="photo" value="" />
+		<property name="email" value="correo@gmail.com" />
+		<property name="phone" value="+34647307406" />
+		<property name="address" value="" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="userAccount" ref="userAccountSystem" />
+	</bean>
+	<!-- ========================= ======== =========================== -->
+
+	<bean id="outBoxSystem" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxSystem" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxSystem" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="notificationBoxSystem" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxSystem" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="system" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================================= -->
+
+	<bean id="outBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Out box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="In box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Trash box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="notificationBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Notification box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spamBoxAdministrator1" class="domain.Folder">
+		<property name="name" value="Spam box" />
+		<property name="isSystemFolder" value="true" />
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+				<!-- <ref bean="message1"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ========================================= -->
+	<!-- =================================================================== 
+		======= ADMINISTRATOR ========= =================================================================== -->
+
+	<bean id="administrator1" class="domain.Administrator">
+		<!-- Actor -->
+		<property name="name" value="Admin1" />
+		<property name="surname">
+			<list>
+				<value>Admin</value>
+			</list>
+		</property>
+		<property name="photo" value="http://tinyurl.com/picture.png" />
+		<property name="email" value="conwdasto@jmsx.es" />
+		<property name="phone" value="+34647607406" />
+		<property name="address" value="Reina Mercedes" />
+		<property name="vat" value="0.21" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="userAccount" ref="userAccountAdmin1" />
+	</bean>
+	
+		<!-- =================================================================== 
+		======= CreditCard ========= =================================================================== -->
+
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Customer 1" />
+		<property name="make" value="VISA" />
+		<property name="number" value="4716477920082572" />
+		<property name="expirationMonth" value="06" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="163" />
+	</bean>
+
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Customer 2" />
+		<property name="make" value="MASTER" />
+		<property name="number" value="5498128346540526" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="728" />
+	</bean>
+	
+	<!-- =================================================================== 
+		======= Configuration Parameters ========= =================================================================== -->
+
+	<bean id="configurationParameters" class="domain.ConfigurationParameters">
+		<property name="sysName" value="Acme Hacker Rank" />
+		<property name="banner" value="https://i.imgur.com/7b8lu4b.png" />
+		<property name="welcomeMessageEn"
+			value="Welcome to Acme hacker Rank! We’re IT hacker’s favourite job marketplace!" />
+		<property name="welcomeMessageEsp"
+			value="“¡Bien-venidos a Acme Hacker Rank! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
+		<property name="countryPhoneCode" value="+34" />
+		<property name="spamWords">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>one million</value>
+				<value>you've been selected</value>
+				<value>nigeria</value>
+				<value>sexo</value>
+				<value>un millón</value>
+				<value>ha sido seleccionado</value>
+			</list>
+		</property>
+		<property name="positiveWords">
+			<list>
+				<value>good</value>
+				<value>factastic</value>
+				<value>excellent</value>
+				<value>great</value>
+				<value>amazing</value>
+				<value>terrific</value>
+				<value>beautiful</value>
+				<value>bueno</value>
+				<value>buena</value>
+				<value>fantástico</value>
+				<value>fantástica</value>
+				<value>excelente</value>
+				<value>genial</value>
+				<value>terrorífico</value>
+				<value>bonito</value>
+				<value>bonita</value>
+			</list>
+		</property>
+		<property name="negativeWords">
+			<list>
+				<value>not</value>
+				<value>bad</value>
+				<value>horrible</value>
+				<value>average</value>
+				<value>disaster</value>
+				<value>malo</value>
+				<value>media</value>
+				<value>desastre</value>
+			</list>
+		</property>
+		<property name="maxFinderResults" value="10" />
+		<property name="finderTime" value="1" />
+		<property name="creditCardMake">
+			<list>
+				<value>VISA</value>
+				<value>MCARD</value>
+				<value>AMEX</value>
+				<value>DINNERS</value>
+				<value>FLY</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+</beans>
