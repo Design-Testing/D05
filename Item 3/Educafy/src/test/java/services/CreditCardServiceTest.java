@@ -25,7 +25,7 @@ public class CreditCardServiceTest extends AbstractTest {
 
 
 	@Test
-	public void driverCreateAndSaveFinder() {
+	public void driverCreateAndSaveCreditCard() {
 		final Object testingData[][] = {
 			{
 				//				A: Educafy Crear y guardar una tarjeta de crédito
