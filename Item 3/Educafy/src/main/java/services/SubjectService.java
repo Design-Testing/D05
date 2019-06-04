@@ -98,4 +98,8 @@ public class SubjectService {
 		Assert.notNull(res);
 		return res;
 	}
+
+	public void flush() {
+		this.subjectRepository.flush();
+	}
 }

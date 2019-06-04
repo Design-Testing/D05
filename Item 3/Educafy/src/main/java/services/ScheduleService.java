@@ -206,4 +206,8 @@ public class ScheduleService {
 		return saved;
 	}
 
+	public void flush() {
+		this.scheduleRepository.flush();
+	}
+
 }
