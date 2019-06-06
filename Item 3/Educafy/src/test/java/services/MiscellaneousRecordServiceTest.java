@@ -37,28 +37,28 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 		attachments.add("http://www.attachment2.com");
 		final Object testingRecord[][] = {
 			{
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher crea MiscellaneousRecord 
-				//			C: 100% Recorre 49 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 20 de las 20 (7+13) lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher1", "Disfruto enseñando", attachments, null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher crea MiscellaneousRecord 
-				//			C: 100% Recorre 49 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 20 de las 20 (7+13) lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher1", "Escribo varios blogs", attachments, null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Negativo: Un teacher intenta crear una MiscellaneousRecord con el texto vacío
-				//			C: 32,65% Recorre 16 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 19 de las 20 (7+13) lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher1", "", attachments, javax.validation.ConstraintViolationException.class
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
-				//			B: Test Positivo: Teacher intenta crear MiscellaneousRecord sin archivos adjuntos
-				//			C: 100% Recorre 49 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
+				//			B: Test Negativo: Teacher intenta crear MiscellaneousRecord sin archivos adjuntos
+				//			C: % Recorre 19 de las 20 (7+13) lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher1", "freeText1", null, javax.validation.ConstraintViolationException.class
 			},
 		};
@@ -98,34 +98,34 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 		attachments.add("http://www.attachment2.com");
 		final Object testingRecord[][] = {
 			{
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher edita MiscellaneousRecord 
-				//			C: 100% Recorre 49 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 10 de las 10 lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher1", "freeText1", attachments, "miscellaneousRecord1", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher edita MiscellaneousRecord 
-				//			C: 100% Recorre 49 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 10 de las 10 lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher3", "freeText1", attachments, "miscellaneousRecord4", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Negativo: Un teacher intenta editar una MiscellaneousRecord con el texto vacío
-				//			C: 32,65% Recorre 16 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 9 de las 10 lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher1", "", attachments, "miscellaneousRecord1", javax.validation.ConstraintViolationException.class
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Negativo: Un teacher intenta editar una MiscellaneousRecord que no está ne modo draft
-				//			C: 32,65% Recorre 16 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 5 de las 10 lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher1", "freeText1", attachments, "miscellaneousRecord2", javax.validation.ConstraintViolationException.class
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Negativo: Un teacher intenta editar una MiscellaneousRecord de otro teacher aunque esté en draft mode
-				//			C: 32,65% Recorre 16 de las 49 lineas posibles
-				//			D: cobertura de datos=6/405
+				//			C: % Recorre 6 de las 10 lineas posibles
+				//			D: cobertura de datos=4/16
 				"teacher2", "freeText1", attachments, "miscellaneousRecord1", javax.validation.ConstraintViolationException.class
 			}
 		};
@@ -159,27 +159,27 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 		final Object testingRecord[][] = {
 			{
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher borra MiscellaneousRecord 
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			C: % Recorre 15 de las 15 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher1", "miscellaneousRecord1", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher borra MiscellaneousRecord 
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			C: % Recorre 15 de las 15 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher3", "miscellaneousRecord4", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Negativo: Teacher intenta borrar MiscellaneousRecord que no está en draft mode
-				//			C: 10,25% Recorre 8 de las 78 lineas posibles
+				//			C: % Recorre 7 de las 15 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher1", "miscellaneousRecord2", IllegalArgumentException.class
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Negativo: Teacher intena borrar miscellaneous Record que no es suyo, aun estando en modo draft
-				//			C: 10,25% Recorre 8 de las 78 lineas posibles
+				//			C: % Recorre 3 de las 15 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher2", "miscellaneousRecord1", IllegalArgumentException.class
 			}
@@ -210,27 +210,27 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 		final Object testingRecord[][] = {
 			{
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher pasa a final MiscellaneousRecord en draft mode
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			C: % Recorre 8 de las 8 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher1", "miscellaneousRecord1", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Teacher pasa a final MiscellaneousRecord en draft mode
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			C: % Recorre 8 de las 8 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher3", "miscellaneousRecord4", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
-				//			B: Test Positivo: Teacher intenar pasar a final MiscellaneousRecord que ya etsá en final mode
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
+				//			B: Test Negativo: Teacher intenar pasar a final MiscellaneousRecord que ya etsá en final mode
+				//			C: % Recorre 5 de las 8 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher1", "miscellaneousRecord2", IllegalArgumentException.class
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
-				//			B: Test Positivo: Teacher intenar pasar a final MiscellaneousRecord que ya etsá en final mode
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
+				//			B: Test Negativo: Teacher intenar pasar a final MiscellaneousRecord que ya etsá en final mode
+				//			C: % Recorre 5 de las 8 lineas posibles
 				//			D: cobertura de datos=1/3
 				"teacher13", "miscellaneousRecord5", IllegalArgumentException.class
 			}
@@ -261,33 +261,33 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 		final Object testingRecord[][] = {
 			{
-				//			A: Educafy Req. 17 -> Teachers can manage their history
-				//			B: Test Positivo: Teacher no puede certificar un registro
-				//			C: 100% Recorre 78 de las 78 lineas posibles
-				//			D: cobertura de datos=1/3
-				"teacher1", "miscellaneousRecord2", IllegalArgumentException.class
-			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Un certificador certifica un registro en modo final
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			C: 100% Recorre 7 de las 7 lineas posibles
 				//			D: cobertura de datos=1/3
 				"certifier1", "miscellaneousRecord2", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
 				//			B: Test Positivo: Un certificador certifica un registro en modo final
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			C: 100% Recorre 7 de las 7 lineas posibles
 				//			D: cobertura de datos=1/3
 				"certifier1", "miscellaneousRecord5", null
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
-				//			B: Test Positivo: Un certificador intenta certificar un registro en modo draft
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
+				//			B: Test Negativo: Teacher no puede certificar un registro
+				//			C: 100% Recorre 1 de las 7 lineas posibles
+				//			D: cobertura de datos=1/3
+				"teacher1", "miscellaneousRecord2", IllegalArgumentException.class
+			}, {
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
+				//			B: Test Negativo: Un certificador intenta certificar un registro en modo draft
+				//			C: 100% Recorre 4 de las 7 lineas posibles
 				//			D: cobertura de datos=1/3
 				"certifier1", "miscellaneousRecord1", IllegalArgumentException.class
 			}, {
-				//			A: Educafy Req. 17 -> Teachers can manage their history
-				//			B: Test Positivo: Un certificador intenta certificar un registro que ya está certificado
-				//			C: 100% Recorre 78 de las 78 lineas posibles
+				//			A: Educafy Req. 20.8 -> Los profesores pueden administrar su currícilum...
+				//			B: Test Negativo: Un certificador intenta certificar un registro que ya está certificado
+				//			C: 100% Recorre 5 de las 7 lineas posibles
 				//			D: cobertura de datos=1/3
 				"certifier1", "miscellaneousRecord1", IllegalArgumentException.class
 			}
