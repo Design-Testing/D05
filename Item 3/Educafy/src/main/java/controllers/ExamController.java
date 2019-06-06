@@ -84,7 +84,8 @@ public class ExamController extends AbstractController {
 				result = this.createEditModelAndView(exam, "commit.exam.create.error");
 				result.addObject("errors", binding.getAllErrors());
 			}
-
+		final Reservation reservation = this.reservationService.findOne(reservationId);
+		result.addObject("reservation", reservation);
 		return result;
 	}
 

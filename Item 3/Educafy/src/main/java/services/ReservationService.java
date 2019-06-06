@@ -155,6 +155,7 @@ public class ReservationService {
 		final Reservation result;
 		Assert.isTrue(reservation.getStudent().equals(student), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("ACCEPTED"), "Para poner una Reserva en Pendiente debe de estar anteriormente Aceptada.");
+		Assert.isTrue(!(reservation.getExplanation().isEmpty() || reservation.getExplanation().equals("") || reservation.getExplanation() == null));
 		reservation.setStatus("REVIEWING");
 		result = this.save(reservation);
 		return result;
@@ -179,6 +180,7 @@ public class ReservationService {
 		final Reservation result;
 		Assert.isTrue(this.lessonService.findAllLessonsByTeacher(teacher.getUserAccount().getId()).contains(reservation.getLesson()), "No puede ejecutar ninguna acción sobre una reservation que no le pertenece.");
 		Assert.isTrue(reservation.getStatus().equals("PENDING") || reservation.getStatus().equals("ACCEPTED") || reservation.getStatus().equals("REVIEWING"), "Para poner una Reserva en Rechaza debe de estar anteriormente Aceptada o Pendiente.");
+		Assert.isTrue(!(reservation.getExplanation().isEmpty() || reservation.getExplanation().equals("") || reservation.getExplanation() == null));
 		reservation.setStatus("REJECTED");
 		result = this.save(reservation);
 		return result;
