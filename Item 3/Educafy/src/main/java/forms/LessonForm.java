@@ -40,6 +40,7 @@ public class LessonForm extends DomainEntity {
 		this.description = description;
 	}
 
+	@NotNull	
 	@Min(0)
 	public Double getPrice() {
 		return this.price;

@@ -55,6 +55,7 @@ public class LessonService {
 
 	public Lesson create() {
 		final Lesson lesson = new Lesson();
+		lesson.setIsDraft(true);
 		final Teacher principal = this.teacherService.findByPrincipal();
 		final String ticker = this.generateTicker(principal.getName());
 		lesson.setTicker(ticker);

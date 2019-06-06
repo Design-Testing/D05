@@ -444,10 +444,11 @@ CREATE TABLE `credit_card` (
   `holder_name` varchar(255) DEFAULT NULL,
   `make` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
-  `actor` int(11) NOT NULL,
+  `student` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_2ncxn32sn2quehl710urqs0on` (`number`),
-  KEY `UK_kj6ag2kv2vppcsvh6y24est5s` (`actor`)
+  KEY `UK_f6sl0xouejsvcfplq2hxwfh4h` (`student`),
+  CONSTRAINT `FK_f6sl0xouejsvcfplq2hxwfh4h` FOREIGN KEY (`student`) REFERENCES `student` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -790,7 +791,7 @@ CREATE TABLE `hibernate_sequences` (
 
 LOCK TABLES `hibernate_sequences` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequences` DISABLE KEYS */;
-INSERT INTO `hibernate_sequences` VALUES ('domain_entity',1);
+INSERT INTO `hibernate_sequences` VALUES ('domain_entity',2);
 /*!40000 ALTER TABLE `hibernate_sequences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -827,7 +828,7 @@ CREATE TABLE `lesson` (
 
 LOCK TABLES `lesson` WRITE;
 /*!40000 ALTER TABLE `lesson` DISABLE KEYS */;
-INSERT INTO `lesson` VALUES (5443,0,'Description1','\0',16.5,'EYTS-6579','Lesson1',5357,5301),(5444,0,'Description2','\0',16.5,'KYTS-6529','Lesson2',5358,5302),(5445,0,'Description3','\0',16.5,'UYTO-6379','Lesson3',5358,5301),(5446,0,'Description4','\0',16.5,'EITS-4579','Lesson4',5357,5302);
+INSERT INTO `lesson` VALUES (5443,0,'Description1','\0',16.5,'EYTS-6579','Lesson1',5357,5301),(5444,0,'Description2','\0',16.5,'KYTS-6529','Lesson2',5358,5302),(5445,0,'Description3','\0',16.5,'UYTO-6379','Lesson3',5358,5301),(5446,0,'Description4','\0',16.5,'EITS-4579','Lesson4',5357,5302),(32768,0,'werwer','',12,'TEAC-7799','eewrw',5357,5301);
 /*!40000 ALTER TABLE `lesson` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1455,5 +1456,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-05  0:01:05
+-- Dump completed on 2019-06-06 22:54:42
 commit;
